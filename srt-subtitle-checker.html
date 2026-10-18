@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>SRT Subtitle Checker – Validate Timing, CPS & Line Length</title>
+  <meta name="description" content="Check SRT and WebVTT subtitle files for timestamp errors, overlapping captions, reading speed, long lines, and display duration. Download a detailed report or normalized SRT.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#f6f8fc">
+  <link rel="canonical" href="https://onlinetoolsandconverters.cc/tools/srt-subtitle-checker.html">
+  <link rel="stylesheet" href="../style.css">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Online Tools &amp; Converters">
+  <meta property="og:title" content="SRT Subtitle Quality Checker">
+  <meta property="og:description" content="Validate subtitle timing, line length, reading speed, and caption structure in your browser.">
+  <meta property="og:url" content="https://onlinetoolsandconverters.cc/tools/srt-subtitle-checker.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="SRT Subtitle Quality Checker">
+  <meta name="twitter:description" content="Check subtitles for common timing and readability problems.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebApplication",
+        "name": "SRT Subtitle Quality Checker",
+        "url": "https://onlinetoolsandconverters.cc/tools/srt-subtitle-checker.html",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "isAccessibleForFree": true,
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "A browser-based subtitle validation utility for SRT and WebVTT files."
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://onlinetoolsandconverters.cc/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "SRT Subtitle Checker",
+            "item": "https://onlinetoolsandconverters.cc/tools/srt-subtitle-checker.html"
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script src="../script.js" defer></script>
+</head>
+
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="../index.html" aria-label="Online Tools and Converters home">
+      <span class="brand-mark" aria-hidden="true">✦</span>
+      <span class="brand-text">Online Tools <span>&amp; Converters</span></span>
+    </a>
+
+    <button class="nav-toggle" type="button"
+      aria-label="Open navigation menu"
+      aria-expanded="false" aria-controls="srt-navigation">
+      <span class="nav-toggle-bars"></span>
+    </button>
+
+    <nav class="primary-nav" id="srt-navigation" aria-label="Main navigation">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#tools">All tools</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="container srt-page" data-tool="srt-subtitle-checker">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../index.html#tools">Tools</a></li>
+      <li aria-current="page">SRT Subtitle Checker</li>
+    </ol>
+  </nav>
+
+  <section class="srt-hero">
+    <p class="eyebrow">Free subtitle quality tool</p>
+    <h1>SRT Subtitle Quality Checker</h1>
+    <p class="srt-lead">
+      Find subtitle timing errors, overlapping captions, high reading speed,
+      and lines that may be difficult to read. Check SRT and WebVTT files
+      directly in your browser.
+    </p>
+
+    <div class="srt-trust">
+      <span>✓ No account required</span>
+      <span>✓ Local browser processing</span>
+      <span>✓ Downloadable reports</span>
+    </div>
+  </section>
+
+  <section class="srt-workspace" aria-labelledby="checker-heading">
+    <div class="srt-editor panel">
+      <div class="srt-panel-heading">
+        <div>
+          <h2 id="checker-heading">Check your subtitles</h2>
+          <p class="muted small">Paste subtitle text or choose an SRT/VTT file.</p>
+        </div>
+        <span class="srt-file-badge">SRT · VTT</span>
+      </div>
+
+      <label class="srt-dropzone" id="srt-dropzone" for="srt-file">
+        <span class="srt-upload-icon" aria-hidden="true">⇧</span>
+        <strong>Choose a subtitle file</strong>
+        <span>or drag and drop it here</span>
+        <small>Supports .srt, .vtt and .webvtt · Maximum 5 MB</small>
+        <input type="file" id="srt-file"
+          accept=".srt,.vtt,.webvtt,.txt,text/plain,text/vtt">
+      </label>
+
+      <p class="srt-file-status" id="srt-file-status"
+        role="status" aria-live="polite"></p>
+
+      <div class="field">
+        <label for="srt-input">Subtitle text</label>
+        <textarea id="srt-input" rows="14" spellcheck="false"
+          autocomplete="off"
+          placeholder="1&#10;00:00:01,000 --> 00:00:03,000&#10;Your first subtitle goes here.&#10;&#10;2&#10;00:00:03,500 --> 00:00:05,000&#10;Your second subtitle goes here."></textarea>
+        <p class="hint">Your text stays in this browser. Checking is performed only when you press the button.</p>
+      </div>
+
+      <div class="srt-editor-actions">
+        <button type="button" class="btn btn-secondary btn-sm" id="srt-sample">Load example</button>
+        <button type="button" class="btn btn-secondary btn-sm" id="srt-clear">Clear</button>
+      </div>
+
+      <div class="srt-rule-box">
+        <div class="srt-panel-heading">
+          <div>
+            <h3>Readability settings</h3>
+            <p class="muted small">Choose practical review limits for your project.</p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="srt-preset">Rule preset</label>
+          <select id="srt-preset">
+            <option value="general">General subtitles</option>
+            <option value="conservative">Conservative reading limits</option>
+            <option value="shortform">Short-form video</option>
+            <option value="custom">Custom settings</option>
+          </select>
+        </div>
+
+        <div class="srt-settings-grid">
+          <div class="field">
+            <label for="srt-max-cps">Maximum characters per second (CPS)</label>
+            <input id="srt-max-cps" type="number" min="1" max="100" step="1" value="20">
+          </div>
+
+          <div class="field">
+            <label for="srt-max-cpl">Maximum characters per line</label>
+            <input id="srt-max-cpl" type="number" min="1" max="200" step="1" value="42">
+          </div>
+
+          <div class="field">
+            <label for="srt-max-lines">Maximum lines per cue</label>
+            <input id="srt-max-lines" type="number" min="1" max="10" step="1" value="2">
+          </div>
+
+          <div class="field">
+            <label for="srt-min-duration">Minimum display time (seconds)</label>
+            <input id="srt-min-duration" type="number" min="0" max="60" step="0.1" value="0.8">
+          </div>
+
+          <div class="field">
+            <label for="srt-max-duration">Maximum display time (seconds)</label>
+            <input id="srt-max-duration" type="number" min="0.1" max="600" step="0.5" value="7">
+          </div>
+
+          <div class="field">
+            <label for="srt-min-gap">Minimum gap (seconds)</label>
+            <input id="srt-min-gap" type="number" min="0" max="10" step="0.01" value="0">
+          </div>
+        </div>
+
+        <p class="srt-help">
+          These settings are review heuristics, not universal platform
+          requirements. Overlaps and unusual durations can sometimes be intentional.
+        </p>
+      </div>
+
+      <div class="srt-primary-actions">
+        <button class="btn btn-primary" type="button" id="srt-check">
+          Check subtitles
+        </button>
+        <button class="btn btn-secondary" type="button" id="srt-copy-issues" disabled>
+          Copy issues
+        </button>
+        <button class="btn btn-secondary" type="button" id="srt-copy-prompt" disabled>
+          Copy AI fix prompt
+        </button>
+      </div>
+
+      <div class="srt-status" id="srt-status" role="status" aria-live="polite"></div>
+    </div>
+
+    <aside class="srt-side">
+      <div class="panel srt-summary">
+        <p class="eyebrow">Quality report</p>
+        <h2>Subtitle analysis</h2>
+        <p class="muted small">Your report appears after checking the subtitle text.</p>
+
+        <div class="srt-stat-grid">
+          <div class="srt-stat">
+            <strong id="srt-stat-cues">—</strong>
+            <span>Valid cues</span>
+          </div>
+          <div class="srt-stat">
+            <strong id="srt-stat-errors">—</strong>
+            <span>Errors</span>
+          </div>
+          <div class="srt-stat">
+            <strong id="srt-stat-warnings">—</strong>
+            <span>Warnings</span>
+          </div>
+          <div class="srt-stat">
+            <strong id="srt-stat-cps">—</strong>
+            <span>Highest CPS</span>
+          </div>
+          <div class="srt-stat">
+            <strong id="srt-stat-cpl">—</strong>
+            <span>Longest line</span>
+          </div>
+          <div class="srt-stat">
+            <strong id="srt-stat-clean">—</strong>
+            <span>Unflagged cues</span>
+          </div>
+        </div>
+
+        <div class="srt-total-time">
+          <span>Total subtitle time</span>
+          <strong id="srt-total-time">—</strong>
+        </div>
+
+        <div class="srt-report-actions">
+          <button class="btn btn-secondary" type="button"
+            id="srt-download-csv" disabled>Download CSV report</button>
+          <button class="btn btn-primary" type="button"
+            id="srt-download-srt" disabled>Download numbered SRT</button>
+        </div>
+
+        <p class="srt-help">
+          The SRT export normalizes cue numbering and timecode formatting.
+          It does not rewrite subtitle text or repair timing automatically.
+          WebVTT-specific settings are not preserved in SRT output.
+        </p>
+      </div>
+
+      <div class="panel srt-privacy">
+        <span class="srt-privacy-icon" aria-hidden="true">🔒</span>
+        <div>
+          <h3>Designed for local processing</h3>
+          <p class="muted small">
+            The tool reads selected files in your browser. It has no subtitle
+            upload endpoint and does not send your caption content to an AI service.
+          </p>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="srt-results-section" aria-labelledby="srt-issues-heading">
+    <div class="srt-section-heading">
+      <div>
+        <p class="eyebrow">Detailed findings</p>
+        <h2 id="srt-issues-heading">Issues found</h2>
+        <p class="muted">Each finding identifies the affected cue and its timecode.</p>
+      </div>
+    </div>
+
+    <div class="srt-issue-list" id="srt-issues" aria-live="polite">
+      <div class="srt-empty">
+        <span aria-hidden="true">⌕</span>
+        <h3>Ready to check</h3>
+        <p>Paste or select a subtitle file, then press “Check subtitles”.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="srt-results-section" aria-labelledby="srt-preview-heading">
+    <div class="srt-section-heading">
+      <div>
+        <p class="eyebrow">Cue-by-cue view</p>
+        <h2 id="srt-preview-heading">Subtitle preview and timing</h2>
+        <p class="muted">Review each cue's duration, reading speed, line length, and status.</p>
+      </div>
+    </div>
+
+    <div class="srt-table-wrap">
+      <table class="srt-cue-table">
+        <thead>
+          <tr>
+            <th>Cue</th>
+            <th>Timecode</th>
+            <th>Duration</th>
+            <th>CPS</th>
+            <th>Longest line</th>
+            <th>Review</th>
+            <th>Subtitle text</th>
+          </tr>
+        </thead>
+        <tbody id="srt-cue-rows">
+          <tr>
+            <td colspan="7" class="srt-table-empty">No subtitles checked yet.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <article class="srt-content">
+    <section>
+      <h2>What does an SRT subtitle checker do?</h2>
+      <p>
+        An SRT subtitle checker reviews the structure and readability of
+        SubRip subtitle files. It can flag malformed timecodes, cues with
+        invalid durations, caption overlaps, unusually fast reading speed,
+        overlong lines, excessive line counts, and numbering problems.
+      </p>
+      <p>
+        These checks are useful for video editors, YouTube creators,
+        subtitlers, translators, localization teams, and anyone preparing
+        caption files for review or delivery. A file can open correctly in a
+        player while still containing readability problems.
+      </p>
+    </section>
+
+    <section>
+      <h2>What is CPS in subtitles?</h2>
+      <p>
+        CPS means characters per second. It estimates how quickly a viewer
+        must read the visible caption text during its display time.
+      </p>
+      <div class="srt-formula">
+        Characters per second = Visible subtitle characters ÷ Display duration in seconds
+      </div>
+      <p>
+        For example, a caption with 40 visible characters shown for two
+        seconds has a reading speed of approximately 20 CPS. Actual reading
+        comfort depends on language, audience, vocabulary, and context, so
+        adjust the threshold for your particular project.
+      </p>
+    </section>
+
+    <section>
+      <h2>Why subtitle timing and line length matter</h2>
+      <p>
+        A caption that disappears too quickly can be difficult to read.
+        Overlapping captions may cause two cues to appear simultaneously,
+        although some projects intentionally use overlapping speaker cues.
+        Very long lines can also make subtitles harder to follow on small screens.
+      </p>
+      <p>
+        Use the checker to locate likely problems. Always compare important
+        findings with the final video and the style guide for your project.
+        This tool checks text structure and timing; it cannot prove that
+        captions match the spoken dialogue or are synchronized correctly to audio.
+      </p>
+    </section>
+
+    <section>
+      <h2>Frequently asked questions</h2>
+
+      <details>
+        <summary>Does this subtitle checker upload my file?</summary>
+        <p>
+          No. File reading and subtitle analysis take place locally in your
+          browser. The page does not upload your subtitle text to a server.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can I check WebVTT files as well as SRT?</summary>
+        <p>
+          Yes. The checker accepts SRT and WebVTT text and file formats.
+          The downloadable normalized output is SRT, so WebVTT-specific cue
+          settings are not retained.
+        </p>
+      </details>
+
+      <details>
+        <summary>Does a clean report guarantee platform approval?</summary>
+        <p>
+          No. A clean report means the file passed the enabled checks. Platforms,
+          clients, languages, and projects may have different technical and
+          editorial requirements.
+        </p>
+      </details>
+
+      <details>
+        <summary>Does the tool automatically rewrite captions?</summary>
+        <p>
+          No. It reports potential issues and offers a downloadable report.
+          Its numbered SRT export normalizes cue numbering and time formatting,
+          but does not rewrite caption text or automatically change cue timing.
+        </p>
+      </details>
+
+      <details>
+        <summary>Why does the checker flag a subtitle overlap?</summary>
+        <p>
+          It flags a cue that starts before the previous cue has finished.
+          This may be an error, but overlapping speaker captions can be
+          intentional, so review the video before changing the timing.
+        </p>
+      </details>
+
+      <details>
+        <summary>What does the AI fix prompt do?</summary>
+        <p>
+          It copies a prompt that explains the reported issues. It does not
+          send your subtitle file to an AI service. You decide whether to paste
+          the prompt and your subtitle content into another tool.
+        </p>
+      </details>
+    </section>
+  </article>
+
+  <section class="related section">
+    <h2>Explore more tools</h2>
+    <div class="related-grid">
+      <a class="related-card" href="../index.html#tools">
+        <strong>All online tools →</strong>
+        <span>Browse calculators, converters, and other utilities.</span>
+      </a>
+      <a class="related-card" href="video-file-size-calculator.html">
+        <strong>Video File Size Calculator →</strong>
+        <span>Estimate file size from video bitrate and duration.</span>
+      </a>
+      <a class="related-card" href="../index.html#tools">
+        <strong>Data Converters →</strong>
+        <span>Discover useful data and developer tools.</span>
+      </a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <a class="footer-brand" href="../index.html">Online Tools &amp; Converters</a>
+
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+      <a href="../privacy-policy.html">Privacy Policy</a>
+      <a href="../terms-of-use.html">Terms of Use</a>
+    </nav>
+
+    <p class="copyright">
+      © <span id="current-year">2026</span> Online Tools &amp; Converters.
+      All rights reserved.
+    </p>
+  </div>
+</footer>
+</body>
+</html>

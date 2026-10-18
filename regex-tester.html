@@ -1,0 +1,2029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Regex Tester Online – Match Groups, Highlight & Replace</title>
+  <meta name="description" content="Test JavaScript regular expressions online. Highlight matches, inspect numbered and named capture groups, preview replacements, test flags and export results privately in your browser.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2563eb">
+
+  <link rel="canonical" href="https://onlinetoolsandconverters.cc/tools/regex-tester.html">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../script.js" defer></script>
+
+  <style>
+    .regex-tool {
+      --rx-ink: #172033;
+      --rx-muted: #64748b;
+      --rx-border: #dbe2ea;
+      --rx-soft: #f8fafc;
+      --rx-blue: #2563eb;
+      --rx-green: #166534;
+      --rx-green-bg: #dcfce7;
+      --rx-red: #991b1b;
+      --rx-red-bg: #fee2e2;
+      color: var(--rx-ink);
+    }
+
+    .regex-tool *,
+    .regex-tool *::before,
+    .regex-tool *::after {
+      box-sizing: border-box;
+    }
+
+    .rx-intro {
+      max-width: 900px;
+      margin-bottom: 1.5rem;
+    }
+
+    .rx-intro h1 {
+      line-height: 1.15;
+      margin-bottom: .75rem;
+    }
+
+    .rx-intro p {
+      color: var(--rx-muted);
+      font-size: 1.03rem;
+      line-height: 1.75;
+    }
+
+    .rx-kicker {
+      display: inline-block;
+      margin-bottom: .5rem;
+      color: var(--rx-blue);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .rx-workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 1.2rem;
+      align-items: start;
+      margin: 1.5rem 0;
+    }
+
+    .rx-card {
+      min-width: 0;
+      padding: clamp(1rem, 2.4vw, 1.5rem);
+      background: #fff;
+      border: 1px solid var(--rx-border);
+      border-radius: 15px;
+      box-shadow: 0 5px 22px rgba(15, 23, 42, .045);
+      margin-bottom: 1.2rem;
+    }
+
+    .rx-card h2,
+    .rx-card h3 {
+      margin-top: 0;
+      line-height: 1.35;
+    }
+
+    .rx-muted {
+      color: var(--rx-muted);
+      font-size: .88rem;
+      line-height: 1.65;
+    }
+
+    .rx-field {
+      min-width: 0;
+      margin: 1rem 0;
+    }
+
+    .rx-label {
+      display: block;
+      margin-bottom: .45rem;
+      font-size: .91rem;
+      font-weight: 750;
+    }
+
+    .rx-input,
+    .rx-textarea {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      padding: .7rem .8rem;
+      border: 1px solid var(--rx-border);
+      border-radius: 9px;
+      color: var(--rx-ink);
+      background: #fff;
+      font: inherit;
+      font-size: .92rem;
+    }
+
+    .rx-input {
+      min-height: 43px;
+    }
+
+    .rx-textarea {
+      min-height: 200px;
+      resize: vertical;
+      line-height: 1.65;
+    }
+
+    .rx-pattern {
+      min-height: 88px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      overflow-wrap: anywhere;
+    }
+
+    .rx-test-text {
+      min-height: 235px;
+    }
+
+    .rx-input:focus,
+    .rx-textarea:focus,
+    .rx-button:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, .23);
+      outline-offset: 2px;
+      border-color: var(--rx-blue);
+    }
+
+    .rx-input[aria-invalid="true"],
+    .rx-textarea[aria-invalid="true"] {
+      border-color: #dc2626;
+      background: #fff7f7;
+    }
+
+    .rx-field small {
+      display: block;
+      margin-top: .35rem;
+      color: var(--rx-muted);
+      font-size: .8rem;
+      line-height: 1.55;
+    }
+
+    .rx-flags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .55rem;
+      margin: .75rem 0 1rem;
+    }
+
+    .rx-flag {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .5rem .65rem;
+      border: 1px solid var(--rx-border);
+      border-radius: 8px;
+      background: #fff;
+      font-size: .83rem;
+      cursor: pointer;
+    }
+
+    .rx-flag input {
+      margin: 0;
+      accent-color: var(--rx-blue);
+    }
+
+    .rx-flag code {
+      font-weight: 850;
+    }
+
+    .rx-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin: 1rem 0;
+    }
+
+    .rx-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: .62rem .85rem;
+      border: 1px solid var(--rx-border);
+      border-radius: 9px;
+      color: var(--rx-ink);
+      background: #fff;
+      font: inherit;
+      font-size: .86rem;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .rx-button:hover {
+      background: #f1f5f9;
+    }
+
+    .rx-button-primary {
+      color: #fff;
+      background: var(--rx-blue);
+      border-color: var(--rx-blue);
+    }
+
+    .rx-button-primary:hover {
+      color: #fff;
+      background: #1d4ed8;
+      border-color: #1d4ed8;
+    }
+
+    .rx-button-small {
+      min-height: 32px;
+      padding: .4rem .6rem;
+      font-size: .77rem;
+    }
+
+    .rx-button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .rx-options {
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+      margin: .8rem 0;
+    }
+
+    .rx-option {
+      display: flex;
+      align-items: flex-start;
+      gap: .55rem;
+      font-size: .87rem;
+      line-height: 1.6;
+      cursor: pointer;
+    }
+
+    .rx-option input {
+      flex-shrink: 0;
+      margin-top: .25rem;
+      accent-color: var(--rx-blue);
+    }
+
+    .rx-divider {
+      border: 0;
+      border-top: 1px solid var(--rx-border);
+      margin: 1.35rem 0;
+    }
+
+    .rx-alert {
+      padding: .9rem 1rem;
+      margin: 1rem 0;
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      background: #eff6ff;
+      color: #1e3a8a;
+      font-size: .86rem;
+      line-height: 1.7;
+    }
+
+    .rx-alert-warning {
+      border-color: #fde68a;
+      background: #fffbeb;
+      color: #854d0e;
+    }
+
+    .rx-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .65rem;
+      margin: 1rem 0;
+    }
+
+    .rx-stat {
+      min-width: 0;
+      padding: .8rem;
+      border: 1px solid var(--rx-border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .rx-stat-label {
+      display: block;
+      color: var(--rx-muted);
+      font-size: .78rem;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .rx-stat-value {
+      display: block;
+      margin-top: .35rem;
+      font-size: 1.25rem;
+      font-weight: 850;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    .rx-status {
+      padding: .9rem 1rem;
+      border: 1px solid var(--rx-border);
+      border-radius: 10px;
+      background: var(--rx-soft);
+      margin: 1rem 0;
+      font-size: .88rem;
+      line-height: 1.65;
+    }
+
+    .rx-status-error {
+      border-color: #fecaca;
+      background: #fef2f2;
+      color: var(--rx-red);
+    }
+
+    .rx-status-success {
+      border-color: #bbf7d0;
+      background: #f0fdf4;
+      color: var(--rx-green);
+    }
+
+    .rx-live {
+      min-height: 1.4em;
+      color: var(--rx-muted);
+      font-size: .84rem;
+      line-height: 1.6;
+      margin: .7rem 0 0;
+    }
+
+    .rx-highlight {
+      padding: .85rem;
+      border: 1px solid var(--rx-border);
+      border-radius: 10px;
+      background: #fff;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .85rem;
+      line-height: 1.8;
+      min-height: 100px;
+      max-height: 320px;
+      overflow: auto;
+    }
+
+    .rx-highlight mark {
+      padding: .06rem .1rem;
+      border-radius: 3px;
+      background: #fde68a;
+      color: #713f12;
+      box-decoration-break: clone;
+      -webkit-box-decoration-break: clone;
+    }
+
+    .rx-match-list {
+      display: grid;
+      gap: .75rem;
+      margin: 1rem 0;
+    }
+
+    .rx-match {
+      min-width: 0;
+      border: 1px solid var(--rx-border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .rx-match-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+      padding: .7rem .8rem;
+      background: var(--rx-soft);
+      border-bottom: 1px solid var(--rx-border);
+      font-size: .83rem;
+      font-weight: 800;
+    }
+
+    .rx-match-body {
+      padding: .75rem .8rem;
+    }
+
+    .rx-match-value {
+      display: block;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      padding: .55rem;
+      border-radius: 7px;
+      background: #fffbeb;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .83rem;
+      line-height: 1.6;
+    }
+
+    .rx-group-details {
+      margin-top: .7rem;
+      font-size: .83rem;
+    }
+
+    .rx-group-details summary {
+      cursor: pointer;
+      font-weight: 750;
+      padding: .35rem 0;
+    }
+
+    .rx-groups {
+      display: grid;
+      gap: .4rem;
+      margin-top: .5rem;
+    }
+
+    .rx-group {
+      display: grid;
+      grid-template-columns: minmax(0, .4fr) minmax(0, 1fr);
+      gap: .6rem;
+      padding: .45rem .55rem;
+      border: 1px solid var(--rx-border);
+      border-radius: 7px;
+      min-width: 0;
+    }
+
+    .rx-group-name {
+      color: var(--rx-muted);
+      font-weight: 750;
+      overflow-wrap: anywhere;
+    }
+
+    .rx-group-value {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .8rem;
+    }
+
+    .rx-table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--rx-border);
+      border-radius: 10px;
+      margin: 1rem 0;
+    }
+
+    .rx-table {
+      width: 100%;
+      min-width: 520px;
+      border-collapse: collapse;
+      font-size: .85rem;
+    }
+
+    .rx-table th,
+    .rx-table td {
+      text-align: left;
+      vertical-align: top;
+      padding: .7rem .75rem;
+      border-bottom: 1px solid var(--rx-border);
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+    }
+
+    .rx-table th {
+      background: var(--rx-soft);
+      font-size: .78rem;
+      font-weight: 800;
+    }
+
+    .rx-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .rx-table code {
+      overflow-wrap: anywhere;
+    }
+
+    .rx-content {
+      max-width: 900px;
+      margin: 2.5rem auto;
+    }
+
+    .rx-content h2 {
+      margin-top: 2.1rem;
+      line-height: 1.4;
+    }
+
+    .rx-content p,
+    .rx-content li {
+      line-height: 1.8;
+    }
+
+    .rx-faq {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--rx-border);
+    }
+
+    .rx-faq h3 {
+      margin: 0 0 .45rem;
+      font-size: 1rem;
+    }
+
+    .rx-faq p {
+      margin: 0;
+      color: var(--rx-muted);
+    }
+
+    @media (max-width: 850px) {
+      .rx-workspace {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .rx-stats {
+        gap: .4rem;
+      }
+
+      .rx-stat {
+        padding: .6rem;
+      }
+
+      .rx-stat-value {
+        font-size: 1.05rem;
+      }
+
+      .rx-buttons .rx-button {
+        flex: 1 1 auto;
+      }
+
+      .rx-group {
+        grid-template-columns: 1fr;
+        gap: .2rem;
+      }
+    }
+
+    @media print {
+      .site-header,
+      .site-footer,
+      .rx-controls,
+      .rx-content,
+      .rx-buttons {
+        display: none !important;
+      }
+
+      .rx-workspace {
+        display: block;
+      }
+
+      .rx-card {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Regex Tester Online",
+    "url": "https://onlinetoolsandconverters.cc/tools/regex-tester.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "isAccessibleForFree": true,
+    "description": "Test JavaScript regular expressions, inspect capture groups, highlight matches, preview replacements and export results locally in the browser.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What regex syntax does this tester support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This tool uses the browser's native JavaScript RegExp engine. Its patterns are not automatically compatible with every Python, PCRE, Java, .NET or other regex implementation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do capture groups work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Parentheses create capturing groups that store parts of a match. Groups can be numbered or named, and their captured text can be inspected for each match."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does the global flag do?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The g flag tells JavaScript to find all non-overlapping matches instead of stopping after the first match. It also affects how String.replace processes matching text."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can a regular expression freeze the browser?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Some patterns can take a very long time on certain inputs. This tool runs matching in a temporary Web Worker and terminates it if the time limit is exceeded. This reduces the risk of freezing the page but does not make every regex safe or fast."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="ConvertToToolsOnline home">
+        <span class="brand-mark" aria-hidden="true">C</span>
+        <span class="brand-text">ConvertToToolsOnline</span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="primaryNav">
+        ☰
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Main navigation">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#tools">All tools</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container regex-tool" id="main">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span aria-hidden="true"> / </span>
+      <span>Developer Tools</span>
+      <span aria-hidden="true"> / </span>
+      <span aria-current="page">Regex Tester</span>
+    </nav>
+
+    <section class="rx-intro">
+      <span class="rx-kicker">Developer &amp; text tools</span>
+      <h1>Regex Tester &amp; Match Extractor</h1>
+      <p>
+        Test regular expressions against real text. Highlight matches, inspect
+        numbered and named capture groups, preview find-and-replace operations,
+        and export the results. Matching runs locally in your browser.
+      </p>
+    </section>
+
+    <section class="rx-workspace" aria-label="Regular expression tester">
+      <div class="rx-card">
+        <h2>Build your expression</h2>
+        <p class="rx-muted">
+          Enter a JavaScript regex pattern without the surrounding slash
+          delimiters, then select the flags to use.
+        </p>
+
+        <div class="rx-field rx-controls">
+          <label class="rx-label" for="rxPattern">Regular expression pattern</label>
+          <textarea
+            class="rx-textarea rx-pattern"
+            id="rxPattern"
+            maxlength="2000"
+            spellcheck="false"
+            autocapitalize="off"
+            autocomplete="off"
+            placeholder="(?<user>[\w.+-]+)@(?<domain>[\w.-]+\.[A-Za-z]{2,})">(?<user>[\w.+-]+)@(?<domain>[\w-]+(?:\.[\w-]+)+)</textarea>
+          <small>
+            Maximum 2,000 characters. The pattern uses JavaScript regex syntax.
+          </small>
+        </div>
+
+        <div class="rx-field rx-controls">
+          <span class="rx-label">Flags</span>
+          <div class="rx-flags">
+            <label class="rx-flag"><input type="checkbox" id="rxFlagG" checked><code>g</code> Global</label>
+            <label class="rx-flag"><input type="checkbox" id="rxFlagI"><code>i</code> Ignore case</label>
+            <label class="rx-flag"><input type="checkbox" id="rxFlagM"><code>m</code> Multiline</label>
+            <label class="rx-flag"><input type="checkbox" id="rxFlagS"><code>s</code> Dot-all</label>
+            <label class="rx-flag"><input type="checkbox" id="rxFlagU" checked><code>u</code> Unicode</label>
+            <label class="rx-flag"><input type="checkbox" id="rxFlagY"><code>y</code> Sticky</label>
+          </div>
+          <small id="rxFlagsDisplay">/pattern/gu</small>
+        </div>
+
+        <hr class="rx-divider">
+
+        <h3>Quick examples</h3>
+        <p class="rx-muted">
+          Load a working example to test common extraction and replacement tasks.
+        </p>
+
+        <div class="rx-buttons rx-controls">
+          <button class="rx-button" type="button" data-example="email">Extract emails</button>
+          <button class="rx-button" type="button" data-example="date">ISO dates</button>
+          <button class="rx-button" type="button" data-example="space">Repeated spaces</button>
+          <button class="rx-button" type="button" data-example="hex">Hex colors</button>
+        </div>
+
+        <div class="rx-field rx-controls">
+          <label class="rx-label" for="rxTestText">Test text</label>
+          <textarea
+            class="rx-textarea rx-test-text"
+            id="rxTestText"
+            maxlength="50000"
+            spellcheck="false"
+            autocapitalize="off"
+            autocomplete="off">Contact ada@example.com or grace@navy.example for details.
+You can also test support-team@tools.example.</textarea>
+          <small>
+            Maximum 50,000 characters per run. Large samples or complex patterns may take longer.
+          </small>
+        </div>
+
+        <div class="rx-field rx-controls">
+          <label class="rx-label" for="rxReplacement">Replacement template</label>
+          <input
+            class="rx-input"
+            id="rxReplacement"
+            maxlength="250"
+            spellcheck="false"
+            autocapitalize="off"
+            autocomplete="off"
+            value="$<user> [at] $<domain>"
+            placeholder="Replacement text, e.g. $1">
+          <small>
+            Common substitutions include <code>$&amp;</code> for the entire match,
+            <code>$1</code> for capture group 1, <code>$&lt;name&gt;</code>
+            for a named group and <code>$$</code> for a literal dollar sign.
+          </small>
+        </div>
+
+        <label class="rx-option rx-controls">
+          <input type="checkbox" id="rxEnableReplace">
+          <span>
+            <strong>Enable replacement preview</strong><br>
+            Preview the output of JavaScript's <code>String.replace()</code>.
+          </span>
+        </label>
+
+        <div class="rx-buttons rx-controls">
+          <button class="rx-button rx-button-primary" id="rxRun" type="button">
+            Test regex
+          </button>
+          <button class="rx-button" id="rxCopyPattern" type="button">
+            Copy as JavaScript
+          </button>
+          <button class="rx-button" id="rxReset" type="button">
+            Reset
+          </button>
+        </div>
+
+        <p class="rx-live" id="rxInputMessage" aria-live="polite">
+          Ready to test.
+        </p>
+      </div>
+
+      <div>
+        <div class="rx-card">
+          <h2>Test result</h2>
+          <p class="rx-muted">
+            The match list is capped at 300 entries to keep the interface responsive.
+          </p>
+
+          <div class="rx-stats">
+            <div class="rx-stat">
+              <span class="rx-stat-label">Matches shown</span>
+              <output class="rx-stat-value" id="rxMatchCount">0</output>
+            </div>
+            <div class="rx-stat">
+              <span class="rx-stat-label">Input characters</span>
+              <output class="rx-stat-value" id="rxCharCount">0</output>
+            </div>
+            <div class="rx-stat">
+              <span class="rx-stat-label">Runtime</span>
+              <output class="rx-stat-value" id="rxRuntime">—</output>
+            </div>
+          </div>
+
+          <div class="rx-status" id="rxStatus" aria-live="polite">
+            Enter a pattern and test text, then select Test regex.
+          </div>
+
+          <h3>Highlighted matches</h3>
+          <p class="rx-muted">
+            Highlighting shows the matched ranges for the displayed matches.
+          </p>
+
+          <div class="rx-highlight" id="rxHighlighted" aria-label="Text with highlighted matches">
+            Your highlighted text will appear here.
+          </div>
+
+          <div class="rx-buttons">
+            <button class="rx-button" id="rxCopyMatches" type="button" disabled>
+              Copy match list
+            </button>
+            <button class="rx-button" id="rxDownloadCsv" type="button" disabled>
+              Download matches CSV
+            </button>
+          </div>
+
+          <p class="rx-live" id="rxMatchMessage" aria-live="polite"></p>
+        </div>
+
+        <div class="rx-card">
+          <h2>Match details &amp; capture groups</h2>
+          <p class="rx-muted">
+            Match positions are zero-based JavaScript string indexes.
+            Numbered and named capture groups are listed when present.
+          </p>
+
+          <div class="rx-match-list" id="rxMatches">
+            <div class="rx-alert">
+              No results yet. Run a regex to inspect matches.
+            </div>
+          </div>
+        </div>
+
+        <div class="rx-card" id="rxReplacementCard" hidden>
+          <h2>Replacement preview</h2>
+          <p class="rx-muted">
+            This is the result from the native JavaScript <code>String.replace()</code>
+            operation using the current pattern, flags and replacement string.
+          </p>
+
+          <div class="rx-field">
+            <label class="rx-label" for="rxReplacementOutput">Replaced text</label>
+            <textarea
+              class="rx-textarea"
+              id="rxReplacementOutput"
+              readonly
+              aria-label="Preview of replaced text"></textarea>
+          </div>
+
+          <div class="rx-buttons">
+            <button class="rx-button rx-button-primary" id="rxCopyReplacement" type="button">
+              Copy replacement
+            </button>
+            <button class="rx-button" id="rxDownloadReplacement" type="button">
+              Download replacement
+            </button>
+          </div>
+
+          <p class="rx-live" id="rxReplaceMessage" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="rx-card">
+      <h2>Regular expression cheat sheet</h2>
+      <p class="rx-muted">
+        These examples use JavaScript syntax. Exact behavior can differ between regex engines.
+      </p>
+
+      <div class="rx-table-wrap">
+        <table class="rx-table">
+          <thead>
+            <tr>
+              <th scope="col">Pattern</th>
+              <th scope="col">Meaning</th>
+              <th scope="col">Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td><code>.</code></td><td>Any character, except line terminators unless dot-all is enabled</td><td><code>a.c</code></td></tr>
+            <tr><td><code>\d</code></td><td>ASCII digit</td><td><code>\d{4}</code></td></tr>
+            <tr><td><code>\w</code></td><td>ASCII word character in common usage</td><td><code>\w+</code></td></tr>
+            <tr><td><code>\s</code></td><td>Whitespace character</td><td><code>\s+</code></td></tr>
+            <tr><td><code>[abc]</code></td><td>One character from the set</td><td><code>[aeiou]</code></td></tr>
+            <tr><td><code>[^abc]</code></td><td>One character not in the set</td><td><code>[^0-9]</code></td></tr>
+            <tr><td><code>{2,4}</code></td><td>Repeat the previous item 2–4 times</td><td><code>\d{2,4}</code></td></tr>
+            <tr><td><code>(...)</code></td><td>Capturing group</td><td><code>(\d{4})</code></td></tr>
+            <tr><td><code>(?:...)</code></td><td>Non-capturing group</td><td><code>(?:https?|ftp)</code></td></tr>
+            <tr><td><code>(?&lt;year&gt;...)</code></td><td>Named capturing group</td><td><code>(?&lt;year&gt;\d{4})</code></td></tr>
+            <tr><td><code>^</code> and <code>$</code></td><td>String boundaries, or line boundaries with multiline flag</td><td><code>^Hello$</code></td></tr>
+            <tr><td><code>\b</code></td><td>Word boundary</td><td><code>\bcat\b</code></td></tr>
+            <tr><td><code>(?=...)</code></td><td>Positive lookahead</td><td><code>\d(?=px)</code></td></tr>
+            <tr><td><code>(?!...)</code></td><td>Negative lookahead</td><td><code>foo(?!bar)</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="rx-content content prose">
+      <h2>How to use this regex tester</h2>
+      <ol>
+        <li>Enter the expression without surrounding slash delimiters.</li>
+        <li>Choose the flags, such as global matching and case-insensitive matching.</li>
+        <li>Paste the text you want to inspect and run the test.</li>
+        <li>Review the highlighted matches, indexes and capture groups.</li>
+        <li>Optionally enable replacement preview, then copy or export results.</li>
+      </ol>
+
+      <h2>Understanding regex flags</h2>
+      <ul>
+        <li><strong>g — Global:</strong> find multiple non-overlapping matches rather than only the first.</li>
+        <li><strong>i — Ignore case:</strong> ignore case differences where the JavaScript engine allows.</li>
+        <li><strong>m — Multiline:</strong> make <code>^</code> and <code>$</code> recognize line boundaries.</li>
+        <li><strong>s — Dot-all:</strong> allow <code>.</code> to match line terminators.</li>
+        <li><strong>u — Unicode:</strong> enable Unicode-aware regex processing.</li>
+        <li><strong>y — Sticky:</strong> match at the current <code>lastIndex</code> position rather than searching forward.</li>
+      </ul>
+
+      <h2>What are capture groups?</h2>
+      <p>
+        Parentheses can capture part of a match. Numbered capture groups are
+        assigned from left to right, while named groups label the captured
+        values. For example,
+        <code>(?&lt;year&gt;\d{4})-(?&lt;month&gt;\d{2})</code>
+        creates named captures for a four-digit year and a two-digit month.
+      </p>
+
+      <h2>Testing a pattern is not the same as validating the data</h2>
+      <p>
+        A regex can check whether a date string resembles <code>2026-10-17</code>
+        without confirming that every matched date is a real calendar date.
+        Similar limits apply to email addresses, URLs and phone numbers. Use a
+        domain-specific validator when the actual value must be correct.
+      </p>
+
+      <h2>Why the tool has a timeout</h2>
+      <p>
+        Some regex patterns can take a long time on certain input strings.
+        This tool runs matching in a separate temporary Web Worker and stops
+        it after a time limit. That reduces the risk of a slow pattern freezing
+        the page, but it does not guarantee that every expression is safe or fast.
+      </p>
+
+      <h2>JavaScript syntax versus other regex engines</h2>
+      <p>
+        This tester uses your browser's JavaScript <code>RegExp</code> engine.
+        Patterns written for Python, PCRE, Java, .NET, Ruby or other engines
+        may behave differently. If your production code uses another engine,
+        test the expression in a tool that supports that particular flavor.
+      </p>
+
+      <h2>Frequently asked questions</h2>
+
+      <div class="rx-faq">
+        <h3>Why is only one match shown?</h3>
+        <p>
+          Without the global flag <code>g</code>, JavaScript matching typically
+          stops after the first result. Enable the flag when you want all
+          non-overlapping matches.
+        </p>
+      </div>
+
+      <div class="rx-faq">
+        <h3>Does this tool upload my pattern or sample text?</h3>
+        <p>
+          The matching is performed in a browser Web Worker. No server-based
+          regex service is required. Avoid entering sensitive production data
+          on websites unless you understand the entire site's data handling.
+        </p>
+      </div>
+
+      <div class="rx-faq">
+        <h3>Does this regex tester guarantee that my pattern is secure?</h3>
+        <p>
+          No. A successful test only shows how the chosen pattern behaves
+          on the supplied sample. It is not a formal ReDoS security audit
+          or proof that a pattern will be efficient for every input.
+        </p>
+      </div>
+
+      <div class="rx-faq">
+        <h3>Can I export the matches?</h3>
+        <p>
+          Yes. You can copy the match list or download a CSV containing match
+          indexes, matched text, and capture-group details for the entries
+          shown by the tool.
+        </p>
+      </div>
+
+      <h2>Learn more</h2>
+      <p>
+        Consult the
+        <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions"
+           target="_blank" rel="noopener noreferrer">MDN JavaScript regular expression guide</a>
+        for syntax and examples, and the
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Worker/terminate"
+           target="_blank" rel="noopener noreferrer">MDN Worker termination reference</a>
+        for how a Web Worker can be stopped.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>
+        <a href="../index.html">ConvertToToolsOnline</a>
+        · Free browser-based utility tools.
+      </p>
+      <p class="copyright">
+        © <span id="rxYear"></span> ConvertToToolsOnline
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const $ = (id) => document.getElementById(id);
+
+      const MAX_PATTERN_LENGTH = 2000;
+      const MAX_TEXT_LENGTH = 50000;
+      const MAX_REPLACEMENT_LENGTH = 250;
+      const MAX_MATCHES = 300;
+      const WORKER_TIMEOUT_MS = 1500;
+
+      let activeJob = null;
+      let debounceTimer = null;
+      let runSequence = 0;
+      let actionTimer = null;
+      let latestResult = null;
+      let latestTestText = "";
+      let latestReplacement = "";
+      let latestPattern = "";
+      let latestFlags = "";
+
+      const DEFAULTS = {
+        pattern: String.raw`(?<user>[\w.+-]+)@(?<domain>[\w-]+(?:\.[\w-]+)+)`,
+        flags: ["g", "u"],
+        testText:
+          "Contact ada@example.com or grace@navy.example for details.\n" +
+          "You can also test support-team@tools.example.",
+        replacement: "$<user> [at] $<domain>",
+        enableReplacement: false
+      };
+
+      const EXAMPLES = {
+        email: {
+          pattern: String.raw`(?<user>[\w.+-]+)@(?<domain>[\w-]+(?:\.[\w-]+)+)`,
+          flags: ["g", "u"],
+          text:
+            "Contact ada@example.com or grace@navy.example for details.\n" +
+            "Malformed: bob@@example.com",
+          replacement: "$<user> [at] $<domain>",
+          enableReplacement: true
+        },
+        date: {
+          pattern: String.raw`(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})`,
+          flags: ["g"],
+          text:
+            "Released 2026-10-05, next update 2026-11-12.\n" +
+            "The pattern also matches 2026-13-40; it does not validate calendar dates.",
+          replacement: "$<day>/$<month>/$<year>",
+          enableReplacement: true
+        },
+        space: {
+          pattern: String.raw`[ \t]{2,}`,
+          flags: ["g"],
+          text: "Repeated    spaces\t\tand     tabs.",
+          replacement: " ",
+          enableReplacement: true
+        },
+        hex: {
+          pattern: String.raw`#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})\b`,
+          flags: ["g"],
+          text: "Colors: #fff, #2563eb, #12AB90 and invalid #12AB.",
+          replacement: "HEX:$&",
+          enableReplacement: true
+        }
+      };
+
+      /*
+        Worker code is self-contained because it is serialized to a Blob.
+        Every regex operation, including replacement preview, runs inside
+        the worker so the main UI can stop a slow expression.
+      */
+      function regexWorkerMain() {
+        "use strict";
+
+        self.onmessage = function (event) {
+          const started = performance.now();
+          const data = event.data || {};
+
+          try {
+            const pattern = data.pattern;
+            const text = data.text;
+            const flags = data.flags;
+            const replacement = data.replacement;
+            const doReplacement = data.doReplacement;
+
+            if (typeof pattern !== "string" || typeof text !== "string") {
+              throw new Error("Pattern or test text is missing.");
+            }
+
+            // Compilation validates the flags and pattern syntax.
+            new RegExp(pattern, flags);
+
+            const scanFlags = flags.includes("g") ? flags : flags + "g";
+            const scanRegex = new RegExp(pattern, scanFlags);
+            const matches = [];
+            const maxStoredMatches = 300;
+
+            let moreThanLimit = false;
+
+            function trimCapture(value, limit) {
+              if (value === undefined || value === null) {
+                return {
+                  value: "(undefined)",
+                  truncated: false,
+                  undefinedValue: true
+                };
+              }
+
+              const stringValue = String(value);
+
+              return {
+                value: stringValue.length > limit
+                  ? stringValue.slice(0, limit) + " … [truncated]"
+                  : stringValue,
+                truncated: stringValue.length > limit,
+                undefinedValue: false
+              };
+            }
+
+            function advanceStringIndex(source, index, unicode) {
+              if (!unicode) return index + 1;
+
+              const first = source.charCodeAt(index);
+
+              if (
+                first >= 0xD800 &&
+                first <= 0xDBFF &&
+                index + 1 < source.length
+              ) {
+                const second = source.charCodeAt(index + 1);
+
+                if (second >= 0xDC00 && second <= 0xDFFF) {
+                  return index + 2;
+                }
+              }
+
+              return index + 1;
+            }
+
+            while (matches.length <= maxStoredMatches) {
+              const match = scanRegex.exec(text);
+
+              if (match === null) break;
+
+              if (matches.length === maxStoredMatches) {
+                moreThanLimit = true;
+                break;
+              }
+
+              const captureGroups = [];
+              const maxGroups = 50;
+              const groupCount = Math.max(0, match.length - 1);
+              const storedGroupCount = Math.min(groupCount, maxGroups);
+
+              for (let groupIndex = 1; groupIndex <= storedGroupCount; groupIndex++) {
+                captureGroups.push({
+                  name: String(groupIndex),
+                  ...trimCapture(match[groupIndex], 500)
+                });
+              }
+
+              const namedGroups = [];
+              const namedObject = match.groups || {};
+              const namedEntries = Object.entries(namedObject);
+              const storedNamedCount = Math.min(namedEntries.length, maxGroups);
+
+              for (let groupIndex = 0; groupIndex < storedNamedCount; groupIndex++) {
+                const [name, value] = namedEntries[groupIndex];
+
+                namedGroups.push({
+                  name,
+                  ...trimCapture(value, 500)
+                });
+              }
+
+              const matchedValue = String(match[0]);
+
+              matches.push({
+                index: match.index,
+                length: matchedValue.length,
+                value: matchedValue.length > 1000
+                  ? matchedValue.slice(0, 1000) + " … [truncated]"
+                  : matchedValue,
+                valueTruncated: matchedValue.length > 1000,
+                groups: captureGroups,
+                namedGroups,
+                omittedGroups: Math.max(0, groupCount - storedGroupCount),
+                omittedNamedGroups: Math.max(0, namedEntries.length - storedNamedCount)
+              });
+
+              if (!flags.includes("g")) {
+                break;
+              }
+
+              if (matchedValue === "") {
+                if (scanRegex.lastIndex >= text.length) {
+                  break;
+                }
+
+                scanRegex.lastIndex = advanceStringIndex(
+                  text,
+                  scanRegex.lastIndex,
+                  flags.includes("u")
+                );
+              }
+            }
+
+            let replacementResult = null;
+            let replacementTooLarge = false;
+
+            if (doReplacement) {
+              const replacementRegex = new RegExp(pattern, flags);
+
+              const replaced = text.replace(replacementRegex, replacement);
+
+              // Avoid transferring a very large result to the UI.
+              if (replaced.length > 1000000) {
+                replacementTooLarge = true;
+              } else {
+                replacementResult = replaced;
+              }
+            }
+
+            self.postMessage({
+              ok: true,
+              matches,
+              truncated: moreThanLimit,
+              replacementResult,
+              replacementTooLarge,
+              durationMs: performance.now() - started,
+              totalCharacters: text.length
+            });
+          } catch (error) {
+            self.postMessage({
+              ok: false,
+              error: error && error.message
+                ? error.message
+                : "The regular expression could not be tested.",
+              durationMs: performance.now() - started
+            });
+          }
+        };
+      }
+
+      function flagsString() {
+        return [
+          $("rxFlagG").checked ? "g" : "",
+          $("rxFlagI").checked ? "i" : "",
+          $("rxFlagM").checked ? "m" : "",
+          $("rxFlagS").checked ? "s" : "",
+          $("rxFlagU").checked ? "u" : "",
+          $("rxFlagY").checked ? "y" : ""
+        ].join("");
+      }
+
+      function formatNumber(value) {
+        return new Intl.NumberFormat().format(value);
+      }
+
+      function setText(id, value) {
+        $(id).textContent = String(value);
+      }
+
+      function displayStatus(message, type = "") {
+        const node = $("rxStatus");
+
+        node.className = "rx-status" + (type ? " rx-status-" + type : "");
+        node.textContent = message;
+      }
+
+      function terminateActiveJob() {
+        if (!activeJob) return;
+
+        try {
+          clearTimeout(activeJob.timeout);
+          activeJob.worker.terminate();
+        } catch (error) {
+          // The worker might already have stopped.
+        }
+
+        try {
+          URL.revokeObjectURL(activeJob.url);
+        } catch (error) {
+          // The URL might already have been revoked.
+        }
+
+        activeJob = null;
+      }
+
+      function clearResultPanels() {
+        latestResult = null;
+        latestTestText = "";
+        latestReplacement = "";
+        latestPattern = "";
+        latestFlags = "";
+
+        setText("rxMatchCount", "0");
+        setText("rxRuntime", "—");
+        setText("rxCharCount", formatNumber($("rxTestText").value.length));
+
+        $("rxHighlighted").textContent = "No result available yet.";
+        $("rxMatches").replaceChildren();
+
+        const message = document.createElement("div");
+        message.className = "rx-alert";
+        message.textContent = "Run a valid expression to view matches.";
+        $("rxMatches").appendChild(message);
+
+        $("rxCopyMatches").disabled = true;
+        $("rxDownloadCsv").disabled = true;
+
+        $("rxReplacementCard").hidden = true;
+        $("rxReplacementOutput").value = "";
+        $("rxCopyReplacement").disabled = true;
+        $("rxDownloadReplacement").disabled = true;
+      }
+
+      function showValidationError(message) {
+        displayStatus(message, "error");
+        setText("rxInputMessage", message);
+        clearResultPanels();
+      }
+
+      function scheduleTest(immediate = false) {
+        runSequence++;
+        const thisSequence = runSequence;
+
+        if (debounceTimer) {
+          clearTimeout(debounceTimer);
+          debounceTimer = null;
+        }
+
+        terminateActiveJob();
+
+        setText(
+          "rxFlagsDisplay",
+          "/" + $("rxPattern").value.replace(/\//g, "\\/") + "/" + flagsString()
+        );
+
+        setText("rxInputMessage", immediate ? "Testing expression…" : "Input changed; testing shortly…");
+
+        if (immediate) {
+          startWorker(thisSequence);
+        } else {
+          debounceTimer = window.setTimeout(() => {
+            startWorker(thisSequence);
+          }, 300);
+        }
+      }
+
+      function startWorker(thisSequence) {
+        if (thisSequence !== runSequence) return;
+
+        const pattern = $("rxPattern").value;
+        const text = $("rxTestText").value;
+        const replacement = $("rxReplacement").value;
+        const flags = flagsString();
+        const doReplacement = $("rxEnableReplace").checked;
+
+        if (pattern.length > MAX_PATTERN_LENGTH) {
+          showValidationError("The pattern exceeds the 2,000-character limit.");
+          $("rxPattern").setAttribute("aria-invalid", "true");
+          return;
+        }
+
+        if (text.length > MAX_TEXT_LENGTH) {
+          showValidationError("The test text exceeds the 50,000-character limit.");
+          $("rxTestText").setAttribute("aria-invalid", "true");
+          return;
+        }
+
+        if (replacement.length > MAX_REPLACEMENT_LENGTH) {
+          showValidationError("The replacement exceeds the 250-character limit.");
+          return;
+        }
+
+        $("rxPattern").setAttribute("aria-invalid", "false");
+        $("rxTestText").setAttribute("aria-invalid", "false");
+
+        if (typeof Worker === "undefined" || typeof Blob === "undefined") {
+          showValidationError(
+            "This browser does not support the worker-based tester needed for timeout protection."
+          );
+          return;
+        }
+
+        let workerUrl = null;
+        let worker = null;
+
+        try {
+          const workerSource =
+            "(" + regexWorkerMain.toString() + ")();";
+
+          workerUrl = URL.createObjectURL(
+            new Blob([workerSource], { type: "text/javascript" })
+          );
+
+          worker = new Worker(workerUrl);
+        } catch (error) {
+          if (workerUrl) URL.revokeObjectURL(workerUrl);
+
+          showValidationError(
+            "A temporary worker could not be started. Your browser or site's security policy may block Blob workers."
+          );
+          return;
+        }
+
+        const job = {
+          worker,
+          url: workerUrl,
+          timeout: null
+        };
+
+        activeJob = job;
+
+        function finishJob() {
+          clearTimeout(job.timeout);
+
+          try {
+            worker.terminate();
+          } catch (error) {
+            // Already terminated.
+          }
+
+          try {
+            URL.revokeObjectURL(workerUrl);
+          } catch (error) {
+            // Already revoked.
+          }
+
+          if (activeJob === job) activeJob = null;
+        }
+
+        job.timeout = window.setTimeout(() => {
+          if (activeJob !== job || thisSequence !== runSequence) return;
+
+          finishJob();
+
+          showValidationError(
+            "The regex test exceeded " +
+            (WORKER_TIMEOUT_MS / 1000).toFixed(1) +
+            " seconds and was stopped. Simplify the pattern or test it against a shorter sample."
+          );
+        }, WORKER_TIMEOUT_MS);
+
+        worker.onmessage = (event) => {
+          finishJob();
+
+          if (thisSequence !== runSequence) return;
+
+          const result = event.data;
+
+          if (!result || !result.ok) {
+            $("rxPattern").setAttribute("aria-invalid", "true");
+            showValidationError(
+              "Regex error: " +
+              (result && result.error ? result.error : "Unable to run this expression.")
+            );
+            return;
+          }
+
+          $("rxPattern").setAttribute("aria-invalid", "false");
+
+          latestResult = result;
+          latestTestText = text;
+          latestReplacement = replacement;
+          latestPattern = pattern;
+          latestFlags = flags;
+
+          renderResults(result, text);
+
+          if (result.replacementTooLarge) {
+            setText(
+              "rxReplaceMessage",
+              "The replacement output exceeds one million characters and was not displayed."
+            );
+          }
+        };
+
+        worker.onerror = () => {
+          finishJob();
+
+          if (thisSequence !== runSequence) return;
+
+          showValidationError(
+            "The worker encountered an unexpected error. Check the pattern and try a shorter sample."
+          );
+        };
+
+        try {
+          worker.postMessage({
+            pattern,
+            text,
+            flags,
+            replacement,
+            doReplacement
+          });
+        } catch (error) {
+          finishJob();
+
+          showValidationError(
+            "The test could not be started with the supplied input."
+          );
+        }
+      }
+
+      function appendPlainText(parent, value) {
+        if (value) parent.appendChild(document.createTextNode(value));
+      }
+
+      function renderHighlighted(text, matches, truncated) {
+        const target = $("rxHighlighted");
+        target.replaceChildren();
+
+        let cursor = 0;
+
+        for (const match of matches) {
+          const start = match.index;
+          const end = match.index + match.length;
+
+          if (start < cursor || start > text.length || end > text.length) {
+            continue;
+          }
+
+          appendPlainText(target, text.slice(cursor, start));
+
+          if (match.length > 0) {
+            const mark = document.createElement("mark");
+            mark.textContent = text.slice(start, end);
+            target.appendChild(mark);
+          }
+
+          cursor = Math.max(cursor, end);
+        }
+
+        appendPlainText(target, text.slice(cursor));
+
+        if (!text.length) {
+          target.textContent = "(Empty test text)";
+        }
+
+        if (truncated) {
+          const note = document.createElement("p");
+          note.className = "rx-muted";
+          note.textContent =
+            "Highlighting shows only the first " + MAX_MATCHES + " matches.";
+          target.appendChild(document.createElement("br"));
+          target.appendChild(note);
+        }
+      }
+
+      function appendGroup(parent, label, value, truncated) {
+        const row = document.createElement("div");
+        row.className = "rx-group";
+
+        const name = document.createElement("span");
+        name.className = "rx-group-name";
+        name.textContent = label;
+
+        const content = document.createElement("code");
+        content.className = "rx-group-value";
+        content.textContent = value;
+
+        if (truncated) {
+          content.textContent += " [display value truncated]";
+        }
+
+        row.append(name, content);
+        parent.appendChild(row);
+      }
+
+      function renderMatchCards(matches) {
+        const list = $("rxMatches");
+        list.replaceChildren();
+
+        if (matches.length === 0) {
+          const message = document.createElement("div");
+          message.className = "rx-alert";
+          message.textContent = "No matches were found for this pattern and input.";
+          list.appendChild(message);
+          return;
+        }
+
+        matches.forEach((match, index) => {
+          const card = document.createElement("article");
+          card.className = "rx-match";
+
+          const header = document.createElement("div");
+          header.className = "rx-match-header";
+
+          const title = document.createElement("span");
+          title.textContent = "Match " + (index + 1);
+
+          const position = document.createElement("span");
+          position.textContent =
+            "Index " + match.index + " · Length " + match.length;
+
+          header.append(title, position);
+          card.appendChild(header);
+
+          const body = document.createElement("div");
+          body.className = "rx-match-body";
+
+          const value = document.createElement("code");
+          value.className = "rx-match-value";
+          value.textContent = match.valueTruncated
+            ? match.value
+            : (match.value === "" ? "(Empty match)" : match.value);
+
+          body.appendChild(value);
+
+          const groupCount =
+            match.groups.length +
+            match.namedGroups.length +
+            match.omittedGroups +
+            match.omittedNamedGroups;
+
+          const details = document.createElement("details");
+          details.className = "rx-group-details";
+
+          const summary = document.createElement("summary");
+          summary.textContent = "Capture groups (" + groupCount + ")";
+          details.appendChild(summary);
+
+          const groupList = document.createElement("div");
+          groupList.className = "rx-groups";
+
+          if (groupCount === 0) {
+            const note = document.createElement("p");
+            note.className = "rx-muted";
+            note.textContent = "This pattern has no capture groups.";
+            groupList.appendChild(note);
+          } else {
+            match.groups.forEach((group) => {
+              appendGroup(
+                groupList,
+                "$" + group.name,
+                group.value,
+                group.truncated
+              );
+            });
+
+            match.namedGroups.forEach((group) => {
+              appendGroup(
+                groupList,
+                "$<" + group.name + ">",
+                group.value,
+                group.truncated
+              );
+            });
+
+            if (match.omittedGroups) {
+              const note = document.createElement("p");
+              note.className = "rx-muted";
+              note.textContent =
+                match.omittedGroups + " additional numbered group(s) omitted from display.";
+              groupList.appendChild(note);
+            }
+
+            if (match.omittedNamedGroups) {
+              const note = document.createElement("p");
+              note.className = "rx-muted";
+              note.textContent =
+                match.omittedNamedGroups + " additional named group(s) omitted from display.";
+              groupList.appendChild(note);
+            }
+          }
+
+          details.appendChild(groupList);
+          body.appendChild(details);
+          card.appendChild(body);
+          list.appendChild(card);
+        });
+      }
+
+      function renderResults(result, text) {
+        const matches = result.matches || [];
+
+        setText("rxMatchCount", matches.length + (result.truncated ? "+" : ""));
+        setText("rxCharCount", formatNumber(text.length));
+        setText("rxRuntime", result.durationMs.toFixed(1) + " ms");
+
+        const summary =
+          matches.length === 0
+            ? "No matches found."
+            : matches.length +
+              (result.truncated ? "+ matches shown (display limit reached)." : " match(es) found.");
+
+        const replaceWasEnabled = $("rxEnableReplace").checked;
+
+        displayStatus(
+          "Expression compiled successfully. " + summary +
+          " The matching process ran in a temporary worker.",
+          "success"
+        );
+
+        renderHighlighted(text, matches, result.truncated);
+        renderMatchCards(matches);
+
+        $("rxCopyMatches").disabled = matches.length === 0;
+        $("rxDownloadCsv").disabled = matches.length === 0;
+
+        $("rxReplacementCard").hidden = !replaceWasEnabled;
+
+        if (replaceWasEnabled) {
+          $("rxCopyReplacement").disabled = !result.replacementResult;
+          $("rxDownloadReplacement").disabled = !result.replacementResult;
+
+          $("rxReplacementOutput").value =
+            result.replacementResult === null
+              ? ""
+              : result.replacementResult;
+
+          setText(
+            "rxReplaceMessage",
+            result.replacementResult === null
+              ? "Replacement preview is unavailable or too large."
+              : "Replacement preview updated."
+          );
+        } else {
+          $("rxReplacementOutput").value = "";
+          $("rxCopyReplacement").disabled = true;
+          $("rxDownloadReplacement").disabled = true;
+        }
+
+        setText(
+          "rxMatchMessage",
+          result.truncated
+            ? "Only the first " + MAX_MATCHES + " entries are displayed and exported."
+            : "All matches found by this test are displayed."
+        );
+
+        setText("rxInputMessage", "Test complete.");
+      }
+
+      function csvCell(value) {
+        return '"' + String(value).replace(/"/g, '""') + '"';
+      }
+
+      function buildMatchesCsv() {
+        if (!latestResult) return "";
+
+        const rows = [
+          ["Match number", "Start index", "Length", "Matched text", "Numbered groups", "Named groups"]
+        ];
+
+        latestResult.matches.forEach((match, index) => {
+          const numbered = match.groups
+            .map((group) => group.name + "=" + group.value)
+            .join(" | ");
+
+          const named = match.namedGroups
+            .map((group) => group.name + "=" + group.value)
+            .join(" | ");
+
+          rows.push([
+            index + 1,
+            match.index,
+            match.length,
+            match.value,
+            numbered,
+            named
+          ]);
+        });
+
+        if (latestResult.truncated) {
+          rows.push([
+            "NOTE",
+            "",
+            "",
+            "Output limited to the first " + MAX_MATCHES + " matches.",
+            "",
+            ""
+          ]);
+        }
+
+        return "\uFEFF" + rows
+          .map((row) => row.map(csvCell).join(","))
+          .join("\r\n");
+      }
+
+      async function copyText(text, message) {
+        if (text === null || text === undefined || text === "") {
+          announce(message || "There is no text to copy.");
+          return;
+        }
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+            announce(message || "Copied to clipboard.");
+            return;
+          }
+        } catch (error) {
+          // Continue with the compatibility fallback.
+        }
+
+        const area = document.createElement("textarea");
+        area.value = text;
+        area.setAttribute("readonly", "");
+        area.style.position = "fixed";
+        area.style.left = "-9999px";
+        area.style.top = "0";
+
+        document.body.appendChild(area);
+        area.select();
+
+        let copied = false;
+
+        try {
+          copied = document.execCommand("copy");
+        } catch (error) {
+          copied = false;
+        }
+
+        area.remove();
+
+        announce(
+          copied
+            ? (message || "Copied to clipboard.")
+            : "Copy was blocked. Select the text and copy it manually."
+        );
+      }
+
+      function announce(message) {
+        setText("rxMatchMessage", message);
+
+        if (actionTimer) clearTimeout(actionTimer);
+
+        actionTimer = setTimeout(() => {
+          setText("rxMatchMessage", "");
+        }, 4000);
+      }
+
+      function downloadFile(text, filename, mimeType) {
+        if (!text) {
+          announce("There is no content to download.");
+          return;
+        }
+
+        try {
+          const blob = new Blob([text], { type: mimeType });
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+
+          link.href = url;
+          link.download = filename;
+
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+
+          window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+          announce("Download started.");
+        } catch (error) {
+          announce("The file could not be downloaded in this browser.");
+        }
+      }
+
+      function loadExample(key) {
+        const example = EXAMPLES[key];
+
+        if (!example) return;
+
+        $("rxPattern").value = example.pattern;
+        $("rxTestText").value = example.text;
+        $("rxReplacement").value = example.replacement;
+        $("rxEnableReplace").checked = example.enableReplacement;
+
+        ["G", "I", "M", "S", "U", "Y"].forEach((flag) => {
+          const flagLower = flag.toLowerCase();
+          $("rxFlag" + flag).checked = example.flags.includes(flagLower);
+        });
+
+        scheduleTest(true);
+      }
+
+      function resetTool() {
+        $("rxPattern").value = DEFAULTS.pattern;
+        $("rxTestText").value = DEFAULTS.testText;
+        $("rxReplacement").value = DEFAULTS.replacement;
+        $("rxEnableReplace").checked = DEFAULTS.enableReplacement;
+
+        ["G", "I", "M", "S", "U", "Y"].forEach((flag) => {
+          const flagLower = flag.toLowerCase();
+          $("rxFlag" + flag).checked = DEFAULTS.flags.includes(flagLower);
+        });
+
+        scheduleTest(true);
+      }
+
+      $("rxRun").addEventListener("click", () => scheduleTest(true));
+
+      $("rxReset").addEventListener("click", resetTool);
+
+      document.querySelectorAll("[data-example]").forEach((button) => {
+        button.addEventListener("click", () => {
+          loadExample(button.dataset.example);
+        });
+      });
+
+      [
+        "rxPattern",
+        "rxTestText",
+        "rxReplacement",
+        "rxFlagG",
+        "rxFlagI",
+        "rxFlagM",
+        "rxFlagS",
+        "rxFlagU",
+        "rxFlagY",
+        "rxEnableReplace"
+      ].forEach((id) => {
+        const element = $(id);
+
+        element.addEventListener("input", () => scheduleTest(false));
+        element.addEventListener("change", () => scheduleTest(false));
+      });
+
+      $("rxCopyPattern").addEventListener("click", () => {
+        const pattern = $("rxPattern").value;
+        const flags = flagsString();
+
+        const jsExpression =
+          "new RegExp(" +
+          JSON.stringify(pattern) +
+          ", " +
+          JSON.stringify(flags) +
+          ")";
+
+        copyText(jsExpression, "JavaScript RegExp expression copied.");
+      });
+
+      $("rxCopyMatches").addEventListener("click", () => {
+        if (!latestResult) return;
+
+        const lines = [
+          "REGEX MATCH RESULTS",
+          "Pattern: " + latestPattern,
+          "Flags: " + latestFlags,
+          "Matches shown: " + latestResult.matches.length +
+            (latestResult.truncated ? " (truncated)" : ""),
+          ""
+        ];
+
+        latestResult.matches.forEach((match, index) => {
+          lines.push(
+            "Match " + (index + 1) +
+            " | index=" + match.index +
+            " | length=" + match.length,
+            match.value
+          );
+
+          match.groups.forEach((group) => {
+            lines.push("  $" + group.name + " = " + group.value);
+          });
+
+          match.namedGroups.forEach((group) => {
+            lines.push("  $" + "<" + group.name + "> = " + group.value);
+          });
+
+          lines.push("");
+        });
+
+        copyText(lines.join("\n"), "Match list copied.");
+      });
+
+      $("rxDownloadCsv").addEventListener("click", () => {
+        if (!latestResult || !latestResult.matches.length) {
+          announce("There are no matches to export.");
+          return;
+        }
+
+        downloadFile(
+          buildMatchesCsv(),
+          "regex-matches.csv",
+          "text/csv;charset=utf-8"
+        );
+      });
+
+      $("rxCopyReplacement").addEventListener("click", () => {
+        copyText(
+          $("rxReplacementOutput").value,
+          "Replacement output copied."
+        );
+      });
+
+      $("rxDownloadReplacement").addEventListener("click", () => {
+        downloadFile(
+          $("rxReplacementOutput").value,
+          "regex-replacement.txt",
+          "text/plain;charset=utf-8"
+        );
+      });
+
+      $("rxYear").textContent = String(new Date().getFullYear());
+
+      scheduleTest(true);
+    })();
+  </script>
+</body>
+</html>

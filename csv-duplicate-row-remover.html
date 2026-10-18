@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>CSV Duplicate Row Remover – Remove Duplicates by Column</title>
+<meta name="description" content="Remove duplicate CSV rows online. Deduplicate by all columns or selected key columns, keep the first or last match, normalize text, preview changes, and download clean CSV locally.">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#f6f8fc">
+<link rel="canonical" href="https://onlinetoolsandconverters.cc/tools/csv-duplicate-row-remover.html">
+<link rel="stylesheet" href="../style.css">
+<script src="../script.js" defer></script>
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Online Tools &amp; Converters">
+<meta property="og:title" content="CSV Duplicate Row Remover">
+<meta property="og:description" content="Clean CSV files by removing duplicate rows or matching selected columns.">
+<meta property="og:url" content="https://onlinetoolsandconverters.cc/tools/csv-duplicate-row-remover.html">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "CSV Duplicate Row Remover",
+  "url": "https://onlinetoolsandconverters.cc/tools/csv-duplicate-row-remover.html",
+  "applicationCategory": "DataTransformation",
+  "operatingSystem": "Any",
+  "isAccessibleForFree": true,
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "description": "Remove duplicate CSV records by comparing all fields or selected key columns. Process and export data in the browser."
+}
+</script>
+</head>
+
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="../index.html" aria-label="Homepage">
+      <span class="brand-mark" aria-hidden="true">✦</span>
+      <span class="brand-text">Online Tools <span>&amp; Converters</span></span>
+    </a>
+    <button class="nav-toggle" type="button"
+      aria-label="Open navigation menu"
+      aria-expanded="false" aria-controls="csv-navigation">
+      <span class="nav-toggle-bars"></span>
+    </button>
+    <nav class="primary-nav" id="csv-navigation" aria-label="Main navigation">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#tools">All tools</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="container content-area">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../index.html#tools">Tools</a></li>
+      <li aria-current="page">CSV Duplicate Row Remover</li>
+    </ol>
+  </nav>
+
+  <section class="page-head">
+    <p class="eyebrow">Free data-cleaning utility</p>
+    <h1>CSV Duplicate Row Remover</h1>
+    <p class="lead">
+      Clean duplicate records from CSV files without opening a spreadsheet.
+      Compare complete rows or choose specific columns such as email, customer
+      ID, or product SKU. Review the results and download your cleaned data.
+    </p>
+  </section>
+
+  <section class="tool-layout">
+    <div class="panel">
+      <h2>1. Import CSV data</h2>
+
+      <div class="field">
+        <label for="dr-file">Choose a CSV or TSV file</label>
+        <input type="file" id="dr-file" accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values,text/plain">
+        <p class="hint">Maximum file size: 10 MB. Your file is processed locally in your browser.</p>
+      </div>
+
+      <div class="field">
+        <label for="dr-input">Or paste your data here</label>
+        <textarea id="dr-input" rows="12" spellcheck="false" autocomplete="off"
+          placeholder="email,name,city&#10;alex@example.com,Alex,Kathmandu&#10;sam@example.com,Sam,Pokhara&#10;alex@example.com,Alex,Kathmandu"></textarea>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="dr-delimiter">Field delimiter</label>
+          <select id="dr-delimiter">
+            <option value="auto">Auto-detect</option>
+            <option value=",">Comma (,)</option>
+            <option value="&#9;">Tab</option>
+            <option value=";">Semicolon (;)</option>
+            <option value="|">Pipe (|)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="dr-output-delimiter">Output delimiter</label>
+          <select id="dr-output-delimiter">
+            <option value=",">Comma (,)</option>
+            <option value="&#9;">Tab</option>
+            <option value=";">Semicolon (;)</option>
+          </select>
+        </div>
+      </div>
+
+      <label class="checkbox-row">
+        <input type="checkbox" id="dr-headers" checked>
+        First row contains column names
+      </label>
+
+      <label class="checkbox-row">
+        <input type="checkbox" id="dr-trim" checked>
+        Trim leading and trailing cell whitespace
+      </label>
+
+      <label class="checkbox-row">
+        <input type="checkbox" id="dr-ignore-blank" checked>
+        Ignore completely blank rows
+      </label>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" type="button" id="dr-sample">Load example</button>
+        <button class="btn btn-secondary" type="button" id="dr-clear">Clear</button>
+        <button class="btn btn-primary" type="button" id="dr-analyze">Analyze columns</button>
+      </div>
+
+      <div id="dr-status" class="status" role="status" aria-live="polite"></div>
+
+      <div class="section">
+        <h2>2. Choose duplicate rules</h2>
+
+        <div class="field">
+          <label for="dr-mode">Compare records using</label>
+          <select id="dr-mode">
+            <option value="all">All columns — exact row duplicates</option>
+            <option value="selected">Selected columns — match key fields</option>
+          </select>
+          <p class="hint">
+            Selected-column mode treats rows as duplicates when the chosen key
+            values match, even if their other fields differ.
+          </p>
+        </div>
+
+        <div id="dr-column-area" hidden>
+          <div class="field">
+            <span class="field-label">Select comparison columns</span>
+            <div id="dr-columns" class="dr-column-grid">
+              <p class="muted small">Analyze your data to load the column list.</p>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-secondary btn-sm" type="button" id="dr-select-all">Select all</button>
+            <button class="btn btn-secondary btn-sm" type="button" id="dr-select-none">Select none</button>
+          </div>
+          <label class="checkbox-row">
+            <input type="checkbox" id="dr-blank-keys" checked>
+            Keep rows with all selected key cells blank as separate records
+          </label>
+        </div>
+
+        <div class="field">
+          <label for="dr-keep">Which matching record should be kept?</label>
+          <select id="dr-keep">
+            <option value="first">Keep the first occurrence</option>
+            <option value="last">Keep the last occurrence</option>
+          </select>
+        </div>
+
+        <label class="checkbox-row">
+          <input type="checkbox" id="dr-ignore-case">
+          Ignore uppercase/lowercase differences when comparing
+        </label>
+
+        <label class="checkbox-row">
+          <input type="checkbox" id="dr-normalize-unicode" checked>
+          Normalize Unicode text for comparison
+        </label>
+
+        <label class="checkbox-row">
+          <input type="checkbox" id="dr-formula-protection">
+          Prefix formula-like values with an apostrophe in exported CSV
+        </label>
+        <p class="hint">
+          Spreadsheet formula protection changes exported cell values where
+          needed. Keep it off when you need an unchanged data export.
+        </p>
+
+        <button class="btn btn-primary" type="button" id="dr-remove" disabled>
+          Remove duplicate rows
+        </button>
+      </div>
+    </div>
+
+    <aside>
+      <div class="panel">
+        <h2>Deduplication results</h2>
+        <p class="muted small">Analyze your data and remove duplicates to see the final totals.</p>
+
+        <div class="stats">
+          <div class="stat">
+            <strong id="dr-stat-input">—</strong>
+            <span>Input rows</span>
+          </div>
+          <div class="stat">
+            <strong id="dr-stat-output">—</strong>
+            <span>Unique rows</span>
+          </div>
+          <div class="stat">
+            <strong id="dr-stat-removed">—</strong>
+            <span>Duplicates removed</span>
+          </div>
+          <div class="stat">
+            <strong id="dr-stat-groups">—</strong>
+            <span>Duplicate groups</span>
+          </div>
+        </div>
+
+        <div class="result-line" id="dr-summary">
+          Your results will appear here.
+        </div>
+
+        <div class="field" style="margin-top:18px">
+          <label for="dr-output">Cleaned CSV output</label>
+          <textarea id="dr-output" rows="15" readonly spellcheck="false"
+            placeholder="Your cleaned CSV will appear here."></textarea>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" type="button" id="dr-copy" disabled>Copy cleaned CSV</button>
+          <button class="btn btn-secondary" type="button" id="dr-download" disabled>Download CSV</button>
+        </div>
+
+        <div class="btn-row" style="margin-top:10px">
+          <button class="btn btn-secondary" type="button" id="dr-report" disabled>Download duplicate report</button>
+        </div>
+
+        <p id="dr-output-status" class="hint" role="status" aria-live="polite"></p>
+
+        <div class="callout" style="margin-top:15px">
+          <strong>Important:</strong> when matching by selected columns, a kept
+          record retains all its original fields. The tool does not merge values
+          from discarded records.
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="section">
+    <h2>Input preview</h2>
+    <p class="muted">Inspect your parsed headers and first rows before cleaning.</p>
+    <div id="dr-input-preview-info" class="result-line">No data analyzed yet.</div>
+    <div class="table-wrap" style="margin-top:14px">
+      <table>
+        <thead id="dr-input-thead"></thead>
+        <tbody id="dr-input-tbody">
+          <tr><td class="muted">No preview available yet.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Removed duplicate records</h2>
+    <p class="muted">Review which records were removed and which record was retained.</p>
+    <div id="dr-duplicates-info" class="result-line">No deduplication run yet.</div>
+    <div class="table-wrap" style="margin-top:14px">
+      <table>
+        <thead>
+          <tr>
+            <th>Removed record</th>
+            <th>Kept record</th>
+            <th>Matching key</th>
+          </tr>
+        </thead>
+        <tbody id="dr-duplicates-tbody">
+          <tr><td colspan="3" class="muted">No duplicate report yet.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="hint" id="dr-report-limit"></p>
+  </section>
+
+  <article class="content prose">
+    <h2>What is CSV deduplication?</h2>
+    <p>
+      CSV deduplication removes records that match according to selected
+      comparison rules. An exact row match checks every field. Key-based
+      deduplication checks selected fields, such as email addresses, customer
+      IDs, product codes, or URLs, even when other fields differ.
+    </p>
+
+    <h2>Remove duplicates by email or ID</h2>
+    <p>
+      Select a key column when a record should be unique according to one field.
+      For example, comparing by email can identify repeated contact records.
+      Comparing by product SKU can identify repeated product codes. Review
+      whether keeping the first or last record is appropriate before exporting.
+    </p>
+
+    <h2>CSV formatting and privacy</h2>
+    <p>
+      The parser supports quoted fields, embedded commas, escaped quotation
+      marks, and line breaks within quoted cells. The output is regenerated
+      as delimited text and therefore may use different quoting or line endings
+      than the original file. All parsing and deduplication happen locally in
+      your browser; data is not uploaded to this website.
+    </p>
+
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>Can I remove duplicates using only one column?</summary>
+      <p>Yes. Analyze your data, choose selected-column matching, and select the column that defines a duplicate, such as email or customer ID.</p>
+    </details>
+    <details>
+      <summary>What happens if duplicate rows have different values in other columns?</summary>
+      <p>In selected-column mode, the chosen keep-first or keep-last rule decides which full record remains. The tool does not combine values from matching records.</p>
+    </details>
+    <details>
+      <summary>Does the tool upload my CSV?</summary>
+      <p>No. Your file is read and processed locally in the browser.</p>
+    </details>
+    <details>
+      <summary>Will the output preserve the exact original formatting?</summary>
+      <p>No. It preserves cell values unless trimming or spreadsheet formula protection is enabled, but regenerated CSV may use different quoting and line endings.</p>
+    </details>
+    <details>
+      <summary>What is spreadsheet formula protection?</summary>
+      <p>Some spreadsheet applications interpret cell values beginning with formula characters as executable formulas. The optional protection prefixes such values with an apostrophe; that changes the exported value, so enable it only when appropriate for your workflow.</p>
+    </details>
+
+    <section class="related">
+      <h2>Explore more tools</h2>
+      <ul>
+        <li><a href="../index.html#tools">All online tools →</a></li>
+        <li><a href="csv-json-converter.html">CSV &amp; JSON Converter →</a></li>
+        <li><a href="csv-json-to-sql-insert-generator.html">CSV/JSON to SQL Generator →</a></li>
+      </ul>
+    </section>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <a class="footer-brand" href="../index.html">Online Tools &amp; Converters</a>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+      <a href="../privacy-policy.html">Privacy Policy</a>
+      <a href="../terms-of-use.html">Terms of Use</a>
+    </nav>
+    <p class="copyright">© <span id="current-year">2026</span> Online Tools &amp; Converters. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = (id) => document.getElementById(id);
+
+  const MAX_BYTES = 10 * 1024 * 1024;
+  const MAX_ROWS = 100000;
+  const MAX_COLUMNS = 200;
+  const MAX_OUTPUT = 20 * 1024 * 1024;
+  const PREVIEW_ROWS = 8;
+  const MAX_DUPLICATE_PREVIEW = 200;
+
+  let analyzed = null;
+  let result = null;
+  let loadedFileName = "cleaned-data";
+
+  const csvSample = [
+    "email,name,city",
+    "alex@example.com,Alex,Kathmandu",
+    "sam@example.com,Sam,Pokhara",
+    "alex@example.com,Alex,Kathmandu",
+    "CASE@example.com,Casey,Lalitpur",
+    "case@example.com,Casey,Lalitpur",
+    "duplicate@example.com,First record,Janakpur",
+    "duplicate@example.com,Updated record,Janakpur"
+  ].join("\n");
+
+  function setStatus(message, type = "") {
+    const box = $("dr-status");
+    box.textContent = message;
+    box.className = "status show";
+    if (type) box.classList.add(type);
+  }
+
+  function clearStatus() {
+    $("dr-status").textContent = "";
+    $("dr-status").className = "status";
+  }
+
+  function fmt(value) {
+    return new Intl.NumberFormat("en-US").format(value);
+  }
+
+  function csvEscape(value, delimiter, protectFormulas = false) {
+    let text = value == null ? "" : String(value);
+
+    if (protectFormulas && /^[\t\r\n ]*[=+\-@]/.test(text)) {
+      text = "'" + text;
+    }
+
+    if (
+      text.includes('"') ||
+      text.includes("\r") ||
+      text.includes("\n") ||
+      text.includes(delimiter) ||
+      /^\s|\s$/.test(text)
+    ) {
+      text = '"' + text.replace(/"/g, '""') + '"';
+    }
+
+    return text;
+  }
+
+  function serializeCsv(headers, rows, includeHeaders, delimiter, protect) {
+    const lines = [];
+
+    if (includeHeaders) {
+      lines.push(headers.map((value) =>
+        csvEscape(value, delimiter, protect)
+      ).join(delimiter));
+    }
+
+    rows.forEach((row) => {
+      lines.push(row.cells.map((value) =>
+        csvEscape(value, delimiter, protect)
+      ).join(delimiter));
+    });
+
+    return lines.join("\r\n") + "\r\n";
+  }
+
+  function parseDelimited(text, delimiter) {
+    const rows = [];
+    let row = [];
+    let field = "";
+    let quoted = false;
+
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+
+      if (quoted) {
+        if (ch === '"') {
+          if (text[i + 1] === '"') {
+            field += '"';
+            i++;
+          } else {
+            quoted = false;
+          }
+        } else {
+          field += ch;
+        }
+        continue;
+      }
+
+      if (ch === '"' && field === "") {
+        quoted = true;
+      } else if (ch === delimiter) {
+        row.push(field);
+        field = "";
+      } else if (ch === "\n" || ch === "\r") {
+        row.push(field);
+        rows.push(row);
+        row = [];
+        field = "";
+
+        if (ch === "\r" && text[i + 1] === "\n") i++;
+      } else {
+        field += ch;
+      }
+
+      if (rows.length > MAX_ROWS + 1) {
+        throw new Error(`Maximum ${MAX_ROWS.toLocaleString()} rows are supported.`);
+      }
+    }
+
+    if (quoted) {
+      throw new Error("A quoted CSV field was not closed.");
+    }
+
+    if (field !== "" || row.length) {
+      row.push(field);
+      rows.push(row);
+    }
+
+    return rows;
+  }
+
+  function detectDelimiter(text) {
+    const candidates = [",", "\t", ";", "|"];
+    let best = ",";
+    let bestScore = -1;
+
+    // Use the first logical record for delimiter detection, respecting quotes.
+    let firstRecord = "";
+    let quoted = false;
+
+    for (let i = 0; i < text.length && firstRecord.length < 100000; i++) {
+      const ch = text[i];
+      firstRecord += ch;
+
+      if (ch === '"') {
+        if (quoted && text[i + 1] === '"') {
+          firstRecord += text[++i];
+        } else {
+          quoted = !quoted;
+        }
+      }
+
+      if (!quoted && (ch === "\n" || ch === "\r")) break;
+    }
+
+    for (const candidate of candidates) {
+      let count = 0;
+      let inQuotes = false;
+
+      for (let i = 0; i < firstRecord.length; i++) {
+        const ch = firstRecord[i];
+
+        if (ch === '"') {
+          if (inQuotes && firstRecord[i + 1] === '"') {
+            i++;
+          } else {
+            inQuotes = !inQuotes;
+          }
+        } else if (!inQuotes && ch === candidate) {
+          count++;
+        }
+      }
+
+      if (count > bestScore) {
+        bestScore = count;
+        best = candidate;
+      }
+    }
+
+    return best;
+  }
+
+  function parseInput() {
+    let text = $("dr-input").value.replace(/^\uFEFF/, "");
+
+    if (!text.trim()) {
+      throw new Error("Paste CSV data or select a file first.");
+    }
+
+    if (new Blob([text]).size > MAX_BYTES) {
+      throw new Error("Input exceeds the 10 MB limit.");
+    }
+
+    text = text.replace(/\u0000/g, "");
+
+    const selectedDelimiter = $("dr-delimiter").value;
+    const delimiter = selectedDelimiter === "auto"
+      ? detectDelimiter(text)
+      : selectedDelimiter;
+
+    let rows = parseDelimited(text, delimiter);
+
+    if ($("dr-trim").checked) {
+      rows = rows.map((row) => row.map((value) => value.trim()));
+    }
+
+    if ($("dr-ignore-blank").checked) {
+      rows = rows.filter((row) =>
+        row.some((cell) => String(cell).trim() !== "")
+      );
+    }
+
+    if (!rows.length) {
+      throw new Error("No non-empty rows were found.");
+    }
+
+    const hasHeaders = $("dr-headers").checked;
+    let headers;
+    let dataRows;
+
+    if (hasHeaders) {
+      headers = rows.shift();
+      if (!headers) {
+        throw new Error("The header row is missing.");
+      }
+      dataRows = rows;
+    } else {
+      dataRows = rows;
+      headers = [];
+    }
+
+    if (!dataRows.length) {
+      throw new Error("No data rows remain after the header.");
+    }
+
+    const width = Math.max(
+      headers.length,
+      ...dataRows.map((row) => row.length)
+    );
+
+    if (width > MAX_COLUMNS) {
+      throw new Error(`Maximum ${MAX_COLUMNS} columns are supported.`);
+    }
+
+    if (width < 1) {
+      throw new Error("No columns were found.");
+    }
+
+    if (hasHeaders) {
+      headers = headers.slice();
+
+      while (headers.length < width) {
+        headers.push("");
+      }
+    } else {
+      headers = Array.from(
+        { length: width },
+        (_, index) => `Column ${index + 1}`
+      );
+    }
+
+    const normalizedRows = dataRows.map((cells, index) => {
+      const padded = cells.slice();
+
+      while (padded.length < width) {
+        padded.push("");
+      }
+
+      return {
+        cells: padded,
+        recordNumber: index + 1
+      };
+    });
+
+    if (normalizedRows.length > MAX_ROWS) {
+      throw new Error(`Maximum ${MAX_ROWS.toLocaleString()} data rows are supported.`);
+    }
+
+    return {
+      headers,
+      rows: normalizedRows,
+      hasHeaders,
+      delimiter,
+      columnCount: width
+    };
+  }
+
+  function clearOutput() {
+    result = null;
+    $("dr-output").value = "";
+    $("dr-copy").disabled = true;
+    $("dr-download").disabled = true;
+    $("dr-report").disabled = true;
+    $("dr-output-status").textContent = "";
+
+    $("dr-stat-input").textContent = analyzed ? fmt(analyzed.rows.length) : "—";
+    $("dr-stat-output").textContent = "—";
+    $("dr-stat-removed").textContent = "—";
+    $("dr-stat-groups").textContent = "—";
+
+    $("dr-summary").textContent = "Run deduplication to see the results.";
+    $("dr-duplicates-info").textContent = "No deduplication run yet.";
+
+    $("dr-duplicates-tbody").replaceChildren();
+    const row = document.createElement("tr");
+    const cell = document.createElement("td");
+    cell.colSpan = 3;
+    cell.className = "muted";
+    cell.textContent = "No duplicate report yet.";
+    row.appendChild(cell);
+    $("dr-duplicates-tbody").appendChild(row);
+    $("dr-report-limit").textContent = "";
+  }
+
+  function invalidateAnalysis() {
+    analyzed = null;
+    $("dr-remove").disabled = true;
+    $("dr-columns").replaceChildren();
+
+    const message = document.createElement("p");
+    message.className = "muted small";
+    message.textContent = "Analyze your data to load the column list.";
+    $("dr-columns").appendChild(message);
+
+    $("dr-input-preview-info").textContent = "No data analyzed yet.";
+    $("dr-input-thead").replaceChildren();
+    $("dr-input-tbody").replaceChildren();
+
+    clearOutput();
+  }
+
+  function invalidateResult() {
+    clearOutput();
+  }
+
+  function renderInputPreview(data) {
+    const thead = $("dr-input-thead");
+    const tbody = $("dr-input-tbody");
+    thead.replaceChildren();
+    tbody.replaceChildren();
+
+    const headerRow = document.createElement("tr");
+
+    data.headers.forEach((header, index) => {
+      const th = document.createElement("th");
+      th.textContent = header || `Column ${index + 1}`;
+      headerRow.appendChild(th);
+    });
+
+    thead.appendChild(headerRow);
+
+    data.rows.slice(0, PREVIEW_ROWS).forEach((record) => {
+      const row = document.createElement("tr");
+
+      record.cells.forEach((value) => {
+        const td = document.createElement("td");
+        td.textContent = value;
+        row.appendChild(td);
+      });
+
+      tbody.appendChild(row);
+    });
+
+    $("dr-input-preview-info").textContent =
+      `${fmt(data.rows.length)} data row(s), ` +
+      `${fmt(data.columnCount)} column(s). ` +
+      `Delimiter: ${data.delimiter === "\t" ? "Tab" : data.delimiter}. ` +
+      (data.rows.length > PREVIEW_ROWS
+        ? `Showing the first ${PREVIEW_ROWS} rows.`
+        : "All rows shown.");
+  }
+
+  function renderColumnOptions(data) {
+    const container = $("dr-columns");
+    container.replaceChildren();
+
+    data.headers.forEach((header, index) => {
+      const label = document.createElement("label");
+      label.className = "checkbox-row";
+      label.style.margin = "4px 0";
+
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.value = String(index);
+      input.checked = false;
+      input.className = "dr-key-column";
+
+      const span = document.createElement("span");
+      span.textContent = `${header || `Column ${index + 1}`} (column ${index + 1})`;
+
+      label.append(input, span);
+      container.appendChild(label);
+
+      input.addEventListener("change", invalidateResult);
+    });
+  }
+
+  function analyze() {
+    clearStatus();
+
+    try {
+      const data = parseInput();
+      analyzed = data;
+
+      renderInputPreview(data);
+      renderColumnOptions(data);
+
+      $("dr-remove").disabled = false;
+      $("dr-column-area").hidden = $("dr-mode").value !== "selected";
+
+      clearOutput();
+
+      $("dr-stat-input").textContent = fmt(data.rows.length);
+      $("dr-summary").textContent =
+        `${fmt(data.rows.length)} data rows loaded. Choose your comparison rules.`;
+
+      setStatus(
+        `Analyzed ${fmt(data.rows.length)} data row(s) and ${fmt(data.columnCount)} column(s).`
+      );
+    } catch (error) {
+      invalidateAnalysis();
+      setStatus(
+        error instanceof Error ? error.message : "Could not parse the CSV.",
+        "error"
+      );
+    }
+  }
+
+  function normalizeKey(value) {
+    let text = String(value ?? "");
+
+    if ($("dr-trim").checked) {
+      text = text.trim();
+    }
+
+    if ($("dr-normalize-unicode").checked) {
+      text = text.normalize("NFC");
+    }
+
+    if ($("dr-ignore-case").checked) {
+      text = text.toLocaleLowerCase();
+    }
+
+    return text;
+  }
+
+  function getSelectedColumnIndexes() {
+    return Array.from(
+      document.querySelectorAll("#dr-columns .dr-key-column:checked")
+    ).map((input) => Number(input.value));
+  }
+
+  function deduplicate() {
+    clearStatus();
+
+    if (!analyzed) {
+      setStatus("Analyze your data first.", "error");
+      return;
+    }
+
+    try {
+      const mode = $("dr-mode").value;
+      const keep = $("dr-keep").value;
+      const selectedIndexes = getSelectedColumnIndexes();
+
+      if (mode === "selected" && !selectedIndexes.length) {
+        throw new Error("Choose at least one comparison column.");
+      }
+
+      const keyColumns = mode === "all"
+        ? analyzed.headers.map((_, index) => index)
+        : selectedIndexes;
+
+      const groups = new Map();
+
+      analyzed.rows.forEach((record, index) => {
+        const selectedValues = keyColumns.map(
+          (columnIndex) => normalizeKey(record.cells[columnIndex])
+        );
+
+        const allKeyValuesBlank = selectedValues.every(
+          (value) => value === ""
+        );
+
+        // If every selected key cell is blank, preserve each record separately.
+        const key = mode === "selected" &&
+          $("dr-blank-keys").checked &&
+          allKeyValuesBlank
+            ? `__unique_blank_${index}`
+            : JSON.stringify(selectedValues);
+
+        if (!groups.has(key)) {
+          groups.set(key, []);
+        }
+
+        groups.get(key).push(index);
+      });
+
+      const retainedIndexes = new Set();
+      const removed = [];
+      let duplicateGroups = 0;
+
+      groups.forEach((indexes, key) => {
+        const keepIndex = keep === "last"
+          ? indexes[indexes.length - 1]
+          : indexes[0];
+
+        retainedIndexes.add(keepIndex);
+
+        if (indexes.length > 1) {
+          duplicateGroups++;
+
+          const displayKey = keyColumns.map((columnIndex) => {
+            const header = analyzed.headers[columnIndex] ||
+              `Column ${columnIndex + 1}`;
+            return `${header}: ${analyzed.rows[keepIndex].cells[columnIndex]}`;
+          }).join(" | ");
+
+          indexes.forEach((index) => {
+            if (index === keepIndex) return;
+
+            removed.push({
+              removedRecord: analyzed.rows[index].recordNumber,
+              keptRecord: analyzed.rows[keepIndex].recordNumber,
+              key: displayKey
+            });
+          });
+        }
+      });
+
+      const keptRows = analyzed.rows.filter(
+        (_, index) => retainedIndexes.has(index)
+      );
+
+      const delimiter = $("dr-output-delimiter").value;
+      const protectFormulas = $("dr-formula-protection").checked;
+
+      const output = serializeCsv(
+        analyzed.headers,
+        keptRows,
+        analyzed.hasHeaders,
+        delimiter,
+        protectFormulas
+      );
+
+      if (output.length > MAX_OUTPUT) {
+        throw new Error(
+          "The cleaned output exceeds the 20 MB limit. Split the file into smaller parts."
+        );
+      }
+
+      result = {
+        inputRows: analyzed.rows.length,
+        keptRows,
+        removed,
+        duplicateGroups,
+        output,
+        delimiter,
+        headers: analyzed.headers,
+        hasHeaders: analyzed.hasHeaders,
+        keyColumns
+      };
+
+      $("dr-output").value = output;
+      $("dr-stat-input").textContent = fmt(result.inputRows);
+      $("dr-stat-output").textContent = fmt(keptRows.length);
+      $("dr-stat-removed").textContent = fmt(removed.length);
+      $("dr-stat-groups").textContent = fmt(duplicateGroups);
+
+      $("dr-summary").textContent =
+        removed.length === 0
+          ? "No duplicate records found using the selected rules."
+          : `Removed ${fmt(removed.length)} duplicate row(s) across ${fmt(duplicateGroups)} duplicate group(s).`;
+
+      $("dr-copy").disabled = false;
+      $("dr-download").disabled = false;
+      $("dr-report").disabled = false;
+
+      renderOutputPreview(result);
+      renderDuplicateReport(result);
+
+      $("dr-output-status").textContent =
+        `${fmt(keptRows.length)} unique row(s) remain. ` +
+        (protectFormulas
+          ? "Spreadsheet formula protection was applied to exported values."
+          : "Output cell values were not modified for formula protection.");
+
+      setStatus("Deduplication complete.");
+    } catch (error) {
+      setStatus(
+        error instanceof Error ? error.message : "Could not remove duplicates.",
+        "error"
+      );
+    }
+  }
+
+  function renderOutputPreview(data) {
+    const container = $("dr-preview-output");
+
+    if (!container) return;
+
+    container.replaceChildren();
+    const tableWrap = document.createElement("div");
+    tableWrap.className = "table-wrap";
+
+    const table = document.createElement("table");
+    const thead = document.createElement("thead");
+    const headerRow = document.createElement("tr");
+
+    if (data.hasHeaders) {
+      data.headers.forEach((header, index) => {
+        const th = document.createElement("th");
+        th.textContent = header || `Column ${index + 1}`;
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+    }
+
+    const tbody = document.createElement("tbody");
+
+    data.keptRows.slice(0, PREVIEW_ROWS).forEach((record) => {
+      const row = document.createElement("tr");
+
+      record.cells.forEach((value) => {
+        const td = document.createElement("td");
+        td.textContent = value;
+        row.appendChild(td);
+      });
+
+      tbody.appendChild(row);
+    });
+
+    table.appendChild(tbody);
+    tableWrap.appendChild(table);
+    container.appendChild(tableWrap);
+  }
+
+  function renderDuplicateReport(data) {
+    const tbody = $("dr-duplicates-tbody");
+    tbody.replaceChildren();
+
+    $("dr-duplicates-info").textContent =
+      `${fmt(data.removed.length)} removed record(s), ` +
+      `${fmt(data.duplicateGroups)} duplicate group(s).`;
+
+    data.removed.slice(0, MAX_DUPLICATE_PREVIEW).forEach((item) => {
+      const row = document.createElement("tr");
+
+      [item.removedRecord, item.keptRecord, item.key].forEach((value) => {
+        const cell = document.createElement("td");
+        cell.textContent = String(value);
+        row.appendChild(cell);
+      });
+
+      tbody.appendChild(row);
+    });
+
+    if (!data.removed.length) {
+      const row = document.createElement("tr");
+      const cell = document.createElement("td");
+      cell.colSpan = 3;
+      cell.className = "muted";
+      cell.textContent = "No duplicate records were removed.";
+      row.appendChild(cell);
+      tbody.appendChild(row);
+    }
+
+    $("dr-report-limit").textContent =
+      data.removed.length > MAX_DUPLICATE_PREVIEW
+        ? `Showing the first ${MAX_DUPLICATE_PREVIEW} removed records. The downloadable report includes all ${fmt(data.removed.length)}.`
+        : "";
+  }
+
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+
+    link.href = url;
+    link.download = filename;
+    link.hidden = true;
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    window.setTimeout(() => URL.revokeObjectURL(url), 1500);
+  }
+
+  async function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const helper = document.createElement("textarea");
+    helper.value = text;
+    helper.setAttribute("readonly", "");
+    helper.style.position = "fixed";
+    helper.style.opacity = "0";
+
+    document.body.appendChild(helper);
+    helper.select();
+
+    const success = document.execCommand("copy");
+    helper.remove();
+
+    if (!success) {
+      throw new Error("Clipboard access was blocked by your browser.");
+    }
+  }
+
+  $("dr-analyze").addEventListener("click", analyze);
+
+  $("dr-remove").addEventListener("click", deduplicate);
+
+  $("dr-mode").addEventListener("change", () => {
+    $("dr-column-area").hidden = $("dr-mode").value !== "selected";
+    invalidateResult();
+  });
+
+  [
+    "dr-keep",
+    "dr-blank-keys",
+    "dr-ignore-case",
+    "dr-normalize-unicode",
+    "dr-output-delimiter",
+    "dr-formula-protection"
+  ].forEach((id) => {
+    $(id).addEventListener("change", invalidateResult);
+  });
+
+  [
+    "dr-input",
+    "dr-delimiter",
+    "dr-headers",
+    "dr-trim",
+    "dr-ignore-blank"
+  ].forEach((id) => {
+    $(id).addEventListener("input", invalidateAnalysis);
+    $(id).addEventListener("change", invalidateAnalysis);
+  });
+
+  $("dr-select-all").addEventListener("click", () => {
+    document.querySelectorAll("#dr-columns .dr-key-column")
+      .forEach((checkbox) => {
+        checkbox.checked = true;
+      });
+    invalidateResult();
+  });
+
+  $("dr-select-none").addEventListener("click", () => {
+    document.querySelectorAll("#dr-columns .dr-key-column")
+      .forEach((checkbox) => {
+        checkbox.checked = false;
+      });
+    invalidateResult();
+  });
+
+  $("dr-sample").addEventListener("click", () => {
+    $("dr-input").value = csvSample;
+    $("dr-delimiter").value = ",";
+    $("dr-headers").checked = true;
+    $("dr-trim").checked = true;
+    $("dr-ignore-blank").checked = true;
+    $("dr-mode").value = "all";
+    $("dr-keep").value = "first";
+    $("dr-ignore-case").checked = false;
+    $("dr-normalize-unicode").checked = true;
+    $("dr-blank-keys").checked = true;
+    $("dr-formula-protection").checked = false;
+    $("dr-output-delimiter").value = ",";
+    invalidateAnalysis();
+    analyze();
+  });
+
+  $("dr-clear").addEventListener("click", () => {
+    $("dr-input").value = "";
+    $("dr-file").value = "";
+    loadedFileName = "cleaned-data";
+    invalidateAnalysis();
+    clearStatus();
+    $("dr-output-status").textContent = "";
+  });
+
+  $("dr-file").addEventListener("change", async () => {
+    const file = $("dr-file").files && $("dr-file").files[0];
+    if (!file) return;
+
+    invalidateAnalysis();
+    clearStatus();
+
+    if (file.size > MAX_BYTES) {
+      setStatus("File exceeds the 10 MB limit.", "error");
+      $("dr-file").value = "";
+      return;
+    }
+
+    try {
+      const text = await file.text();
+      if (text.length > MAX_BYTES) {
+        throw new Error("File text exceeds the 10 MB limit.");
+      }
+
+      $("dr-input").value = text;
+      loadedFileName = file.name.replace(/\.[^.]+$/, "") || "cleaned-data";
+
+      if (/\.tsv$/i.test(file.name)) {
+        $("dr-delimiter").value = "\t";
+      } else {
+        $("dr-delimiter").value = "auto";
+      }
+
+      setStatus(`${file.name} loaded. Analyze the data before removing duplicates.`);
+    } catch (error) {
+      setStatus(
+        error instanceof Error ? error.message : "The file could not be read.",
+        "error"
+      );
+    }
+  });
+
+  $("dr-copy").addEventListener("click", async () => {
+    if (!result) return;
+
+    try {
+      await copyText(result.output);
+      $("dr-output-status").textContent = "Cleaned CSV copied to clipboard.";
+    } catch (_) {
+      $("dr-output-status").textContent =
+        "Clipboard access was blocked. Select the output and copy it manually.";
+    }
+  });
+
+  $("dr-download").addEventListener("click", () => {
+    if (!result) return;
+
+    const blob = new Blob(
+      ["\uFEFF", result.output],
+      { type: "text/csv;charset=utf-8" }
+    );
+
+    const safeName = loadedFileName
+      .replace(/[^A-Za-z0-9_-]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "cleaned-data";
+
+    downloadBlob(blob, `${safeName}-deduplicated.csv`);
+  });
+
+  $("dr-report").addEventListener("click", () => {
+    if (!result) return;
+
+    const delimiter = ",";
+    const rows = [
+      ["Removed data record", "Kept data record", "Matching key"]
+    ];
+
+    result.removed.forEach((item) => {
+      rows.push([
+        item.removedRecord,
+        item.keptRecord,
+        item.key
+      ]);
+    });
+
+    const csv = rows
+      .map((row) => row.map((value) => {
+        let text = String(value ?? "");
+
+        // Protect user-derived report values from spreadsheet formulas.
+        if (/^[\s]*[=+\-@]/.test(text)) {
+          text = "'" + text;
+        }
+
+        return '"' + text.replace(/"/g, '""') + '"';
+      }).join(delimiter))
+      .join("\r\n") + "\r\n";
+
+    const blob = new Blob(
+      ["\uFEFF", csv],
+      { type: "text/csv;charset=utf-8" }
+    );
+
+    downloadBlob(blob, `${loadedFileName}-duplicate-report.csv`);
+  });
+
+  // A hidden anchor for the optional output preview. Keep it within this page.
+  const preview = document.createElement("div");
+  preview.id = "dr-preview-output";
+  preview.style.marginTop = "20px";
+
+  const outputSection = $("dr-output").closest(".panel");
+  if (outputSection) outputSection.appendChild(preview);
+
+  invalidateAnalysis();
+})();
+</script>
+</body>
+</html>

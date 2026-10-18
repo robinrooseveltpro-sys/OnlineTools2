@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Ad Profitability Calculator – Break-Even ROAS, CPA &amp; CPC</title>
+  <meta name="description" content="Estimate ad campaign revenue, profit after ad spend, ROAS, break-even ROAS, maximum CPA, maximum CPC, and the conversion rate you need to break even.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+
+  <link rel="canonical" href="https://onlinetoolsandconverters.cc/tools/ad-profitability-calculator.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ad Profitability Calculator – Break-Even ROAS, CPA &amp; CPC">
+  <meta property="og:description" content="Model paid-ad performance and find break-even acquisition costs using your own campaign assumptions.">
+  <meta property="og:url" content="https://onlinetoolsandconverters.cc/tools/ad-profitability-calculator.html">
+
+  <!-- Shared website assets -->
+  <link rel="stylesheet" href="../style.css">
+  <script src="../script.js" defer></script>
+
+  <!-- SEO structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Ad Profitability Calculator",
+    "url": "https://onlinetoolsandconverters.cc/tools/ad-profitability-calculator.html",
+    "description": "Estimate paid advertising revenue, contribution profit, ROAS, break-even ROAS, maximum CPA, and maximum CPC.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Any",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Skip to calculator</a>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="Online Tools and Converters home">
+        <span class="brand-mark" aria-hidden="true">O</span>
+        <span class="brand-text">Online Tools <span>&amp; Converters</span></span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+      >
+        <span class="nav-toggle-bars" aria-hidden="true"></span>
+      </button>
+
+      <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#tools">All tools</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content" class="container">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#tools">Tools</a></li>
+        <li aria-current="page">Ad Profitability Calculator</li>
+      </ol>
+    </nav>
+
+    <!-- Page heading -->
+    <section class="page-head">
+      <h1>Ad Profitability &amp; Break-Even ROAS Calculator</h1>
+      <p class="lead">
+        Estimate clicks, conversions, revenue, and profit after ad spend.
+        Find your break-even ROAS, maximum cost per acquisition (CPA),
+        and maximum cost per click (CPC) using your own numbers.
+      </p>
+    </section>
+
+    <!-- Calculator -->
+    <div class="tool-layout">
+
+      <!-- Inputs -->
+      <section class="panel" aria-labelledby="inputs-heading">
+        <h2 id="inputs-heading">Campaign assumptions</h2>
+
+        <form id="ad-profit-form" novalidate>
+
+          <div class="field">
+            <label for="currency">Currency</label>
+            <select id="currency" name="currency">
+              <option value="USD" selected>USD — US dollar ($)</option>
+              <option value="NPR">NPR — Nepalese rupee (रू)</option>
+              <option value="EUR">EUR — Euro (€)</option>
+              <option value="GBP">GBP — Pound sterling (£)</option>
+              <option value="INR">INR — Indian rupee (₹)</option>
+              <option value="CAD">CAD — Canadian dollar ($)</option>
+              <option value="AUD">AUD — Australian dollar ($)</option>
+            </select>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="ad-spend">
+                Ad spend budget (<span data-currency-token>$</span>)
+              </label>
+              <input
+                id="ad-spend"
+                name="adSpend"
+                type="number"
+                min="0"
+                step="any"
+                value="500"
+                inputmode="decimal"
+                required
+              >
+              <p class="hint">Total planned advertising spend.</p>
+            </div>
+
+            <div class="field">
+              <label for="avg-cpc">
+                Average CPC (<span data-currency-token>$</span>)
+              </label>
+              <input
+                id="avg-cpc"
+                name="avgCpc"
+                type="number"
+                min="0"
+                step="any"
+                value="0.80"
+                inputmode="decimal"
+                required
+              >
+              <p class="hint">Use your observed or expected cost per click.</p>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="conversion-rate">Conversion rate (%)</label>
+              <input
+                id="conversion-rate"
+                name="conversionRate"
+                type="number"
+                min="0"
+                max="100"
+                step="any"
+                value="3"
+                inputmode="decimal"
+                required
+              >
+              <p class="hint">Conversions divided by clicks, multiplied by 100.</p>
+            </div>
+
+            <div class="field">
+              <label for="revenue-per-conversion">
+                Revenue per conversion (<span data-currency-token>$</span>)
+              </label>
+              <input
+                id="revenue-per-conversion"
+                name="revenuePerConversion"
+                type="number"
+                min="0.01"
+                step="any"
+                value="60"
+                inputmode="decimal"
+                required
+              >
+              <p class="hint">For example, order value or revenue per lead or sale.</p>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="gross-margin">Gross margin (%)</label>
+              <input
+                id="gross-margin"
+                name="grossMargin"
+                type="number"
+                min="0"
+                max="100"
+                step="any"
+                value="55"
+                inputmode="decimal"
+                required
+              >
+              <p class="hint">Margin before the extra variable cost below.</p>
+            </div>
+
+            <div class="field">
+              <label for="variable-cost">
+                Other variable cost per conversion (<span data-currency-token>$</span>)
+              </label>
+              <input
+                id="variable-cost"
+                name="variableCost"
+                type="number"
+                min="0"
+                step="any"
+                value="2"
+                inputmode="decimal"
+                required
+              >
+              <p class="hint">Costs not already counted in gross margin.</p>
+            </div>
+          </div>
+
+          <p class="hint">
+            Set CPC to zero if you do not know it. Break-even limits will
+            still calculate, but campaign projections require a CPC above zero.
+          </p>
+
+          <div class="btn-row" style="margin-top:18px">
+            <button class="btn btn-primary" type="submit">
+              Calculate results
+            </button>
+
+            <button class="btn btn-secondary" id="load-example" type="button">
+              Load example
+            </button>
+
+            <button class="btn btn-secondary" id="reset-form" type="button">
+              Reset
+            </button>
+          </div>
+        </form>
+
+        <div
+          id="result-status"
+          class="alert alert-info"
+          role="status"
+          aria-live="polite"
+          style="margin-top:18px"
+        >
+          Estimates use the inputs above. Change an input or select Calculate
+          results to update the numbers.
+        </div>
+      </section>
+
+      <!-- Results -->
+      <section class="panel" aria-labelledby="results-heading" aria-live="polite">
+        <h2 id="results-heading">Estimated campaign results</h2>
+
+        <div class="stats">
+          <div class="stat">
+            <b id="out-revenue">$1,125.00</b>
+            <span>Projected revenue</span>
+          </div>
+
+          <div class="stat">
+            <b id="out-profit">$81.25</b>
+            <span>Profit after ad spend</span>
+          </div>
+
+          <div class="stat">
+            <b id="out-roas">2.25×</b>
+            <span>Estimated ROAS</span>
+          </div>
+
+          <div class="stat">
+            <b id="out-conversions">18.75</b>
+            <span>Estimated conversions</span>
+          </div>
+        </div>
+
+        <h3 style="margin-top:22px">Break-even limits</h3>
+
+        <div class="stats">
+          <div class="stat">
+            <b id="out-be-roas">1.94×</b>
+            <span>Break-even ROAS</span>
+          </div>
+
+          <div class="stat">
+            <b id="out-be-cpa">$31.00</b>
+            <span>Maximum break-even CPA</span>
+          </div>
+
+          <div class="stat">
+            <b id="out-be-cpc">$0.93</b>
+            <span>Maximum break-even CPC</span>
+          </div>
+
+          <div class="stat">
+            <b id="out-be-cvr">2.58%</b>
+            <span>Break-even conversion rate</span>
+          </div>
+        </div>
+
+        <h3 style="margin-top:22px">More details</h3>
+
+        <div class="result-line">
+          Estimated clicks:
+          <strong id="out-clicks">625.00</strong>
+        </div>
+
+        <div class="result-line">
+          Estimated cost per conversion (CPA):
+          <strong id="out-cpa">$26.67</strong>
+        </div>
+
+        <div class="result-line">
+          Contribution per conversion before ads:
+          <strong id="out-contribution">$31.00</strong>
+        </div>
+
+        <div class="result-line">
+          Total contribution before ads:
+          <strong id="out-total-contribution">$581.25</strong>
+        </div>
+
+        <div class="btn-row" style="margin-top:18px">
+          <button class="btn btn-secondary" id="copy-results" type="button">
+            Copy summary
+          </button>
+
+          <button class="btn btn-secondary" id="download-csv" type="button">
+            Download CSV
+          </button>
+        </div>
+
+        <p class="hint" style="margin-top:12px">
+          Conversions are expected-value estimates and can be fractional.
+          Actual results will vary.
+        </p>
+      </section>
+    </div>
+
+    <!-- SEO content -->
+    <section class="content prose">
+      <h2>How to use the ad profitability calculator</h2>
+
+      <p>
+        Enter your planned ad budget, average cost per click, conversion rate,
+        revenue per conversion, and gross margin. Add any additional variable
+        cost per conversion that is not already included in your margin.
+        The calculator models a possible campaign outcome and compares it
+        with the acquisition costs your business can support.
+      </p>
+
+      <p>
+        Use real historical campaign data where possible. If you are planning
+        a new campaign, test several realistic CPC and conversion-rate
+        assumptions rather than relying on a single best-case estimate.
+      </p>
+
+      <h2>What is break-even ROAS?</h2>
+
+      <p>
+        Return on ad spend (ROAS) is attributed revenue divided by advertising
+        spend. A ROAS of 2.0× means the campaign generates two currency units
+        in tracked revenue for each currency unit spent on ads.
+        ROAS by itself is not profit: product costs, fulfillment, payment fees,
+        refunds, and other variable expenses can make a campaign unprofitable
+        even when revenue is higher than ad spend.
+      </p>
+
+      <p>
+        Break-even ROAS estimates the revenue-to-ad-spend ratio needed for
+        contribution after variable costs to cover ad spend. It does not
+        include fixed overhead, taxes, or other expenses unless you include
+        them in your assumptions.
+      </p>
+
+      <h2>Formulas used</h2>
+
+      <ul>
+        <li><strong>Estimated clicks</strong> = ad spend ÷ average CPC.</li>
+        <li><strong>Estimated conversions</strong> = estimated clicks × conversion rate as a decimal.</li>
+        <li><strong>Projected revenue</strong> = estimated conversions × revenue per conversion.</li>
+        <li><strong>Contribution per conversion</strong> = (revenue per conversion × gross margin) − other variable cost per conversion.</li>
+        <li><strong>Estimated profit after ads</strong> = (estimated conversions × contribution per conversion) − ad spend.</li>
+        <li><strong>ROAS</strong> = projected revenue ÷ ad spend.</li>
+        <li><strong>Break-even CPA</strong> = contribution per conversion, provided the contribution is positive.</li>
+        <li><strong>Break-even CPC</strong> = contribution per conversion × conversion rate as a decimal.</li>
+        <li><strong>Break-even ROAS</strong> = revenue per conversion ÷ contribution per conversion, provided the contribution is positive.</li>
+      </ul>
+
+      <h2>Understanding the results</h2>
+
+      <p>
+        <strong>Maximum break-even CPA</strong> is the approximate amount you
+        can spend to acquire one conversion before that conversion's
+        contribution is entirely consumed by acquisition cost.
+        <strong>Maximum break-even CPC</strong> is the approximate click price
+        you can afford at the conversion rate you entered. A real campaign
+        needs room for uncertainty and profit, so operating exactly at
+        break-even leaves no buffer.
+      </p>
+
+      <p>
+        If contribution per conversion is zero or negative, the calculator
+        cannot produce a positive break-even CPA, CPC, or ROAS from these
+        assumptions. Review your margin, revenue, and additional costs before
+        increasing ad spend.
+      </p>
+
+      <h2>Frequently asked questions</h2>
+
+      <h3>Why can ROAS be positive while the campaign loses money?</h3>
+      <p>
+        ROAS measures revenue against advertising cost, not contribution
+        profit. If the amount left after product and other variable costs is
+        too small to cover ad spend, the campaign can lose money despite
+        generating revenue.
+      </p>
+
+      <h3>Should I include payment or fulfillment fees?</h3>
+      <p>
+        Include them in gross margin or in the additional variable cost field,
+        but do not count the same cost twice. The additional variable cost is
+        intended for costs not already reflected in your margin.
+      </p>
+
+      <h3>Does this predict actual campaign performance?</h3>
+      <p>
+        No. It is a planning estimate based on the assumptions you enter.
+        Actual performance can differ because of attribution, audience quality,
+        auction prices, conversion tracking, refunds, and changes in the offer
+        or landing page.
+      </p>
+    </section>
+
+    <!-- Related tools -->
+    <section class="related" aria-labelledby="related-heading">
+      <h2 id="related-heading">Explore more tools</h2>
+
+      <ul>
+        <li><a href="../index.html#tools">Browse all online tools</a></li>
+        <li><a href="utm-campaign-url-builder.html">UTM Campaign URL Builder</a></li>
+        <li><a href="freelance-project-profit-calculator.html">Freelance Project Profit Calculator</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <p class="footer-brand">Online Tools &amp; Converters</p>
+          <p>
+            Simple browser-based tools for everyday work, calculations,
+            and digital tasks.
+          </p>
+        </div>
+
+        <nav aria-label="Footer navigation">
+          <ul class="footer-links">
+            <li><a href="../about.html">About</a></li>
+            <li><a href="../contact.html">Contact</a></li>
+            <li><a href="../privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="../terms-of-use.html">Terms of Use</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <p>
+          © <span id="current-year">2026</span> Online Tools &amp; Converters.
+          All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Calculator functionality -->
+  <script>
+  (() => {
+    "use strict";
+
+    const form = document.getElementById("ad-profit-form");
+    if (!form) return;
+
+    const $ = (id) => document.getElementById(id);
+
+    const fieldIds = [
+      "ad-spend",
+      "avg-cpc",
+      "conversion-rate",
+      "revenue-per-conversion",
+      "gross-margin",
+      "variable-cost"
+    ];
+
+    const sample = {
+      currency: "USD",
+      "ad-spend": "500",
+      "avg-cpc": "0.80",
+      "conversion-rate": "3",
+      "revenue-per-conversion": "60",
+      "gross-margin": "55",
+      "variable-cost": "2"
+    };
+
+    const currencyTokens = {
+      USD: "$",
+      NPR: "रू",
+      EUR: "€",
+      GBP: "£",
+      INR: "₹",
+      CAD: "$",
+      AUD: "$"
+    };
+
+    let lastCalculation = null;
+
+    function readNumber(id, label) {
+      const raw = $(id).value.trim();
+
+      if (raw === "") {
+        throw new Error(label + " is required.");
+      }
+
+      const value = Number(raw);
+
+      if (!Number.isFinite(value)) {
+        throw new Error(label + " must be a valid number.");
+      }
+
+      return value;
+    }
+
+    function getInputs() {
+      const values = {
+        currency: $("currency").value,
+        spend: readNumber("ad-spend", "Ad spend budget"),
+        cpc: readNumber("avg-cpc", "Average CPC"),
+        cvrPercent: readNumber("conversion-rate", "Conversion rate"),
+        revenuePerConversion: readNumber(
+          "revenue-per-conversion",
+          "Revenue per conversion"
+        ),
+        marginPercent: readNumber("gross-margin", "Gross margin"),
+        variableCost: readNumber(
+          "variable-cost",
+          "Other variable cost per conversion"
+        )
+      };
+
+      if (values.spend < 0) {
+        throw new Error("Ad spend budget cannot be negative.");
+      }
+
+      if (values.cpc < 0) {
+        throw new Error(
+          "Average CPC cannot be negative. Use zero if it is unknown."
+        );
+      }
+
+      if (values.cvrPercent < 0 || values.cvrPercent > 100) {
+        throw new Error("Conversion rate must be between 0 and 100%.");
+      }
+
+      if (values.revenuePerConversion <= 0) {
+        throw new Error("Revenue per conversion must be greater than zero.");
+      }
+
+      if (values.marginPercent < 0 || values.marginPercent > 100) {
+        throw new Error("Gross margin must be between 0 and 100%.");
+      }
+
+      if (values.variableCost < 0) {
+        throw new Error("Other variable cost cannot be negative.");
+      }
+
+      if (!(values.currency in currencyTokens)) {
+        throw new Error("Choose a supported currency.");
+      }
+
+      return values;
+    }
+
+    function currencyFormat(value, currency) {
+      if (value === null || value === undefined || !Number.isFinite(value)) {
+        return "—";
+      }
+
+      try {
+        return new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency,
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }).format(value);
+      } catch (_) {
+        return currency + " " + value.toFixed(2);
+      }
+    }
+
+    function numberFormat(value, digits = 2) {
+      if (value === null || value === undefined || !Number.isFinite(value)) {
+        return "—";
+      }
+
+      return new Intl.NumberFormat("en-US", {
+        minimumFractionDigits: digits,
+        maximumFractionDigits: digits
+      }).format(value);
+    }
+
+    function roasFormat(value) {
+      return value === null || !Number.isFinite(value)
+        ? "—"
+        : numberFormat(value, 2) + "×";
+    }
+
+    function percentFormat(value) {
+      return value === null || !Number.isFinite(value)
+        ? "—"
+        : numberFormat(value, 2) + "%";
+    }
+
+    function setOutput(id, value) {
+      $(id).textContent = value;
+    }
+
+    function setStatus(message, type = "info") {
+      const status = $("result-status");
+
+      status.className =
+        "alert " +
+        (type === "error"
+          ? "alert-error"
+          : type === "ok"
+            ? "alert-ok"
+            : "alert-info");
+
+      status.textContent = message;
+    }
+
+    function updateCurrencyTokens() {
+      const currency = $("currency").value;
+
+      document.querySelectorAll("[data-currency-token]").forEach((el) => {
+        el.textContent = currencyTokens[currency] || currency;
+      });
+    }
+
+    function calculate(event) {
+      if (event) event.preventDefault();
+
+      let input;
+
+      try {
+        input = getInputs();
+      } catch (error) {
+        lastCalculation = null;
+
+        [
+          "out-revenue",
+          "out-profit",
+          "out-roas",
+          "out-conversions",
+          "out-be-roas",
+          "out-be-cpa",
+          "out-be-cpc",
+          "out-be-cvr",
+          "out-clicks",
+          "out-cpa",
+          "out-contribution",
+          "out-total-contribution"
+        ].forEach((id) => setOutput(id, "—"));
+
+        setStatus(
+          error instanceof Error
+            ? error.message
+            : "Please check the input values.",
+          "error"
+        );
+
+        return;
+      }
+
+      updateCurrencyTokens();
+
+      const conversionRate = input.cvrPercent / 100;
+      const margin = input.marginPercent / 100;
+
+      const contributionPerConversion =
+        input.revenuePerConversion * margin - input.variableCost;
+
+      const hasProjection = input.cpc > 0;
+
+      const clicks = hasProjection
+        ? input.spend / input.cpc
+        : null;
+
+      const conversions = hasProjection
+        ? clicks * conversionRate
+        : null;
+
+      const revenue = hasProjection
+        ? conversions * input.revenuePerConversion
+        : null;
+
+      const totalContribution = hasProjection
+        ? conversions * contributionPerConversion
+        : null;
+
+      const profitAfterAds = hasProjection
+        ? totalContribution - input.spend
+        : null;
+
+      const roas = hasProjection && input.spend > 0
+        ? revenue / input.spend
+        : null;
+
+      const cpa = hasProjection && conversions > 0
+        ? input.spend / conversions
+        : null;
+
+      const breakEvenRoas = contributionPerConversion > 0
+        ? input.revenuePerConversion / contributionPerConversion
+        : null;
+
+      const breakEvenCpa = contributionPerConversion > 0
+        ? contributionPerConversion
+        : null;
+
+      const breakEvenCpc = contributionPerConversion > 0
+        ? contributionPerConversion * conversionRate
+        : null;
+
+      const breakEvenCvrPercent =
+        contributionPerConversion > 0 && input.cpc > 0
+          ? (input.cpc / contributionPerConversion) * 100
+          : null;
+
+      const result = {
+        ...input,
+        conversionRate,
+        margin,
+        contributionPerConversion,
+        clicks,
+        conversions,
+        revenue,
+        totalContribution,
+        profitAfterAds,
+        roas,
+        cpa,
+        breakEvenRoas,
+        breakEvenCpa,
+        breakEvenCpc,
+        breakEvenCvrPercent,
+        hasProjection
+      };
+
+      lastCalculation = result;
+
+      setOutput("out-revenue", currencyFormat(revenue, input.currency));
+      setOutput("out-profit", currencyFormat(profitAfterAds, input.currency));
+      setOutput("out-roas", roasFormat(roas));
+      setOutput("out-conversions", numberFormat(conversions));
+
+      setOutput("out-be-roas", roasFormat(breakEvenRoas));
+      setOutput("out-be-cpa", currencyFormat(breakEvenCpa, input.currency));
+      setOutput("out-be-cpc", currencyFormat(breakEvenCpc, input.currency));
+      setOutput("out-be-cvr", percentFormat(breakEvenCvrPercent));
+
+      setOutput("out-clicks", numberFormat(clicks));
+      setOutput("out-cpa", currencyFormat(cpa, input.currency));
+      setOutput(
+        "out-contribution",
+        currencyFormat(contributionPerConversion, input.currency)
+      );
+      setOutput(
+        "out-total-contribution",
+        currencyFormat(totalContribution, input.currency)
+      );
+
+      if (!hasProjection) {
+        setStatus(
+          "Enter an average CPC above zero to estimate clicks, conversions, revenue, ROAS, and profit. Break-even limits are still calculated from your margin and conversion rate.",
+          "info"
+        );
+      } else if (contributionPerConversion <= 0) {
+        setStatus(
+          "Your contribution per conversion is zero or negative before advertising. The projection is shown, but there is no positive break-even CPA, CPC, or ROAS under these assumptions.",
+          "error"
+        );
+      } else if (profitAfterAds > 0) {
+        setStatus(
+          "Under these assumptions, the campaign is projected to make a positive contribution after ad spend. This is an estimate, not a performance guarantee.",
+          "ok"
+        );
+      } else if (profitAfterAds < 0) {
+        setStatus(
+          "Under these assumptions, the campaign is projected to lose money after ad spend. Compare your CPC, conversion rate, margin, and costs with the break-even limits.",
+          "info"
+        );
+      } else {
+        setStatus(
+          "Under these assumptions, the campaign is at estimated break-even after ad spend. Real-world results may vary.",
+          "info"
+        );
+      }
+    }
+
+    function applyValues(values) {
+      Object.entries(values).forEach(([id, value]) => {
+        const el = $(id);
+        if (el) el.value = value;
+      });
+
+      updateCurrencyTokens();
+      calculate();
+    }
+
+    function csvCell(value) {
+      const text = String(value ?? "");
+
+      return /[",\r\n]/.test(text)
+        ? '"' + text.replace(/"/g, '""') + '"'
+        : text;
+    }
+
+    function reportRows(r) {
+      const money = (v) =>
+        v === null || !Number.isFinite(v)
+          ? "Not available"
+          : v.toFixed(4);
+
+      const plain = (v) =>
+        v === null || !Number.isFinite(v)
+          ? "Not available"
+          : String(v);
+
+      return [
+        ["Metric", "Value", "Currency / unit"],
+        ["Currency", r.currency, ""],
+        ["Ad spend budget", money(r.spend), r.currency],
+        ["Average CPC", money(r.cpc), r.currency],
+        ["Conversion rate", money(r.cvrPercent), "%"],
+        ["Revenue per conversion", money(r.revenuePerConversion), r.currency],
+        ["Gross margin", money(r.marginPercent), "%"],
+        ["Other variable cost per conversion", money(r.variableCost), r.currency],
+        ["Estimated clicks", plain(r.clicks), "clicks"],
+        ["Estimated conversions", plain(r.conversions), "conversions"],
+        ["Projected revenue", money(r.revenue), r.currency],
+        ["Contribution per conversion", money(r.contributionPerConversion), r.currency],
+        ["Total contribution before ads", money(r.totalContribution), r.currency],
+        ["Estimated profit after ad spend", money(r.profitAfterAds), r.currency],
+        ["Estimated ROAS", plain(r.roas), "x"],
+        ["Estimated CPA", money(r.cpa), r.currency],
+        ["Break-even ROAS", plain(r.breakEvenRoas), "x"],
+        ["Maximum break-even CPA", money(r.breakEvenCpa), r.currency],
+        ["Maximum break-even CPC", money(r.breakEvenCpc), r.currency],
+        ["Break-even conversion rate", money(r.breakEvenCvrPercent), "%"]
+      ];
+    }
+
+    async function copyResults() {
+      if (!lastCalculation) {
+        setStatus("Correct the input errors before copying results.", "error");
+        return;
+      }
+
+      const r = lastCalculation;
+
+      const summary = [
+        "Ad Profitability Calculator Summary",
+        "Currency: " + r.currency,
+        "Ad spend: " + currencyFormat(r.spend, r.currency),
+        "Average CPC: " + currencyFormat(r.cpc, r.currency),
+        "Conversion rate: " + percentFormat(r.cvrPercent),
+        "Revenue per conversion: " + currencyFormat(r.revenuePerConversion, r.currency),
+        "Gross margin: " + percentFormat(r.marginPercent),
+        "Other variable cost per conversion: " + currencyFormat(r.variableCost, r.currency),
+        "Estimated clicks: " + numberFormat(r.clicks),
+        "Estimated conversions: " + numberFormat(r.conversions),
+        "Projected revenue: " + currencyFormat(r.revenue, r.currency),
+        "Contribution per conversion: " + currencyFormat(r.contributionPerConversion, r.currency),
+        "Total contribution before ads: " + currencyFormat(r.totalContribution, r.currency),
+        "Estimated profit after ad spend: " + currencyFormat(r.profitAfterAds, r.currency),
+        "Estimated ROAS: " + roasFormat(r.roas),
+        "Estimated CPA: " + currencyFormat(r.cpa, r.currency),
+        "Break-even ROAS: " + roasFormat(r.breakEvenRoas),
+        "Maximum break-even CPA: " + currencyFormat(r.breakEvenCpa, r.currency),
+        "Maximum break-even CPC: " + currencyFormat(r.breakEvenCpc, r.currency),
+        "Break-even conversion rate: " + percentFormat(r.breakEvenCvrPercent),
+        "Note: Estimates only; actual campaign results can differ."
+      ].join("\n");
+
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(summary);
+        } else {
+          const temporary = document.createElement("textarea");
+
+          temporary.value = summary;
+          temporary.setAttribute("readonly", "");
+          temporary.style.position = "fixed";
+          temporary.style.opacity = "0";
+
+          document.body.appendChild(temporary);
+          temporary.select();
+
+          const copied = document.execCommand("copy");
+          temporary.remove();
+
+          if (!copied) {
+            throw new Error("Copy command was not available.");
+          }
+        }
+
+        setStatus("Results copied to the clipboard.", "ok");
+      } catch (_) {
+        setStatus(
+          "Could not copy automatically in this browser. Use Download CSV to save the results instead.",
+          "error"
+        );
+      }
+    }
+
+    function downloadCsv() {
+      if (!lastCalculation) {
+        setStatus("Correct the input errors before downloading a report.", "error");
+        return;
+      }
+
+      const csv =
+        "\uFEFF" +
+        reportRows(lastCalculation)
+          .map((row) => row.map(csvCell).join(","))
+          .join("\r\n");
+
+      const blob = new Blob([csv], {
+        type: "text/csv;charset=utf-8;"
+      });
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = "ad-profitability-report.csv";
+
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+      setStatus("CSV report generated.", "ok");
+    }
+
+    // Form submission and live recalculation
+    form.addEventListener("submit", calculate);
+
+    fieldIds.forEach((id) => {
+      $(id).addEventListener("input", calculate);
+      $(id).addEventListener("change", calculate);
+    });
+
+    $("currency").addEventListener("change", () => {
+      updateCurrencyTokens();
+      calculate();
+    });
+
+    $("load-example").addEventListener("click", () => {
+      applyValues(sample);
+    });
+
+    $("reset-form").addEventListener("click", () => {
+      form.reset();
+      updateCurrencyTokens();
+      calculate();
+    });
+
+    $("copy-results").addEventListener("click", copyResults);
+    $("download-csv").addEventListener("click", downloadCsv);
+
+    // Calculate the initial example when the page loads
+    updateCurrencyTokens();
+    calculate();
+  })();
+  </script>
+</body>
+</html>

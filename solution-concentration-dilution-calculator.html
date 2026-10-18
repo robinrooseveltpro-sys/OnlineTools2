@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Solution Concentration & Dilution Calculator | Free Chemistry Tool</title>
+  <meta name="description" content="Calculate solution concentration, molarity, dilution volume, solvent to add and required solute mass. Includes unit conversions, worked steps and a free online chemistry calculator.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2563eb">
+
+  <link rel="canonical" href="https://onlinetoolsandconverters.cc/tools/solution-concentration-dilution-calculator.html">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../script.js" defer></script>
+
+  <style>
+    .chem-tool {
+      --ch-ink: #172033;
+      --ch-muted: #64748b;
+      --ch-border: #dbe2ea;
+      --ch-soft: #f8fafc;
+      --ch-blue: #2563eb;
+      --ch-green: #166534;
+      --ch-green-bg: #dcfce7;
+      --ch-red: #991b1b;
+      --ch-red-bg: #fee2e2;
+      color: var(--ch-ink);
+    }
+
+    .chem-tool *,
+    .chem-tool *::before,
+    .chem-tool *::after {
+      box-sizing: border-box;
+    }
+
+    .ch-intro {
+      max-width: 900px;
+      margin-bottom: 1.5rem;
+    }
+
+    .ch-intro h1 {
+      line-height: 1.15;
+      margin-bottom: .75rem;
+    }
+
+    .ch-intro p {
+      color: var(--ch-muted);
+      line-height: 1.75;
+      font-size: 1.03rem;
+    }
+
+    .ch-kicker {
+      display: inline-block;
+      color: var(--ch-blue);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: .5rem;
+    }
+
+    .ch-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      align-items: start;
+      gap: 1.2rem;
+      margin: 1.5rem 0 2.5rem;
+    }
+
+    .ch-card {
+      min-width: 0;
+      padding: clamp(1rem, 2.4vw, 1.5rem);
+      margin-bottom: 1.2rem;
+      border: 1px solid var(--ch-border);
+      border-radius: 15px;
+      background: #fff;
+      box-shadow: 0 5px 22px rgba(15, 23, 42, .045);
+    }
+
+    .ch-card h2,
+    .ch-card h3 {
+      margin-top: 0;
+      line-height: 1.35;
+    }
+
+    .ch-muted {
+      color: var(--ch-muted);
+      font-size: .89rem;
+      line-height: 1.7;
+    }
+
+    .ch-field {
+      min-width: 0;
+      margin: 1rem 0;
+    }
+
+    .ch-field label {
+      display: block;
+      margin-bottom: .4rem;
+      font-weight: 750;
+      font-size: .91rem;
+    }
+
+    .ch-field small {
+      display: block;
+      margin-top: .35rem;
+      color: var(--ch-muted);
+      font-size: .8rem;
+      line-height: 1.55;
+    }
+
+    .ch-input,
+    .ch-select {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      min-height: 44px;
+      padding: .65rem .75rem;
+      border: 1px solid var(--ch-border);
+      border-radius: 9px;
+      color: var(--ch-ink);
+      background: #fff;
+      font: inherit;
+      font-size: .95rem;
+    }
+
+    .ch-input:focus,
+    .ch-select:focus,
+    .ch-btn:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, .23);
+      outline-offset: 2px;
+      border-color: var(--ch-blue);
+    }
+
+    .ch-input:disabled,
+    .ch-select:disabled {
+      background: #f1f5f9;
+      color: #64748b;
+      cursor: not-allowed;
+    }
+
+    .ch-input[aria-invalid="true"] {
+      border-color: #dc2626;
+      background: #fff7f7;
+    }
+
+    .ch-two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: .8rem;
+    }
+
+    .ch-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin: 1rem 0;
+    }
+
+    .ch-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: .62rem .85rem;
+      border: 1px solid var(--ch-border);
+      border-radius: 9px;
+      background: #fff;
+      color: var(--ch-ink);
+      font: inherit;
+      font-size: .86rem;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .ch-btn:hover {
+      background: #f1f5f9;
+    }
+
+    .ch-btn-primary {
+      border-color: var(--ch-blue);
+      background: var(--ch-blue);
+      color: #fff;
+    }
+
+    .ch-btn-primary:hover {
+      background: #1d4ed8;
+      border-color: #1d4ed8;
+      color: #fff;
+    }
+
+    .ch-btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .ch-divider {
+      border: 0;
+      border-top: 1px solid var(--ch-border);
+      margin: 1.3rem 0;
+    }
+
+    .ch-error {
+      color: var(--ch-red);
+      font-size: .87rem;
+      line-height: 1.6;
+      margin: .7rem 0;
+    }
+
+    .ch-error:empty {
+      display: none;
+    }
+
+    .ch-result-hero {
+      padding: 1.1rem;
+      margin: 1rem 0;
+      background: var(--ch-soft);
+      border: 1px solid var(--ch-border);
+      border-radius: 12px;
+    }
+
+    .ch-result-label {
+      color: var(--ch-muted);
+      font-size: .84rem;
+      font-weight: 750;
+    }
+
+    .ch-result-value {
+      display: block;
+      margin-top: .4rem;
+      font-size: clamp(1.7rem, 4vw, 2.5rem);
+      line-height: 1.25;
+      font-weight: 850;
+      letter-spacing: -.035em;
+      overflow-wrap: anywhere;
+    }
+
+    .ch-unit-label {
+      display: block;
+      margin-top: .35rem;
+      font-size: .92rem;
+      font-weight: 700;
+    }
+
+    .ch-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .7rem;
+      margin: 1rem 0;
+    }
+
+    .ch-stat {
+      min-width: 0;
+      padding: .85rem;
+      border: 1px solid var(--ch-border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .ch-stat-label {
+      display: block;
+      color: var(--ch-muted);
+      font-size: .79rem;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .ch-stat-value {
+      display: block;
+      margin-top: .35rem;
+      font-size: 1.15rem;
+      font-weight: 850;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    .ch-formula {
+      padding: .85rem;
+      background: #f8fafc;
+      border: 1px solid var(--ch-border);
+      border-radius: 9px;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font: .88rem/1.8 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      margin: .8rem 0;
+    }
+
+    .ch-steps {
+      padding-left: 1.3rem;
+      margin: .9rem 0;
+    }
+
+    .ch-steps li {
+      padding: .2rem 0;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
+    }
+
+    .ch-status {
+      padding: .9rem 1rem;
+      margin: 1rem 0;
+      border: 1px solid var(--ch-border);
+      border-radius: 10px;
+      background: var(--ch-soft);
+      font-size: .87rem;
+      line-height: 1.7;
+    }
+
+    .ch-status-good {
+      border-color: #bbf7d0;
+      background: #f0fdf4;
+      color: var(--ch-green);
+    }
+
+    .ch-status-warning {
+      border-color: #fde68a;
+      background: #fffbeb;
+      color: #854d0e;
+    }
+
+    .ch-status-error {
+      border-color: #fecaca;
+      background: #fef2f2;
+      color: var(--ch-red);
+    }
+
+    .ch-live {
+      min-height: 1.4em;
+      margin: .7rem 0 0;
+      color: var(--ch-muted);
+      font-size: .84rem;
+      line-height: 1.6;
+    }
+
+    .ch-content {
+      max-width: 900px;
+      margin: 2.5rem auto;
+    }
+
+    .ch-content h2 {
+      margin-top: 2.1rem;
+      line-height: 1.4;
+    }
+
+    .ch-content p,
+    .ch-content li {
+      line-height: 1.8;
+    }
+
+    .ch-faq {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--ch-border);
+    }
+
+    .ch-faq h3 {
+      margin: 0 0 .45rem;
+      font-size: 1rem;
+    }
+
+    .ch-faq p {
+      margin: 0;
+      color: var(--ch-muted);
+    }
+
+    @media (max-width: 850px) {
+      .ch-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .ch-two-col {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .ch-buttons .ch-btn {
+        flex: 1 1 auto;
+      }
+
+      .ch-stats {
+        gap: .5rem;
+      }
+
+      .ch-stat {
+        padding: .7rem;
+      }
+
+      .ch-stat-value {
+        font-size: 1rem;
+      }
+    }
+
+    @media print {
+      .site-header,
+      .site-footer,
+      .ch-input-card,
+      .ch-content,
+      .ch-buttons {
+        display: none !important;
+      }
+
+      .ch-layout {
+        display: block;
+      }
+
+      .ch-card {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Solution Concentration and Dilution Calculator",
+    "url": "https://onlinetoolsandconverters.cc/tools/solution-concentration-dilution-calculator.html",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Any",
+    "isAccessibleForFree": true,
+    "description": "Calculate molarity, mass concentration, dilution volumes and required solute mass with compatible units and worked calculation steps.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the dilution equation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The dilution equation is C1V1 = C2V2, where C1 and V1 describe the stock solution and C2 and V2 describe the final diluted solution. The concentration units must be compatible and the volume units must match."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you calculate molarity?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Molarity is the amount of substance in moles divided by the total solution volume in litres. When starting with mass, first divide the solute mass by its molar mass to obtain moles."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much water should be added during dilution?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The approximate volume to add is the desired final solution volume minus the stock aliquot volume, provided that the process and solution volumes behave as assumed. In practice, add solvent until the final solution reaches the specified volume."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I mix molarity and mass concentration in the same dilution calculation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not directly with the simple C1V1 = C2V2 equation. Use compatible concentration units on both sides. Converting between molarity and mass concentration requires the solute's molar mass."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="ConvertToToolsOnline home">
+        <span class="brand-mark" aria-hidden="true">C</span>
+        <span class="brand-text">ConvertToToolsOnline</span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="primaryNav">
+        ☰
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Main navigation">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#tools">All tools</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container chem-tool" id="main">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span aria-hidden="true"> / </span>
+      <span>Science &amp; Education</span>
+      <span aria-hidden="true"> / </span>
+      <span aria-current="page">Solution Concentration &amp; Dilution</span>
+    </nav>
+
+    <section class="ch-intro">
+      <span class="ch-kicker">Chemistry &amp; laboratory tools</span>
+      <h1>Solution Concentration &amp; Dilution Calculator</h1>
+      <p>
+        Calculate stock-solution dilution, molarity, mass concentration and
+        required solute mass. Choose a calculation, enter compatible units,
+        and get the result with the formula and worked steps.
+      </p>
+    </section>
+
+    <section class="ch-layout" aria-label="Concentration calculator">
+      <div class="ch-card ch-input-card">
+        <h2>Choose a calculation</h2>
+
+        <div class="ch-field">
+          <label for="chMode">Calculation type</label>
+          <select class="ch-select" id="chMode">
+            <option value="dilution">Dilution — C₁V₁ = C₂V₂</option>
+            <option value="molarity">Molarity from moles and volume</option>
+            <option value="massMolarity">Molarity from mass and molar mass</option>
+            <option value="massConcentration">Mass concentration from mass and volume</option>
+            <option value="requiredMass">Required solute mass for target molarity</option>
+          </select>
+          <small>
+            Select the calculation that matches the information you already know.
+          </small>
+        </div>
+
+        <div class="ch-buttons">
+          <button class="ch-btn" type="button" id="chExample">Load example</button>
+          <button class="ch-btn" type="button" id="chReset">Reset inputs</button>
+        </div>
+
+        <hr class="ch-divider">
+
+        <section class="ch-mode-panel" data-panel="dilution">
+          <h3>Stock solution dilution</h3>
+          <p class="ch-muted">
+            Supply three quantities and select which fourth quantity to calculate.
+          </p>
+
+          <div class="ch-field">
+            <label for="chSolveFor">Calculate unknown</label>
+            <select class="ch-select" id="chSolveFor">
+              <option value="V1" selected>Required stock volume (V₁)</option>
+              <option value="C1">Stock concentration (C₁)</option>
+              <option value="C2">Final concentration (C₂)</option>
+              <option value="V2">Final solution volume (V₂)</option>
+            </select>
+          </div>
+
+          <div class="ch-field">
+            <label for="chConcUnit">Concentration unit — use the same type throughout</label>
+            <select class="ch-select" id="chConcUnit">
+              <option value="M">mol/L (M)</option>
+              <option value="mM">mmol/L (mM)</option>
+              <option value="uM">µmol/L (µM)</option>
+              <option value="nM">nmol/L (nM)</option>
+              <option value="gL">g/L</option>
+              <option value="mgmL">mg/mL</option>
+              <option value="mgL">mg/L</option>
+            </select>
+          </div>
+
+          <div class="ch-field">
+            <label for="chVolumeUnit">Volume unit — same unit for V₁ and V₂</label>
+            <select class="ch-select" id="chVolumeUnit">
+              <option value="mL">mL</option>
+              <option value="uL">µL</option>
+              <option value="L">L</option>
+            </select>
+          </div>
+
+          <div class="ch-two-col">
+            <div class="ch-field">
+              <label for="chC1">Stock concentration (C₁)</label>
+              <input class="ch-input" id="chC1" type="number" min="0" step="any" value="1" inputmode="decimal">
+            </div>
+
+            <div class="ch-field">
+              <label for="chV1">Stock volume (V₁)</label>
+              <input class="ch-input" id="chV1" type="number" min="0" step="any" placeholder="Calculated automatically" disabled>
+            </div>
+          </div>
+
+          <div class="ch-two-col">
+            <div class="ch-field">
+              <label for="chC2">Final concentration (C₂)</label>
+              <input class="ch-input" id="chC2" type="number" min="0" step="any" value="0.1" inputmode="decimal">
+            </div>
+
+            <div class="ch-field">
+              <label for="chV2">Final solution volume (V₂)</label>
+              <input class="ch-input" id="chV2" type="number" min="0" step="any" value="100" inputmode="decimal">
+            </div>
+          </div>
+
+          <p class="ch-muted" id="chUnknownHelp">
+            V₁ is calculated from the other three values.
+          </p>
+        </section>
+
+        <section class="ch-mode-panel" data-panel="molarity" hidden>
+          <h3>Molarity from moles</h3>
+          <p class="ch-muted">
+            Calculate amount concentration from the amount of solute and final solution volume.
+          </p>
+
+          <div class="ch-field">
+            <label for="chMoles">Amount of solute</label>
+            <input class="ch-input" id="chMoles" type="number" min="0" step="any" value="0.5" inputmode="decimal">
+          </div>
+
+          <div class="ch-two-col">
+            <div class="ch-field">
+              <label for="chMolesUnit">Amount unit</label>
+              <select class="ch-select" id="chMolesUnit">
+                <option value="mol">mol</option>
+                <option value="mmol">mmol</option>
+                <option value="umol">µmol</option>
+              </select>
+            </div>
+
+            <div class="ch-field">
+              <label for="chMolarityOutputUnit">Output concentration unit</label>
+              <select class="ch-select" id="chMolarityOutputUnit">
+                <option value="M">M</option>
+                <option value="mM">mM</option>
+                <option value="uM">µM</option>
+                <option value="nM">nM</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="ch-two-col">
+            <div class="ch-field">
+              <label for="chMolarityVolume">Final solution volume</label>
+              <input class="ch-input" id="chMolarityVolume" type="number" min="0" step="any" value="2" inputmode="decimal">
+            </div>
+            <div class="ch-field">
+              <label for="chMolarityVolumeUnit">Volume unit</label>
+              <select class="ch-select" id="chMolarityVolumeUnit">
+                <option value="L">L</option>
+                <option value="mL">mL</option>
+                <option value="uL">µL</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <section class="ch-mode-panel" data-panel="massMolarity" hidden>
+          <h3>Molarity from mass</h3>
+          <p class="ch-muted">
+            Convert solute mass to moles using its molar mass before calculating molarity.
+          </p>
+
+          <div class="ch-two-col">
+            <div class="ch-field">
+              <label for="chSoluteMass">Solute mass</label>
+              <input class="ch-input" id="chSoluteMass" type="number" min="0" step="any" value="58.44" inputmode="decimal">
+            </div>
+
+            <div class="ch-field">
+              <label for="chSoluteMassUnit">Mass unit</label>
+              <select class="ch-select" id="chSoluteMassUnit">
+                <option value="g">g</option>
+                <option value="mg">mg</option>
+                <option value="kg">kg</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="ch-field">
+            <label for="chMolarMass">Molar mass (g/mol)</label>
+            <input class="ch-input" id="chMolarMass" type="number" min="0" step="any" value="58.44" inputmode="decimal">
+            <small>
+              Enter the molar mass for your solute. This calculator does not identify chemicals automatically.
+            </small>
+          </div>
+
+          <div class="ch-two-col">
+            <div class="ch-field">
+              <label for="chMassMolarityVolume">Final solution volume</label>
+              <input class="ch-input" id="chMassMolarityVolume" type="number" min="0" step="any" value="1" inputmode="decimal">
+            </div>
+
+            <div class="ch-field">
+              <label for="chMassMolarityVolumeUnit">Volume unit</label>
+              <select class="ch-select" id="chMassMolarityVolumeUnit">
+                <option value="L">L</option>
+                <option value="mL">mL</option>
+                <option value="uL">µL</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="ch-field">
+            <label for="chMassMolarityOutput">Output concentration unit</label>
+            <select class="ch-select" id="chMassMolarityOutput">
+              <option value="M">M</option>
+              <option value="mM">mM</option>
+              <option value="uM">µM</option>
+              <option value="nM">nM</option>
+            </select>
+          </div>
+        </section>
+
+        <section class="ch-mode-panel" data-panel="massConcentration" hidden>
+          <h3>Mass concentration</h3>
+          <p class="ch-muted">
+            Calculate mass per volume. The result is not molarity; no molar mass is required.
+          </p>
+
+          <div class="ch-two-col">
+            <div class="ch-field">
+              <label for="chMassConcMass">Solute mass</label>
+              <input class="ch-input" id="chMassConcMass" type="number" min="0" step="any" value="100" inputmode="decimal">
+            </div>
+
+            <div class="ch-field">
+              <label for="chMassConcMassUnit">Mass unit</label>
+              <select class="ch-select" id="chMassConcMassUnit">
+                <option value="mg">mg</option>
+                <option value="g">g</option>
+                <option value="ug">µg</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="ch-two-col">
+            <div class="ch-field">
+              <label for="chMassConcVolume">Solution volume</label>
+              <input class="ch-input" id="chMassConcVolume" type="number" min="0" step="any" value="250" inputmode="decimal">
+            </div>
+
+            <div class="ch-field">
+              <label for="chMassConcVolumeUnit">Volume unit</label>
+              <select class="ch-select" id="chMassConcVolumeUnit">
+                <option value="mL">mL</option>
+                <option value="L">L</option>
+                <option value="uL">µL</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="ch-field">
+            <label for="chMassConcOutput">Output concentration unit</label>
+            <select class="ch-select" id="chMassConcOutput">
+              <option value="mgmL">mg/mL</option>
+              <option value="gL">g/L</option>
+              <option value="mgL">mg/L</option>
+              <option value="ugmL">µg/mL</option>
+            </select>
+          </div>
+        </section>
+
+        <section class="ch-mode-panel" data-panel="requiredMass" hidden>
+          <h3>Required solute mass</h3>
+          <p class="ch-muted">
+            Calculate how much solute to weigh to prepare a specified molarity and final solution volume.
+          </p>
+
+          <div class="ch-two-col">
+            <div class="ch-field">
+              <label for="chTargetMolarity">Target concentration</label>
+              <input class="ch-input" id="chTargetMolarity" type="number" min="0" step="any" value="0.5" inputmode="decimal">
+            </div>
+
+            <div class="ch-field">
+              <label for="chTargetMolarityUnit">Concentration unit</label>
+              <select class="ch-select" id="chTargetMolarityUnit">
+                <option value="M">M</option>
+                <option value="mM">mM</option>
+                <option value="uM">µM</option>
+                <option value="nM">nM</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="ch-two-col">
+            <div class="ch-field">
+              <label for="chTargetVolume">Final solution volume</label>
+              <input class="ch-input" id="chTargetVolume" type="number" min="0" step="any" value="500" inputmode="decimal">
+            </div>
+
+            <div class="ch-field">
+              <label for="chTargetVolumeUnit">Volume unit</label>
+              <select class="ch-select" id="chTargetVolumeUnit">
+                <option value="mL">mL</option>
+                <option value="L">L</option>
+                <option value="uL">µL</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="ch-field">
+            <label for="chTargetMolarMass">Molar mass (g/mol)</label>
+            <input class="ch-input" id="chTargetMolarMass" type="number" min="0" step="any" value="58.44" inputmode="decimal">
+          </div>
+
+          <div class="ch-field">
+            <label for="chTargetMassUnit">Display required mass in</label>
+            <select class="ch-select" id="chTargetMassUnit">
+              <option value="g">g</option>
+              <option value="mg">mg</option>
+              <option value="kg">kg</option>
+            </select>
+          </div>
+        </section>
+
+        <div class="ch-buttons">
+          <button class="ch-btn ch-btn-primary" type="button" id="chCalculate">
+            Calculate
+          </button>
+        </div>
+
+        <p class="ch-error" id="chError" role="alert" aria-live="polite"></p>
+        <p class="ch-live" id="chInputMessage" aria-live="polite">
+          Select a mode and enter your values.
+        </p>
+      </div>
+
+      <div class="ch-card">
+        <h2>Calculation result</h2>
+        <p class="ch-muted">
+          Results and worked steps update when you change the active inputs.
+        </p>
+
+        <div class="ch-result-hero">
+          <span class="ch-result-label" id="chResultLabel">Required stock volume</span>
+          <output class="ch-result-value" id="chResultValue" aria-live="polite">10.00</output>
+          <span class="ch-unit-label" id="chResultUnit">mL</span>
+        </div>
+
+        <div class="ch-stats">
+          <div class="ch-stat">
+            <span class="ch-stat-label" id="chExtraLabel1">Final solution volume</span>
+            <output class="ch-stat-value" id="chExtraValue1">100.00 mL</output>
+          </div>
+
+          <div class="ch-stat">
+            <span class="ch-stat-label" id="chExtraLabel2">Solvent to add (approx.)</span>
+            <output class="ch-stat-value" id="chExtraValue2">90.00 mL</output>
+          </div>
+        </div>
+
+        <div class="ch-status ch-status-good" id="chStatus" role="status" aria-live="polite">
+          Ready to calculate.
+        </div>
+
+        <h3>Formula used</h3>
+        <pre class="ch-formula" id="chFormula">C₁V₁ = C₂V₂</pre>
+
+        <h3>Worked calculation</h3>
+        <ol class="ch-steps" id="chSteps">
+          <li>Use the dilution equation with consistent units.</li>
+          <li>Calculate the missing quantity.</li>
+        </ol>
+
+        <div class="ch-buttons">
+          <button class="ch-btn ch-btn-primary" type="button" id="chCopy">
+            Copy result
+          </button>
+          <button class="ch-btn" type="button" id="chDownload">
+            Download report
+          </button>
+        </div>
+
+        <p class="ch-live" id="chActionMessage" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="ch-content content prose">
+      <h2>What is solution concentration?</h2>
+      <p>
+        Solution concentration describes how much of a constituent is present
+        in a specified amount or volume of a mixture. Common forms include
+        amount concentration, mass concentration and volume concentration.
+        They use different units and should not be interchanged without the
+        appropriate conversion. The IUPAC Gold Book defines amount concentration
+        in terms of amount of substance divided by mixture volume.
+      </p>
+
+      <h2>The dilution equation</h2>
+      <p>
+        The standard dilution relationship is
+        <code>C₁V₁ = C₂V₂</code>. Here, C₁ is the starting stock concentration,
+        V₁ is the amount of stock solution used, C₂ is the target concentration,
+        and V₂ is the final total solution volume.
+      </p>
+
+      <p>
+        The equation expresses the conservation of solute during dilution:
+        the amount of solute in the stock aliquot equals the amount in the
+        resulting diluted solution. Use compatible concentration units and
+        identical volume units on both sides of the equation.
+      </p>
+
+      <h2>Molarity from moles</h2>
+      <p>
+        Amount concentration (commonly called molarity in educational
+        contexts) is calculated by dividing the amount of solute, in moles,
+        by the total solution volume, in litres:
+      </p>
+      <p><code>c = n / V</code></p>
+
+      <h2>Molarity from mass</h2>
+      <p>
+        If the solute mass and molar mass are known, first calculate the
+        amount of substance. Divide the mass in grams by the molar mass in
+        grams per mole, then divide the resulting moles by the total
+        solution volume in litres.
+      </p>
+      <p><code>n = m / M</code></p>
+      <p><code>c = m / (M × V)</code></p>
+      <p>
+        In the second formula, m is the solute mass in grams, M is the molar
+        mass in grams per mole, and V is the solution volume in litres.
+      </p>
+
+      <h2>Required solute mass for a target molarity</h2>
+      <p>
+        To prepare a specified molarity, multiply the target amount
+        concentration by the final solution volume in litres and then by
+        the solute's molar mass:
+      </p>
+      <p><code>m = c × V × M</code></p>
+      <p>
+        Weighing the calculated mass is only one step of solution preparation.
+        The final solution must be made up to the specified total volume.
+      </p>
+
+      <h2>Mass concentration</h2>
+      <p>
+        Mass concentration reports mass per volume, for example mg/mL or g/L.
+        It can be calculated by dividing solute mass by solution volume after
+        converting both quantities into compatible units. It is not the
+        same quantity as molarity, which uses moles per volume.
+      </p>
+
+      <h2>Important assumptions and lab safety</h2>
+      <ul>
+        <li>
+          Concentrations and volumes must describe the same solute and the
+          intended final solution.
+        </li>
+        <li>
+          The dilution calculation treats the solute amount as conserved and
+          assumes the entered concentrations are applicable. It does not
+          account for chemical reactions, degradation, precipitation or
+          temperature-dependent volume effects.
+        </li>
+        <li>
+          Solvent volume is not always exactly additive. In practical dilution,
+          add solvent until the solution reaches the desired final volume
+          rather than assuming that measured liquid volumes always sum exactly.
+        </li>
+        <li>
+          Follow the chemical's safety data sheet, suitable PPE, and the
+          applicable laboratory procedure. This calculator is not a substitute
+          for safe handling or validated preparation instructions.
+        </li>
+      </ul>
+
+      <h2>Frequently asked questions</h2>
+
+      <div class="ch-faq">
+        <h3>Can I mix molarity and mg/mL in one dilution calculation?</h3>
+        <p>
+          Not directly. Use the same type of concentration unit for both
+          solutions, or convert with the solute's molar mass when an
+          appropriate conversion is possible.
+        </p>
+      </div>
+
+      <div class="ch-faq">
+        <h3>Does final volume mean the amount of solvent to add?</h3>
+        <p>
+          No. Final volume refers to the total volume of the completed solution.
+          The calculator estimates the additional volume as final volume minus
+          the stock aliquot, but actual preparation should be brought to the
+          required final volume.
+        </p>
+      </div>
+
+      <div class="ch-faq">
+        <h3>Why does molarity require litres?</h3>
+        <p>
+          The conventional unit for molarity is mol/L. A volume entered in
+          millilitres or microlitres must be converted to litres before the
+          molarity formula is applied.
+        </p>
+      </div>
+
+      <div class="ch-faq">
+        <h3>Where can I learn more about the formulas?</h3>
+        <p>
+          See
+          <a href="https://chem.libretexts.org/Courses/Valley_City_State_University/Chem_115/Chapter_5%3A_Reactions_in_Aqueous_Solution/5.4%3A_Molarity_and_Dilutions"
+             target="_blank" rel="noopener noreferrer">Chemistry LibreTexts: Molarity and Dilutions</a>
+          and the
+          <a href="https://goldbook.iupac.org/terms/view/A00295"
+             target="_blank" rel="noopener noreferrer">IUPAC Gold Book definition of amount concentration</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>
+        <a href="../index.html">ConvertToToolsOnline</a>
+        · Free browser-based utility tools.
+      </p>
+      <p class="copyright">
+        © <span id="chYear"></span> ConvertToToolsOnline
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const $ = (id) => document.getElementById(id);
+
+      const MODES = [
+        "dilution",
+        "molarity",
+        "massMolarity",
+        "massConcentration",
+        "requiredMass"
+      ];
+
+      const DEFAULTS = {
+        chMode: "dilution",
+        chSolveFor: "V1",
+        chConcUnit: "M",
+        chVolumeUnit: "mL",
+        chC1: "1",
+        chV1: "",
+        chC2: "0.1",
+        chV2: "100",
+
+        chMoles: "0.5",
+        chMolesUnit: "mol",
+        chMolarityVolume: "2",
+        chMolarityVolumeUnit: "L",
+        chMolarityOutputUnit: "M",
+
+        chSoluteMass: "58.44",
+        chSoluteMassUnit: "g",
+        chMolarMass: "58.44",
+        chMassMolarityVolume: "1",
+        chMassMolarityVolumeUnit: "L",
+        chMassMolarityOutput: "M",
+
+        chMassConcMass: "100",
+        chMassConcMassUnit: "mg",
+        chMassConcVolume: "250",
+        chMassConcVolumeUnit: "mL",
+        chMassConcOutput: "mgmL",
+
+        chTargetMolarity: "0.5",
+        chTargetMolarityUnit: "M",
+        chTargetVolume: "500",
+        chTargetVolumeUnit: "mL",
+        chTargetMolarMass: "58.44",
+        chTargetMassUnit: "g"
+      };
+
+      const dilutionConcentrationScale = {
+        M: 1,
+        mM: 1e-3,
+        uM: 1e-6,
+        nM: 1e-9,
+        gL: 1,
+        mgmL: 1,
+        mgL: 1e-3
+      };
+
+      const concentrationLabels = {
+        M: "M",
+        mM: "mM",
+        uM: "µM",
+        nM: "nM",
+        gL: "g/L",
+        mgmL: "mg/mL",
+        mgL: "mg/L"
+      };
+
+      const molarityScale = {
+        M: 1,
+        mM: 1e-3,
+        uM: 1e-6,
+        nM: 1e-9
+      };
+
+      const molarityLabels = {
+        M: "mol/L (M)",
+        mM: "mmol/L (mM)",
+        uM: "µmol/L (µM)",
+        nM: "nmol/L (nM)"
+      };
+
+      const volumeToLitres = {
+        L: 1,
+        mL: 1e-3,
+        uL: 1e-6
+      };
+
+      const volumeLabels = {
+        L: "L",
+        mL: "mL",
+        uL: "µL"
+      };
+
+      const massToGrams = {
+        kg: 1000,
+        g: 1,
+        mg: 1e-3,
+        ug: 1e-6
+      };
+
+      const massLabels = {
+        kg: "kg",
+        g: "g",
+        mg: "mg",
+        ug: "µg"
+      };
+
+      const massConcentrationScale = {
+        gL: 1,
+        mgL: 1e-3,
+        mgmL: 1,
+        ugmL: 1e-3
+      };
+
+      const massConcentrationLabels = {
+        gL: "g/L",
+        mgL: "mg/L",
+        mgmL: "mg/mL",
+        ugmL: "µg/mL"
+      };
+
+      let latestReport = "";
+
+      function setText(id, text) {
+        $(id).textContent = String(text);
+      }
+
+      function readNumber(id) {
+        const raw = $(id).value.trim();
+        if (!raw) return NaN;
+
+        const value = Number(raw);
+        return Number.isFinite(value) ? value : NaN;
+      }
+
+      function fmt(value, maximumDecimals = 8) {
+        if (!Number.isFinite(value)) return "Not available";
+
+        return new Intl.NumberFormat(undefined, {
+          maximumFractionDigits: maximumDecimals
+        }).format(value);
+      }
+
+      function precise(value) {
+        if (!Number.isFinite(value)) return "Not available";
+        if (value === 0) return "0";
+
+        const absolute = Math.abs(value);
+
+        if (absolute >= 1e8 || absolute < 1e-5) {
+          return value.toExponential(6);
+        }
+
+        return Number(value.toPrecision(10)).toString();
+      }
+
+      function moneylessValue(value, unit) {
+        return fmt(value) + (unit ? " " + unit : "");
+      }
+
+      function isPositiveFinite(value) {
+        return Number.isFinite(value) && value > 0;
+      }
+
+      function validatePositiveFields(ids, names) {
+        const errors = [];
+
+        ids.forEach((id, index) => {
+          const input = $(id);
+          const value = readNumber(id);
+
+          if (!isPositiveFinite(value)) {
+            input.setAttribute("aria-invalid", "true");
+            errors.push(names[index] + " must be a finite number greater than zero.");
+          } else if (value > 1e100) {
+            input.setAttribute("aria-invalid", "true");
+            errors.push(names[index] + " is too large.");
+          } else {
+            input.setAttribute("aria-invalid", "false");
+          }
+        });
+
+        return errors;
+      }
+
+      function checkFiniteResult(value, label) {
+        if (!Number.isFinite(value) || value <= 0) {
+          throw new Error(
+            label + " could not be calculated as a positive finite value. Check your inputs and units."
+          );
+        }
+
+        return value;
+      }
+
+      function renderSteps(steps) {
+        const list = $("chSteps");
+        list.replaceChildren();
+
+        steps.forEach((text) => {
+          const li = document.createElement("li");
+          li.textContent = text;
+          list.appendChild(li);
+        });
+      }
+
+      function renderExtras(items) {
+        setText("chExtraLabel1", items[0].label);
+        setText("chExtraValue1", items[0].value);
+        setText("chExtraLabel2", items[1].label);
+        setText("chExtraValue2", items[1].value);
+      }
+
+      function renderResult(result) {
+        setText("chResultLabel", result.label);
+        setText("chResultValue", result.value);
+        setText("chResultUnit", result.unit || "");
+
+        setText("chFormula", result.formula);
+        renderSteps(result.steps);
+
+        renderExtras([
+          result.extras[0] || { label: "Additional result", value: "—" },
+          result.extras[1] || { label: "Additional result", value: "—" }
+        ]);
+
+        const status = $("chStatus");
+        status.className = "ch-status " + (result.statusType || "");
+
+        // Use textContent rather than HTML for user-derived values.
+        status.textContent = result.status || "Calculation complete.";
+
+        latestReport = [
+          "SOLUTION CONCENTRATION & DILUTION CALCULATION",
+          "=============================================",
+          "",
+          "Calculation: " + result.label,
+          "Result: " + result.value + (result.unit ? " " + result.unit : ""),
+          "",
+          "Formula:",
+          result.formula,
+          "",
+          "Worked steps:",
+          ...result.steps.map((step, index) => (index + 1) + ". " + step),
+          "",
+          "Additional results:",
+          ...result.extras.map((item) => item.label + ": " + item.value),
+          "",
+          "This calculation uses the inputs provided and the stated assumptions."
+        ].join("\n");
+      }
+
+      function parseDilution() {
+        const solveFor = $("chSolveFor").value;
+        const concUnit = $("chConcUnit").value;
+        const volUnit = $("chVolumeUnit").value;
+
+        const ids = {
+          C1: "chC1",
+          V1: "chV1",
+          C2: "chC2",
+          V2: "chV2"
+        };
+
+        const names = {
+          C1: "Stock concentration C₁",
+          V1: "Stock volume V₁",
+          C2: "Final concentration C₂",
+          V2: "Final solution volume V₂"
+        };
+
+        const values = {};
+
+        for (const key of ["C1", "V1", "C2", "V2"]) {
+          values[key] = key === solveFor ? NaN : readNumber(ids[key]);
+        }
+
+        const errors = [];
+
+        for (const key of ["C1", "V1", "C2", "V2"]) {
+          if (key === solveFor) continue;
+
+          if (!isPositiveFinite(values[key])) {
+            $(ids[key]).setAttribute("aria-invalid", "true");
+            errors.push(names[key] + " must be greater than zero.");
+          } else if (values[key] > 1e100) {
+            $(ids[key]).setAttribute("aria-invalid", "true");
+            errors.push(names[key] + " is too large.");
+          } else {
+            $(ids[key]).setAttribute("aria-invalid", "false");
+          }
+        }
+
+        if (errors.length) {
+          throw new Error(errors.join(" "));
+        }
+
+        const { C1, V1, C2, V2 } = values;
+
+        let solved;
+
+        switch (solveFor) {
+          case "C1":
+            solved = (C2 * V2) / V1;
+            break;
+          case "V1":
+            solved = (C2 * V2) / C1;
+            break;
+          case "C2":
+            solved = (C1 * V1) / V2;
+            break;
+          case "V2":
+            solved = (C1 * V1) / C2;
+            break;
+          default:
+            throw new Error("Choose a valid unknown quantity.");
+        }
+
+        checkFiniteResult(solved, names[solveFor]);
+        values[solveFor] = solved;
+
+        $(ids[solveFor]).value = precise(solved);
+        $(ids[solveFor]).setAttribute("aria-invalid", "false");
+
+        const v1 = values.V1;
+        const v2 = values.V2;
+
+        let solventMessage;
+        let status = "Dilution equation calculated successfully.";
+        let statusType = "ch-status-good";
+
+        const solventVolume = v2 - v1;
+
+        if (v2 < v1) {
+          solventMessage =
+            fmt(Math.abs(solventVolume)) + " " + volumeLabels[volUnit] +
+            " less final volume than stock volume";
+
+          status =
+            "Warning: the entered final volume is less than the stock aliquot volume. This result does not describe a conventional dilution.";
+          statusType = "ch-status-warning";
+        } else {
+          solventMessage =
+            fmt(solventVolume) + " " + volumeLabels[volUnit] +
+            " additional volume (approx.)";
+        }
+
+        if (values.C2 > values.C1) {
+          status =
+            "Warning: final concentration exceeds stock concentration. The equation is solved, but this is not an ordinary dilution.";
+          statusType = "ch-status-warning";
+        }
+
+        const formula = "C₁ × V₁ = C₂ × V₂";
+
+        const knownProduct = solveFor === "C1"
+          ? precise(values.C2) + " × " + precise(values.V2)
+          : solveFor === "V1"
+            ? precise(values.C2) + " × " + precise(values.V2)
+            : solveFor === "C2"
+              ? precise(values.C1) + " × " + precise(values.V1)
+              : precise(values.C1) + " × " + precise(values.V1);
+
+        let solvedFormula;
+
+        switch (solveFor) {
+          case "C1":
+            solvedFormula = "C₁ = (C₂ × V₂) / V₁";
+            break;
+          case "V1":
+            solvedFormula = "V₁ = (C₂ × V₂) / C₁";
+            break;
+          case "C2":
+            solvedFormula = "C₂ = (C₁ × V₁) / V₂";
+            break;
+          case "V2":
+            solvedFormula = "V₂ = (C₁ × V₁) / C₂";
+            break;
+        }
+
+        const steps = [
+          "Write the dilution equation: " + formula + ".",
+          "Rearrange for the unknown: " + solvedFormula + ".",
+          "Substitute the known values: " + names[solveFor] + " = " +
+            "(" + knownProduct + ") divided by the remaining known quantity.",
+          "Calculated " + names[solveFor] + " = " +
+            fmt(solved) + " " +
+            (solveFor.startsWith("C") ? concentrationLabels[concUnit] : volumeLabels[volUnit]) + ".",
+          "The volume difference V₂ − V₁ is " + solventMessage + ". Treat this as an approximate planning value; make the actual solution up to the final total volume."
+        ];
+
+        const labels = {
+          C1: "Required stock concentration",
+          V1: "Required stock volume",
+          C2: "Final concentration",
+          V2: "Final solution volume"
+        };
+
+        const unit = solveFor.startsWith("C")
+          ? concentrationLabels[concUnit]
+          : volumeLabels[volUnit];
+
+        renderResult({
+          label: labels[solveFor],
+          value: fmt(solved),
+          unit,
+          formula: formula + "\n" + solvedFormula,
+          steps,
+          status,
+          statusType,
+          extras: [
+            {
+              label: "Final solution volume (V₂)",
+              value: fmt(v2) + " " + volumeLabels[volUnit]
+            },
+            {
+              label: "Volume difference V₂ − V₁",
+              value: solventMessage
+            }
+          ]
+        });
+      }
+
+      function parseMolarity() {
+        const amount = readNumber("chMoles");
+        const amountUnit = $("chMolesUnit").value;
+        const volume = readNumber("chMolarityVolume");
+        const volumeUnit = $("chMolarityVolumeUnit").value;
+        const outputUnit = $("chMolarityOutputUnit").value;
+
+        const errors = validatePositiveFields(
+          ["chMoles", "chMolarityVolume"],
+          ["Amount of solute", "Final solution volume"]
+        );
+
+        if (errors.length) throw new Error(errors.join(" "));
+
+        const molesScale = {
+          mol: 1,
+          mmol: 1e-3,
+          umol: 1e-6
+        };
+
+        const moles = amount * molesScale[amountUnit];
+        const litres = volume * volumeToLitres[volumeUnit];
+        const molarity = moles / litres;
+        const shown = molarity / molarityScale[outputUnit];
+
+        checkFiniteResult(shown, "Molarity");
+
+        renderResult({
+          label: "Calculated solution concentration",
+          value: fmt(shown),
+          unit: molarityLabels[outputUnit],
+          formula: "c = n / V",
+          steps: [
+            "Convert the solute amount to moles: n = " + precise(amount) +
+              " " + amountUnit + " = " + precise(moles) + " mol.",
+            "Convert the final solution volume to litres: V = " + precise(volume) +
+              " " + volumeLabels[volumeUnit] + " = " + precise(litres) + " L.",
+            "Calculate amount concentration: c = " + precise(moles) +
+              " mol / " + precise(litres) + " L = " + precise(molarity) + " mol/L.",
+            "Convert to the selected output unit: " + fmt(shown) +
+              " " + molarityLabels[outputUnit] + "."
+          ],
+          status: "Calculated from amount of substance divided by total solution volume.",
+          statusType: "ch-status-good",
+          extras: [
+            {
+              label: "Amount of solute",
+              value: fmt(moles) + " mol"
+            },
+            {
+              label: "Solution volume",
+              value: fmt(litres) + " L"
+            }
+          ]
+        });
+      }
+
+      function parseMassMolarity() {
+        const mass = readNumber("chSoluteMass");
+        const massUnit = $("chSoluteMassUnit").value;
+        const molarMass = readNumber("chMolarMass");
+        const volume = readNumber("chMassMolarityVolume");
+        const volumeUnit = $("chMassMolarityVolumeUnit").value;
+        const outputUnit = $("chMassMolarityOutput").value;
+
+        const errors = validatePositiveFields(
+          ["chSoluteMass", "chMolarMass", "chMassMolarityVolume"],
+          ["Solute mass", "Molar mass", "Final solution volume"]
+        );
+
+        if (errors.length) throw new Error(errors.join(" "));
+
+        const massG = mass * massToGrams[massUnit];
+        const moles = massG / molarMass;
+        const litres = volume * volumeToLitres[volumeUnit];
+        const molarity = moles / litres;
+        const shown = molarity / molarityScale[outputUnit];
+
+        checkFiniteResult(shown, "Molarity");
+
+        renderResult({
+          label: "Calculated solution concentration",
+          value: fmt(shown),
+          unit: molarityLabels[outputUnit],
+          formula: "n = m / M\nc = n / V = m / (M × V)",
+          steps: [
+            "Convert solute mass to grams: m = " + precise(massG) + " g.",
+            "Calculate moles: n = m / M = " + precise(massG) +
+              " g / " + precise(molarMass) + " g/mol = " + precise(moles) + " mol.",
+            "Convert solution volume to litres: V = " + precise(litres) + " L.",
+            "Calculate concentration: c = " + precise(moles) +
+              " mol / " + precise(litres) + " L = " + precise(molarity) + " mol/L.",
+            "Converted result: " + fmt(shown) + " " + molarityLabels[outputUnit] + "."
+          ],
+          status: "Calculated using the entered solute molar mass and total solution volume.",
+          statusType: "ch-status-good",
+          extras: [
+            {
+              label: "Calculated amount of solute",
+              value: fmt(moles) + " mol"
+            },
+            {
+              label: "Mass used",
+              value: fmt(massG) + " g"
+            }
+          ]
+        });
+      }
+
+      function parseMassConcentration() {
+        const mass = readNumber("chMassConcMass");
+        const massUnit = $("chMassConcMassUnit").value;
+        const volume = readNumber("chMassConcVolume");
+        const volumeUnit = $("chMassConcVolumeUnit").value;
+        const outputUnit = $("chMassConcOutput").value;
+
+        const errors = validatePositiveFields(
+          ["chMassConcMass", "chMassConcVolume"],
+          ["Solute mass", "Solution volume"]
+        );
+
+        if (errors.length) throw new Error(errors.join(" "));
+
+        const massG = mass * massToGrams[massUnit];
+        const litres = volume * volumeToLitres[volumeUnit];
+        const gramsPerLitre = massG / litres;
+        const shown = gramsPerLitre / massConcentrationScale[outputUnit];
+
+        checkFiniteResult(shown, "Mass concentration");
+
+        renderResult({
+          label: "Calculated mass concentration",
+          value: fmt(shown),
+          unit: massConcentrationLabels[outputUnit],
+          formula: "Mass concentration = solute mass / solution volume",
+          steps: [
+            "Convert the solute mass to grams: " + precise(massG) + " g.",
+            "Convert solution volume to litres: " + precise(litres) + " L.",
+            "Divide mass by volume: " + precise(massG) + " g / " +
+              precise(litres) + " L = " + precise(gramsPerLitre) + " g/L.",
+            "Convert to the selected unit: " + fmt(shown) +
+              " " + massConcentrationLabels[outputUnit] + "."
+          ],
+          status: "Calculated mass per solution volume; this is not a molarity calculation.",
+          statusType: "ch-status-good",
+          extras: [
+            {
+              label: "Solute mass",
+              value: fmt(massG) + " g"
+            },
+            {
+              label: "Solution volume",
+              value: fmt(litres) + " L"
+            }
+          ]
+        });
+      }
+
+      function parseRequiredMass() {
+        const concentration = readNumber("chTargetMolarity");
+        const concentrationUnit = $("chTargetMolarityUnit").value;
+        const volume = readNumber("chTargetVolume");
+        const volumeUnit = $("chTargetVolumeUnit").value;
+        const molarMass = readNumber("chTargetMolarMass");
+        const massUnit = $("chTargetMassUnit").value;
+
+        const errors = validatePositiveFields(
+          [
+            "chTargetMolarity",
+            "chTargetVolume",
+            "chTargetMolarMass"
+          ],
+          [
+            "Target concentration",
+            "Final solution volume",
+            "Molar mass"
+          ]
+        );
+
+        if (errors.length) throw new Error(errors.join(" "));
+
+        const molarity = concentration * molarityScale[concentrationUnit];
+        const litres = volume * volumeToLitres[volumeUnit];
+        const moles = molarity * litres;
+        const massG = moles * molarMass;
+        const shown = massG / massToGrams[massUnit];
+
+        checkFiniteResult(shown, "Required solute mass");
+
+        renderResult({
+          label: "Required solute mass",
+          value: fmt(shown),
+          unit: massLabels[massUnit],
+          formula: "n = c × V\nm = n × M\nm = c × V × M",
+          steps: [
+            "Convert the target concentration to mol/L: c = " +
+              precise(molarity) + " mol/L.",
+            "Convert the final solution volume to litres: V = " +
+              precise(litres) + " L.",
+            "Calculate the required amount: n = c × V = " +
+              precise(molarity) + " × " + precise(litres) +
+              " = " + precise(moles) + " mol.",
+            "Calculate mass: m = n × M = " + precise(moles) + " mol × " +
+              precise(molarMass) + " g/mol = " + precise(massG) + " g.",
+            "Convert the mass to " + massLabels[massUnit] + ": " +
+              fmt(shown) + " " + massLabels[massUnit] + "."
+          ],
+          status: "Calculated the theoretical solute mass for the target concentration and final total volume.",
+          statusType: "ch-status-good",
+          extras: [
+            {
+              label: "Required amount of solute",
+              value: fmt(moles) + " mol"
+            },
+            {
+              label: "Final solution volume",
+              value: fmt(litres) + " L"
+            }
+          ]
+        });
+      }
+
+      function showError(message) {
+        setText("chError", message);
+        setText("chInputMessage", "Correct the input values and calculate again.");
+
+        const status = $("chStatus");
+        status.className = "ch-status ch-status-error";
+        status.textContent = "Calculation not completed.";
+
+        setText("chResultLabel", "No valid result");
+        setText("chResultValue", "—");
+        setText("chResultUnit", "");
+        setText("chFormula", "Check the input values.");
+
+        const steps = $("chSteps");
+        steps.replaceChildren();
+
+        const li = document.createElement("li");
+        li.textContent = message;
+        steps.appendChild(li);
+
+        latestReport = "";
+      }
+
+      function calculate() {
+        setText("chError", "");
+
+        try {
+          const mode = $("chMode").value;
+
+          if (!MODES.includes(mode)) {
+            throw new Error("Select a valid calculation mode.");
+          }
+
+          if (mode === "dilution") parseDilution();
+          else if (mode === "molarity") parseMolarity();
+          else if (mode === "massMolarity") parseMassMolarity();
+          else if (mode === "massConcentration") parseMassConcentration();
+          else if (mode === "requiredMass") parseRequiredMass();
+
+          setText("chInputMessage", "Calculation updated successfully.");
+        } catch (error) {
+          showError(error && error.message
+            ? error.message
+            : "The calculation could not be completed.");
+        }
+      }
+
+      function updateVisibleMode() {
+        const mode = $("chMode").value;
+
+        document.querySelectorAll("[data-panel]").forEach((panel) => {
+          panel.hidden = panel.dataset.panel !== mode;
+        });
+
+        $("chError").textContent = "";
+        calculate();
+      }
+
+      function configureUnknown() {
+        const solveFor = $("chSolveFor").value;
+        const map = {
+          C1: "chC1",
+          V1: "chV1",
+          C2: "chC2",
+          V2: "chV2"
+        };
+
+        Object.entries(map).forEach(([key, id]) => {
+          const input = $(id);
+          const unknown = key === solveFor;
+
+          input.disabled = unknown;
+          input.placeholder = unknown
+            ? "Calculated automatically"
+            : "Enter a positive value";
+
+          if (unknown) {
+            input.value = "";
+            input.removeAttribute("aria-invalid");
+          }
+        });
+
+        setText(
+          "chUnknownHelp",
+          solveFor + " is calculated from the other three values."
+        );
+      }
+
+      function loadExample() {
+        const mode = $("chMode").value;
+
+        const examples = {
+          dilution: {
+            chSolveFor: "V1",
+            chConcUnit: "M",
+            chVolumeUnit: "mL",
+            chC1: "1",
+            chV1: "",
+            chC2: "0.1",
+            chV2: "100"
+          },
+          molarity: {
+            chMoles: "0.5",
+            chMolesUnit: "mol",
+            chMolarityVolume: "2",
+            chMolarityVolumeUnit: "L",
+            chMolarityOutputUnit: "M"
+          },
+          massMolarity: {
+            chSoluteMass: "58.44",
+            chSoluteMassUnit: "g",
+            chMolarMass: "58.44",
+            chMassMolarityVolume: "1",
+            chMassMolarityVolumeUnit: "L",
+            chMassMolarityOutput: "M"
+          },
+          massConcentration: {
+            chMassConcMass: "100",
+            chMassConcMassUnit: "mg",
+            chMassConcVolume: "250",
+            chMassConcVolumeUnit: "mL",
+            chMassConcOutput: "mgmL"
+          },
+          requiredMass: {
+            chTargetMolarity: "0.5",
+            chTargetMolarityUnit: "M",
+            chTargetVolume: "500",
+            chTargetVolumeUnit: "mL",
+            chTargetMolarMass: "58.44",
+            chTargetMassUnit: "g"
+          }
+        };
+
+        const data = examples[mode];
+
+        if (!data) return;
+
+        Object.entries(data).forEach(([id, value]) => {
+          $(id).value = value;
+        });
+
+        if (mode === "dilution") configureUnknown();
+
+        calculate();
+        setText("chActionMessage", "Example values loaded.");
+      }
+
+      function resetInputs() {
+        $("chMode").value = DEFAULTS.chMode;
+
+        Object.entries(DEFAULTS).forEach(([id, value]) => {
+          if (id === "chMode") return;
+          $(id).value = value;
+        });
+
+        configureUnknown();
+        updateVisibleMode();
+        setText("chActionMessage", "Inputs reset.");
+      }
+
+      async function copyResult() {
+        if (!latestReport) {
+          setText("chActionMessage", "Calculate a valid result before copying.");
+          return;
+        }
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(latestReport);
+            setText("chActionMessage", "Calculation report copied.");
+            return;
+          }
+        } catch (error) {
+          // Try a fallback below.
+        }
+
+        const area = document.createElement("textarea");
+        area.value = latestReport;
+        area.setAttribute("readonly", "");
+        area.style.position = "fixed";
+        area.style.left = "-9999px";
+        area.style.top = "0";
+
+        document.body.appendChild(area);
+        area.select();
+
+        let copied = false;
+
+        try {
+          copied = document.execCommand("copy");
+        } catch (error) {
+          copied = false;
+        }
+
+        area.remove();
+
+        setText(
+          "chActionMessage",
+          copied
+            ? "Calculation report copied."
+            : "Copy was blocked. Select the text and copy it manually."
+        );
+      }
+
+      function downloadReport() {
+        if (!latestReport) {
+          setText("chActionMessage", "Calculate a valid result before downloading.");
+          return;
+        }
+
+        try {
+          const blob = new Blob([latestReport], {
+            type: "text/plain;charset=utf-8"
+          });
+
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+
+          link.href = url;
+          link.download = "solution-concentration-report.txt";
+
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+
+          window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+          setText("chActionMessage", "Report download started.");
+        } catch (error) {
+          setText("chActionMessage", "The report could not be downloaded.");
+        }
+      }
+
+      $("chMode").addEventListener("change", updateVisibleMode);
+      $("chSolveFor").addEventListener("change", () => {
+        configureUnknown();
+        calculate();
+      });
+
+      $("chExample").addEventListener("click", loadExample);
+      $("chReset").addEventListener("click", resetInputs);
+      $("chCalculate").addEventListener("click", calculate);
+      $("chCopy").addEventListener("click", copyResult);
+      $("chDownload").addEventListener("click", downloadReport);
+
+      const watchedIds = [
+        "chConcUnit", "chVolumeUnit", "chC1", "chV1", "chC2", "chV2",
+        "chMoles", "chMolesUnit", "chMolarityVolume", "chMolarityVolumeUnit",
+        "chMolarityOutputUnit",
+        "chSoluteMass", "chSoluteMassUnit", "chMolarMass",
+        "chMassMolarityVolume", "chMassMolarityVolumeUnit", "chMassMolarityOutput",
+        "chMassConcMass", "chMassConcMassUnit", "chMassConcVolume",
+        "chMassConcVolumeUnit", "chMassConcOutput",
+        "chTargetMolarity", "chTargetMolarityUnit", "chTargetVolume",
+        "chTargetVolumeUnit", "chTargetMolarMass", "chTargetMassUnit"
+      ];
+
+      watchedIds.forEach((id) => {
+        $(id).addEventListener("input", calculate);
+        $(id).addEventListener("change", calculate);
+      });
+
+      $("chYear").textContent = String(new Date().getFullYear());
+
+      configureUnknown();
+      updateVisibleMode();
+    })();
+  </script>
+</body>
+</html>

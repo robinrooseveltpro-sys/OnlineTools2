@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Passport Photo Print Sheet Maker – A4, 4×6 & Letter</title>
+  <meta name="description" content="Arrange multiple passport and ID photos on A4, 4×6, 5×7 or Letter paper. Set photo dimensions, copies, margins, and cutting guides, then download a print-ready PDF or image.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#f6f8fc">
+  <link rel="canonical" href="https://onlinetoolsandconverters.cc/tools/passport-photo-print-sheet-maker.html">
+  <link rel="stylesheet" href="../style.css">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Online Tools &amp; Converters">
+  <meta property="og:title" content="Passport Photo Print Sheet Maker">
+  <meta property="og:description" content="Create photo print sheets with multiple photos, exact dimensions, copy counts and cutting guides.">
+  <meta property="og:url" content="https://onlinetoolsandconverters.cc/tools/passport-photo-print-sheet-maker.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Passport Photo Print Sheet Maker">
+  <meta name="twitter:description" content="Arrange passport photos on printable paper directly in your browser.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Passport Photo Print Sheet Maker",
+    "url": "https://onlinetoolsandconverters.cc/tools/passport-photo-print-sheet-maker.html",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "isAccessibleForFree": true,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "Create printable passport and ID photo sheets in the browser. Set paper dimensions, photo size, copy counts, margins, and cutting guides, then export as PDF, PNG, or JPEG."
+  }
+  </script>
+
+  <script src="../script.js" defer></script>
+</head>
+
+<body>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="../index.html" aria-label="Online Tools and Converters home">
+      <span class="brand-mark" aria-hidden="true">✦</span>
+      <span class="brand-text">Online Tools <span>&amp; Converters</span></span>
+    </a>
+
+    <button class="nav-toggle" type="button"
+      aria-label="Open navigation menu"
+      aria-expanded="false" aria-controls="pm-navigation">
+      <span class="nav-toggle-bars"></span>
+    </button>
+
+    <nav class="primary-nav" id="pm-navigation" aria-label="Main navigation">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#tools">All tools</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="container content-area" data-tool="passport-photo-print-sheet-maker">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../index.html#tools">Tools</a></li>
+      <li aria-current="page">Passport Photo Print Sheet Maker</li>
+    </ol>
+  </nav>
+
+  <section class="page-head">
+    <p class="eyebrow">Free photo printing utility</p>
+    <h1>Passport Photo Print Sheet Maker</h1>
+    <p class="lead">
+      Arrange photos for passport applications, identity documents, or
+      photo printing. Mix multiple images, set the number of copies for
+      each, choose a paper size, and download a print-ready sheet.
+    </p>
+  </section>
+
+  <section class="tool-layout">
+    <div class="panel">
+      <h2>1. Add your photos</h2>
+      <p>Select up to 10 JPG, PNG, or WebP images. Set copy counts individually.</p>
+
+      <label class="dropzone" id="pm-dropzone" for="pm-files">
+        <p><strong>Choose photos or drop them here</strong></p>
+        <p>Use different photos on the same print sheet.</p>
+        <p class="hint">Maximum 10 images · 15 MB per image</p>
+        <input id="pm-files" type="file"
+          accept="image/jpeg,image/png,image/webp"
+          multiple>
+      </label>
+
+      <div id="pm-file-status" class="status" role="status" aria-live="polite"></div>
+
+      <div class="btn-row">
+        <button class="btn btn-secondary" type="button" id="pm-add-more">Add more photos</button>
+        <button class="btn btn-secondary" type="button" id="pm-clear-photos">Remove all</button>
+      </div>
+
+      <div class="section">
+        <h3>Photo queue</h3>
+        <p class="hint">Change each photo's copy count or remove images you don't need.</p>
+        <div id="pm-photo-list" class="tool-grid">
+          <div class="empty" id="pm-empty">
+            No photos selected yet.
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>2. Photo dimensions</h2>
+
+        <div class="field">
+          <label for="pm-photo-preset">Photo size preset</label>
+          <select id="pm-photo-preset">
+            <option value="35x45">35 × 45 mm — common passport format</option>
+            <option value="2x2">2 × 2 inches — square format</option>
+            <option value="35x35">35 × 35 mm — square format</option>
+            <option value="30x40">30 × 40 mm</option>
+            <option value="custom">Custom dimensions</option>
+          </select>
+          <p class="hint">
+            Presets are convenient dimensions, not confirmation of the current
+            requirements of a particular issuing authority. Check your application instructions.
+          </p>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="pm-photo-width">Photo width (mm)</label>
+            <input id="pm-photo-width" type="number" min="10" max="100" step="0.1" value="35">
+          </div>
+          <div class="field">
+            <label for="pm-photo-height">Photo height (mm)</label>
+            <input id="pm-photo-height" type="number" min="10" max="100" step="0.1" value="45">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="pm-fit">Fit image inside photo dimensions</label>
+          <select id="pm-fit">
+            <option value="cover">Fill photo area — crop edges if needed</option>
+            <option value="contain">Fit entire image — may leave space</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="pm-background">Photo-area background colour</label>
+          <select id="pm-background">
+            <option value="#ffffff">White</option>
+            <option value="#eeeeee">Light grey</option>
+            <option value="#e7efff">Light blue</option>
+          </select>
+          <p class="hint">
+            This fills transparent or unused areas only. It does not remove or replace
+            the background of an ordinary photo.
+          </p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>3. Paper and layout</h2>
+
+        <div class="field">
+          <label for="pm-paper">Paper size</label>
+          <select id="pm-paper">
+            <option value="A4">A4 — 210 × 297 mm</option>
+            <option value="Letter">US Letter — 215.9 × 279.4 mm</option>
+            <option value="4x6">4 × 6 inch photo paper</option>
+            <option value="5x7">5 × 7 inch photo paper</option>
+            <option value="A5">A5 — 148 × 210 mm</option>
+            <option value="custom">Custom paper dimensions</option>
+          </select>
+        </div>
+
+        <div id="pm-custom-paper" class="field-row" hidden>
+          <div class="field">
+            <label for="pm-paper-width">Paper width (mm)</label>
+            <input id="pm-paper-width" type="number" min="50" max="500" step="0.1" value="210">
+          </div>
+          <div class="field">
+            <label for="pm-paper-height">Paper height (mm)</label>
+            <input id="pm-paper-height" type="number" min="50" max="500" step="0.1" value="297">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="pm-orientation">Paper orientation</label>
+          <select id="pm-orientation">
+            <option value="auto">Auto — fit the most photos</option>
+            <option value="portrait">Portrait</option>
+            <option value="landscape">Landscape</option>
+          </select>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="pm-margin">Page margin (mm)</label>
+            <input id="pm-margin" type="number" min="0" max="30" step="0.5" value="4">
+          </div>
+          <div class="field">
+            <label for="pm-gap">Gap between photos (mm)</label>
+            <input id="pm-gap" type="number" min="0" max="20" step="0.5" value="2">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="pm-dpi">Export resolution</label>
+          <select id="pm-dpi">
+            <option value="150">150 DPI — smaller image</option>
+            <option value="300" selected>300 DPI — print-oriented</option>
+          </select>
+          <p class="hint">
+            PDF pages use physical dimensions. PNG and JPEG files are rendered at the selected pixel density;
+            printer and application settings can still affect the final printed size.
+          </p>
+        </div>
+
+        <div class="field">
+          <label class="checkbox-row">
+            <input type="checkbox" id="pm-cut-guides" checked>
+            Show cutting guides
+          </label>
+
+          <label class="checkbox-row">
+            <input type="checkbox" id="pm-photo-border">
+            Add solid photo borders
+          </label>
+
+          <label class="checkbox-row">
+            <input type="checkbox" id="pm-fill-sheet">
+            Fill the last page with extra copies
+          </label>
+          <p class="hint">
+            If enabled, extra copies repeat in queue order to fill otherwise empty slots.
+          </p>
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-primary" type="button" id="pm-generate">
+          Generate print sheet
+        </button>
+        <button class="btn btn-secondary" type="button" id="pm-reset">
+          Reset layout
+        </button>
+      </div>
+
+      <div class="status" id="pm-status" role="status" aria-live="polite"></div>
+    </div>
+
+    <aside>
+      <div class="panel">
+        <h2>Print sheet preview</h2>
+        <p class="hint" id="pm-preview-note">
+          Add a photo to see your sheet layout.
+        </p>
+
+        <div class="preview-box">
+          <canvas id="pm-preview" class="output-canvas"
+            aria-label="Preview of the passport photo print sheet"></canvas>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <strong id="pm-stat-photos">0</strong>
+            <span>Images</span>
+          </div>
+          <div class="stat">
+            <strong id="pm-stat-copies">0</strong>
+            <span>Copies</span>
+          </div>
+          <div class="stat">
+            <strong id="pm-stat-capacity">—</strong>
+            <span>Per page</span>
+          </div>
+        </div>
+
+        <div class="result-line" id="pm-layout-summary">
+          Select photos to start.
+        </div>
+
+        <div class="btn-row" style="margin-top:16px">
+          <button class="btn btn-primary" type="button" id="pm-download-pdf" disabled>
+            Download PDF
+          </button>
+          <button class="btn btn-secondary" type="button" id="pm-download-png" disabled>
+            Download PNG
+          </button>
+          <button class="btn btn-secondary" type="button" id="pm-download-jpg" disabled>
+            Download JPEG
+          </button>
+        </div>
+
+        <div class="notice" style="margin-top:16px">
+          <strong>Print tip:</strong> print the PDF at <strong>Actual size / 100%</strong>.
+          Turn off “Fit to page” if exact photo dimensions matter. Check your printer's
+          non-printable margins before using the sheet for a formal application.
+        </div>
+
+        <p class="hint" id="pm-export-note">
+          Photo processing runs in your browser. Your images are not uploaded to this website.
+        </p>
+      </div>
+    </aside>
+  </section>
+
+  <article class="content prose">
+    <h2>How the passport photo print sheet maker works</h2>
+    <p>
+      This tool arranges one or more images into a sheet that you can print
+      on A4, US Letter, 4 × 6 inch, 5 × 7 inch or A5 paper. Select photo
+      dimensions, set how many copies are required for each image, and choose
+      margins, spacing, orientation and cutting guides.
+    </p>
+
+    <h2>How to get the correct printed size</h2>
+    <p>
+      Start with the dimensions required by the organisation receiving your photo.
+      Different passport, visa, identity-card and application processes can have
+      different rules, including face size, head position, background, recency,
+      expression and paper or digital requirements. A correctly sized print sheet
+      does not guarantee the underlying photo will be accepted.
+    </p>
+    <p>
+      Download the PDF when you need a document with defined paper dimensions.
+      When printing, choose the correct paper and use Actual size or 100% scaling.
+      Avoid automatic enlargement or reduction if you require a particular physical
+      photo size.
+    </p>
+
+    <h2>Privacy and image handling</h2>
+    <p>
+      Photos are loaded and laid out locally in your browser. The tool does not
+      upload photos to a remote image-processing service. When finished, close
+      the page to discard the working session.
+    </p>
+
+    <h2>Frequently asked questions</h2>
+    <details>
+      <summary>Can I put different people's photos on one sheet?</summary>
+      <p>Yes. Add multiple photos and set a separate copy count for each image.</p>
+    </details>
+    <details>
+      <summary>Does the tool remove photo backgrounds?</summary>
+      <p>No. The background colour setting fills transparent or unused areas; it does not remove an existing photo background.</p>
+    </details>
+    <details>
+      <summary>Why should I print at 100%?</summary>
+      <p>Fit-to-page scaling can resize the page, causing the physical dimensions of each photo to differ from your chosen measurements.</p>
+    </details>
+    <details>
+      <summary>Does this guarantee official passport photo compliance?</summary>
+      <p>No. Photo dimensions and acceptance rules vary. Confirm the latest requirements with the relevant issuing authority before submitting a photo.</p>
+    </details>
+
+    <section class="related">
+      <h2>Explore more tools</h2>
+      <ul>
+        <li><a href="../index.html#tools">All online tools →</a></li>
+        <li><a href="video-file-size-calculator.html">Video File Size Calculator →</a></li>
+        <li><a href="srt-subtitle-checker.html">SRT Subtitle Checker →</a></li>
+      </ul>
+    </section>
+  </article>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <a class="footer-brand" href="../index.html">Online Tools &amp; Converters</a>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
+      <a href="../contact.html">Contact</a>
+      <a href="../privacy-policy.html">Privacy Policy</a>
+      <a href="../terms-of-use.html">Terms of Use</a>
+    </nav>
+    <p class="copyright">© <span id="current-year">2026</span> Online Tools &amp; Converters. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>

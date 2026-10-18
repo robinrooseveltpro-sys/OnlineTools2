@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>PPC Affiliate ROI Calculator – Profit, EPC & Break-Even CPC</title>
+  <meta name="description" content="Forecast paid affiliate campaign profit, ROI, EPC, approved conversions, break-even CPC and required conversion rate with this free PPC affiliate calculator.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2563eb">
+
+  <link rel="canonical" href="https://onlinetoolsandconverters.cc/tools/ppc-affiliate-roi-calculator.html">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../script.js" defer></script>
+
+  <style>
+    .ppc-page {
+      --ppc-ink: #172033;
+      --ppc-muted: #64748b;
+      --ppc-border: #dbe2ea;
+      --ppc-soft: #f8fafc;
+      --ppc-blue: #2563eb;
+      --ppc-green: #166534;
+      --ppc-green-bg: #dcfce7;
+      --ppc-red: #991b1b;
+      --ppc-red-bg: #fee2e2;
+      color: var(--ppc-ink);
+    }
+
+    .ppc-page *,
+    .ppc-page *::before,
+    .ppc-page *::after {
+      box-sizing: border-box;
+    }
+
+    .ppc-intro {
+      max-width: 850px;
+      margin-bottom: 1.5rem;
+    }
+
+    .ppc-intro h1 {
+      line-height: 1.15;
+      margin-bottom: .75rem;
+    }
+
+    .ppc-intro p {
+      color: var(--ppc-muted);
+      line-height: 1.75;
+      font-size: 1.03rem;
+    }
+
+    .ppc-kicker {
+      display: inline-block;
+      margin-bottom: .55rem;
+      color: var(--ppc-blue);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .ppc-layout {
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+      gap: 1.2rem;
+      align-items: start;
+      margin: 1.5rem 0 2rem;
+    }
+
+    .ppc-card {
+      min-width: 0;
+      padding: clamp(1rem, 2.5vw, 1.5rem);
+      border: 1px solid var(--ppc-border);
+      border-radius: 15px;
+      background: #fff;
+      box-shadow: 0 5px 22px rgba(15, 23, 42, .045);
+    }
+
+    .ppc-card h2,
+    .ppc-card h3 {
+      margin-top: 0;
+      line-height: 1.35;
+    }
+
+    .ppc-muted {
+      color: var(--ppc-muted);
+      font-size: .9rem;
+      line-height: 1.65;
+    }
+
+    .ppc-field {
+      margin: 1rem 0;
+      min-width: 0;
+    }
+
+    .ppc-field label {
+      display: block;
+      margin-bottom: .4rem;
+      font-weight: 750;
+      font-size: .91rem;
+    }
+
+    .ppc-field small {
+      display: block;
+      color: var(--ppc-muted);
+      line-height: 1.5;
+      margin-top: .35rem;
+      font-size: .8rem;
+    }
+
+    .ppc-input,
+    .ppc-select {
+      width: 100%;
+      min-width: 0;
+      min-height: 45px;
+      padding: .65rem .75rem;
+      border: 1px solid var(--ppc-border);
+      border-radius: 9px;
+      color: var(--ppc-ink);
+      background: #fff;
+      font: inherit;
+      font-size: .97rem;
+    }
+
+    .ppc-input:focus,
+    .ppc-select:focus,
+    .ppc-page button:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, .25);
+      outline-offset: 2px;
+      border-color: var(--ppc-blue);
+    }
+
+    .ppc-input[aria-invalid="true"] {
+      border-color: #dc2626;
+      background: #fff7f7;
+    }
+
+    .ppc-two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: .9rem;
+    }
+
+    .ppc-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .65rem;
+      margin-top: 1.2rem;
+    }
+
+    .ppc-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: .65rem .9rem;
+      border: 1px solid var(--ppc-border);
+      border-radius: 9px;
+      background: #fff;
+      color: var(--ppc-ink);
+      font: inherit;
+      font-weight: 700;
+      font-size: .9rem;
+      cursor: pointer;
+    }
+
+    .ppc-btn:hover {
+      background: #f1f5f9;
+    }
+
+    .ppc-btn-primary {
+      background: var(--ppc-blue);
+      border-color: var(--ppc-blue);
+      color: #fff;
+    }
+
+    .ppc-btn-primary:hover {
+      background: #1d4ed8;
+      border-color: #1d4ed8;
+      color: #fff;
+    }
+
+    .ppc-btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .ppc-error {
+      color: var(--ppc-red);
+      font-size: .86rem;
+      line-height: 1.5;
+      margin: .8rem 0;
+    }
+
+    .ppc-error:empty {
+      display: none;
+    }
+
+    .ppc-alert {
+      padding: .9rem 1rem;
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      background: #eff6ff;
+      color: #1e3a8a;
+      font-size: .88rem;
+      line-height: 1.65;
+      margin: 1rem 0;
+    }
+
+    .ppc-result-hero {
+      padding: 1.1rem;
+      border: 1px solid var(--ppc-border);
+      border-radius: 12px;
+      background: var(--ppc-soft);
+      margin: 1rem 0;
+    }
+
+    .ppc-status {
+      display: inline-block;
+      padding: .35rem .6rem;
+      border-radius: 7px;
+      background: #e2e8f0;
+      color: #334155;
+      font-size: .76rem;
+      font-weight: 850;
+      letter-spacing: .02em;
+    }
+
+    .ppc-status.is-good {
+      background: var(--ppc-green-bg);
+      color: var(--ppc-green);
+    }
+
+    .ppc-status.is-bad {
+      background: var(--ppc-red-bg);
+      color: var(--ppc-red);
+    }
+
+    .ppc-profit-value {
+      margin: .65rem 0 .25rem;
+      font-size: clamp(2rem, 5vw, 2.7rem);
+      font-weight: 850;
+      letter-spacing: -.045em;
+      line-height: 1.15;
+      overflow-wrap: anywhere;
+    }
+
+    .ppc-status-note {
+      color: var(--ppc-muted);
+      line-height: 1.6;
+      font-size: .88rem;
+      margin: .45rem 0 0;
+    }
+
+    .ppc-metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .75rem;
+      margin: 1rem 0;
+    }
+
+    .ppc-metric {
+      min-width: 0;
+      padding: .9rem;
+      border: 1px solid var(--ppc-border);
+      border-radius: 11px;
+      background: #fff;
+    }
+
+    .ppc-metric-label {
+      color: var(--ppc-muted);
+      font-size: .81rem;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .ppc-metric-value {
+      display: block;
+      font-size: clamp(1.05rem, 2.5vw, 1.45rem);
+      font-weight: 850;
+      letter-spacing: -.025em;
+      line-height: 1.35;
+      margin-top: .4rem;
+      overflow-wrap: anywhere;
+    }
+
+    .ppc-metric-note {
+      display: block;
+      color: var(--ppc-muted);
+      font-size: .77rem;
+      line-height: 1.5;
+      margin-top: .35rem;
+    }
+
+    .ppc-divider {
+      border: 0;
+      border-top: 1px solid var(--ppc-border);
+      margin: 1.4rem 0;
+    }
+
+    .ppc-results-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .9rem;
+    }
+
+    .ppc-results-table th,
+    .ppc-results-table td {
+      padding: .75rem .25rem;
+      border-bottom: 1px solid var(--ppc-border);
+      vertical-align: top;
+      text-align: left;
+      line-height: 1.5;
+    }
+
+    .ppc-results-table th {
+      color: var(--ppc-muted);
+      font-size: .8rem;
+      font-weight: 750;
+    }
+
+    .ppc-results-table td:last-child,
+    .ppc-results-table th:last-child {
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+
+    .ppc-live {
+      min-height: 1.5em;
+      font-size: .85rem;
+      color: var(--ppc-muted);
+      line-height: 1.5;
+      margin: .8rem 0 0;
+    }
+
+    .ppc-content {
+      max-width: 900px;
+      margin: 2.5rem auto;
+    }
+
+    .ppc-content h2 {
+      margin-top: 2.1rem;
+      line-height: 1.35;
+    }
+
+    .ppc-content p,
+    .ppc-content li {
+      line-height: 1.8;
+    }
+
+    .ppc-faq {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--ppc-border);
+    }
+
+    .ppc-faq h3 {
+      margin: 0 0 .45rem;
+      font-size: 1rem;
+    }
+
+    .ppc-faq p {
+      margin: 0;
+      color: var(--ppc-muted);
+    }
+
+    @media (max-width: 850px) {
+      .ppc-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 460px) {
+      .ppc-two-col {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .ppc-metric-grid {
+        gap: .55rem;
+      }
+
+      .ppc-metric {
+        padding: .75rem;
+      }
+
+      .ppc-buttons .ppc-btn {
+        flex: 1 1 auto;
+      }
+    }
+
+    @media print {
+      .site-header,
+      .site-footer,
+      .ppc-form-card,
+      .ppc-content,
+      .ppc-buttons {
+        display: none !important;
+      }
+
+      .ppc-layout {
+        display: block;
+      }
+
+      .ppc-card {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "PPC Affiliate ROI Calculator",
+    "url": "https://onlinetoolsandconverters.cc/tools/ppc-affiliate-roi-calculator.html",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "isAccessibleForFree": true,
+    "description": "A browser-based calculator for estimating affiliate paid-traffic revenue, approved conversions, ROI, EPC and break-even metrics.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I calculate affiliate campaign ROI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Subtract advertising spend and other campaign costs from expected approved affiliate commission revenue. Divide the resulting profit or loss by total costs and multiply by 100."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is earnings per click (EPC)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "EPC is the expected affiliate commission revenue divided by the number of clicks. It depends on conversion rate, the approval rate when applicable, and commission per approved conversion."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is break-even CPC?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Break-even CPC is the approximate maximum average cost per click at which expected revenue covers advertising spend and the additional costs entered into the model, holding the other assumptions constant."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this calculator guarantee affiliate profits?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The tool provides projections based on user inputs. Actual results can differ because of traffic quality, attribution, approval rates, refunds, offer rules, advertiser policies and other costs."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="ConvertToToolsOnline home">
+        <span class="brand-mark" aria-hidden="true">C</span>
+        <span class="brand-text">ConvertToToolsOnline</span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="primaryNav">
+        ☰
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Main navigation">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#tools">All tools</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container ppc-page" id="main">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span aria-hidden="true"> / </span>
+      <span>Business &amp; Marketing</span>
+      <span aria-hidden="true"> / </span>
+      <span aria-current="page">PPC Affiliate ROI Calculator</span>
+    </nav>
+
+    <section class="ppc-intro">
+      <span class="ppc-kicker">Business &amp; marketing tools</span>
+      <h1>PPC Affiliate ROI Calculator</h1>
+      <p>
+        Estimate whether a paid affiliate campaign could make money before you
+        spend your budget. Calculate expected conversions, approved commissions,
+        revenue, profit, ROI, earnings per click, break-even CPC and the
+        conversion rate required to meet your target.
+      </p>
+    </section>
+
+    <section class="ppc-layout" aria-label="Affiliate campaign calculator">
+      <div class="ppc-card ppc-form-card">
+        <h2>Campaign assumptions</h2>
+        <p class="ppc-muted">
+          Enter estimates for one campaign and one consistent reporting period.
+          Use the same currency for all monetary values.
+        </p>
+
+        <form id="ppcForm" novalidate>
+          <div class="ppc-field">
+            <label for="ppcCurrency">Currency display</label>
+            <select class="ppc-select" id="ppcCurrency" name="currency">
+              <option value="USD" selected>USD — US dollar</option>
+              <option value="NPR">NPR — Nepalese rupee</option>
+              <option value="INR">INR — Indian rupee</option>
+              <option value="GBP">GBP — British pound</option>
+              <option value="EUR">EUR — Euro</option>
+              <option value="AUD">AUD — Australian dollar</option>
+              <option value="CAD">CAD — Canadian dollar</option>
+              <option value="NGN">NGN — Nigerian naira</option>
+            </select>
+            <small>Changes number formatting only. It does not convert currencies.</small>
+          </div>
+
+          <div class="ppc-field">
+            <label for="ppcBudget">Advertising spend</label>
+            <input
+              class="ppc-input"
+              id="ppcBudget"
+              name="budget"
+              type="number"
+              min="0.01"
+              max="1000000000000"
+              step="any"
+              value="500"
+              inputmode="decimal"
+              required>
+            <small>Your total paid traffic budget for the period.</small>
+          </div>
+
+          <div class="ppc-two-col">
+            <div class="ppc-field">
+              <label for="ppcCpc">Average cost per click (CPC)</label>
+              <input
+                class="ppc-input"
+                id="ppcCpc"
+                name="cpc"
+                type="number"
+                min="0.000001"
+                max="1000000000000"
+                step="any"
+                value="0.40"
+                inputmode="decimal"
+                required>
+              <small>Estimated price of one paid click.</small>
+            </div>
+
+            <div class="ppc-field">
+              <label for="ppcConversion">Conversion rate (%)</label>
+              <input
+                class="ppc-input"
+                id="ppcConversion"
+                name="conversion"
+                type="number"
+                min="0"
+                max="100"
+                step="any"
+                value="3"
+                inputmode="decimal"
+                required>
+              <small>Conversions divided by clicks.</small>
+            </div>
+          </div>
+
+          <div class="ppc-field">
+            <label for="ppcPayout">Commission per approved conversion</label>
+            <input
+              class="ppc-input"
+              id="ppcPayout"
+              name="payout"
+              type="number"
+              min="0.000001"
+              max="1000000000000"
+              step="any"
+              value="20"
+              inputmode="decimal"
+              required>
+            <small>
+              Your actual commission per approved sale or lead, not the
+              customer's total order value unless that is your payout.
+            </small>
+          </div>
+
+          <div class="ppc-two-col">
+            <div class="ppc-field">
+              <label for="ppcApproval">Approval rate (%)</label>
+              <input
+                class="ppc-input"
+                id="ppcApproval"
+                name="approval"
+                type="number"
+                min="0"
+                max="100"
+                step="any"
+                value="90"
+                inputmode="decimal"
+                required>
+              <small>
+                Share of conversions expected to be approved and payable.
+                Use 100 if all are payable.
+              </small>
+            </div>
+
+            <div class="ppc-field">
+              <label for="ppcFixed">Other campaign costs</label>
+              <input
+                class="ppc-input"
+                id="ppcFixed"
+                name="fixed"
+                type="number"
+                min="0"
+                max="1000000000000"
+                step="any"
+                value="25"
+                inputmode="decimal"
+                required>
+              <small>
+                Additional costs such as tracking software or creative fees,
+                in the selected currency.
+              </small>
+            </div>
+          </div>
+
+          <div class="ppc-field">
+            <label for="ppcTargetRoi">Target ROI (%)</label>
+            <input
+              class="ppc-input"
+              id="ppcTargetRoi"
+              name="targetRoi"
+              type="number"
+              min="0"
+              max="1000000"
+              step="any"
+              value="25"
+              inputmode="decimal"
+              required>
+            <small>
+              For example, a 25% ROI target means expected profit equals
+              25% of total campaign costs.
+            </small>
+          </div>
+
+          <p class="ppc-error" id="ppcError" role="alert" aria-live="polite"></p>
+
+          <div class="ppc-buttons">
+            <button class="ppc-btn ppc-btn-primary" type="button" id="ppcExample">
+              Load example
+            </button>
+            <button class="ppc-btn" type="reset" id="ppcReset">
+              Reset
+            </button>
+          </div>
+
+          <p class="ppc-live" id="ppcInputStatus" aria-live="polite">
+            Results update as you change the assumptions.
+          </p>
+        </form>
+
+        <div class="ppc-alert">
+          Forecasts are estimates—not promises of profit. Check the affiliate
+          program's paid-traffic, brand bidding, landing-page and conversion
+          tracking rules before buying traffic.
+        </div>
+      </div>
+
+      <div class="ppc-card">
+        <h2>Campaign forecast</h2>
+        <p class="ppc-muted">
+          Results are modeled from your budget, average CPC, conversion rate,
+          approval rate, payout and additional costs.
+        </p>
+
+        <div class="ppc-result-hero">
+          <span class="ppc-status" id="ppcVerdict">Calculating</span>
+          <div class="ppc-muted" style="margin-top:.8rem">Estimated profit / loss</div>
+          <output class="ppc-profit-value" id="ppcProfit" aria-live="polite">—</output>
+          <p class="ppc-status-note" id="ppcVerdictNote">
+            Calculations will appear here.
+          </p>
+        </div>
+
+        <div class="ppc-metric-grid">
+          <div class="ppc-metric">
+            <span class="ppc-metric-label">Return on ad spend (ROAS)</span>
+            <output class="ppc-metric-value" id="ppcRoas">—</output>
+            <span class="ppc-metric-note">Revenue ÷ advertising spend</span>
+          </div>
+
+          <div class="ppc-metric">
+            <span class="ppc-metric-label">ROI</span>
+            <output class="ppc-metric-value" id="ppcRoi">—</output>
+            <span class="ppc-metric-note">Profit ÷ total campaign costs</span>
+          </div>
+
+          <div class="ppc-metric">
+            <span class="ppc-metric-label">Expected revenue</span>
+            <output class="ppc-metric-value" id="ppcRevenue">—</output>
+            <span class="ppc-metric-note">Approved affiliate commissions</span>
+          </div>
+
+          <div class="ppc-metric">
+            <span class="ppc-metric-label">Earnings per click (EPC)</span>
+            <output class="ppc-metric-value" id="ppcEpc">—</output>
+            <span class="ppc-metric-note">Expected commission revenue per click</span>
+          </div>
+        </div>
+
+        <hr class="ppc-divider">
+
+        <h3>Traffic and conversions</h3>
+        <table class="ppc-results-table">
+          <tbody>
+            <tr>
+              <td>Estimated paid clicks</td>
+              <td id="ppcClicks">—</td>
+            </tr>
+            <tr>
+              <td>Expected conversions before approval</td>
+              <td id="ppcConversions">—</td>
+            </tr>
+            <tr>
+              <td>Expected approved conversions</td>
+              <td id="ppcApproved">—</td>
+            </tr>
+            <tr>
+              <td>Total campaign costs</td>
+              <td id="ppcTotalCosts">—</td>
+            </tr>
+            <tr>
+              <td>Profit or loss per expected click</td>
+              <td id="ppcProfitPerClick">—</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <hr class="ppc-divider">
+
+        <h3>Break-even and target metrics</h3>
+        <p class="ppc-muted">
+          These calculations hold the other assumptions constant. Actual results
+          can change when CPC, traffic volume or conversion quality changes.
+        </p>
+
+        <table class="ppc-results-table">
+          <tbody>
+            <tr>
+              <td>Break-even conversion rate</td>
+              <td id="ppcBreakEvenCr">—</td>
+            </tr>
+            <tr>
+              <td>Break-even average CPC</td>
+              <td id="ppcBreakEvenCpc">—</td>
+            </tr>
+            <tr>
+              <td>Conversion rate needed for target ROI</td>
+              <td id="ppcTargetCr">—</td>
+            </tr>
+            <tr>
+              <td>Expected ROI target</td>
+              <td id="ppcTargetOutput">—</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="ppc-buttons">
+          <button class="ppc-btn ppc-btn-primary" type="button" id="ppcCopy">
+            Copy summary
+          </button>
+          <button class="ppc-btn" type="button" id="ppcDownload">
+            Download CSV report
+          </button>
+        </div>
+
+        <p class="ppc-live" id="ppcActionStatus" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="ppc-content content prose">
+      <h2>How to use this PPC affiliate calculator</h2>
+      <ol>
+        <li>Enter the advertising budget and average cost per click.</li>
+        <li>Estimate the percentage of clicks that become affiliate conversions.</li>
+        <li>Enter the commission actually paid per approved conversion.</li>
+        <li>Adjust the approval rate if your network rejects or reverses some conversions.</li>
+        <li>Add other campaign costs and choose your target ROI.</li>
+        <li>Review the profit forecast, EPC, break-even metrics and downloadable report.</li>
+      </ol>
+
+      <h2>How the calculator works</h2>
+
+      <h3>1. Estimated clicks</h3>
+      <p>
+        Estimated clicks equal your advertising spend divided by the average
+        cost per click. This is a projection based on your assumed CPC, rather
+        than actual clicks reported by an advertising platform.
+      </p>
+
+      <p><code>Clicks = Advertising spend ÷ Average CPC</code></p>
+
+      <h3>2. Expected conversions and approvals</h3>
+      <p>
+        The conversion rate estimates how many clicks produce a sale or lead.
+        The approval rate then estimates how many conversions become payable.
+        This distinction matters when an affiliate network reviews leads,
+        reverses orders or pays only for qualifying actions.
+      </p>
+
+      <p><code>Conversions = Clicks × Conversion rate</code></p>
+      <p><code>Approved conversions = Conversions × Approval rate</code></p>
+
+      <h3>3. Revenue, profit and ROI</h3>
+      <p>
+        Estimated revenue is based on expected approved conversions multiplied
+        by the commission for each approved conversion. Profit subtracts both
+        advertising spend and the additional costs entered in the calculator.
+      </p>
+
+      <p><code>Revenue = Approved conversions × Commission per approval</code></p>
+      <p><code>Profit = Revenue − Advertising spend − Other costs</code></p>
+      <p><code>ROI (%) = Profit ÷ Total campaign costs × 100</code></p>
+
+      <p>
+        ROAS and ROI are not the same metric. ROAS measures revenue relative
+        to advertising spend. ROI here measures estimated profit relative to
+        advertising spend plus other campaign costs.
+      </p>
+
+      <h3>4. Earnings per click (EPC)</h3>
+      <p>
+        EPC estimates how much commission revenue each click produces on
+        average. It helps compare offers, but the result depends on conversion
+        quality, commission rules and the period represented by your inputs.
+      </p>
+
+      <p><code>EPC = Expected commission revenue ÷ Clicks</code></p>
+
+      <h3>5. Break-even CPC and conversion rate</h3>
+      <p>
+        The break-even conversion rate estimates the rate needed to cover
+        total campaign costs for the modeled traffic volume. The break-even
+        CPC estimates the average click price at which those costs would be
+        covered, assuming conversion performance and budget remain as modeled.
+      </p>
+
+      <p><code>Break-even conversion rate = Total costs ÷ (Clicks × Approval rate × Payout) × 100</code></p>
+
+      <p>
+        The target conversion rate applies your selected ROI goal rather
+        than only covering costs. If the required rate exceeds 100%, the
+        target is not feasible under the current assumptions.
+      </p>
+
+      <h2>Important considerations before running paid affiliate traffic</h2>
+      <ul>
+        <li>
+          <strong>Check program terms:</strong> some merchants prohibit paid
+          search, trademark bidding, certain traffic sources or direct linking.
+        </li>
+        <li>
+          <strong>Use realistic estimates:</strong> conversion and approval
+          rates can vary by offer, country, device, landing page and traffic intent.
+        </li>
+        <li>
+          <strong>Include real costs:</strong> account for trackers, landing
+          pages, creatives, software, refunds and other costs where relevant.
+        </li>
+        <li>
+          <strong>Keep attribution consistent:</strong> compare spend and
+          attributed commission revenue for the same campaign and reporting period.
+        </li>
+      </ul>
+
+      <p>
+        This tool is for scenario planning and education. It does not connect
+        to your advertising or affiliate accounts, predict future performance,
+        or guarantee that a campaign will be profitable.
+      </p>
+
+      <h2>Frequently asked questions</h2>
+
+      <div class="ppc-faq">
+        <h3>What is a good ROI for a PPC affiliate campaign?</h3>
+        <p>
+          There is no universal target. It depends on your actual costs, payout,
+          approval rate, traffic quality and the return you need to justify
+          your time and risk. Compare the modeled ROI with your own target.
+        </p>
+      </div>
+
+      <div class="ppc-faq">
+        <h3>Can ROAS be positive while a campaign loses money?</h3>
+        <p>
+          Yes. Revenue may be lower than the combined advertising and operating
+          costs. This is why the calculator presents profit and ROI alongside ROAS.
+        </p>
+      </div>
+
+      <div class="ppc-faq">
+        <h3>Why is the number of approved conversions sometimes fractional?</h3>
+        <p>
+          This is an expected-value forecast. For example, 2,000 clicks at a 3%
+          conversion rate produce an estimate of 60 conversions; a 90% approval
+          rate estimates 54 approved conversions. Fractional forecasts are
+          useful for averages, but actual conversions are whole events.
+        </p>
+      </div>
+
+      <div class="ppc-faq">
+        <h3>Does changing currency convert my money?</h3>
+        <p>
+          No. The currency selector changes formatting only. Enter every
+          monetary figure in the same currency; no foreign-exchange rate is applied.
+        </p>
+      </div>
+
+      <div class="ppc-faq">
+        <h3>Does this calculator guarantee profit or campaign approval?</h3>
+        <p>
+          No. All outputs depend on your estimates. Advertising platforms and
+          affiliate programs may have restrictions or review requirements,
+          and real campaign performance may differ from projections.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>
+        <a href="../index.html">ConvertToToolsOnline</a>
+        · Free online utility tools.
+      </p>
+      <p class="copyright">
+        © <span id="ppcYear"></span> ConvertToToolsOnline
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const $ = (id) => document.getElementById(id);
+
+      const ids = {
+        currency: "ppcCurrency",
+        budget: "ppcBudget",
+        cpc: "ppcCpc",
+        conversion: "ppcConversion",
+        payout: "ppcPayout",
+        approval: "ppcApproval",
+        fixed: "ppcFixed",
+        targetRoi: "ppcTargetRoi"
+      };
+
+      const defaults = {
+        currency: "USD",
+        budget: "500",
+        cpc: "0.40",
+        conversion: "3",
+        payout: "20",
+        approval: "90",
+        fixed: "25",
+        targetRoi: "25"
+      };
+
+      let latestResults = null;
+      let messageTimer = null;
+
+      function readNumber(id) {
+        const element = $(id);
+        const raw = element.value.trim();
+
+        if (raw === "") return NaN;
+
+        const parsed = Number(raw);
+
+        return Number.isFinite(parsed) ? parsed : NaN;
+      }
+
+      function getInputs() {
+        return {
+          currency: $(ids.currency).value,
+          budget: readNumber(ids.budget),
+          cpc: readNumber(ids.cpc),
+          conversion: readNumber(ids.conversion),
+          payout: readNumber(ids.payout),
+          approval: readNumber(ids.approval),
+          fixed: readNumber(ids.fixed),
+          targetRoi: readNumber(ids.targetRoi)
+        };
+      }
+
+      function validateInputs(input) {
+        const errors = [];
+
+        const requiredPositive = [
+          ["budget", "Advertising spend must be greater than zero."],
+          ["cpc", "Average CPC must be greater than zero."],
+          ["payout", "Commission per approved conversion must be greater than zero."]
+        ];
+
+        requiredPositive.forEach(([key, message]) => {
+          if (!Number.isFinite(input[key]) || input[key] <= 0) {
+            errors.push(message);
+            $(ids[key]).setAttribute("aria-invalid", "true");
+          } else {
+            $(ids[key]).setAttribute("aria-invalid", "false");
+          }
+        });
+
+        const percentages = [
+          ["conversion", "Conversion rate must be between 0 and 100."],
+          ["approval", "Approval rate must be between 0 and 100."]
+        ];
+
+        percentages.forEach(([key, message]) => {
+          if (
+            !Number.isFinite(input[key]) ||
+            input[key] < 0 ||
+            input[key] > 100
+          ) {
+            errors.push(message);
+            $(ids[key]).setAttribute("aria-invalid", "true");
+          } else {
+            $(ids[key]).setAttribute("aria-invalid", "false");
+          }
+        });
+
+        if (
+          !Number.isFinite(input.fixed) ||
+          input.fixed < 0
+        ) {
+          errors.push("Other campaign costs must be zero or greater.");
+          $(ids.fixed).setAttribute("aria-invalid", "true");
+        } else {
+          $(ids.fixed).setAttribute("aria-invalid", "false");
+        }
+
+        if (
+          !Number.isFinite(input.targetRoi) ||
+          input.targetRoi < 0 ||
+          input.targetRoi > 1000000
+        ) {
+          errors.push("Target ROI must be between 0 and 1,000,000 percent.");
+          $(ids.targetRoi).setAttribute("aria-invalid", "true");
+        } else {
+          $(ids.targetRoi).setAttribute("aria-invalid", "false");
+        }
+
+        const maxAmount = 1e12;
+
+        ["budget", "cpc", "payout", "fixed"].forEach((key) => {
+          if (Number.isFinite(input[key]) && input[key] > maxAmount) {
+            errors.push("Monetary inputs must not exceed 1,000,000,000,000.");
+            $(ids[key]).setAttribute("aria-invalid", "true");
+          }
+        });
+
+        return errors;
+      }
+
+      function formatMoney(amount, currency) {
+        if (!Number.isFinite(amount)) return "Not available";
+
+        try {
+          return new Intl.NumberFormat(undefined, {
+            style: "currency",
+            currency,
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          }).format(amount);
+        } catch (error) {
+          return currency + " " + amount.toFixed(2);
+        }
+      }
+
+      function formatNumber(value, decimals = 2) {
+        if (!Number.isFinite(value)) return "Not available";
+
+        return new Intl.NumberFormat(undefined, {
+          maximumFractionDigits: decimals,
+          minimumFractionDigits: 0
+        }).format(value);
+      }
+
+      function formatPercent(value) {
+        if (!Number.isFinite(value)) return "Not achievable";
+
+        return formatNumber(value, 2) + "%";
+      }
+
+      function formatRequiredRate(value) {
+        if (!Number.isFinite(value)) {
+          return "Not achievable with current assumptions";
+        }
+
+        if (value > 100) {
+          return "Over 100% — not feasible";
+        }
+
+        return formatPercent(value);
+      }
+
+      function formatMultiple(value) {
+        if (!Number.isFinite(value)) return "Not available";
+
+        return formatNumber(value, 2) + "×";
+      }
+
+      function calculate(input) {
+        const clicks = input.budget / input.cpc;
+
+        const conversions =
+          clicks * (input.conversion / 100);
+
+        const approvedConversions =
+          conversions * (input.approval / 100);
+
+        const revenue =
+          approvedConversions * input.payout;
+
+        const totalCosts =
+          input.budget + input.fixed;
+
+        const profit =
+          revenue - totalCosts;
+
+        const roi =
+          totalCosts > 0
+            ? (profit / totalCosts) * 100
+            : NaN;
+
+        const roas =
+          input.budget > 0
+            ? revenue / input.budget
+            : NaN;
+
+        const epc =
+          clicks > 0
+            ? revenue / clicks
+            : NaN;
+
+        const profitPerClick =
+          clicks > 0
+            ? profit / clicks
+            : NaN;
+
+        const approvalPayoutPerClick =
+          (input.approval / 100) * input.payout;
+
+        const expectedRevenuePerClick =
+          (input.conversion / 100) *
+          approvalPayoutPerClick;
+
+        const breakEvenConversionRate =
+          approvalPayoutPerClick > 0 && clicks > 0
+            ? (totalCosts / (clicks * approvalPayoutPerClick)) * 100
+            : Infinity;
+
+        /*
+          Assumes the advertising budget is fixed. Increasing CPC reduces
+          the number of clicks bought for that budget.
+        */
+        const breakEvenCpc =
+          totalCosts > 0
+            ? (expectedRevenuePerClick * input.budget) / totalCosts
+            : NaN;
+
+        const targetRevenue =
+          totalCosts * (1 + input.targetRoi / 100);
+
+        const targetConversionRate =
+          approvalPayoutPerClick > 0 && clicks > 0
+            ? (targetRevenue / (clicks * approvalPayoutPerClick)) * 100
+            : Infinity;
+
+        return {
+          currency: input.currency,
+          budget: input.budget,
+          cpc: input.cpc,
+          conversionRate: input.conversion,
+          payout: input.payout,
+          approvalRate: input.approval,
+          fixedCosts: input.fixed,
+          targetRoi: input.targetRoi,
+          clicks,
+          conversions,
+          approvedConversions,
+          revenue,
+          totalCosts,
+          profit,
+          roi,
+          roas,
+          epc,
+          profitPerClick,
+          breakEvenConversionRate,
+          breakEvenCpc,
+          targetConversionRate,
+          expectedRevenuePerClick
+        };
+      }
+
+      function setText(id, value) {
+        $(id).textContent = value;
+      }
+
+      function showProfitability(result) {
+        const verdict = $("ppcVerdict");
+
+        verdict.classList.remove("is-good", "is-bad");
+
+        if (result.profit > 0.0000001) {
+          verdict.textContent = "Projected profit";
+          verdict.classList.add("is-good");
+
+          setText(
+            "ppcVerdictNote",
+            "Expected revenue exceeds the total campaign costs entered."
+          );
+        } else if (result.profit < -0.0000001) {
+          verdict.textContent = "Projected loss";
+          verdict.classList.add("is-bad");
+
+          setText(
+            "ppcVerdictNote",
+            "Expected revenue does not cover the total campaign costs entered."
+          );
+        } else {
+          verdict.textContent = "At break-even";
+
+          setText(
+            "ppcVerdictNote",
+            "Expected revenue equals the modeled campaign costs."
+          );
+        }
+      }
+
+      function renderResults(result) {
+        const currency = result.currency;
+
+        setText("ppcProfit", formatMoney(result.profit, currency));
+        setText("ppcRevenue", formatMoney(result.revenue, currency));
+        setText("ppcRoas", formatMultiple(result.roas));
+        setText("ppcRoi", formatPercent(result.roi));
+        setText("ppcEpc", formatMoney(result.epc, currency));
+
+        setText("ppcClicks", formatNumber(result.clicks, 0));
+        setText("ppcConversions", formatNumber(result.conversions, 2));
+        setText("ppcApproved", formatNumber(result.approvedConversions, 2));
+        setText("ppcTotalCosts", formatMoney(result.totalCosts, currency));
+
+        setText(
+          "ppcProfitPerClick",
+          formatMoney(result.profitPerClick, currency)
+        );
+
+        setText(
+          "ppcBreakEvenCr",
+          formatRequiredRate(result.breakEvenConversionRate)
+        );
+
+        setText(
+          "ppcBreakEvenCpc",
+          formatMoney(result.breakEvenCpc, currency)
+        );
+
+        setText(
+          "ppcTargetCr",
+          formatRequiredRate(result.targetConversionRate)
+        );
+
+        setText(
+          "ppcTargetOutput",
+          formatPercent(result.targetRoi)
+        );
+
+        showProfitability(result);
+
+        $("ppcCopy").disabled = false;
+        $("ppcDownload").disabled = false;
+
+        setText(
+          "ppcInputStatus",
+          "Forecast updated using your current assumptions."
+        );
+      }
+
+      function clearResults() {
+        latestResults = null;
+
+        [
+          "ppcProfit",
+          "ppcRevenue",
+          "ppcRoas",
+          "ppcRoi",
+          "ppcEpc",
+          "ppcClicks",
+          "ppcConversions",
+          "ppcApproved",
+          "ppcTotalCosts",
+          "ppcProfitPerClick",
+          "ppcBreakEvenCr",
+          "ppcBreakEvenCpc",
+          "ppcTargetCr",
+          "ppcTargetOutput"
+        ].forEach((id) => setText(id, "—"));
+
+        setText("ppcVerdict", "Check inputs");
+        $("ppcVerdict").classList.remove("is-good", "is-bad");
+
+        setText(
+          "ppcVerdictNote",
+          "Correct the highlighted fields to calculate a forecast."
+        );
+
+        $("ppcCopy").disabled = true;
+        $("ppcDownload").disabled = true;
+      }
+
+      function update() {
+        const input = getInputs();
+        const errors = validateInputs(input);
+
+        if (errors.length) {
+          setText("ppcError", errors.join(" "));
+          clearResults();
+
+          setText("ppcInputStatus", "Please correct the highlighted values.");
+
+          return;
+        }
+
+        setText("ppcError", "");
+
+        const result = calculate(input);
+        latestResults = result;
+
+        renderResults(result);
+      }
+
+      function summaryText(result) {
+        const currency = result.currency;
+
+        return [
+          "PPC AFFILIATE CAMPAIGN FORECAST",
+          "================================",
+          "",
+          "Currency: " + currency + " (display only; no currency conversion)",
+          "Advertising spend: " + formatMoney(result.budget, currency),
+          "Average CPC: " + formatMoney(result.cpc, currency),
+          "Conversion rate: " + formatPercent(result.conversionRate),
+          "Commission per approved conversion: " +
+            formatMoney(result.payout, currency),
+          "Approval rate: " + formatPercent(result.approvalRate),
+          "Other campaign costs: " + formatMoney(result.fixedCosts, currency),
+          "",
+          "FORECAST",
+          "--------",
+          "Estimated clicks: " + formatNumber(result.clicks, 0),
+          "Expected conversions: " + formatNumber(result.conversions, 2),
+          "Expected approved conversions: " +
+            formatNumber(result.approvedConversions, 2),
+          "Expected revenue: " + formatMoney(result.revenue, currency),
+          "Total campaign costs: " + formatMoney(result.totalCosts, currency),
+          "Estimated profit/loss: " + formatMoney(result.profit, currency),
+          "ROAS: " + formatMultiple(result.roas),
+          "ROI: " + formatPercent(result.roi),
+          "Earnings per click: " + formatMoney(result.epc, currency),
+          "Profit/loss per expected click: " +
+            formatMoney(result.profitPerClick, currency),
+          "",
+          "BREAK-EVEN AND TARGETS",
+          "----------------------",
+          "Break-even conversion rate: " +
+            formatRequiredRate(result.breakEvenConversionRate),
+          "Break-even average CPC: " +
+            formatMoney(result.breakEvenCpc, currency),
+          "Target ROI: " + formatPercent(result.targetRoi),
+          "Conversion rate required for target ROI: " +
+            formatRequiredRate(result.targetConversionRate),
+          "",
+          "Projection only. Actual outcomes may differ."
+        ].join("\n");
+      }
+
+      function csvCell(value) {
+        const text = String(value);
+
+        return '"' + text.replace(/"/g, '""') + '"';
+      }
+
+      function downloadCsv(result) {
+        const currency = result.currency;
+
+        const rows = [
+          ["Metric", "Value", "Currency or unit"],
+          ["Currency", currency, "Display setting only"],
+          ["Advertising spend", result.budget, currency],
+          ["Average CPC", result.cpc, currency],
+          ["Conversion rate", result.conversionRate, "%"],
+          ["Commission per approved conversion", result.payout, currency],
+          ["Approval rate", result.approvalRate, "%"],
+          ["Other campaign costs", result.fixedCosts, currency],
+          ["Target ROI", result.targetRoi, "%"],
+          ["Estimated clicks", result.clicks, "clicks"],
+          ["Expected conversions", result.conversions, "conversions"],
+          ["Expected approved conversions", result.approvedConversions, "conversions"],
+          ["Expected revenue", result.revenue, currency],
+          ["Total campaign costs", result.totalCosts, currency],
+          ["Estimated profit or loss", result.profit, currency],
+          ["ROAS", result.roas, "x"],
+          ["ROI", result.roi, "%"],
+          ["Earnings per click (EPC)", result.epc, currency],
+          ["Profit or loss per click", result.profitPerClick, currency],
+          ["Break-even conversion rate", result.breakEvenConversionRate, "%"],
+          ["Break-even average CPC", result.breakEvenCpc, currency],
+          ["Conversion rate required for target ROI", result.targetConversionRate, "%"]
+        ];
+
+        const csv = "\uFEFF" + rows
+          .map((row) => row.map(csvCell).join(","))
+          .join("\r\n");
+
+        const blob = new Blob([csv], {
+          type: "text/csv;charset=utf-8;"
+        });
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "ppc-affiliate-roi-report.csv";
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
+
+      function announceAction(message) {
+        setText("ppcActionStatus", message);
+
+        if (messageTimer) {
+          window.clearTimeout(messageTimer);
+        }
+
+        messageTimer = window.setTimeout(() => {
+          setText("ppcActionStatus", "");
+        }, 4000);
+      }
+
+      async function copySummary() {
+        if (!latestResults) {
+          announceAction("Enter valid inputs first.");
+          return;
+        }
+
+        const text = summaryText(latestResults);
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+            announceAction("Campaign summary copied.");
+            return;
+          }
+        } catch (error) {
+          // A fallback is attempted below.
+        }
+
+        const area = document.createElement("textarea");
+        area.value = text;
+        area.setAttribute("readonly", "");
+        area.style.position = "fixed";
+        area.style.left = "-9999px";
+        area.style.top = "0";
+
+        document.body.appendChild(area);
+        area.select();
+
+        let copied = false;
+
+        try {
+          copied = document.execCommand("copy");
+        } catch (error) {
+          copied = false;
+        }
+
+        area.remove();
+
+        announceAction(
+          copied
+            ? "Campaign summary copied."
+            : "Copy was blocked. Select and copy the summary manually."
+        );
+      }
+
+      function loadExample() {
+        const example = {
+          currency: "USD",
+          budget: "500",
+          cpc: "0.40",
+          conversion: "3",
+          payout: "20",
+          approval: "90",
+          fixed: "25",
+          targetRoi: "25"
+        };
+
+        Object.entries(example).forEach(([key, value]) => {
+          $(ids[key]).value = value;
+        });
+
+        update();
+        announceAction("Example campaign loaded.");
+      }
+
+      function resetForm() {
+        Object.entries(defaults).forEach(([key, value]) => {
+          $(ids[key]).value = value;
+        });
+
+        setText("ppcActionStatus", "");
+        update();
+      }
+
+      Object.values(ids).forEach((id) => {
+        $(id).addEventListener("input", update);
+        $(id).addEventListener("change", update);
+      });
+
+      $("ppcExample").addEventListener("click", loadExample);
+
+      $("ppcReset").addEventListener("click", () => {
+        /*
+          The reset event fires as part of the browser's form-reset operation.
+          Set defaults explicitly to ensure the results match the visible inputs.
+        */
+        window.setTimeout(resetForm, 0);
+      });
+
+      $("ppcCopy").addEventListener("click", copySummary);
+      $("ppcDownload").addEventListener("click", () => {
+        if (!latestResults) {
+          announceAction("Enter valid inputs before downloading.");
+          return;
+        }
+
+        try {
+          downloadCsv(latestResults);
+          announceAction("CSV report download started.");
+        } catch (error) {
+          announceAction("The report could not be downloaded.");
+        }
+      });
+
+      $("ppcYear").textContent = String(new Date().getFullYear());
+
+      update();
+    })();
+  </script>
+</body>
+</html>

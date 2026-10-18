@@ -1,0 +1,2614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>XML Sitemap Validator | Check Sitemap Errors and Extract URLs</title>
+  <meta name="description" content="Validate XML sitemaps and sitemap indexes, detect malformed URLs and duplicate entries, inspect lastmod dates, and export sitemap URLs or validation reports.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="canonical" href="https://converttotoolsonline.com/sitemap-xml-validator.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ConvertToToolsOnline">
+  <meta property="og:title" content="XML Sitemap Validator">
+  <meta property="og:description" content="Validate sitemap XML, find common structural errors, detect duplicate URLs, and export your sitemap entries.">
+  <meta property="og:url" content="https://converttotoolsonline.com/sitemap-xml-validator.html">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="XML Sitemap Validator">
+  <meta name="twitter:description" content="Check XML sitemap structure, find duplicate URLs, review errors, and extract URLs locally.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://converttotoolsonline.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "XML Sitemap Validator",
+        "item": "https://converttotoolsonline.com/sitemap-xml-validator.html"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      color-scheme: light;
+      --blue: #2563eb;
+      --blue-dark: #1d4ed8;
+      --purple: #7c3aed;
+      --ink: #172033;
+      --muted: #64748b;
+      --line: #e5eaf2;
+      --bg: #f7f9fc;
+      --soft-blue: #eff6ff;
+      --soft-purple: #f5f0ff;
+      --green: #087f5b;
+      --red: #b42318;
+      --amber: #92400e;
+      --radius: 17px;
+      --shadow: 0 12px 35px rgba(31, 41, 55, .06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--blue-dark);
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    textarea:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #93c5fd;
+      outline-offset: 3px;
+    }
+
+    button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    h1, h2, h3, p {
+      overflow-wrap: anywhere;
+    }
+
+    .container {
+      width: min(1080px, calc(100% - 32px));
+      margin-inline: auto;
+    }
+
+    /* Header */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, .97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 72px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -.5px;
+    }
+
+    .brand:hover {
+      color: var(--ink);
+    }
+
+    .brand-icon {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      color: white;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+    }
+
+    .brand-name span {
+      color: var(--blue);
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .main-nav a {
+      padding: 9px 12px;
+      border-radius: 10px;
+      color: #475569;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+      background: var(--soft-blue);
+      color: var(--blue-dark);
+    }
+
+    /* Breadcrumb and hero */
+
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      padding-top: 24px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .breadcrumb a {
+      color: #52627a;
+    }
+
+    .hero {
+      padding: 42px 8px 32px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 6px 12px;
+      border: 1px solid #dbeafe;
+      border-radius: 999px;
+      background: var(--soft-blue);
+      color: var(--blue-dark);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--purple);
+    }
+
+    h1 {
+      max-width: 850px;
+      margin: 0 auto 14px;
+      font-size: clamp(32px, 5vw, 48px);
+      line-height: 1.16;
+      letter-spacing: -1.6px;
+    }
+
+    .gradient-text {
+      color: var(--blue);
+      background: linear-gradient(100deg, var(--blue), var(--purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 740px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* Main tool */
+
+    .tool-card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 21px;
+      background: white;
+      box-shadow: var(--shadow);
+    }
+
+    .tool-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 22px;
+    }
+
+    .tool-heading h2 {
+      margin: 0 0 5px;
+      font-size: 23px;
+      line-height: 1.4;
+      letter-spacing: -.6px;
+    }
+
+    .tool-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .privacy-badge {
+      flex-shrink: 0;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #ecfdf5;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .input-label {
+      display: block;
+      margin-bottom: 8px;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .input-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .toolbar-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 280px;
+      padding: 15px;
+      border: 1px solid #d7dfeb;
+      border-radius: 12px;
+      background: #fcfdff;
+      color: #1e293b;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.8;
+      resize: vertical;
+      tab-size: 2;
+    }
+
+    textarea:focus {
+      border-color: var(--blue);
+      outline-offset: 2px;
+    }
+
+    .input-meta {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .help-text {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.85;
+    }
+
+    .file-input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      clip-path: inset(50%);
+      border: 0;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 43px;
+      padding: 9px 14px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 800;
+      transition:
+        transform .18s,
+        background .18s,
+        border-color .18s;
+    }
+
+    .button:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: linear-gradient(110deg, var(--blue), var(--purple));
+      color: white;
+      box-shadow: 0 5px 14px rgba(79, 70, 229, .16);
+    }
+
+    .button-primary:hover:not(:disabled) {
+      color: white;
+      opacity: .94;
+    }
+
+    .button-secondary {
+      border-color: #dbe2ec;
+      background: white;
+      color: #334155;
+    }
+
+    .button-secondary:hover:not(:disabled) {
+      border-color: #94a3b8;
+      background: #f8fafc;
+    }
+
+    .button-small {
+      min-height: 35px;
+      padding: 6px 10px;
+      font-size: 11px;
+    }
+
+    .feedback {
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .feedback:empty {
+      display: none;
+    }
+
+    .feedback.error {
+      border: 1px solid #fecaca;
+      background: #fef2f2;
+      color: var(--red);
+    }
+
+    .feedback.success {
+      border: 1px solid #bbf7d0;
+      background: #f0fdf4;
+      color: #166534;
+    }
+
+    .feedback.info {
+      border: 1px solid #dbeafe;
+      background: var(--soft-blue);
+      color: var(--blue-dark);
+    }
+
+    /* Results */
+
+    .results {
+      margin-top: 29px;
+      padding-top: 27px;
+      border-top: 1px solid var(--line);
+    }
+
+    .results[hidden] {
+      display: none;
+    }
+
+    .results-heading {
+      margin-bottom: 18px;
+    }
+
+    .results-heading h2 {
+      margin: 0 0 5px;
+      font-size: 23px;
+      line-height: 1.4;
+    }
+
+    .results-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .status-panel {
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #fff;
+    }
+
+    .status-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .status-title {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 850;
+    }
+
+    .status-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 29px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: #ecfdf5;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .status-chip.warning {
+      background: #fffbeb;
+      color: var(--amber);
+    }
+
+    .status-chip.error {
+      background: #fef2f2;
+      color: var(--red);
+    }
+
+    .status-description {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .metric {
+      min-width: 0;
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: white;
+    }
+
+    .metric-label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .metric-value {
+      display: block;
+      font-size: clamp(19px, 3vw, 27px);
+      font-weight: 850;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    .metric-value.purple {
+      color: var(--purple);
+    }
+
+    .metric-value.positive {
+      color: var(--green);
+    }
+
+    .metric-value.negative {
+      color: var(--red);
+    }
+
+    .result-section {
+      margin-top: 25px;
+    }
+
+    .result-section h3 {
+      margin: 0 0 10px;
+      font-size: 17px;
+    }
+
+    .issue-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .issue-card {
+      display: grid;
+      grid-template-columns: 85px minmax(0, 1fr);
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: white;
+    }
+
+    .issue-level {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      align-self: start;
+      padding: 5px 8px;
+      border-radius: 7px;
+      background: var(--soft-blue);
+      color: var(--blue-dark);
+      font-size: 10px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .issue-level.error {
+      background: #fef2f2;
+      color: var(--red);
+    }
+
+    .issue-level.warning {
+      background: #fffbeb;
+      color: var(--amber);
+    }
+
+    .issue-level.success {
+      background: #ecfdf5;
+      color: var(--green);
+    }
+
+    .issue-content strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 13px;
+    }
+
+    .issue-content p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .issue-value {
+      margin-top: 6px !important;
+      color: #334155 !important;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      overflow-wrap: anywhere;
+    }
+
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .result-table {
+      width: 100%;
+      min-width: 680px;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .result-table th {
+      padding: 12px 10px;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 11px;
+      font-weight: 800;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .result-table td {
+      padding: 11px 10px;
+      border-top: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .url-cell {
+      min-width: 270px;
+      max-width: 450px;
+      overflow-wrap: anywhere;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 11px;
+    }
+
+    .table-note {
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    .result-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 19px;
+    }
+
+    /* Educational content */
+
+    .content-section {
+      padding-top: 53px;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      font-size: clamp(24px, 4vw, 32px);
+      line-height: 1.3;
+      letter-spacing: -.8px;
+    }
+
+    .section-lead {
+      max-width: 790px;
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .info-card {
+      padding: 21px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #fff;
+    }
+
+    .info-icon {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      margin-bottom: 14px;
+      border-radius: 11px;
+      background: var(--soft-blue);
+      color: var(--blue-dark);
+    }
+
+    .info-card h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .formula-panel {
+      margin-top: 20px;
+      padding: 23px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: white;
+    }
+
+    .formula-panel h3 {
+      margin: 0 0 10px;
+      font-size: 17px;
+    }
+
+    .formula-panel p {
+      margin: 0 0 12px;
+      color: #52627a;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .formula {
+      display: block;
+      margin: 12px 0;
+      padding: 13px;
+      border-radius: 10px;
+      background: #f1f5f9;
+      color: #334155;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.85;
+      overflow-wrap: anywhere;
+    }
+
+    /* FAQs: final main-content section */
+
+    .faq-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 21px;
+    }
+
+    .faq-item {
+      padding: 19px 21px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: white;
+    }
+
+    .faq-item h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .faq-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    /* Footer */
+
+    .site-footer {
+      margin-top: 57px;
+      border-top: 1px solid var(--line);
+      background: white;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 30px;
+      padding-top: 29px;
+      padding-bottom: 27px;
+    }
+
+    .footer-about {
+      max-width: 540px;
+    }
+
+    .footer-about p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      padding-top: 8px;
+    }
+
+    .footer-nav a {
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .footer-nav a:hover {
+      color: var(--blue);
+    }
+
+    .footer-bottom {
+      padding: 15px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .footer-bottom p {
+      margin: 0;
+    }
+
+    @media print {
+      .site-header,
+      .breadcrumb,
+      .hero,
+      .tool-heading,
+      .input-toolbar,
+      .button-row,
+      .feedback,
+      .content-section,
+      .site-footer,
+      .result-actions {
+        display: none !important;
+      }
+
+      body {
+        color: #111;
+        background: #fff;
+      }
+
+      .container {
+        width: 100%;
+        max-width: none;
+      }
+
+      .tool-card {
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+      }
+
+      .results[hidden] {
+        display: none !important;
+      }
+
+      .results {
+        display: block !important;
+        padding: 0;
+        border: 0;
+      }
+
+      .table-scroll {
+        overflow: visible;
+      }
+
+      .result-table {
+        min-width: 0;
+        font-size: 9px;
+      }
+
+      .result-table th,
+      .result-table td {
+        padding: 5px;
+        white-space: normal;
+      }
+
+      .metric,
+      .status-panel,
+      .issue-card {
+        break-inside: avoid;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .tool-card {
+        padding: 22px;
+      }
+
+      .metric-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        width: calc(100% - 26px);
+      }
+
+      .header-inner {
+        min-height: 64px;
+        gap: 7px;
+      }
+
+      .brand {
+        gap: 7px;
+        font-size: 12px;
+        letter-spacing: -.3px;
+      }
+
+      .brand-icon {
+        width: 32px;
+        height: 32px;
+      }
+
+      .main-nav a {
+        padding: 7px 8px;
+        font-size: 11px;
+      }
+
+      .breadcrumb {
+        padding-top: 19px;
+      }
+
+      .hero {
+        padding: 33px 4px 26px;
+      }
+
+      h1 {
+        font-size: 33px;
+        letter-spacing: -1.2px;
+      }
+
+      .hero p {
+        font-size: 13px;
+      }
+
+      .tool-card {
+        padding: 17px 13px;
+        border-radius: 17px;
+      }
+
+      .tool-heading {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .tool-heading h2 {
+        font-size: 21px;
+      }
+
+      textarea {
+        min-height: 245px;
+        padding: 12px;
+        font-size: 11px;
+      }
+
+      .button-row .button,
+      .result-actions .button {
+        flex: 1 1 auto;
+      }
+
+      .metric-grid {
+        gap: 9px;
+      }
+
+      .metric {
+        padding: 12px;
+      }
+
+      .metric-value {
+        font-size: 19px;
+      }
+
+      .issue-card {
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
+
+      .issue-level {
+        justify-self: start;
+      }
+
+      .formula-panel,
+      .faq-item {
+        padding: 17px;
+      }
+
+      .content-section {
+        padding-top: 43px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="ConvertToToolsOnline homepage">
+        <span class="brand-icon" aria-hidden="true">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+            <path d="M4 7H14M11 4L14 7L11 10"
+              stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 17H10M13 14L10 17L13 20"
+              stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="brand-name">ConvertTo<span>Tools</span>Online</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="sitemap-xml-validator.html" class="active" aria-current="page">
+          Sitemap Validator
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">XML Sitemap Validator</span>
+    </nav>
+
+    <section class="hero">
+      <span class="eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        Website SEO · XML utilities
+      </span>
+
+      <h1>
+        XML Sitemap
+        <span class="gradient-text">Validator</span>
+      </h1>
+
+      <p>
+        Check sitemap XML and sitemap index files for structural problems,
+        invalid URL entries, duplicate locations, and common metadata issues.
+        Extract the URLs or export a report for your next SEO review.
+      </p>
+    </section>
+
+    <section class="tool-card" aria-labelledby="validator-title">
+      <div class="tool-heading">
+        <div>
+          <h2 id="validator-title">Validate your sitemap XML</h2>
+          <p>Paste XML or upload a file to inspect its contents.</p>
+        </div>
+        <span class="privacy-badge">Local processing</span>
+      </div>
+
+      <div class="input-toolbar">
+        <label class="input-label" for="xmlInput">Sitemap XML source</label>
+
+        <div class="toolbar-actions">
+          <label for="fileInput" class="button button-secondary button-small">
+            Upload XML
+          </label>
+
+          <input
+            id="fileInput"
+            class="file-input"
+            type="file"
+            accept=".xml,.txt,.sitemap,application/xml,text/xml,text/plain"
+          >
+
+          <button type="button" id="urlExample" class="button button-secondary button-small">
+            URL Set Example
+          </button>
+
+          <button type="button" id="indexExample" class="button button-secondary button-small">
+            Index Example
+          </button>
+        </div>
+      </div>
+
+      <textarea
+        id="xmlInput"
+        spellcheck="false"
+        autocomplete="off"
+        autocapitalize="off"
+        aria-describedby="sourceHelp"
+        placeholder="Paste your sitemap.xml or sitemap index here..."
+      ></textarea>
+
+      <div class="input-meta">
+        <span id="sourceStats">0 characters</span>
+        <span>Maximum input size: 5 MiB</span>
+      </div>
+
+      <p class="help-text" id="sourceHelp">
+        This tool validates XML pasted or uploaded locally. It does not
+        fetch live sitemap URLs, test page responses, or confirm Google indexing.
+        For remote checks, obtain the XML file first and load it here.
+      </p>
+
+      <div class="button-row">
+        <button type="button" id="validateButton" class="button button-primary">
+          Validate Sitemap
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 12H19M12 5L19 12L12 19"
+              stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <button type="button" id="copyURLs" class="button button-secondary" disabled>
+          Copy Extracted URLs
+        </button>
+
+        <button type="button" id="downloadURLs" class="button button-secondary" disabled>
+          Download URL List
+        </button>
+
+        <button type="button" id="downloadReport" class="button button-secondary" disabled>
+          Download Report CSV
+        </button>
+
+        <button type="button" id="resetButton" class="button button-secondary">
+          Clear
+        </button>
+      </div>
+
+      <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+
+      <section id="results" class="results" aria-labelledby="results-title" hidden>
+        <div class="results-heading">
+          <h2 id="results-title">Validation report</h2>
+          <p id="resultsDescription"></p>
+        </div>
+
+        <div class="status-panel">
+          <div class="status-line">
+            <h3 class="status-title" id="statusTitle">Validation complete</h3>
+            <span id="statusChip" class="status-chip">Checked</span>
+          </div>
+          <p class="status-description" id="statusDescription"></p>
+        </div>
+
+        <div class="metric-grid">
+          <div class="metric">
+            <span class="metric-label">Entries found</span>
+            <output class="metric-value" id="entryCount">0</output>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Valid URL locations</span>
+            <output class="metric-value" id="validCount">0</output>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Errors</span>
+            <output class="metric-value negative" id="errorCount">0</output>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Warnings</span>
+            <output class="metric-value purple" id="warningCount">0</output>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Duplicate locations</span>
+            <output class="metric-value" id="duplicateCount">0</output>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Namespace status</span>
+            <output class="metric-value" id="namespaceStatus">—</output>
+          </div>
+        </div>
+
+        <section class="result-section" aria-labelledby="issues-heading">
+          <h3 id="issues-heading">Findings and recommendations</h3>
+          <div id="issueList" class="issue-list"></div>
+        </section>
+
+        <section class="result-section" aria-labelledby="urls-heading">
+          <h3 id="urls-heading">Extracted URL locations</h3>
+
+          <div class="table-scroll">
+            <table class="result-table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">URL / Sitemap location</th>
+                  <th scope="col">Entry status</th>
+                  <th scope="col">Last modified</th>
+                </tr>
+              </thead>
+              <tbody id="urlRows"></tbody>
+            </table>
+          </div>
+
+          <p class="table-note" id="urlTableNote"></p>
+        </section>
+
+        <div class="notice" style="margin-top:20px">
+          <strong>Scope limitation:</strong> A valid XML structure does not prove
+          that a listed page is online, crawlable, canonical, indexable, or indexed by Google.
+          This report examines the supplied XML only.
+        </div>
+      </section>
+    </section>
+
+    <!-- Supporting content -->
+    <section class="content-section" aria-labelledby="how-title">
+      <h2 class="section-title" id="how-title">
+        How to validate an XML sitemap
+      </h2>
+
+      <p class="section-lead">
+        A sitemap provides search engines with a list of URLs that a site
+        wants them to discover. Validating the XML before deployment can help
+        you catch common formatting problems and duplicate entries.
+      </p>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <span class="info-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+              <path d="M6 3H15L19 7V21H6V3Z"
+                stroke="currentColor" stroke-width="1.8"
+                stroke-linejoin="round"/>
+              <path d="M14 3V8H19M9 12H16M9 16H16"
+                stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h3>Check XML structure</h3>
+          <p>
+            Identify malformed XML, unexpected root elements, missing
+            locations, and an absent or incorrect sitemap namespace.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <span class="info-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+              <circle cx="10.5" cy="10.5" r="6.5"
+                stroke="currentColor" stroke-width="1.8"/>
+              <path d="M15.5 15.5L21 21M7.5 10.5H13.5"
+                stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h3>Find common issues</h3>
+          <p>
+            Inspect invalid URL locations, repeated entries, mixed hosts,
+            malformed last-modified values, and out-of-range priority values.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <span class="info-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3V15M7 10L12 15L17 10M5 20H19"
+                stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h3>Extract and export URLs</h3>
+          <p>
+            Copy the discovered locations or download them as a text file.
+            Export findings as CSV for documentation and subsequent checks.
+          </p>
+        </article>
+      </div>
+
+      <div class="formula-panel">
+        <h3>Sitemap XML formats</h3>
+
+        <p>
+          Standard sitemaps use the sitemap protocol namespace
+          <code>http://www.sitemaps.org/schemas/sitemap/0.9</code>.
+          A URL set contains URL entries; a sitemap index contains references
+          to other sitemap files.
+        </p>
+
+        <code class="formula">
+          &lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+          <br>  &lt;url&gt;&lt;loc&gt;https://example.com/page.html&lt;/loc&gt;&lt;/url&gt;
+          <br>&lt;/urlset&gt;
+        </code>
+
+        <code class="formula">
+          &lt;sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+          <br>  &lt;sitemap&gt;&lt;loc&gt;https://example.com/sitemap-1.xml&lt;/loc&gt;&lt;/sitemap&gt;
+          <br>&lt;/sitemapindex&gt;
+        </code>
+
+        <p>
+          The examples above illustrate the structure. Replace the sample
+          URLs with real locations on your own website.
+        </p>
+
+        <p>
+          The official sitemap protocol permits up to 50,000 URLs per sitemap
+          and an uncompressed file size of 50 MB. This browser tool deliberately
+          limits pasted or uploaded input to 5 MiB for responsiveness. That is
+          a tool limitation, not a change to the sitemap protocol.
+        </p>
+      </div>
+    </section>
+
+    <!-- FAQs: final main-content section -->
+    <section class="content-section" aria-labelledby="faq-title">
+      <h2 class="section-title" id="faq-title">Frequently asked questions</h2>
+
+      <div class="faq-list">
+        <article class="faq-item">
+          <h3>What is an XML sitemap validator?</h3>
+          <p>
+            It checks supplied sitemap XML for formatting and common structural
+            issues. This tool also checks URL locations, duplicates, some optional
+            metadata values, and extracts the listed URLs.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Can this tool validate a sitemap index?</h3>
+          <p>
+            Yes. It recognizes both standard URL sets and sitemap index
+            documents. It checks the index entries but does not automatically
+            download and validate the child sitemap files.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Does this tool check whether every URL is online?</h3>
+          <p>
+            No. It validates URL syntax and other properties visible in the
+            XML. It does not request each page or determine its HTTP response,
+            canonical tag, robots directive, or Google indexing status.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>What is the difference between a URL set and a sitemap index?</h3>
+          <p>
+            A URL set contains individual page locations. A sitemap index
+            contains references to other sitemap files. They have different
+            root elements and different entry types.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Why are duplicate sitemap URLs a problem?</h3>
+          <p>
+            Repeated entries are usually unnecessary and may indicate a
+            sitemap generation or maintenance issue. This tool identifies
+            repeated normalized locations in the submitted document so you
+            can review and remove unintended duplicates.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Is the lastmod tag required?</h3>
+          <p>
+            It is optional in the standard sitemap format. When provided,
+            it should represent the page's actual modification date or time.
+            An inaccurate date is not useful simply because the field exists.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Can a valid sitemap guarantee that Google indexes my pages?</h3>
+          <p>
+            No. A sitemap can help search engines discover URLs, but it
+            does not guarantee crawling, indexing, or improved rankings.
+            Page quality, access, canonicalization, indexing directives,
+            and other signals also matter.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Does this tool upload my XML?</h3>
+          <p>
+            The validation runs locally in your browser, and the page's
+            tool code does not transmit the submitted XML to a validation
+            server. Website hosting, analytics, and advertising services
+            configured separately may have their own data practices.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-about">
+        <a class="brand" href="index.html">
+          <span class="brand-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+              <path d="M4 7H14M11 4L14 7L11 10"
+                stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20 17H10M13 14L10 17L13 20"
+                stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="brand-name">ConvertTo<span>Tools</span>Online</span>
+        </a>
+
+        <p>
+          ConvertToToolsOnline provides practical browser-based utilities
+          for website owners, developers, and everyday digital tasks.
+        </p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>
+          &copy; <span id="copyrightYear">2026</span>
+          ConvertToToolsOnline. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const MAX_BYTES = 5 * 1024 * 1024;
+      const MAX_VISIBLE_URLS = 300;
+      const SITEMAP_NAMESPACE =
+        "http://www.sitemaps.org/schemas/sitemap/0.9";
+      const MAX_PROTOCOL_ENTRIES = 50000;
+
+      const xmlInput = document.getElementById("xmlInput");
+      const fileInput = document.getElementById("fileInput");
+      const sourceStats = document.getElementById("sourceStats");
+      const feedback = document.getElementById("feedback");
+      const results = document.getElementById("results");
+
+      const validateButton = document.getElementById("validateButton");
+      const copyURLsButton = document.getElementById("copyURLs");
+      const downloadURLsButton = document.getElementById("downloadURLs");
+      const downloadReportButton = document.getElementById("downloadReport");
+
+      let latestReport = null;
+      let editVersion = 0;
+
+      function makeElement(tag, className, text) {
+        const element = document.createElement(tag);
+
+        if (className) {
+          element.className = className;
+        }
+
+        if (text !== undefined && text !== null) {
+          element.textContent = String(text);
+        }
+
+        return element;
+      }
+
+      function formatNumber(value) {
+        return Number(value).toLocaleString();
+      }
+
+      function showFeedback(message, type) {
+        feedback.textContent = message;
+        feedback.className = "feedback " + type;
+      }
+
+      function clearFeedback() {
+        feedback.textContent = "";
+        feedback.className = "feedback";
+      }
+
+      function invalidateResults() {
+        editVersion += 1;
+        latestReport = null;
+        results.hidden = true;
+        copyURLsButton.disabled = true;
+        downloadURLsButton.disabled = true;
+        downloadReportButton.disabled = true;
+      }
+
+      function updateSourceStats() {
+        const text = xmlInput.value;
+        const bytes = new Blob([text]).size;
+
+        sourceStats.textContent =
+          formatNumber(text.length) + " characters · " +
+          formatNumber(bytes) + " bytes";
+      }
+
+      function isValidDate(value) {
+        const text = value.trim();
+
+        if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
+          const date = new Date(text + "T00:00:00Z");
+
+          return Number.isFinite(date.getTime()) &&
+            date.toISOString().slice(0, 10) === text;
+        }
+
+        const pattern =
+          /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:\d{2})$/;
+
+        if (!pattern.test(text)) {
+          return false;
+        }
+
+        const dateTime = Date.parse(text);
+
+        if (!Number.isFinite(dateTime)) {
+          return false;
+        }
+
+        const datePrefix = text.slice(0, 10);
+        const datePart = new Date(datePrefix + "T00:00:00Z");
+
+        return Number.isFinite(datePart.getTime()) &&
+          datePart.toISOString().slice(0, 10) === datePrefix;
+      }
+
+      function findDirectChildren(element, localName) {
+        return Array.from(element.children).filter(child =>
+          child.localName === localName
+        );
+      }
+
+      function findDirectChild(element, localName) {
+        return findDirectChildren(element, localName)[0] || null;
+      }
+
+      function directText(element, localName) {
+        const child = findDirectChild(element, localName);
+        return child ? child.textContent.trim() : "";
+      }
+
+      function addIssue(report, level, title, detail, value = "", entry = "") {
+        report.issues.push({
+          level,
+          title,
+          detail,
+          value,
+          entry
+        });
+      }
+
+      function readLocation(entry, report, index, seenLocations, firstHost) {
+        const locElements = findDirectChildren(entry, "loc");
+        const label = "Entry " + index;
+
+        if (locElements.length === 0) {
+          addIssue(
+            report,
+            "error",
+            label + " is missing its loc element",
+            "Each sitemap URL entry or sitemap-index entry must have a location.",
+            "",
+            label
+          );
+
+          return {
+            entry: index,
+            loc: "",
+            valid: false,
+            duplicate: false,
+            lastmod: directText(entry, "lastmod")
+          };
+        }
+
+        if (locElements.length > 1) {
+          addIssue(
+            report,
+            "error",
+            label + " has multiple loc elements",
+            "Use exactly one direct loc element for each entry.",
+            locElements.map(element => element.textContent.trim()).join(" | "),
+            label
+          );
+        }
+
+        const loc = locElements[0].textContent.trim();
+
+        if (!loc) {
+          addIssue(
+            report,
+            "error",
+            label + " has an empty loc element",
+            "Provide an absolute HTTP or HTTPS URL.",
+            loc,
+            label
+          );
+
+          return {
+            entry: index,
+            loc,
+            valid: false,
+            duplicate: false,
+            lastmod: directText(entry, "lastmod")
+          };
+        }
+
+        if (/\s/.test(loc)) {
+          addIssue(
+            report,
+            "error",
+            label + " contains whitespace in its URL",
+            "Whitespace in URL locations should be properly percent-encoded.",
+            loc,
+            label
+          );
+
+          return {
+            entry: index,
+            loc,
+            valid: false,
+            duplicate: false,
+            lastmod: directText(entry, "lastmod")
+          };
+        }
+
+        if (loc.length > 2048) {
+          addIssue(
+            report,
+            "error",
+            label + " exceeds the 2,048-character location limit",
+            "The sitemap protocol limits URL locations to 2,048 characters.",
+            loc.slice(0, 300),
+            label
+          );
+
+          return {
+            entry: index,
+            loc,
+            valid: false,
+            duplicate: false,
+            lastmod: directText(entry, "lastmod")
+          };
+        }
+
+        let parsedURL;
+
+        try {
+          parsedURL = new URL(loc);
+        } catch (error) {
+          addIssue(
+            report,
+            "error",
+            label + " is not an absolute valid URL",
+            "Use a full URL including http:// or https://.",
+            loc,
+            label
+          );
+
+          return {
+            entry: index,
+            loc,
+            valid: false,
+            duplicate: false,
+            lastmod: directText(entry, "lastmod")
+          };
+        }
+
+        if (!["http:", "https:"].includes(parsedURL.protocol)) {
+          addIssue(
+            report,
+            "error",
+            label + " uses an unsupported URL protocol",
+            "Sitemap locations must use HTTP or HTTPS.",
+            loc,
+            label
+          );
+
+          return {
+            entry: index,
+            loc,
+            valid: false,
+            duplicate: false,
+            lastmod: directText(entry, "lastmod")
+          };
+        }
+
+        if (!parsedURL.hostname) {
+          addIssue(
+            report,
+            "error",
+            label + " has no hostname",
+            "Provide a full URL with a hostname.",
+            loc,
+            label
+          );
+
+          return {
+            entry: index,
+            loc,
+            valid: false,
+            duplicate: false,
+            lastmod: directText(entry, "lastmod")
+          };
+        }
+
+        if (parsedURL.username || parsedURL.password) {
+          addIssue(
+            report,
+            "warning",
+            label + " contains URL credentials",
+            "Sitemap locations normally should not contain embedded login credentials.",
+            loc,
+            label
+          );
+        }
+
+        if (parsedURL.hash) {
+          addIssue(
+            report,
+            "warning",
+            label + " contains a fragment",
+            "Fragments generally identify parts of a document rather than separate page URLs.",
+            loc,
+            label
+          );
+        }
+
+        const host = parsedURL.hostname.toLowerCase();
+
+        if (firstHost.value === null) {
+          firstHost.value = host;
+        } else if (host !== firstHost.value) {
+          addIssue(
+            report,
+            "warning",
+            label + " uses a different hostname",
+            "Review sitemap host consistency. Cross-site sitemap submission has specific requirements.",
+            loc,
+            label
+          );
+        }
+
+        const normalizedURL = parsedURL.href.replace(/#.*$/, "");
+        const duplicate = seenLocations.has(normalizedURL);
+
+        if (duplicate) {
+          addIssue(
+            report,
+            "error",
+            label + " duplicates a previous location",
+            "Repeated normalized locations should usually be removed from the sitemap.",
+            loc,
+            label
+          );
+        } else {
+          seenLocations.add(normalizedURL);
+        }
+
+        const lastmod = directText(entry, "lastmod");
+
+        if (findDirectChildren(entry, "lastmod").length > 1) {
+          addIssue(
+            report,
+            "warning",
+            label + " has multiple lastmod elements",
+            "Use at most one lastmod value for an entry.",
+            lastmod,
+            label
+          );
+        }
+
+        if (lastmod && !isValidDate(lastmod)) {
+          addIssue(
+            report,
+            "warning",
+            label + " has an invalid lastmod value",
+            "Use a valid date such as 2026-10-15 or a W3C-style date-time.",
+            lastmod,
+            label
+          );
+        }
+
+        const changefreq = directText(entry, "changefreq");
+
+        if (changefreq) {
+          const allowed = [
+            "always", "hourly", "daily", "weekly",
+            "monthly", "yearly", "never"
+          ];
+
+          if (!allowed.includes(changefreq)) {
+            addIssue(
+              report,
+              "warning",
+              label + " has an unsupported changefreq value",
+              "Review the Sitemap protocol's permitted changefreq values.",
+              changefreq,
+              label
+            );
+          }
+        }
+
+        const priority = directText(entry, "priority");
+
+        if (priority) {
+          const number = Number(priority);
+
+          if (
+            priority.trim() === "" ||
+            !Number.isFinite(number) ||
+            number < 0 ||
+            number > 1
+          ) {
+            addIssue(
+              report,
+              "warning",
+              label + " has an invalid priority",
+              "When included, priority must be a number from 0.0 to 1.0.",
+              priority,
+              label
+            );
+          }
+        }
+
+        return {
+          entry: index,
+          loc,
+          valid: true,
+          duplicate,
+          lastmod
+        };
+      }
+
+      function inspectXML(source) {
+        const report = {
+          rootType: "",
+          namespaceOK: false,
+          entries: [],
+          issues: [],
+          fatal: false
+        };
+
+        const bytes = new Blob([source]).size;
+
+        if (bytes > MAX_BYTES) {
+          addIssue(
+            report,
+            "error",
+            "Input exceeds the browser tool limit",
+            "This tool accepts up to 5 MiB of pasted or uploaded XML.",
+            formatNumber(bytes) + " bytes"
+          );
+          report.fatal = true;
+          return report;
+        }
+
+        if (!source.trim()) {
+          addIssue(
+            report,
+            "error",
+            "No XML was supplied",
+            "Paste a sitemap or upload an XML file before validating."
+          );
+          report.fatal = true;
+          return report;
+        }
+
+        if (/<!DOCTYPE/i.test(source)) {
+          addIssue(
+            report,
+            "warning",
+            "DOCTYPE declaration detected",
+            "This browser-only validator does not need a document type declaration. Remove it if it is unnecessary."
+          );
+        }
+
+        let doc;
+
+        try {
+          const parser = new DOMParser();
+          doc = parser.parseFromString(source, "application/xml");
+        } catch (error) {
+          addIssue(
+            report,
+            "error",
+            "The XML could not be parsed",
+            "Review the document syntax and try again."
+          );
+          report.fatal = true;
+          return report;
+        }
+
+        const parserErrors = Array.from(doc.getElementsByTagName("*"))
+          .filter(element => element.localName === "parsererror");
+
+        if (
+          parserErrors.length > 0 ||
+          !doc.documentElement ||
+          doc.documentElement.localName === "parsererror"
+        ) {
+          const detail = parserErrors.length
+            ? parserErrors[0].textContent.trim().slice(0, 500)
+            : "The document contains malformed XML.";
+
+          addIssue(
+            report,
+            "error",
+            "Malformed XML",
+            detail || "Check that all elements and attributes are correctly formed."
+          );
+
+          report.fatal = true;
+          return report;
+        }
+
+        const root = doc.documentElement;
+        const rootName = root.localName;
+        const correctNamespace = root.namespaceURI === SITEMAP_NAMESPACE;
+
+        report.namespaceOK = correctNamespace;
+
+        if (rootName === "urlset") {
+          report.rootType = "URL set";
+        } else if (rootName === "sitemapindex") {
+          report.rootType = "Sitemap index";
+        } else {
+          addIssue(
+            report,
+            "error",
+            "Unexpected root element",
+            "Expected urlset or sitemapindex as the document root.",
+            rootName
+          );
+
+          report.fatal = true;
+          return report;
+        }
+
+        if (!correctNamespace) {
+          addIssue(
+            report,
+            "error",
+            "Missing or incorrect sitemap namespace",
+            "The root element must use " + SITEMAP_NAMESPACE,
+            root.namespaceURI || "(no namespace)"
+          );
+        }
+
+        const expectedEntryName =
+          rootName === "urlset" ? "url" : "sitemap";
+
+        const unexpectedChildren = Array.from(root.children)
+          .filter(child => child.localName !== expectedEntryName);
+
+        if (unexpectedChildren.length > 0) {
+          addIssue(
+            report,
+            "error",
+            "Unexpected direct child elements",
+            "A " + rootName + " document should contain direct " +
+              expectedEntryName + " entries, not unrelated child elements.",
+            unexpectedChildren.map(child => child.localName).join(", ")
+          );
+        }
+
+        const directEntries = Array.from(root.children)
+          .filter(child => child.localName === expectedEntryName);
+
+        if (directEntries.length === 0) {
+          addIssue(
+            report,
+            "error",
+            "No sitemap entries found",
+            "Add at least one " + expectedEntryName + " entry with a loc value."
+          );
+        }
+
+        if (directEntries.length > MAX_PROTOCOL_ENTRIES) {
+          addIssue(
+            report,
+            "error",
+            "Entry count exceeds the protocol limit",
+            "A single sitemap or sitemap index can contain up to 50,000 entries.",
+            String(directEntries.length)
+          );
+        }
+
+        const seenLocations = new Set();
+        const firstHost = { value: null };
+
+        directEntries.forEach((entry, index) => {
+          const result = readLocation(
+            entry,
+            report,
+            index + 1,
+            seenLocations,
+            firstHost
+          );
+
+          report.entries.push(result);
+        });
+
+        const duplicateCount = report.entries.filter(entry =>
+          entry.duplicate
+        ).length;
+
+        const validCount = report.entries.filter(entry =>
+          entry.valid
+        ).length;
+
+        if (validCount === report.entries.length &&
+            duplicateCount === 0 &&
+            report.issues.filter(issue => issue.level === "error").length === 0) {
+          addIssue(
+            report,
+            "success",
+            "All location entries passed the basic URL checks",
+            "No missing or malformed locations were detected in the supplied entries."
+          );
+        }
+
+        return report;
+      }
+
+      function renderIssues(report) {
+        const container = document.getElementById("issueList");
+        container.replaceChildren();
+
+        if (report.issues.length === 0) {
+          const card = makeElement("article", "issue-card");
+          const badge = makeElement("span", "issue-level success", "Passed");
+          const content = makeElement("div", "issue-content");
+          content.append(
+            makeElement("strong", "", "No issues detected"),
+            makeElement("p", "", "The supplied XML passed the checks performed by this tool.")
+          );
+          card.append(badge, content);
+          container.appendChild(card);
+          return;
+        }
+
+        report.issues.forEach(issue => {
+          const card = makeElement("article", "issue-card");
+          const badge = makeElement(
+            "span",
+            "issue-level " + issue.level,
+            issue.level
+          );
+
+          const content = makeElement("div", "issue-content");
+          content.append(
+            makeElement("strong", "", issue.title),
+            makeElement("p", "", issue.detail)
+          );
+
+          if (issue.entry) {
+            const entryText = makeElement("p", "", issue.entry);
+            entryText.className = "issue-value";
+            content.appendChild(entryText);
+          }
+
+          if (issue.value) {
+            const valueText = makeElement("p", "issue-value", issue.value);
+            content.appendChild(valueText);
+          }
+
+          card.append(badge, content);
+          container.appendChild(card);
+        });
+      }
+
+      function renderURLTable(report) {
+        const tbody = document.getElementById("urlRows");
+        tbody.replaceChildren();
+
+        const visibleEntries = report.entries.slice(0, MAX_VISIBLE_URLS);
+
+        visibleEntries.forEach(entry => {
+          const row = document.createElement("tr");
+
+          const values = [
+            entry.entry,
+            entry.loc || "(missing location)",
+            entry.valid
+              ? entry.duplicate
+                ? "Duplicate"
+                : "Valid URL syntax"
+              : "Invalid / missing URL",
+            entry.lastmod || "Not provided"
+          ];
+
+          values.forEach((value, index) => {
+            const cell = document.createElement("td");
+            cell.textContent = String(value);
+
+            if (index === 1) {
+              cell.className = "url-cell";
+            }
+
+            row.appendChild(cell);
+          });
+
+          tbody.appendChild(row);
+        });
+
+        document.getElementById("urlTableNote").textContent =
+          report.entries.length > MAX_VISIBLE_URLS
+            ? "Showing the first " + MAX_VISIBLE_URLS +
+              " entries. The copy and download functions include all extracted locations."
+            : report.entries.length === 0
+              ? "No entries are available to display."
+              : "All " + formatNumber(report.entries.length) + " entries are displayed.";
+      }
+
+      function renderReport(report) {
+        const errors = report.issues.filter(issue =>
+          issue.level === "error"
+        ).length;
+
+        const warnings = report.issues.filter(issue =>
+          issue.level === "warning"
+        ).length;
+
+        const validLocations = report.entries.filter(entry =>
+          entry.valid
+        ).length;
+
+        const duplicates = report.entries.filter(entry =>
+          entry.duplicate
+        ).length;
+
+        const chip = document.getElementById("statusChip");
+
+        chip.className = "status-chip";
+
+        if (errors > 0) {
+          chip.classList.add("error");
+          chip.textContent = "Errors found";
+          document.getElementById("statusTitle").textContent =
+            "Review required";
+        } else if (warnings > 0) {
+          chip.classList.add("warning");
+          chip.textContent = "Warnings";
+          document.getElementById("statusTitle").textContent =
+            "Passed with warnings";
+        } else {
+          chip.textContent = "Basic checks passed";
+          document.getElementById("statusTitle").textContent =
+            "No structural issues detected";
+        }
+
+        document.getElementById("statusDescription").textContent =
+          report.fatal
+            ? "The document could not be fully inspected. Correct the fatal issue and validate it again."
+            : "Detected document type: " + report.rootType +
+              ". This report checks the supplied XML structure and does not test live page availability or Google indexing.";
+
+        document.getElementById("resultsDescription").textContent =
+          "Validation completed for the supplied " +
+          (report.rootType || "XML") + ".";
+
+        document.getElementById("entryCount").textContent =
+          formatNumber(report.entries.length);
+
+        document.getElementById("validCount").textContent =
+          formatNumber(validLocations);
+
+        document.getElementById("errorCount").textContent =
+          formatNumber(errors);
+
+        document.getElementById("warningCount").textContent =
+          formatNumber(warnings);
+
+        document.getElementById("duplicateCount").textContent =
+          formatNumber(duplicates);
+
+        document.getElementById("namespaceStatus").textContent =
+          report.namespaceOK ? "Correct" : "Problem";
+
+        renderIssues(report);
+        renderURLTable(report);
+
+        results.hidden = false;
+
+        copyURLsButton.disabled = report.entries.length === 0;
+        downloadURLsButton.disabled = report.entries.length === 0;
+        downloadReportButton.disabled = false;
+      }
+
+      function validateCurrentInput() {
+        clearFeedback();
+
+        const source = xmlInput.value;
+        const byteSize = new Blob([source]).size;
+
+        if (byteSize > MAX_BYTES) {
+          const report = {
+            rootType: "",
+            namespaceOK: false,
+            entries: [],
+            issues: [{
+              level: "error",
+              title: "Input exceeds the 5 MiB tool limit",
+              detail: "Use a smaller file or split the input into separate sitemap documents.",
+              value: formatNumber(byteSize) + " bytes",
+              entry: ""
+            }],
+            fatal: true
+          };
+
+          latestReport = report;
+          renderReport(report);
+          showFeedback("The input is too large for this browser tool.", "error");
+          return;
+        }
+
+        const report = inspectXML(source);
+        latestReport = report;
+
+        renderReport(report);
+
+        const errorCount = report.issues.filter(issue =>
+          issue.level === "error"
+        ).length;
+
+        const warningCount = report.issues.filter(issue =>
+          issue.level === "warning"
+        ).length;
+
+        if (errorCount > 0) {
+          showFeedback(
+            "Validation finished. " + errorCount +
+            " error(s) found. Review the findings and correct the XML.",
+            "error"
+          );
+        } else if (warningCount > 0) {
+          showFeedback(
+            "Validation finished with " + warningCount +
+            " warning(s). Review the findings before publishing.",
+            "info"
+          );
+        } else {
+          showFeedback(
+            "Validation finished. No errors or warnings were detected by these checks.",
+            "success"
+          );
+        }
+      }
+
+      function getExtractedURLs() {
+        if (!latestReport) {
+          return [];
+        }
+
+        return latestReport.entries
+          .filter(entry => entry.loc)
+          .map(entry => entry.loc);
+      }
+
+      async function copyExtractedURLs() {
+        const urls = getExtractedURLs();
+
+        if (urls.length === 0) {
+          return;
+        }
+
+        try {
+          const text = urls.join("\n");
+
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const textarea = document.createElement("textarea");
+            textarea.value = text;
+            textarea.setAttribute("readonly", "");
+            textarea.style.position = "fixed";
+            textarea.style.opacity = "0";
+
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            const copied = document.execCommand("copy");
+            textarea.remove();
+
+            if (!copied) {
+              throw new Error("Copy failed");
+            }
+          }
+
+          showFeedback(
+            formatNumber(urls.length) + " location(s) copied.",
+            "success"
+          );
+        } catch (error) {
+          showFeedback(
+            "The browser blocked clipboard access. Use Download URL List instead.",
+            "error"
+          );
+        }
+      }
+
+      function saveBlob(blob, filename) {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = filename;
+        link.style.display = "none";
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
+
+      function downloadURLList() {
+        const urls = getExtractedURLs();
+
+        if (urls.length === 0) {
+          return;
+        }
+
+        const text = urls.join("\n") + "\n";
+        const blob = new Blob([text], {
+          type: "text/plain;charset=utf-8;"
+        });
+
+        saveBlob(blob, "sitemap-urls.txt");
+
+        showFeedback(
+          "Your URL list has been prepared for download.",
+          "success"
+        );
+      }
+
+      function csvCell(value) {
+        let text = String(value ?? "");
+
+        if (/^[\s]*[=+\-@]/.test(text)) {
+          text = "'" + text;
+        }
+
+        return '"' + text.replace(/"/g, '""') + '"';
+      }
+
+      function downloadValidationReport() {
+        if (!latestReport) {
+          return;
+        }
+
+        const report = latestReport;
+
+        const rows = [
+          ["Section", "Type", "Title", "Details", "Value", "Entry"],
+          [
+            "Summary",
+            "Info",
+            "Document type",
+            report.rootType,
+            "",
+            ""
+          ],
+          [
+            "Summary",
+            report.namespaceOK ? "Success" : "Error",
+            "Sitemap namespace",
+            report.namespaceOK ? "Correct namespace" : "Missing or incorrect namespace",
+            SITEMAP_NAMESPACE,
+            ""
+          ]
+        ];
+
+        report.issues.forEach(issue => {
+          rows.push([
+            "Finding",
+            issue.level,
+            issue.title,
+            issue.detail,
+            issue.value,
+            issue.entry
+          ]);
+        });
+
+        report.entries.forEach(entry => {
+          rows.push([
+            "Location",
+            entry.valid
+              ? entry.duplicate
+                ? "Duplicate"
+                : "Valid URL syntax"
+              : "Invalid",
+            "Entry " + entry.entry,
+            "Last modified: " + (entry.lastmod || "Not provided"),
+            entry.loc,
+            String(entry.entry)
+          ]);
+        });
+
+        const csv = "\uFEFF" + rows
+          .map(row => row.map(csvCell).join(","))
+          .join("\r\n");
+
+        const blob = new Blob([csv], {
+          type: "text/csv;charset=utf-8;"
+        });
+
+        saveBlob(blob, "sitemap-validation-report.csv");
+
+        showFeedback(
+          "Your validation report has been prepared for download.",
+          "success"
+        );
+      }
+
+      function sampleURLSet() {
+        return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://example.com/</loc>
+    <lastmod>2026-10-10</lastmod>
+  </url>
+  <url>
+    <loc>https://example.com/about.html</loc>
+    <lastmod>2026-10-12</lastmod>
+  </url>
+  <url>
+    <loc>https://example.com/contact.html</loc>
+  </url>
+</urlset>`;
+      }
+
+      function sampleIndex() {
+        return `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://example.com/sitemap-pages.xml</loc>
+    <lastmod>2026-10-10</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://example.com/sitemap-tools.xml</loc>
+    <lastmod>2026-10-12</lastmod>
+  </sitemap>
+</sitemapindex>`;
+      }
+
+      function setXML(source) {
+        xmlInput.value = source;
+        updateSourceStats();
+        invalidateResults();
+        clearFeedback();
+      }
+
+      function resetTool() {
+        setXML("");
+        fileInput.value = "";
+        results.hidden = true;
+        latestReport = null;
+
+        copyURLsButton.disabled = true;
+        downloadURLsButton.disabled = true;
+        downloadReportButton.disabled = true;
+
+        clearFeedback();
+        xmlInput.focus();
+      }
+
+      xmlInput.addEventListener("input", () => {
+        updateSourceStats();
+        invalidateResults();
+        clearFeedback();
+      });
+
+      fileInput.addEventListener("change", async () => {
+        const file = fileInput.files && fileInput.files[0];
+
+        if (!file) {
+          return;
+        }
+
+        if (file.size > MAX_BYTES) {
+          showFeedback(
+            "The selected file exceeds the 5 MiB tool limit.",
+            "error"
+          );
+
+          fileInput.value = "";
+          return;
+        }
+
+        try {
+          const content = await file.text();
+
+          if (new Blob([content]).size > MAX_BYTES) {
+            throw new Error("The decoded file exceeds the tool limit.");
+          }
+
+          setXML(content);
+          showFeedback(
+            "Loaded " + file.name + ". Review the source and select Validate Sitemap.",
+            "info"
+          );
+        } catch (error) {
+          showFeedback(
+            "The file could not be read. Try a standard UTF-8 XML file.",
+            "error"
+          );
+        }
+
+        fileInput.value = "";
+      });
+
+      document.getElementById("urlExample").addEventListener("click", () => {
+        setXML(sampleURLSet());
+      });
+
+      document.getElementById("indexExample").addEventListener("click", () => {
+        setXML(sampleIndex());
+      });
+
+      validateButton.addEventListener("click", validateCurrentInput);
+      copyURLsButton.addEventListener("click", copyExtractedURLs);
+      downloadURLsButton.addEventListener("click", downloadURLList);
+      downloadReportButton.addEventListener("click", downloadValidationReport);
+      document.getElementById("resetButton").addEventListener("click", resetTool);
+
+      document.getElementById("copyrightYear").textContent =
+        String(new Date().getFullYear());
+
+      updateSourceStats();
+    })();
+  </script>
+</body>
+</html>

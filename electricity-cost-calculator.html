@@ -1,0 +1,2812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Appliance Electricity Cost Calculator | Compare Energy Usage</title>
+  <meta name="description" content="Calculate appliance electricity consumption and running costs. Compare multiple devices, estimate daily, billing-cycle and annual energy use, and export your results.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#ffffff">
+
+  <link rel="canonical" href="https://converttotoolsonline.com/appliance-electricity-cost-calculator.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ConvertToToolsOnline">
+  <meta property="og:title" content="Appliance Electricity Cost Calculator">
+  <meta property="og:description" content="Compare appliance energy usage and electricity costs using your own wattage, usage hours and tariff.">
+  <meta property="og:url" content="https://converttotoolsonline.com/appliance-electricity-cost-calculator.html">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Appliance Electricity Cost Calculator">
+  <meta name="twitter:description" content="Estimate electricity consumption, compare devices and calculate energy costs for your billing period.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://converttotoolsonline.com/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Appliance Electricity Cost Calculator",
+        "item": "https://converttotoolsonline.com/appliance-electricity-cost-calculator.html"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      color-scheme: light;
+      --blue: #2563eb;
+      --blue-dark: #1d4ed8;
+      --purple: #7c3aed;
+      --ink: #172033;
+      --muted: #64748b;
+      --line: #e5eaf2;
+      --bg: #f7f9fc;
+      --soft-blue: #eff6ff;
+      --soft-purple: #f5f0ff;
+      --green: #087f5b;
+      --red: #b42318;
+      --amber: #92400e;
+      --radius: 18px;
+      --shadow: 0 12px 35px rgba(31, 41, 55, .06);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: var(--blue-dark);
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #93c5fd;
+      outline-offset: 3px;
+    }
+
+    button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    h1, h2, h3, p {
+      overflow-wrap: anywhere;
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 32px));
+      margin-inline: auto;
+    }
+
+    /* Header */
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, .97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 72px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: -.5px;
+    }
+
+    .brand:hover {
+      color: var(--ink);
+    }
+
+    .brand-icon {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      color: #fff;
+    }
+
+    .brand-name span {
+      color: var(--blue);
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .main-nav a {
+      padding: 9px 12px;
+      border-radius: 10px;
+      color: #475569;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+      background: var(--soft-blue);
+      color: var(--blue-dark);
+    }
+
+    /* Intro */
+
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      padding-top: 24px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .breadcrumb a {
+      color: #52627a;
+    }
+
+    .hero {
+      padding: 42px 8px 32px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 6px 12px;
+      border: 1px solid #dbeafe;
+      border-radius: 999px;
+      background: var(--soft-blue);
+      color: var(--blue-dark);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--purple);
+    }
+
+    h1 {
+      max-width: 850px;
+      margin: 0 auto 14px;
+      font-size: clamp(32px, 5vw, 48px);
+      line-height: 1.16;
+      letter-spacing: -1.6px;
+    }
+
+    .gradient-text {
+      color: var(--blue);
+      background: linear-gradient(100deg, var(--blue), var(--purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 730px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* Tool */
+
+    .tool-card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 21px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .tool-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 24px;
+    }
+
+    .tool-heading h2 {
+      margin: 0 0 5px;
+      font-size: 23px;
+      line-height: 1.4;
+      letter-spacing: -.6px;
+    }
+
+    .tool-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .local-badge {
+      flex-shrink: 0;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #ecfdf5;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .section-label {
+      margin: 25px 0 13px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .section-label:first-of-type {
+      margin-top: 0;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    .field {
+      min-width: 0;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 7px;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .field input,
+    .field select {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      min-height: 46px;
+      padding: 10px 12px;
+      border: 1px solid #d7dfeb;
+      border-radius: 10px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 14px;
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--blue);
+    }
+
+    .field input[aria-invalid="true"],
+    .appliance-row input[aria-invalid="true"] {
+      border-color: var(--red);
+      background: #fff7f7;
+    }
+
+    .help {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.75;
+    }
+
+    .notice {
+      margin-top: 18px;
+      padding: 14px 16px;
+      border: 1px solid #dbeafe;
+      border-radius: 11px;
+      background: #f8fbff;
+      color: #475569;
+      font-size: 12px;
+      line-height: 1.85;
+    }
+
+    .notice strong {
+      color: #1e40af;
+    }
+
+    /* Appliance builder */
+
+    .appliance-toolbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .appliance-toolbar p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .preset-control {
+      display: flex;
+      align-items: end;
+      gap: 9px;
+      min-width: 0;
+    }
+
+    .preset-control .field {
+      min-width: 0;
+    }
+
+    .preset-control select {
+      min-width: 190px;
+    }
+
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .appliance-table,
+    .result-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .appliance-table {
+      min-width: 840px;
+    }
+
+    .result-table {
+      min-width: 700px;
+    }
+
+    .appliance-table th,
+    .result-table th {
+      padding: 12px 9px;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 11px;
+      font-weight: 800;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .appliance-table td,
+    .result-table td {
+      padding: 9px;
+      border-top: 1px solid var(--line);
+      vertical-align: middle;
+      text-align: left;
+    }
+
+    .appliance-table input {
+      width: 100%;
+      min-width: 78px;
+      min-height: 39px;
+      padding: 7px 9px;
+      border: 1px solid #d7dfeb;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 12px;
+    }
+
+    .appliance-table .device-name {
+      min-width: 130px;
+    }
+
+    .remove-button {
+      min-height: 34px;
+      padding: 6px 9px;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--red);
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .remove-button:hover:not(:disabled) {
+      background: #fef2f2;
+    }
+
+    .table-help {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    /* Buttons */
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 10px 15px;
+      border: 1px solid transparent;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 800;
+      transition:
+        transform .18s,
+        background .18s,
+        border-color .18s;
+    }
+
+    .button:hover:not(:disabled) {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      background: linear-gradient(110deg, var(--blue), var(--purple));
+      color: #fff;
+      box-shadow: 0 5px 14px rgba(79, 70, 229, .16);
+    }
+
+    .button-primary:hover:not(:disabled) {
+      color: #fff;
+      opacity: .94;
+    }
+
+    .button-secondary {
+      border-color: #dbe2ec;
+      background: #fff;
+      color: #334155;
+    }
+
+    .button-secondary:hover:not(:disabled) {
+      border-color: #94a3b8;
+      background: #f8fafc;
+    }
+
+    .feedback {
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .feedback:empty {
+      display: none;
+    }
+
+    .feedback.error {
+      border: 1px solid #fecaca;
+      background: #fef2f2;
+      color: var(--red);
+    }
+
+    .feedback.success {
+      border: 1px solid #bbf7d0;
+      background: #f0fdf4;
+      color: #166534;
+    }
+
+    .feedback.info {
+      border: 1px solid #dbeafe;
+      background: var(--soft-blue);
+      color: var(--blue-dark);
+    }
+
+    /* Results */
+
+    .results {
+      margin-top: 29px;
+      padding-top: 27px;
+      border-top: 1px solid var(--line);
+    }
+
+    .results[hidden] {
+      display: none;
+    }
+
+    .results-heading {
+      margin-bottom: 18px;
+    }
+
+    .results-heading h2 {
+      margin: 0 0 5px;
+      font-size: 23px;
+      line-height: 1.4;
+    }
+
+    .results-heading p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .summary-banner {
+      padding: 23px;
+      border: 1px solid #dbeafe;
+      border-radius: 16px;
+      background: linear-gradient(120deg, #eff6ff, #f5f3ff);
+    }
+
+    .summary-label {
+      display: block;
+      margin-bottom: 4px;
+      color: #475569;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .summary-number {
+      display: block;
+      color: var(--blue-dark);
+      font-size: clamp(31px, 5vw, 43px);
+      font-weight: 850;
+      line-height: 1.3;
+      letter-spacing: -1px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .summary-banner p {
+      margin: 8px 0 0;
+      color: #52627a;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .metric {
+      min-width: 0;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: #fff;
+    }
+
+    .metric-label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.65;
+    }
+
+    .metric-value {
+      display: block;
+      color: var(--ink);
+      font-size: clamp(16px, 2.4vw, 22px);
+      font-weight: 850;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric-value.purple {
+      color: var(--purple);
+    }
+
+    .metric-value.positive {
+      color: var(--green);
+    }
+
+    .interpretation {
+      margin-top: 16px;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .interpretation p {
+      margin: 0 0 7px;
+    }
+
+    .interpretation p:last-child {
+      margin-bottom: 0;
+    }
+
+    .interpretation strong {
+      color: var(--ink);
+    }
+
+    .results-subheading {
+      margin: 27px 0 12px;
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .result-table td {
+      white-space: nowrap;
+    }
+
+    .result-table td:first-child {
+      font-weight: 750;
+    }
+
+    .usage-bar {
+      width: 100%;
+      min-width: 65px;
+      height: 8px;
+      overflow: hidden;
+      border-radius: 99px;
+      background: #e9eef7;
+    }
+
+    .usage-bar span {
+      display: block;
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue), var(--purple));
+    }
+
+    .result-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 19px;
+    }
+
+    /* Educational content */
+
+    .content-section {
+      padding-top: 53px;
+    }
+
+    .section-title {
+      margin: 0 0 10px;
+      font-size: clamp(24px, 4vw, 32px);
+      line-height: 1.3;
+      letter-spacing: -.8px;
+    }
+
+    .section-lead {
+      max-width: 790px;
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .info-card {
+      padding: 21px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #fff;
+    }
+
+    .info-icon {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      margin-bottom: 14px;
+      border-radius: 11px;
+      background: var(--soft-blue);
+      color: var(--blue-dark);
+    }
+
+    .info-card h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .formula-panel {
+      margin-top: 20px;
+      padding: 23px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #fff;
+    }
+
+    .formula-panel h3 {
+      margin: 0 0 10px;
+      font-size: 17px;
+    }
+
+    .formula-panel p {
+      margin: 0 0 12px;
+      color: #52627a;
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .formula {
+      display: block;
+      margin: 12px 0;
+      padding: 13px;
+      border-radius: 10px;
+      background: #f1f5f9;
+      color: #334155;
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.85;
+      overflow-wrap: anywhere;
+    }
+
+    .example-table {
+      width: 100%;
+      margin: 14px 0 18px;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .example-table th,
+    .example-table td {
+      padding: 10px;
+      border: 1px solid var(--line);
+      text-align: left;
+    }
+
+    .example-table th {
+      background: #f8fafc;
+    }
+
+    /* FAQs: final main-content section */
+
+    .faq-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 21px;
+    }
+
+    .faq-item {
+      padding: 19px 21px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .faq-item h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .faq-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    /* Footer */
+
+    .site-footer {
+      margin-top: 57px;
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 30px;
+      padding-top: 29px;
+      padding-bottom: 27px;
+    }
+
+    .footer-about {
+      max-width: 540px;
+    }
+
+    .footer-about p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      padding-top: 8px;
+    }
+
+    .footer-nav a {
+      color: #64748b;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .footer-nav a:hover {
+      color: var(--blue);
+    }
+
+    .footer-bottom {
+      padding: 15px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .footer-bottom p {
+      margin: 0;
+    }
+
+    /* Printing */
+
+    @media print {
+      .site-header,
+      .breadcrumb,
+      .hero,
+      .tool-heading,
+      #settingsForm,
+      .appliance-toolbar,
+      .button-row,
+      .feedback,
+      .content-section,
+      .site-footer,
+      .result-actions {
+        display: none !important;
+      }
+
+      body {
+        color: #111;
+        background: #fff;
+      }
+
+      .container {
+        width: 100%;
+        max-width: none;
+      }
+
+      .tool-card {
+        padding: 0;
+        border: 0;
+        box-shadow: none;
+      }
+
+      .results[hidden] {
+        display: none !important;
+      }
+
+      .results {
+        display: block !important;
+        padding: 0;
+        border: 0;
+      }
+
+      .table-scroll {
+        overflow: visible;
+      }
+
+      .result-table {
+        min-width: 0;
+        font-size: 9px;
+      }
+
+      .result-table th,
+      .result-table td {
+        padding: 5px;
+        white-space: normal;
+      }
+
+      .metric,
+      .summary-banner {
+        break-inside: avoid;
+      }
+    }
+
+    /* Responsive */
+
+    @media (max-width: 760px) {
+      .tool-card {
+        padding: 22px;
+      }
+
+      .metric-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .appliance-toolbar {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        width: calc(100% - 26px);
+      }
+
+      .header-inner {
+        min-height: 64px;
+        gap: 7px;
+      }
+
+      .brand {
+        gap: 7px;
+        font-size: 12px;
+        letter-spacing: -.3px;
+      }
+
+      .brand-icon {
+        width: 32px;
+        height: 32px;
+      }
+
+      .main-nav {
+        gap: 0;
+      }
+
+      .main-nav a {
+        padding: 7px 8px;
+        font-size: 11px;
+      }
+
+      .breadcrumb {
+        padding-top: 19px;
+      }
+
+      .hero {
+        padding: 33px 4px 26px;
+      }
+
+      h1 {
+        font-size: 34px;
+        letter-spacing: -1.2px;
+      }
+
+      .hero p {
+        font-size: 13px;
+      }
+
+      .tool-card {
+        padding: 17px 13px;
+        border-radius: 17px;
+      }
+
+      .tool-heading {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .tool-heading h2 {
+        font-size: 21px;
+      }
+
+      .field-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .preset-control {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .preset-control select {
+        min-width: 0;
+      }
+
+      .button-row .button,
+      .result-actions .button {
+        flex: 1 1 auto;
+      }
+
+      .summary-banner {
+        padding: 18px;
+      }
+
+      .metric-grid {
+        gap: 9px;
+      }
+
+      .metric {
+        padding: 12px;
+      }
+
+      .metric-value {
+        font-size: 18px;
+      }
+
+      .formula-panel,
+      .faq-item {
+        padding: 17px;
+      }
+
+      .content-section {
+        padding-top: 43px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="ConvertToToolsOnline homepage">
+        <span class="brand-icon" aria-hidden="true">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+            <path d="M4 7H14M11 4L14 7L11 10"
+              stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M20 17H10M13 14L10 17L13 20"
+              stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="brand-name">ConvertTo<span>Tools</span>Online</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="appliance-electricity-cost-calculator.html"
+           class="active" aria-current="page">Electricity Cost</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">Appliance Electricity Cost Calculator</span>
+    </nav>
+
+    <section class="hero">
+      <span class="eyebrow">
+        <span class="eyebrow-dot" aria-hidden="true"></span>
+        Energy use · Home budgeting
+      </span>
+
+      <h1>
+        Appliance Electricity
+        <span class="gradient-text">Cost Calculator</span>
+      </h1>
+
+      <p>
+        Estimate how much your electrical appliances consume and cost to run.
+        Compare several devices, enter your own electricity rate, and estimate
+        the cost for your billing cycle or a full year.
+      </p>
+    </section>
+
+    <section class="tool-card" aria-labelledby="calculator-title">
+      <div class="tool-heading">
+        <div>
+          <h2 id="calculator-title">Calculate your electricity costs</h2>
+          <p>Use your appliances' actual wattage and your electricity tariff when possible.</p>
+        </div>
+        <span class="local-badge">Browser-based</span>
+      </div>
+
+      <form id="settingsForm" novalidate>
+        <h3 class="section-label">1. Electricity bill settings</h3>
+
+        <div class="field-grid">
+          <div class="field">
+            <label for="currency">Display currency</label>
+            <select id="currency" name="currency">
+              <option value="NPR">NPR — Nepalese Rupee</option>
+              <option value="USD">USD — US Dollar</option>
+              <option value="INR">INR — Indian Rupee</option>
+              <option value="EUR">EUR — Euro</option>
+              <option value="GBP">GBP — British Pound</option>
+              <option value="AUD">AUD — Australian Dollar</option>
+              <option value="CAD">CAD — Canadian Dollar</option>
+              <option value="NGN">NGN — Nigerian Naira</option>
+            </select>
+            <span class="help">
+              Select the currency used for your electricity bill. This does not convert exchange rates.
+            </span>
+          </div>
+
+          <div class="field">
+            <label for="rate">Electricity price per kWh</label>
+            <input
+              id="rate"
+              name="rate"
+              type="number"
+              min="0"
+              max="10000000"
+              step="any"
+              value="10"
+              inputmode="decimal"
+              required
+            >
+            <span class="help">
+              Enter your effective energy rate. If your tariff has tiers, use an appropriate average rate.
+            </span>
+          </div>
+
+          <div class="field">
+            <label for="cycleDays">Billing-cycle length (days)</label>
+            <input
+              id="cycleDays"
+              name="cycleDays"
+              type="number"
+              min="1"
+              max="366"
+              step="1"
+              value="30"
+              inputmode="numeric"
+              required
+            >
+            <span class="help">
+              The number of days covered by one electricity bill.
+            </span>
+          </div>
+
+          <div class="field">
+            <label for="fixedCharge">Fixed charges per bill (optional)</label>
+            <input
+              id="fixedCharge"
+              name="fixedCharge"
+              type="number"
+              min="0"
+              max="1000000000000"
+              step="any"
+              value="0"
+              inputmode="decimal"
+              required
+            >
+            <span class="help">
+              Enter fixed charges you want to include. This amount is counted once per billing cycle, not once per appliance.
+            </span>
+          </div>
+        </div>
+
+        <div class="notice">
+          <strong>Accuracy tip:</strong> The result is an estimate, not an official bill.
+          Electricity tariffs may be tiered and may include taxes, demand charges, meter fees,
+          or other adjustments. Use your actual bill and tariff rules for a more accurate estimate.
+        </div>
+
+        <h3 class="section-label">2. Add your appliances</h3>
+
+        <div class="appliance-toolbar">
+          <p id="applianceCount" aria-live="polite">0 of 12 appliances</p>
+
+          <div class="preset-control">
+            <div class="field">
+              <label for="preset">Quick example appliance</label>
+              <select id="preset">
+                <option value="led">LED bulb — illustrative 9 W</option>
+                <option value="fan">Ceiling fan — illustrative 75 W</option>
+                <option value="laptop">Laptop — illustrative 60 W</option>
+                <option value="tv">LED television — illustrative 100 W</option>
+                <option value="fridge">Refrigerator — illustrative average 150 W</option>
+                <option value="ac">Air conditioner — illustrative 1,200 W</option>
+                <option value="kettle">Electric kettle — illustrative 1,800 W</option>
+                <option value="washer">Washing machine — illustrative 500 W</option>
+                <option value="microwave">Microwave — illustrative 1,000 W</option>
+                <option value="rice">Rice cooker — illustrative 700 W</option>
+              </select>
+            </div>
+
+            <button type="button" id="addPreset" class="button button-secondary">
+              Add Example
+            </button>
+          </div>
+        </div>
+
+        <div class="table-scroll">
+          <table class="appliance-table">
+            <thead>
+              <tr>
+                <th scope="col">Appliance</th>
+                <th scope="col">Power (W)</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Hours/day</th>
+                <th scope="col">Days/cycle</th>
+                <th scope="col">Average load %</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody id="applianceRows">
+              <!-- Example rows are generated by JavaScript. -->
+            </tbody>
+          </table>
+        </div>
+
+        <p class="table-help">
+          The example wattages are illustrative starting values, not specifications for every
+          appliance. Replace them with the value on your device label or a measured average.
+          “Average load %” accounts for devices that cycle on and off; use 100% if the entered
+          wattage already represents their average power draw.
+          Days/cycle must not exceed your billing-cycle length.
+        </p>
+
+        <div class="button-row">
+          <button type="button" id="addEmpty" class="button button-secondary">
+            + Add Blank Appliance
+          </button>
+
+          <button type="submit" class="button button-primary">
+            Calculate Electricity Cost
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12H19M12 5L19 12L12 19"
+                stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+
+          <button type="button" id="reset" class="button button-secondary">
+            Reset
+          </button>
+        </div>
+      </form>
+
+      <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
+
+      <section id="results" class="results" aria-labelledby="results-title" hidden>
+        <div class="results-heading">
+          <h2 id="results-title">Your electricity cost report</h2>
+          <p id="resultsDescription"></p>
+        </div>
+
+        <div class="summary-banner">
+          <span class="summary-label">Estimated total cost per billing cycle</span>
+          <output id="cycleTotal" class="summary-number">—</output>
+          <p id="cycleExplanation"></p>
+        </div>
+
+        <div class="metric-grid">
+          <div class="metric">
+            <span class="metric-label">Energy consumed per cycle</span>
+            <output class="metric-value" id="cycleEnergy">—</output>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Average energy per day</span>
+            <output class="metric-value" id="dailyEnergy">—</output>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Estimated average 30-day cost</span>
+            <output class="metric-value purple" id="thirtyDayCost">—</output>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Estimated annual energy use</span>
+            <output class="metric-value" id="annualEnergy">—</output>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Estimated annual total cost</span>
+            <output class="metric-value purple" id="annualCost">—</output>
+          </div>
+
+          <div class="metric">
+            <span class="metric-label">Largest energy consumer</span>
+            <output class="metric-value" id="largestAppliance">—</output>
+          </div>
+        </div>
+
+        <div class="interpretation">
+          <p><strong>What this means</strong></p>
+          <p id="interpretationText"></p>
+          <p id="fixedChargeText"></p>
+        </div>
+
+        <h3 class="results-subheading">Cost and usage by appliance</h3>
+
+        <div class="table-scroll">
+          <table class="result-table">
+            <thead>
+              <tr>
+                <th scope="col">Appliance</th>
+                <th scope="col">kWh/cycle</th>
+                <th scope="col">Energy cost/cycle</th>
+                <th scope="col">Estimated annual cost</th>
+                <th scope="col">Share of usage</th>
+                <th scope="col">Relative usage</th>
+              </tr>
+            </thead>
+            <tbody id="resultRows"></tbody>
+          </table>
+        </div>
+
+        <p class="table-help">
+          Appliance costs include energy charges only. Fixed bill charges are included in
+          the total cost summary and are not arbitrarily assigned to individual devices.
+        </p>
+
+        <div class="result-actions">
+          <button type="button" id="copyReport" class="button button-secondary">
+            Copy Report
+          </button>
+
+          <button type="button" id="downloadCSV" class="button button-secondary">
+            Download CSV
+          </button>
+
+          <button type="button" id="printReport" class="button button-secondary">
+            Print / Save as PDF
+          </button>
+        </div>
+      </section>
+    </section>
+
+    <!-- Supporting educational content -->
+    <section class="content-section" aria-labelledby="how-title">
+      <h2 class="section-title" id="how-title">
+        How to calculate appliance electricity consumption
+      </h2>
+
+      <p class="section-lead">
+        An appliance's electricity use depends on its power draw, how many
+        units you operate, how long they run, and how often they are used.
+        You can use the calculator to compare lighting, computers, fans,
+        kitchen equipment, cooling appliances, and other electrical devices.
+      </p>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <span class="info-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+              <path d="M13 2L4 14H11L10 22L20 9H13L13 2Z"
+                stroke="currentColor" stroke-width="1.8"
+                stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h3>Start with watts</h3>
+          <p>
+            Check the appliance label or manufacturer's specifications.
+            Rated power may differ from actual average power consumption,
+            particularly for equipment that cycles on and off.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <span class="info-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M12 7V12L16 14" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h3>Estimate usage time</h3>
+          <p>
+            Enter the hours used on a typical usage day and the number of
+            days used in one billing cycle. Do not count the same run time twice.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <span class="info-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+              <path d="M4 19V5M4 19H21" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M7 15L11 11L14 13L20 6"
+                stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h3>Compare the result</h3>
+          <p>
+            Compare energy consumption as well as cost. The device with
+            the highest wattage is not always the device that consumes
+            the most electricity over a billing period.
+          </p>
+        </article>
+      </div>
+
+      <div class="formula-panel">
+        <h3>The electricity consumption formula</h3>
+
+        <code class="formula">
+          Energy (kWh) = Power (W) × Quantity × Hours per day × Days used × Average load fraction ÷ 1,000
+        </code>
+
+        <code class="formula">
+          Energy cost = Energy consumption (kWh) × Electricity rate per kWh
+        </code>
+
+        <p>
+          Average load fraction is your entered load percentage divided by 100.
+          For a device using its full rated power during every entered hour,
+          set the load percentage to 100%. For devices that cycle on and off,
+          an estimated average load can provide a better approximation if it
+          is not already represented by the wattage you enter.
+        </p>
+
+        <h3>Worked example</h3>
+
+        <p>
+          Suppose one 100 W device runs for 5 hours a day and is used on
+          30 days of a billing cycle, with an average load of 100%.
+        </p>
+
+        <table class="example-table">
+          <thead>
+            <tr>
+              <th scope="col">Calculation</th>
+              <th scope="col">Result</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Daily energy</td>
+              <td>100 × 5 ÷ 1,000 = 0.5 kWh</td>
+            </tr>
+            <tr>
+              <td>30-day energy</td>
+              <td>0.5 × 30 = 15 kWh</td>
+            </tr>
+            <tr>
+              <td>Energy cost at 10 currency units/kWh</td>
+              <td>15 × 10 = 150 currency units</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>
+          This illustration assumes constant 100 W power draw and excludes
+          fixed charges, taxes, and tariff tiers. Your results may differ
+          substantially if the actual operating pattern is different.
+        </p>
+      </div>
+
+      <div class="notice">
+        <strong>About real electricity bills:</strong> This calculator uses
+        a flat rate per kWh. Some electricity providers calculate charges
+        using consumption tiers, time-of-use pricing, taxes, minimum charges,
+        or other rules. Entering an average effective rate can help with
+        budgeting, but it does not reproduce every utility bill.
+      </div>
+    </section>
+
+    <!-- FAQs are the final main-content section -->
+    <section class="content-section" aria-labelledby="faq-title">
+      <h2 class="section-title" id="faq-title">Frequently asked questions</h2>
+
+      <div class="faq-list">
+        <article class="faq-item">
+          <h3>How do I calculate electricity cost for an appliance?</h3>
+          <p>
+            Multiply the appliance's power in watts by its quantity,
+            daily operating hours, days used, and average load fraction.
+            Divide by 1,000 to obtain kilowatt-hours, then multiply the
+            energy consumption by your electricity rate. This gives an
+            estimated energy charge before any separate fixed fees or taxes.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>What is a kilowatt-hour (kWh)?</h3>
+          <p>
+            A kilowatt-hour is a unit of energy. Using a 1,000-watt device
+            at its full rated power for one hour consumes 1 kWh. A 100-watt
+            device at full power for ten hours also consumes 1 kWh.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>How accurate is this appliance electricity cost calculator?</h3>
+          <p>
+            Accuracy depends on the wattage, usage hours, number of devices,
+            average load, tariff, and billing assumptions you provide.
+            Nameplate wattage may not equal actual power draw. For more
+            accurate results, measure consumption where practical and
+            use the rate structure on your electricity bill.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Why is a refrigerator's actual electricity use different from its rated wattage?</h3>
+          <p>
+            Many refrigerators cycle their compressors rather than drawing
+            the same power constantly. The hours or average-load assumptions
+            can therefore differ from their actual operating patterns.
+            A measured average or manufacturer's energy-use estimate can
+            be more suitable than assuming rated power for every hour.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Can I calculate costs for multiple appliances together?</h3>
+          <p>
+            Yes. Add a row for each device, enter its power, quantity,
+            usage time and average load, and run the calculation. The report
+            totals their estimated energy use and charges, then shows
+            each appliance's contribution to overall consumption.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Does this calculator use my electricity provider's actual tariff?</h3>
+          <p>
+            No. You enter the price per kWh and any fixed bill charge yourself.
+            If your provider uses different rates for different usage levels,
+            use a suitable effective average rate or calculate the tiers
+            separately before entering an equivalent total.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Does changing the display currency convert electricity prices?</h3>
+          <p>
+            No. Currency selection changes the formatting of the displayed
+            amounts only. There is no exchange-rate lookup or conversion.
+            Enter the tariff and fixed charges in the currency you select.
+          </p>
+        </article>
+
+        <article class="faq-item">
+          <h3>Does this tool upload my appliance data?</h3>
+          <p>
+            The calculator's arithmetic and report exports run in your
+            browser. This page's tool code does not send your inputs to a
+            calculation server. Hosting, analytics or advertising services
+            configured separately may have their own data practices.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-about">
+        <a class="brand" href="index.html">
+          <span class="brand-icon" aria-hidden="true">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+              <path d="M4 7H14M11 4L14 7L11 10"
+                stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M20 17H10M13 14L10 17L13 20"
+                stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="brand-name">ConvertTo<span>Tools</span>Online</span>
+        </a>
+
+        <p>
+          ConvertToToolsOnline provides practical online utilities for
+          everyday digital, productivity and household tasks.
+        </p>
+      </div>
+
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html">Home</a>
+        <a href="appliance-electricity-cost-calculator.html">Electricity Cost Calculator</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p>
+          &copy; <span id="copyrightYear">2026</span>
+          ConvertToToolsOnline. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const MAX_APPLIANCES = 12;
+      const MAX_POWER = 1000000;
+      const MAX_QUANTITY = 1000;
+      const MAX_HOURS = 24;
+      const MAX_MONEY = 1e12;
+
+      const settingsForm = document.getElementById("settingsForm");
+      const applianceRows = document.getElementById("applianceRows");
+      const applianceCount = document.getElementById("applianceCount");
+      const presetSelect = document.getElementById("preset");
+      const feedback = document.getElementById("feedback");
+      const results = document.getElementById("results");
+
+      const addPresetButton = document.getElementById("addPreset");
+      const addEmptyButton = document.getElementById("addEmpty");
+      const exampleButton = document.getElementById("exampleButton");
+      const resetButton = document.getElementById("reset");
+      const copyButton = document.getElementById("copyReport");
+      const downloadButton = document.getElementById("downloadCSV");
+      const printButton = document.getElementById("printReport");
+
+      const currencyInput = document.getElementById("currency");
+      const rateInput = document.getElementById("rate");
+      const cycleDaysInput = document.getElementById("cycleDays");
+      const fixedChargeInput = document.getElementById("fixedCharge");
+
+      let latestReport = null;
+
+      const presets = {
+        led: {
+          name: "LED bulb",
+          power: 9,
+          quantity: 4,
+          hours: 5,
+          load: 100
+        },
+        fan: {
+          name: "Ceiling fan",
+          power: 75,
+          quantity: 1,
+          hours: 8,
+          load: 100
+        },
+        laptop: {
+          name: "Laptop",
+          power: 60,
+          quantity: 1,
+          hours: 6,
+          load: 100
+        },
+        tv: {
+          name: "LED television",
+          power: 100,
+          quantity: 1,
+          hours: 4,
+          load: 100
+        },
+        fridge: {
+          name: "Refrigerator (example)",
+          power: 150,
+          quantity: 1,
+          hours: 24,
+          load: 35
+        },
+        ac: {
+          name: "Air conditioner (example)",
+          power: 1200,
+          quantity: 1,
+          hours: 5,
+          load: 65
+        },
+        kettle: {
+          name: "Electric kettle",
+          power: 1800,
+          quantity: 1,
+          hours: 0.25,
+          load: 100
+        },
+        washer: {
+          name: "Washing machine",
+          power: 500,
+          quantity: 1,
+          hours: 1,
+          load: 100
+        },
+        microwave: {
+          name: "Microwave",
+          power: 1000,
+          quantity: 1,
+          hours: 0.25,
+          load: 100
+        },
+        rice: {
+          name: "Rice cooker (example)",
+          power: 700,
+          quantity: 1,
+          hours: 1,
+          load: 70
+        }
+      };
+
+      function formatNumber(value, digits = 3) {
+        if (!Number.isFinite(value)) {
+          return "Not available";
+        }
+
+        if (value === 0 || Object.is(value, -0)) {
+          return "0";
+        }
+
+        return value.toLocaleString(undefined, {
+          maximumSignificantDigits: digits,
+          useGrouping: true
+        });
+      }
+
+      function formatMoney(value, currency) {
+        return new Intl.NumberFormat(undefined, {
+          style: "currency",
+          currency,
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }).format(value);
+      }
+
+      function showFeedback(message, type) {
+        feedback.textContent = message;
+        feedback.className = "feedback " + type;
+      }
+
+      function clearFeedback() {
+        feedback.textContent = "";
+        feedback.className = "feedback";
+      }
+
+      function clearInvalidStates() {
+        settingsForm.querySelectorAll("[aria-invalid='true']")
+          .forEach(element => element.removeAttribute("aria-invalid"));
+
+        applianceRows.querySelectorAll("[aria-invalid='true']")
+          .forEach(element => element.removeAttribute("aria-invalid"));
+      }
+
+      function clearResults() {
+        latestReport = null;
+        results.hidden = true;
+        copyButton.disabled = true;
+        downloadButton.disabled = true;
+        printButton.disabled = true;
+      }
+
+      function invalidateResults() {
+        if (!results.hidden) {
+          clearResults();
+          showFeedback(
+            "Your inputs changed. Calculate again to update the report.",
+            "info"
+          );
+        }
+      }
+
+      function makeElement(tag, className, text) {
+        const element = document.createElement(tag);
+
+        if (className) {
+          element.className = className;
+        }
+
+        if (text !== undefined && text !== null) {
+          element.textContent = String(text);
+        }
+
+        return element;
+      }
+
+      function createInput(label, value, minimum, maximum, step = "any") {
+        const input = document.createElement("input");
+
+        input.type = "number";
+        input.inputMode = step === "1" ? "numeric" : "decimal";
+        input.step = step;
+        input.min = String(minimum);
+        input.max = String(maximum);
+        input.value = value === undefined ? "" : String(value);
+        input.setAttribute("aria-label", label);
+        input.autocomplete = "off";
+
+        return input;
+      }
+
+      function getRows() {
+        return Array.from(applianceRows.querySelectorAll("tr"));
+      }
+
+      function getBillingDays() {
+        return Number(cycleDaysInput.value);
+      }
+
+      function updateControls() {
+        const rows = getRows();
+        const count = rows.length;
+
+        applianceCount.textContent =
+          count + " of " + MAX_APPLIANCES + " appliances";
+
+        addPresetButton.disabled = count >= MAX_APPLIANCES;
+        addEmptyButton.disabled = count >= MAX_APPLIANCES;
+
+        rows.forEach((row, index) => {
+          const remove = row.querySelector(".remove-button");
+          const nameInput = row.querySelector("[data-field='name']");
+
+          remove.disabled = count <= 1;
+          remove.setAttribute(
+            "aria-label",
+            "Remove " + (nameInput.value.trim() || ("appliance " + (index + 1)))
+          );
+        });
+      }
+
+      function createApplianceRow(data = {}) {
+        if (getRows().length >= MAX_APPLIANCES) {
+          showFeedback(
+            "You can compare up to " + MAX_APPLIANCES + " appliances at once.",
+            "error"
+          );
+          return false;
+        }
+
+        const cycleDays = getBillingDays();
+        const useDays = data.days === undefined
+          ? cycleDays
+          : data.days;
+
+        const row = document.createElement("tr");
+
+        const columns = [
+          {
+            field: "name",
+            value: data.name || "",
+            label: "Appliance name",
+            min: 0,
+            max: 0,
+            className: "device-name"
+          },
+          {
+            field: "power",
+            value: data.power === undefined ? "" : data.power,
+            label: "Power in watts",
+            min: 0,
+            max: MAX_POWER
+          },
+          {
+            field: "quantity",
+            value: data.quantity === undefined ? 1 : data.quantity,
+            label: "Quantity",
+            min: 1,
+            max: MAX_QUANTITY,
+            step: "1"
+          },
+          {
+            field: "hours",
+            value: data.hours === undefined ? "" : data.hours,
+            label: "Hours used per day",
+            min: 0,
+            max: MAX_HOURS
+          },
+          {
+            field: "days",
+            value: useDays,
+            label: "Days used per billing cycle",
+            min: 0,
+            max: 366,
+            step: "1"
+          },
+          {
+            field: "load",
+            value: data.load === undefined ? 100 : data.load,
+            label: "Average load percentage",
+            min: 0,
+            max: 100
+          }
+        ];
+
+        columns.forEach(column => {
+          const cell = document.createElement("td");
+
+          let input;
+
+          if (column.field === "name") {
+            input = document.createElement("input");
+            input.type = "text";
+            input.maxLength = 80;
+            input.autocomplete = "off";
+            input.value = column.value;
+            input.className = column.className;
+            input.setAttribute("aria-label", column.label);
+          } else {
+            input = createInput(
+              column.label,
+              column.value,
+              column.min,
+              column.max,
+              column.step || "any"
+            );
+          }
+
+          input.dataset.field = column.field;
+          cell.appendChild(input);
+          row.appendChild(cell);
+        });
+
+        const actionCell = document.createElement("td");
+        const removeButton = makeElement(
+          "button",
+          "remove-button",
+          "Remove"
+        );
+
+        removeButton.type = "button";
+        removeButton.className = "remove-button";
+
+        removeButton.addEventListener("click", () => {
+          if (getRows().length <= 1) {
+            showFeedback(
+              "At least one appliance row is required. Clear its values or use Reset.",
+              "info"
+            );
+            return;
+          }
+
+          row.remove();
+          updateControls();
+          invalidateResults();
+          clearFeedback();
+        });
+
+        actionCell.appendChild(removeButton);
+        row.appendChild(actionCell);
+        applianceRows.appendChild(row);
+
+        updateControls();
+        return true;
+      }
+
+      function addPreset(key) {
+        const preset = presets[key];
+
+        if (!preset) {
+          showFeedback("Choose a valid example appliance.", "error");
+          return;
+        }
+
+        const added = createApplianceRow({
+          ...preset,
+          days: getBillingDays()
+        });
+
+        if (added) {
+          clearFeedback();
+          invalidateResults();
+        }
+      }
+
+      function validateNumber(element, label, minimum, maximum, options = {}) {
+        const raw = element.value.trim();
+        const value = Number(raw);
+
+        if (
+          raw === "" ||
+          !Number.isFinite(value) ||
+          value < minimum ||
+          value > maximum
+        ) {
+          throw {
+            element,
+            message: label + " must be a valid number between " +
+              formatNumber(minimum) + " and " + formatNumber(maximum) + "."
+          };
+        }
+
+        if (options.integer && !Number.isInteger(value)) {
+          throw {
+            element,
+            message: label + " must be a whole number."
+          };
+        }
+
+        if (options.positive && value <= 0) {
+          throw {
+            element,
+            message: label + " must be greater than zero."
+          };
+        }
+
+        return value;
+      }
+
+      function collectInputs() {
+        clearInvalidStates();
+
+        const supportedCurrencies = [
+          "NPR", "USD", "INR", "EUR",
+          "GBP", "AUD", "CAD", "NGN"
+        ];
+
+        const currency = currencyInput.value;
+
+        if (!supportedCurrencies.includes(currency)) {
+          throw {
+            element: currencyInput,
+            message: "Choose a supported display currency."
+          };
+        }
+
+        const rate = validateNumber(
+          rateInput,
+          "Electricity rate",
+          0,
+          10000000
+        );
+
+        const cycleDays = validateNumber(
+          cycleDaysInput,
+          "Billing-cycle length",
+          1,
+          366,
+          { integer: true }
+        );
+
+        const fixedCharge = validateNumber(
+          fixedChargeInput,
+          "Fixed charges",
+          0,
+          MAX_MONEY
+        );
+
+        const sourceRows = getRows();
+
+        if (sourceRows.length < 1 || sourceRows.length > MAX_APPLIANCES) {
+          throw {
+            element: null,
+            message: "Enter between 1 and " + MAX_APPLIANCES + " appliances."
+          };
+        }
+
+        const appliances = [];
+
+        for (let index = 0; index < sourceRows.length; index += 1) {
+          const row = sourceRows[index];
+
+          const getField = field =>
+            row.querySelector("[data-field='" + field + "']");
+
+          const nameInput = getField("name");
+          const powerInput = getField("power");
+          const quantityInput = getField("quantity");
+          const hoursInput = getField("hours");
+          const daysInput = getField("days");
+          const loadInput = getField("load");
+
+          const name = nameInput.value.trim() || ("Appliance " + (index + 1));
+
+          const power = validateNumber(
+            powerInput,
+            name + " power",
+            0,
+            MAX_POWER
+          );
+
+          const quantity = validateNumber(
+            quantityInput,
+            name + " quantity",
+            1,
+            MAX_QUANTITY,
+            { integer: true, positive: true }
+          );
+
+          const hours = validateNumber(
+            hoursInput,
+            name + " hours per day",
+            0,
+            MAX_HOURS
+          );
+
+          const days = validateNumber(
+            daysInput,
+            name + " days used per billing cycle",
+            0,
+            cycleDays,
+            { integer: true }
+          );
+
+          const load = validateNumber(
+            loadInput,
+            name + " average load",
+            0,
+            100
+          );
+
+          if (
+            !Number.isFinite(power * quantity) ||
+            !Number.isFinite(power * quantity * hours)
+          ) {
+            throw {
+              element: powerInput,
+              message: name + ": these inputs exceed the supported calculation range."
+            };
+          }
+
+          appliances.push({
+            name,
+            power,
+            quantity,
+            hours,
+            days,
+            load
+          });
+        }
+
+        return {
+          currency,
+          rate,
+          cycleDays,
+          fixedCharge,
+          appliances
+        };
+      }
+
+      function calculate(data) {
+        const {
+          currency,
+          rate,
+          cycleDays,
+          fixedCharge,
+          appliances
+        } = data;
+
+        const calculatedAppliances = appliances.map(appliance => {
+          const energyKWh =
+            appliance.power *
+            appliance.quantity *
+            appliance.hours *
+            appliance.days *
+            (appliance.load / 100) / 1000;
+
+          const energyCost = energyKWh * rate;
+          const annualEnergy = energyKWh * 365 / cycleDays;
+          const annualCost = energyCost * 365 / cycleDays;
+
+          return {
+            ...appliance,
+            energyKWh,
+            energyCost,
+            annualEnergy,
+            annualCost
+          };
+        });
+
+        const totalEnergy = calculatedAppliances.reduce(
+          (sum, appliance) => sum + appliance.energyKWh,
+          0
+        );
+
+        const totalEnergyCost = calculatedAppliances.reduce(
+          (sum, appliance) => sum + appliance.energyCost,
+          0
+        );
+
+        const dailyEnergy = totalEnergy / cycleDays;
+        const annualEnergy = totalEnergy * 365 / cycleDays;
+
+        const totalCycleCost = totalEnergyCost + fixedCharge;
+        const average30DayCost = totalCycleCost * 30 / cycleDays;
+        const annualCost = totalCycleCost * 365 / cycleDays;
+
+        const largest = calculatedAppliances.reduce(
+          (current, appliance) =>
+            appliance.energyKWh > current.energyKWh ? appliance : current,
+          calculatedAppliances[0]
+        );
+
+        const checkedValues = [
+          totalEnergy,
+          totalEnergyCost,
+          dailyEnergy,
+          annualEnergy,
+          totalCycleCost,
+          average30DayCost,
+          annualCost
+        ];
+
+        if (!checkedValues.every(value =>
+          Number.isFinite(value) && Math.abs(value) <= MAX_MONEY
+        )) {
+          throw {
+            element: null,
+            message: "The totals exceed the supported numeric range. Review your appliance inputs."
+          };
+        }
+
+        const relativeRows = calculatedAppliances.map(appliance => ({
+          ...appliance,
+          share: totalEnergy > 0
+            ? appliance.energyKWh / totalEnergy * 100
+            : 0
+        }));
+
+        return {
+          currency,
+          rate,
+          cycleDays,
+          fixedCharge,
+          appliances: relativeRows,
+          totalEnergy,
+          totalEnergyCost,
+          dailyEnergy,
+          annualEnergy,
+          totalCycleCost,
+          average30DayCost,
+          annualCost,
+          largest
+        };
+      }
+
+      function setMetric(id, value, className = "") {
+        const element = document.getElementById(id);
+
+        element.textContent = value;
+        element.classList.remove("purple", "positive");
+
+        if (className) {
+          element.classList.add(className);
+        }
+      }
+
+      function renderResults(report) {
+        const {
+          currency,
+          cycleDays,
+          rate,
+          fixedCharge,
+          appliances,
+          totalEnergy,
+          totalEnergyCost,
+          dailyEnergy,
+          annualEnergy,
+          totalCycleCost,
+          average30DayCost,
+          annualCost,
+          largest
+        } = report;
+
+        setMetric("cycleTotal", formatMoney(totalCycleCost, currency));
+
+        document.getElementById("cycleExplanation").textContent =
+          formatNumber(totalEnergy) + " kWh of estimated energy use at " +
+          formatMoney(rate, currency) + " per kWh, plus " +
+          formatMoney(fixedCharge, currency) +
+          " in fixed charges per billing cycle of " + cycleDays + " days.";
+
+        setMetric("cycleEnergy", formatNumber(totalEnergy) + " kWh");
+        setMetric("dailyEnergy", formatNumber(dailyEnergy) + " kWh/day");
+        setMetric("thirtyDayCost", formatMoney(average30DayCost, currency), "purple");
+        setMetric("annualEnergy", formatNumber(annualEnergy) + " kWh");
+        setMetric("annualCost", formatMoney(annualCost, currency), "purple");
+
+        setMetric("largestAppliance", largest.energyKWh > 0
+          ? largest.name
+          : "No energy use");
+
+        document.getElementById("resultsDescription").textContent =
+          appliances.length + " appliance" +
+          (appliances.length === 1 ? "" : "s") +
+          " analyzed using a " + cycleDays +
+          "-day billing cycle and your entered energy rate.";
+
+        document.getElementById("interpretationText").textContent =
+          largest.energyKWh > 0
+            ? largest.name + " is the largest modeled energy user at " +
+              formatNumber(largest.energyKWh) +
+              " kWh per billing cycle (" +
+              formatNumber(largest.share) +
+              "% of the appliances' total estimated consumption)."
+            : "All modeled appliance usage is zero. Check hours, days used, average load and wattage.";
+
+        document.getElementById("fixedChargeText").textContent =
+          "Energy-only charges per cycle: " +
+          formatMoney(totalEnergyCost, currency) +
+          ". Fixed charges included in total: " +
+          formatMoney(fixedCharge, currency) +
+          ". The 30-day and annual figures are scaled estimates, not forecasts of future tariff changes.";
+
+        const resultRows = document.getElementById("resultRows");
+        resultRows.replaceChildren();
+
+        appliances.forEach(appliance => {
+          const tr = document.createElement("tr");
+          const values = [
+            appliance.name,
+            formatNumber(appliance.energyKWh),
+            formatMoney(appliance.energyCost, currency),
+            formatMoney(appliance.annualCost, currency),
+            formatNumber(appliance.share) + "%"
+          ];
+
+          values.forEach(value => {
+            const td = document.createElement("td");
+            td.textContent = value;
+            tr.appendChild(td);
+          });
+
+          const barCell = document.createElement("td");
+          const bar = makeElement("div", "usage-bar");
+          const fill = document.createElement("span");
+
+          fill.style.width = Math.max(
+            0,
+            Math.min(100, appliance.share)
+          ) + "%";
+
+          fill.setAttribute("aria-hidden", "true");
+          bar.setAttribute("role", "img");
+          bar.setAttribute(
+            "aria-label",
+            formatNumber(appliance.share) + "% of modeled energy consumption"
+          );
+
+          bar.appendChild(fill);
+          barCell.appendChild(bar);
+          tr.appendChild(barCell);
+          resultRows.appendChild(tr);
+        });
+      }
+
+      function calculateAndRender() {
+        clearFeedback();
+        clearInvalidStates();
+        clearResults();
+
+        try {
+          const input = collectInputs();
+          const report = calculate(input);
+
+          latestReport = report;
+          renderResults(report);
+
+          results.hidden = false;
+          copyButton.disabled = false;
+          downloadButton.disabled = false;
+          printButton.disabled = false;
+
+          showFeedback(
+            "Calculation complete. Your energy and cost breakdown is ready.",
+            "success"
+          );
+        } catch (error) {
+          if (error && error.element) {
+            error.element.setAttribute("aria-invalid", "true");
+            error.element.focus();
+            error.element.scrollIntoView({
+              behavior: "smooth",
+              block: "center"
+            });
+          }
+
+          showFeedback(
+            error && error.message
+              ? error.message
+              : "We could not calculate these values. Check your inputs and try again.",
+            "error"
+          );
+        }
+      }
+
+      function buildReportText() {
+        if (!latestReport) {
+          return "";
+        }
+
+        const r = latestReport;
+        const money = value => formatMoney(value, r.currency);
+
+        const lines = [
+          "ConvertToToolsOnline — Appliance Electricity Cost Calculator",
+          "",
+          "BILL SETTINGS",
+          "Display currency: " + r.currency,
+          "Energy rate: " + money(r.rate) + " per kWh",
+          "Billing-cycle length: " + r.cycleDays + " days",
+          "Fixed charges per bill: " + money(r.fixedCharge),
+          "",
+          "TOTALS",
+          "Energy per billing cycle: " + formatNumber(r.totalEnergy) + " kWh",
+          "Average daily energy use: " + formatNumber(r.dailyEnergy) + " kWh/day",
+          "Energy cost per billing cycle: " + money(r.totalEnergyCost),
+          "Total cost per billing cycle: " + money(r.totalCycleCost),
+          "Estimated average 30-day cost: " + money(r.average30DayCost),
+          "Estimated annual energy: " + formatNumber(r.annualEnergy) + " kWh",
+          "Estimated annual total cost: " + money(r.annualCost),
+          "",
+          "APPLIANCE BREAKDOWN"
+        ];
+
+        r.appliances.forEach((appliance, index) => {
+          lines.push(
+            "",
+            (index + 1) + ". " + appliance.name,
+            "Power: " + appliance.power + " W",
+            "Quantity: " + appliance.quantity,
+            "Hours used per day: " + appliance.hours,
+            "Days used per billing cycle: " + appliance.days,
+            "Average load: " + appliance.load + "%",
+            "Energy per billing cycle: " + formatNumber(appliance.energyKWh) + " kWh",
+            "Energy cost per billing cycle: " + money(appliance.energyCost),
+            "Estimated annual energy: " + formatNumber(appliance.annualEnergy) + " kWh",
+            "Estimated annual energy cost: " + money(appliance.annualCost),
+            "Share of modeled energy consumption: " + formatNumber(appliance.share) + "%"
+          );
+        });
+
+        lines.push(
+          "",
+          "FORMULA",
+          "Energy (kWh) = Watts × Quantity × Hours/day × Days used × Average load fraction / 1000",
+          "Energy cost = kWh × Entered rate per kWh",
+          "",
+          "Estimates use the inputs supplied. Fixed charges are included only in overall totals.",
+          "Tiered tariffs, taxes and other bill adjustments may not be fully represented.",
+          "Currency selection changes formatting only; no currency conversion occurs."
+        );
+
+        return lines.join("\n");
+      }
+
+      async function copyReport() {
+        if (!latestReport) {
+          return;
+        }
+
+        try {
+          const text = buildReportText();
+
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const textarea = document.createElement("textarea");
+
+            textarea.value = text;
+            textarea.setAttribute("readonly", "");
+            textarea.style.position = "fixed";
+            textarea.style.opacity = "0";
+
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            const copied = document.execCommand("copy");
+            textarea.remove();
+
+            if (!copied) {
+              throw new Error("Clipboard access is unavailable.");
+            }
+          }
+
+          showFeedback("Your electricity report has been copied.", "success");
+        } catch (error) {
+          showFeedback(
+            "Your browser blocked automatic copying. Download the CSV report instead.",
+            "error"
+          );
+        }
+      }
+
+      function csvCell(value) {
+        let text = String(value ?? "");
+
+        // Protect text cells from being interpreted as spreadsheet formulas.
+        if (typeof value === "string" && /^[\s]*[=+\-@]/.test(text)) {
+          text = "'" + text;
+        }
+
+        return '"' + text.replace(/"/g, '""') + '"';
+      }
+
+      function downloadCSV() {
+        if (!latestReport) {
+          return;
+        }
+
+        const r = latestReport;
+
+        const data = [
+          ["Section", "Metric", "Value", "Units"],
+          ["Bill settings", "Currency", r.currency, ""],
+          ["Bill settings", "Energy rate", r.rate, r.currency + "/kWh"],
+          ["Bill settings", "Billing-cycle length", r.cycleDays, "days"],
+          ["Bill settings", "Fixed charges per bill", r.fixedCharge, r.currency],
+          ["Totals", "Energy per cycle", r.totalEnergy, "kWh"],
+          ["Totals", "Average daily energy", r.dailyEnergy, "kWh/day"],
+          ["Totals", "Energy cost per cycle", r.totalEnergyCost, r.currency],
+          ["Totals", "Total cost per cycle", r.totalCycleCost, r.currency],
+          ["Totals", "Average 30-day cost", r.average30DayCost, r.currency],
+          ["Totals", "Estimated annual energy", r.annualEnergy, "kWh"],
+          ["Totals", "Estimated annual total cost", r.annualCost, r.currency],
+          [],
+          [
+            "Appliance",
+            "Power (W)",
+            "Quantity",
+            "Hours/day",
+            "Days/cycle",
+            "Average load (%)",
+            "Energy/cycle (kWh)",
+            "Energy cost/cycle",
+            "Annual energy (kWh)",
+            "Annual energy cost",
+            "Share of energy (%)"
+          ]
+        ];
+
+        r.appliances.forEach(appliance => {
+          data.push([
+            appliance.name,
+            appliance.power,
+            appliance.quantity,
+            appliance.hours,
+            appliance.days,
+            appliance.load,
+            appliance.energyKWh,
+            appliance.energyCost,
+            appliance.annualEnergy,
+            appliance.annualCost,
+            appliance.share
+          ]);
+        });
+
+        data.push(
+          [],
+          ["Note", "Estimates use supplied inputs. Fixed fees are included in overall totals only."],
+          ["Note", "Tariff tiers, taxes and additional adjustments may not be fully represented."],
+          ["Note", "Currency formatting only; no conversion takes place."]
+        );
+
+        const csv = "\uFEFF" + data
+          .map(row => row.map(csvCell).join(","))
+          .join("\r\n");
+
+        const blob = new Blob([csv], {
+          type: "text/csv;charset=utf-8;"
+        });
+
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "appliance-electricity-cost-report.csv";
+        link.style.display = "none";
+
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+        showFeedback("Your CSV report has been prepared for download.", "success");
+      }
+
+      function loadExample() {
+        applianceRows.replaceChildren();
+
+        const cycleDays = getBillingDays();
+
+        createApplianceRow({
+          ...presets.led,
+          days: Math.min(30, cycleDays)
+        });
+
+        createApplianceRow({
+          ...presets.fan,
+          days: Math.min(30, cycleDays)
+        });
+
+        createApplianceRow({
+          ...presets.laptop,
+          days: Math.min(20, cycleDays)
+        });
+
+        createApplianceRow({
+          ...presets.fridge,
+          days: cycleDays
+        });
+
+        clearFeedback();
+        clearResults();
+
+        showFeedback(
+          "Example appliances added. Their wattage and usage figures are illustrative estimates; replace them with your own readings.",
+          "info"
+        );
+      }
+
+      function resetCalculator() {
+        currencyInput.value = "NPR";
+        rateInput.value = "10";
+        cycleDaysInput.value = "30";
+        fixedChargeInput.value = "0";
+
+        applianceRows.replaceChildren();
+
+        createApplianceRow({
+          name: "LED bulb",
+          power: 9,
+          quantity: 4,
+          hours: 5,
+          days: 30,
+          load: 100
+        });
+
+        clearFeedback();
+        clearInvalidStates();
+        clearResults();
+        updateControls();
+      }
+
+      settingsForm.addEventListener("submit", event => {
+        event.preventDefault();
+        calculateAndRender();
+      });
+
+      addPresetButton.addEventListener("click", () => {
+        addPreset(presetSelect.value);
+      });
+
+      addEmptyButton.addEventListener("click", () => {
+        if (createApplianceRow({
+          name: "",
+          power: "",
+          quantity: 1,
+          hours: "",
+          days: getBillingDays(),
+          load: 100
+        })) {
+          clearFeedback();
+          invalidateResults();
+        }
+      });
+
+      exampleButton.addEventListener("click", loadExample);
+      resetButton.addEventListener("click", resetCalculator);
+      copyButton.addEventListener("click", copyReport);
+      downloadButton.addEventListener("click", downloadCSV);
+
+      printButton.addEventListener("click", () => {
+        if (latestReport) {
+          window.print();
+        }
+      });
+
+      settingsForm.addEventListener("input", event => {
+        const target = event.target;
+
+        if (target.matches("input, select")) {
+          target.removeAttribute("aria-invalid");
+          invalidateResults();
+        }
+      });
+
+      applianceRows.addEventListener("input", event => {
+        const target = event.target;
+
+        if (target.matches("input")) {
+          target.removeAttribute("aria-invalid");
+          invalidateResults();
+          updateControls();
+        }
+      });
+
+      document.getElementById("copyrightYear").textContent =
+        String(new Date().getFullYear());
+
+      // Example starting row: clearly identified as editable.
+      createApplianceRow({
+        name: "LED bulb",
+        power: 9,
+        quantity: 4,
+        hours: 5,
+        days: 30,
+        load: 100
+      });
+
+      createApplianceRow({
+        name: "Ceiling fan",
+        power: 75,
+        quantity: 1,
+        hours: 8,
+        days: 30,
+        load: 100
+      });
+
+      createApplianceRow({
+        name: "Laptop",
+        power: 60,
+        quantity: 1,
+        hours: 6,
+        days: 20,
+        load: 100
+      });
+
+      updateControls();
+    })();
+  </script>
+</body>
+</html>

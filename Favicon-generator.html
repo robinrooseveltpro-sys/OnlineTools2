@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Free Favicon Generator Online – Create Website & App Icons</title>
+  <meta name="description" content="Create a favicon and app icon package for free. Upload a logo or use text and emoji, customize colors and shapes, preview icon sizes, and download website icons as a ZIP file.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#f5f7fb">
+  <link rel="canonical" href="https://converttotoolsonline.com/favicon-generator.html">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free Favicon & App Icon Generator">
+  <meta property="og:description" content="Create custom website favicons and app icons online. Preview sizes and download an icon package without an account.">
+  <meta property="og:url" content="https://converttotoolsonline.com/favicon-generator.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Free Favicon Generator Online">
+  <meta name="twitter:description" content="Generate website icons, Apple touch icons, Android icons, and an installation snippet.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Free Favicon and App Icon Generator",
+    "url": "https://converttotoolsonline.com/favicon-generator.html",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "isAccessibleForFree": true,
+    "description": "A browser-based tool for designing favicons and app icons from images, text, or emoji and exporting common icon sizes."
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --surface: #fff;
+      --text: #172033;
+      --muted: #667085;
+      --border: #dce3ed;
+      --accent: #2457d6;
+      --accent-dark: #1e40af;
+      --soft: #edf3ff;
+      --radius: 16px;
+      --shadow: 0 8px 30px rgba(25, 40, 70, .065);
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 20px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    a { color: var(--accent); }
+
+    button, input, select { font: inherit; }
+
+    button { cursor: pointer; }
+
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    a:focus-visible {
+      outline: 3px solid rgba(36, 87, 214, .3);
+      outline-offset: 3px;
+    }
+
+    .site-header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: 1220px;
+      margin: auto;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand {
+      color: var(--text);
+      font-size: 1.08rem;
+      font-weight: 850;
+      letter-spacing: -.5px;
+      text-decoration: none;
+    }
+
+    .brand span { color: var(--accent); }
+
+    .header-link {
+      font-size: .9rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1220px, 100%);
+      margin: auto;
+      padding: 28px 24px 60px;
+    }
+
+    .breadcrumb {
+      margin-bottom: 17px;
+      color: var(--muted);
+      font-size: .86rem;
+    }
+
+    .breadcrumb a { text-decoration: none; }
+
+    .hero {
+      max-width: 820px;
+      margin: 0 0 25px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 8px;
+      color: var(--accent);
+      text-transform: uppercase;
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2rem, 4.4vw, 3.15rem);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+    }
+
+    .hero > p {
+      margin: 0;
+      max-width: 750px;
+      color: #596579;
+      font-size: 1.03rem;
+    }
+
+    .benefits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .benefit {
+      padding: 6px 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #fff;
+      color: #344054;
+      font-size: .81rem;
+      font-weight: 650;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      align-items: start;
+      gap: 22px;
+    }
+
+    .panel {
+      min-width: 0;
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .panel-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .panel-header h2 {
+      margin: 0;
+      font-size: 1.04rem;
+      letter-spacing: -.3px;
+    }
+
+    .panel-header p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: .83rem;
+    }
+
+    .panel-body { padding: 20px; }
+
+    .form-section {
+      margin-bottom: 25px;
+    }
+
+    .form-section:last-child { margin-bottom: 0; }
+
+    .section-heading {
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e8edf4;
+      font-size: .96rem;
+      font-weight: 800;
+    }
+
+    .field {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+
+    .field:last-child { margin-bottom: 0; }
+
+    .field > label,
+    .field > span {
+      color: #344054;
+      font-size: .85rem;
+      font-weight: 700;
+    }
+
+    input[type="text"],
+    input[type="color"],
+    select {
+      width: 100%;
+      min-width: 0;
+      min-height: 42px;
+      padding: 9px 11px;
+      border: 1px solid #cfd7e3;
+      border-radius: 9px;
+      background: #fff;
+      color: var(--text);
+    }
+
+    input[type="color"] {
+      padding: 4px;
+      cursor: pointer;
+    }
+
+    .field-hint {
+      margin: 0;
+      color: var(--muted);
+      font-size: .79rem;
+    }
+
+    .mode-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .mode-option {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .mode-option:has(input:checked) {
+      border-color: var(--accent);
+      background: var(--soft);
+    }
+
+    .mode-option input { accent-color: var(--accent); }
+
+    .mode-option strong {
+      display: block;
+      font-size: .87rem;
+    }
+
+    .mode-option small {
+      display: block;
+      color: var(--muted);
+      font-size: .75rem;
+    }
+
+    .upload-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 25px 16px;
+      border: 1.5px dashed #aebbd0;
+      border-radius: 12px;
+      background: #f9fbff;
+      text-align: center;
+    }
+
+    .upload-symbol {
+      display: grid;
+      width: 44px;
+      height: 44px;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--soft);
+      color: var(--accent);
+      font-size: 1.5rem;
+    }
+
+    .upload-area strong { font-size: .9rem; }
+
+    .upload-area small {
+      color: var(--muted);
+      font-size: .78rem;
+    }
+
+    .file-input {
+      display: none;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 40px;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 13px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      background: #fff;
+      color: #344054;
+      font-size: .86rem;
+      font-weight: 750;
+      text-decoration: none;
+      transition: background .15s, transform .15s;
+    }
+
+    .button:hover { background: #f5f7fb; }
+
+    .button:active { transform: translateY(1px); }
+
+    .button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .button.primary:hover {
+      background: var(--accent-dark);
+      border-color: var(--accent-dark);
+    }
+
+    .button.full { width: 100%; }
+
+    .button.small {
+      min-height: 34px;
+      padding: 7px 10px;
+      font-size: .8rem;
+    }
+
+    .action-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 9px;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      color: #344054;
+      font-size: .85rem;
+      cursor: pointer;
+    }
+
+    .check-row input {
+      margin-top: 4px;
+      accent-color: var(--accent);
+    }
+
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .design-settings[hidden],
+    .upload-settings[hidden] {
+      display: none !important;
+    }
+
+    .preview-top {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 9px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .preview-top h2 {
+      margin: 0;
+      font-size: 1rem;
+    }
+
+    .live-label {
+      color: #067647;
+      font-size: .8rem;
+      font-weight: 750;
+    }
+
+    .preview-content { padding: 18px; }
+
+    .large-preview {
+      display: grid;
+      min-height: 190px;
+      place-items: center;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background-color: #f6f8fc;
+      background-image:
+        linear-gradient(45deg, #e8edf5 25%, transparent 25%),
+        linear-gradient(-45deg, #e8edf5 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #e8edf5 75%),
+        linear-gradient(-45deg, transparent 75%, #e8edf5 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+    }
+
+    #mainPreview {
+      display: block;
+      width: 112px;
+      height: 112px;
+      object-fit: contain;
+      image-rendering: auto;
+      filter: drop-shadow(0 4px 9px rgba(16, 24, 40, .13));
+    }
+
+    .preview-title {
+      margin: 20px 0 9px;
+      font-size: .89rem;
+      font-weight: 800;
+    }
+
+    .size-previews {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    .size-card {
+      min-width: 0;
+      padding: 10px 6px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
+      text-align: center;
+    }
+
+    .size-card .checker {
+      display: grid;
+      height: 66px;
+      place-items: center;
+      margin-bottom: 8px;
+      background-color: #f7f9fc;
+      background-image: linear-gradient(45deg, #e7ebf2 25%, transparent 25%),
+        linear-gradient(-45deg, #e7ebf2 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #e7ebf2 75%),
+        linear-gradient(-45deg, transparent 75%, #e7ebf2 75%);
+      background-size: 12px 12px;
+      background-position: 0 0, 0 6px, 6px -6px, -6px 0;
+    }
+
+    .size-card canvas {
+      display: block;
+      image-rendering: pixelated;
+    }
+
+    .size-card strong {
+      display: block;
+      font-size: .76rem;
+    }
+
+    .size-card small {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: .7rem;
+    }
+
+    .package-list {
+      display: grid;
+      gap: 9px;
+      margin: 12px 0 17px;
+    }
+
+    .package-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: .84rem;
+    }
+
+    .package-check {
+      flex: 0 0 auto;
+      color: #067647;
+      font-weight: 900;
+    }
+
+    .snippet-box {
+      display: block;
+      width: 100%;
+      min-height: 160px;
+      padding: 12px;
+      resize: vertical;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #101828;
+      color: #e3ebff;
+      font: 12px/1.65 ui-monospace, SFMono-Regular, Consolas, monospace;
+      white-space: pre;
+      overflow-wrap: normal;
+      overflow-x: auto;
+    }
+
+    .status {
+      min-height: 22px;
+      margin-top: 12px;
+      color: #067647;
+      font-size: .83rem;
+    }
+
+    .status.error { color: #b42318; }
+
+    .privacy-note {
+      margin-top: 17px;
+      padding: 12px;
+      border-radius: 10px;
+      background: #f0f7ff;
+      color: #344d70;
+      font-size: .82rem;
+    }
+
+    .below-content {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+      gap: 22px;
+      margin-top: 30px;
+    }
+
+    .content-card {
+      min-width: 0;
+      padding: 23px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    .content-card h2 {
+      margin: 0 0 12px;
+      font-size: 1.28rem;
+      letter-spacing: -.55px;
+    }
+
+    .content-card h3 {
+      margin: 20px 0 6px;
+      font-size: 1rem;
+    }
+
+    .content-card p,
+    .content-card li {
+      color: #596579;
+      font-size: .93rem;
+    }
+
+    .content-card ol,
+    .content-card ul {
+      padding-left: 21px;
+    }
+
+    .content-card li { margin-bottom: 7px; }
+
+    .faq-item {
+      padding: 15px 0;
+      border-bottom: 1px solid #e8edf4;
+    }
+
+    .faq-item:first-of-type { padding-top: 0; }
+    .faq-item:last-child { border-bottom: 0; padding-bottom: 0; }
+
+    .faq-item h3 {
+      margin: 0 0 6px;
+      font-size: .96rem;
+    }
+
+    .faq-item p {
+      margin: 0;
+      font-size: .89rem;
+    }
+
+    .site-footer {
+      padding: 24px;
+      border-top: 1px solid var(--border);
+      background: #fff;
+      color: var(--muted);
+      text-align: center;
+      font-size: .84rem;
+    }
+
+    .site-footer a {
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    @media (max-width: 940px) {
+      .workspace,
+      .below-content {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .header-inner { padding: 14px; }
+      .container { padding: 20px 13px 38px; }
+      .panel-body, .preview-content { padding: 14px; }
+      .panel-header { padding: 15px; }
+      .size-previews { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 5px; }
+      .size-card { padding: 7px 3px; }
+      .color-grid { gap: 9px; }
+      .content-card { padding: 17px; }
+      .large-preview { min-height: 170px; }
+      .action-grid { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="https://converttotoolsonline.com/">
+        ConvertTo<span>Tools</span>Online
+      </a>
+      <a class="header-link" href="https://converttotoolsonline.com/">
+        Explore all tools →
+      </a>
+    </div>
+  </header>
+
+  <main class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="https://converttotoolsonline.com/">Home</a>
+      <span aria-hidden="true"> / </span>
+      <span>Favicon Generator</span>
+    </nav>
+
+    <section class="hero">
+      <span class="eyebrow">Free web design tool</span>
+      <h1>Favicon & App Icon Generator</h1>
+      <p>
+        Create a custom website icon from your logo, an image, text, or emoji.
+        Customize the background and shape, preview popular sizes, and download
+        a ready-to-use icon package for your website or web app.
+      </p>
+
+      <div class="benefits">
+        <span class="benefit">✓ Free to use</span>
+        <span class="benefit">✓ No signup</span>
+        <span class="benefit">✓ Live preview</span>
+        <span class="benefit">✓ Browser-based processing</span>
+      </div>
+    </section>
+
+    <section class="workspace" aria-label="Favicon creation workspace">
+      <section class="panel" aria-labelledby="settingsTitle">
+        <div class="panel-header">
+          <h2 id="settingsTitle">Design your icon</h2>
+          <p>Choose a source, customize it, then download your package.</p>
+        </div>
+
+        <div class="panel-body">
+          <div class="form-section">
+            <div class="section-heading">1. Choose an icon source</div>
+
+            <div class="mode-options">
+              <label class="mode-option">
+                <input type="radio" name="sourceMode" value="image" checked>
+                <span>
+                  <strong>Upload image</strong>
+                  <small>Use a logo or picture</small>
+                </span>
+              </label>
+
+              <label class="mode-option">
+                <input type="radio" name="sourceMode" value="text">
+                <span>
+                  <strong>Text or emoji</strong>
+                  <small>Create a simple brand icon</small>
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-section upload-settings" id="uploadSettings">
+            <div class="field">
+              <span>Upload your image</span>
+              <div class="upload-area" id="dropArea">
+                <div class="upload-symbol" aria-hidden="true">↑</div>
+                <strong id="fileName">Choose a logo or image</strong>
+                <small>PNG, JPG, WEBP or GIF · Maximum 10 MB</small>
+                <button type="button" class="button" id="chooseFileButton">
+                  Choose image
+                </button>
+                <input class="file-input" type="file" id="imageFile"
+                  accept="image/png,image/jpeg,image/webp,image/gif">
+              </div>
+              <p class="field-hint">
+                A square, high-resolution logo usually gives the cleanest result.
+                Transparent PNG logos work well.
+              </p>
+            </div>
+
+            <div class="field">
+              <label for="fitMode">Fit uploaded image</label>
+              <select id="fitMode">
+                <option value="contain">Contain — show the full logo</option>
+                <option value="cover">Cover — fill the icon area</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-section design-settings" id="textSettings" hidden>
+            <div class="field">
+              <label for="iconText">Text or emoji</label>
+              <input id="iconText" type="text" maxlength="4" value="CT"
+                placeholder="e.g. A, CT, 🚀">
+              <p class="field-hint">
+                One to three letters or a single emoji often looks best at small sizes.
+              </p>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="section-heading">2. Customize appearance</div>
+
+            <div class="color-grid">
+              <div class="field">
+                <label for="backgroundColor">Background</label>
+                <input id="backgroundColor" type="color" value="#2457d6">
+              </div>
+
+              <div class="field">
+                <label for="foregroundColor">Text color</label>
+                <input id="foregroundColor" type="color" value="#ffffff">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="shape">Icon shape</label>
+              <select id="shape">
+                <option value="square">Square</option>
+                <option value="rounded" selected>Rounded square</option>
+                <option value="circle">Circle</option>
+              </select>
+            </div>
+
+            <label class="check-row">
+              <input id="transparentBackground" type="checkbox">
+              <span>
+                Transparent background
+                <span class="field-hint" style="display:block">
+                  Useful for image logos that already contain transparency.
+                </span>
+              </span>
+            </label>
+          </div>
+
+          <div class="form-section">
+            <button type="button" class="button primary full" id="downloadButton">
+              Generate & Download Icon Package
+            </button>
+
+            <div class="action-grid" style="margin-top:9px">
+              <button type="button" class="button" id="downloadPngButton">
+                Download 512px PNG
+              </button>
+              <button type="button" class="button" id="resetButton">
+                Reset design
+              </button>
+            </div>
+
+            <div class="status" id="status" role="status" aria-live="polite"></div>
+
+            <div class="privacy-note">
+              <strong>Privacy:</strong> the generator processes your chosen image
+              in this browser. Its code does not upload your source image to a
+              server. Avoid using confidential images on shared devices.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="previewTitle">
+        <div class="preview-top">
+          <h2 id="previewTitle">Live preview</h2>
+          <span class="live-label">● Updates automatically</span>
+        </div>
+
+        <div class="preview-content">
+          <div class="large-preview">
+            <canvas id="mainPreview" width="512" height="512"
+              aria-label="Large favicon preview"></canvas>
+          </div>
+
+          <h3 class="preview-title">Popular icon sizes</h3>
+
+          <div class="size-previews">
+            <div class="size-card">
+              <div class="checker">
+                <canvas class="sizePreview" data-size="16"
+                  width="16" height="16" aria-label="16 pixel icon preview"></canvas>
+              </div>
+              <strong>16 × 16</strong>
+              <small>Small tab</small>
+            </div>
+
+            <div class="size-card">
+              <div class="checker">
+                <canvas class="sizePreview" data-size="32"
+                  width="32" height="32" aria-label="32 pixel icon preview"></canvas>
+              </div>
+              <strong>32 × 32</strong>
+              <small>Browser icon</small>
+            </div>
+
+            <div class="size-card">
+              <div class="checker">
+                <canvas class="sizePreview" data-size="48"
+                  width="48" height="48" aria-label="48 pixel icon preview"></canvas>
+              </div>
+              <strong>48 × 48</strong>
+              <small>Large favicon</small>
+            </div>
+
+            <div class="size-card">
+              <div class="checker">
+                <canvas class="sizePreview" data-size="180"
+                  width="180" height="180" aria-label="180 pixel icon preview"></canvas>
+              </div>
+              <strong>180 × 180</strong>
+              <small>Apple touch</small>
+            </div>
+          </div>
+
+          <h3 class="preview-title">What is included in the ZIP?</h3>
+
+          <div class="package-list">
+            <div class="package-item">
+              <span class="package-check">✓</span>
+              <span><strong>favicon.ico</strong> — a multi-size ICO container for common browsers.</span>
+            </div>
+            <div class="package-item">
+              <span class="package-check">✓</span>
+              <span><strong>PNG icons</strong> — 16, 32, 48, 150, 180, 192 and 512 pixel images.</span>
+            </div>
+            <div class="package-item">
+              <span class="package-check">✓</span>
+              <span><strong>site.webmanifest</strong> — manifest referencing Android-sized icons.</span>
+            </div>
+            <div class="package-item">
+              <span class="package-check">✓</span>
+              <span><strong>favicon.svg</strong> — an SVG wrapper with the generated 512px PNG embedded.</span>
+            </div>
+            <div class="package-item">
+              <span class="package-check">✓</span>
+              <span><strong>browserconfig.xml</strong> — an example Windows tile icon configuration.</span>
+            </div>
+            <div class="package-item">
+              <span class="package-check">✓</span>
+              <span><strong>README.txt</strong> — installation guidance and the HTML snippet.</span>
+            </div>
+          </div>
+
+          <h3 class="preview-title">HTML snippet for your website</h3>
+          <p class="field-hint" style="margin-bottom:9px">
+            After uploading the icon files to your site's root folder, add these tags inside the
+            <code>&lt;head&gt;</code> of your HTML page.
+          </p>
+
+          <textarea id="htmlSnippet" class="snippet-box" readonly
+            spellcheck="false" aria-label="Favicon installation HTML snippet"></textarea>
+
+          <button type="button" class="button" id="copySnippetButton"
+            style="margin-top:9px">
+            Copy HTML snippet
+          </button>
+        </div>
+      </section>
+    </section>
+
+    <section class="below-content">
+      <article class="content-card">
+        <h2>How to create a favicon for your website</h2>
+        <ol>
+          <li>Upload a square logo or switch to text and emoji mode.</li>
+          <li>Choose your background, foreground color, and icon shape.</li>
+          <li>Review the small-size previews to check that your icon remains recognizable.</li>
+          <li>Click Generate & Download Icon Package.</li>
+          <li>Extract the ZIP file into your website's public root directory.</li>
+          <li>Add the HTML icon references to the homepage's head section and check the website.</li>
+        </ol>
+
+        <h3>What is a favicon?</h3>
+        <p>
+          A favicon is a small icon associated with a website. Browsers can display
+          it in tabs, bookmarks, and other interface locations. Google may also use
+          a website's favicon in eligible organic search results, subject to its
+          published requirements and processing.
+        </p>
+
+        <h3>Which favicon size should you use?</h3>
+        <p>
+          Different platforms can use different icon sizes. This tool creates several
+          common sizes from one design. Google recommends a square favicon larger
+          than 48 × 48 pixels for better display across surfaces. Check your specific
+          platform's requirements before publishing a production app.
+        </p>
+
+        <h3>What makes a good website icon?</h3>
+        <p>
+          Simple shapes, clear contrast, and minimal text often work better than
+          detailed designs when the icon appears at a very small size. Use a logo
+          you have permission to use, and preview it at 16 × 16 pixels before
+          installing it on your site.
+        </p>
+      </article>
+
+      <article class="content-card">
+        <h2>Frequently asked questions</h2>
+
+        <div class="faq-item">
+          <h3>Is this favicon generator free?</h3>
+          <p>
+            Yes. You can design an icon, generate the package, and download the
+            assets without an account or paid export service.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Can I create a favicon without a logo?</h3>
+          <p>
+            Yes. Switch to Text or emoji mode to make a simple icon with letters,
+            numbers, or an emoji. You can customize its background and text color.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>How do I install the favicon?</h3>
+          <p>
+            Extract the files into the website's public root folder and add the
+            generated HTML snippet inside your homepage's head section. Adjust
+            file paths if you store the icons in a different folder.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Does a favicon guarantee a Google search icon?</h3>
+          <p>
+            No. Google may show a favicon when its guidelines are met, but display
+            is not guaranteed. The homepage and icon must be crawlable, and Google
+            may need time to recrawl and process changes.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Are my uploaded images sent to a server?</h3>
+          <p>
+            This page's generator code uses local browser image processing and
+            does not send your source image to a server. Be mindful of browser
+            extensions, shared-device privacy, and the way you store exported files.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Why might an icon look different in some browsers?</h3>
+          <p>
+            Browsers and operating systems can select different file formats and
+            sizes, and may cache an old icon. Check the relevant icon file paths,
+            refresh the page, and allow time for browser or search-result updates.
+          </p>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>
+      © <span id="year"></span>
+      <a href="https://converttotoolsonline.com/">ConvertToToolsOnline</a>.
+      Free online tools for everyday work.
+    </p>
+  </footer>
+
+  <script>
+    "use strict";
+
+    const $ = (selector, root = document) => root.querySelector(selector);
+    const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+
+    const els = {
+      file: $("#imageFile"),
+      fileName: $("#fileName"),
+      dropArea: $("#dropArea"),
+      uploadSettings: $("#uploadSettings"),
+      textSettings: $("#textSettings"),
+      iconText: $("#iconText"),
+      background: $("#backgroundColor"),
+      foreground: $("#foregroundColor"),
+      shape: $("#shape"),
+      transparent: $("#transparentBackground"),
+      fit: $("#fitMode"),
+      mainPreview: $("#mainPreview"),
+      snippet: $("#htmlSnippet"),
+      status: $("#status"),
+      download: $("#downloadButton"),
+      downloadPng: $("#downloadPngButton")
+    };
+
+    let sourceImage = null;
+    let sourceObjectUrl = null;
+    let imageMode = false;
+    let busy = false;
+
+    function currentMode() {
+      return $('input[name="sourceMode"]:checked').value;
+    }
+
+    function setStatus(message, isError = false) {
+      els.status.textContent = message;
+      els.status.classList.toggle("error", isError);
+    }
+
+    function currentOptions() {
+      return {
+        mode: currentMode(),
+        text: els.iconText.value.trim() || "A",
+        background: els.background.value,
+        foreground: els.foreground.value,
+        shape: els.shape.value,
+        transparent: els.transparent.checked,
+        fit: els.fit.value
+      };
+    }
+
+    function roundedRectPath(ctx, size, radius) {
+      const r = Math.min(radius, size / 2);
+
+      ctx.beginPath();
+      ctx.moveTo(r, 0);
+      ctx.lineTo(size - r, 0);
+      ctx.quadraticCurveTo(size, 0, size, r);
+      ctx.lineTo(size, size - r);
+      ctx.quadraticCurveTo(size, size, size - r, size);
+      ctx.lineTo(r, size);
+      ctx.quadraticCurveTo(0, size, 0, size - r);
+      ctx.lineTo(0, r);
+      ctx.quadraticCurveTo(0, 0, r, 0);
+      ctx.closePath();
+    }
+
+    function applyClip(ctx, size, shape) {
+      ctx.beginPath();
+
+      if (shape === "circle") {
+        ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+        ctx.closePath();
+      } else if (shape === "rounded") {
+        roundedRectPath(ctx, size, size * 0.19);
+      } else {
+        ctx.rect(0, 0, size, size);
+      }
+
+      ctx.clip();
+    }
+
+    function drawSourceImage(ctx, size, options) {
+      if (!sourceImage || !sourceImage.naturalWidth || !sourceImage.naturalHeight) {
+        return;
+      }
+
+      const iw = sourceImage.naturalWidth;
+      const ih = sourceImage.naturalHeight;
+
+      if (options.fit === "cover") {
+        const side = Math.min(iw, ih);
+        const sx = (iw - side) / 2;
+        const sy = (ih - side) / 2;
+        ctx.drawImage(sourceImage, sx, sy, side, side, 0, 0, size, size);
+      } else {
+        const scale = Math.min(size / iw, size / ih);
+        const width = iw * scale;
+        const height = ih * scale;
+        ctx.drawImage(
+          sourceImage,
+          (size - width) / 2,
+          (size - height) / 2,
+          width,
+          height
+        );
+      }
+    }
+
+    function drawTextIcon(ctx, size, options) {
+      const text = options.text;
+
+      const fontStack =
+        '"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",system-ui,sans-serif';
+
+      let fontSize = size * (text.length > 2 ? 0.43 : text.length > 1 ? 0.54 : 0.68);
+      if (/[\u{1F000}-\u{1FAFF}]/u.test(text)) fontSize = size * 0.68;
+
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      // Text may include emoji, which uses its own color glyphs.
+      // The foreground setting is applied to ordinary text.
+      ctx.fillStyle = options.foreground;
+      ctx.font = `800 ${fontSize}px ${fontStack}`;
+
+      while (text.length <= 3 && ctx.measureText(text).width > size * 0.82 && fontSize > size * 0.2) {
+        fontSize *= 0.92;
+        ctx.font = `800 ${fontSize}px ${fontStack}`;
+      }
+
+      ctx.fillText(text, size / 2, size / 2 + size * 0.025, size * 0.88);
+    }
+
+    function renderCanvas(size) {
+      const canvas = document.createElement("canvas");
+      canvas.width = size;
+      canvas.height = size;
+
+      const ctx = canvas.getContext("2d", { alpha: true });
+      if (!ctx) throw new Error("Your browser could not create an icon canvas.");
+
+      const options = currentOptions();
+
+      ctx.clearRect(0, 0, size, size);
+      ctx.save();
+      applyClip(ctx, size, options.shape);
+
+      if (!options.transparent) {
+        ctx.fillStyle = options.background;
+        ctx.fillRect(0, 0, size, size);
+      }
+
+      if (options.mode === "image") {
+        drawSourceImage(ctx, size, options);
+      } else {
+        drawTextIcon(ctx, size, options);
+      }
+
+      ctx.restore();
+      return canvas;
+    }
+
+    function canvasToBlob(canvas, type = "image/png") {
+      return new Promise((resolve, reject) => {
+        canvas.toBlob(blob => {
+          if (!blob) {
+            reject(new Error("The browser could not export this image."));
+            return;
+          }
+          resolve(blob);
+        }, type);
+      });
+    }
+
+    function updatePreview() {
+      try {
+        const main = renderCanvas(512);
+        const ctx = els.mainPreview.getContext("2d");
+        ctx.clearRect(0, 0, 512, 512);
+        ctx.drawImage(main, 0, 0);
+
+        $$(".sizePreview").forEach(displayCanvas => {
+          const size = Number(displayCanvas.dataset.size);
+          const icon = renderCanvas(size);
+          const displayCtx = displayCanvas.getContext("2d");
+          displayCtx.clearRect(0, 0, size, size);
+          displayCtx.drawImage(icon, 0, 0);
+        });
+
+        els.snippet.value = getHtmlSnippet();
+      } catch (error) {
+        setStatus(error.message || "Unable to draw the current icon.", true);
+      }
+    }
+
+    function getHtmlSnippet() {
+      return [
+        '<link rel="icon" href="/favicon.ico" sizes="any">',
+        '<link rel="icon" type="image/svg+xml" href="/favicon.svg">',
+        '<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">',
+        '<link rel="apple-touch-icon" href="/apple-touch-icon.png">',
+        '<link rel="manifest" href="/site.webmanifest">'
+      ].join("\n");
+    }
+
+    function setSourceMode() {
+      imageMode = currentMode() === "image";
+      els.uploadSettings.hidden = !imageMode;
+      els.textSettings.hidden = imageMode;
+      updatePreview();
+    }
+
+    function loadUploadedFile(file) {
+      if (!file) return;
+
+      const allowedTypes = [
+        "image/png",
+        "image/jpeg",
+        "image/webp",
+        "image/gif"
+      ];
+
+      if (!allowedTypes.includes(file.type)) {
+        setStatus("Please upload a PNG, JPG, WEBP, or GIF image.", true);
+        return;
+      }
+
+      if (file.size > 10 * 1024 * 1024) {
+        setStatus("This image is larger than 10 MB. Choose a smaller file.", true);
+        return;
+      }
+
+      if (sourceObjectUrl) {
+        URL.revokeObjectURL(sourceObjectUrl);
+      }
+
+      sourceObjectUrl = URL.createObjectURL(file);
+      const image = new Image();
+
+      image.onload = () => {
+        sourceImage = image;
+        els.fileName.textContent = file.name;
+        $('input[name="sourceMode"][value="image"]').checked = true;
+        setSourceMode();
+        setStatus("Image loaded. Customize it and download your icon package.");
+      };
+
+      image.onerror = () => {
+        sourceImage = null;
+        setStatus("The image could not be opened. Try another file.", true);
+        URL.revokeObjectURL(sourceObjectUrl);
+        sourceObjectUrl = null;
+      };
+
+      image.src = sourceObjectUrl;
+    }
+
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = filename;
+      link.style.display = "none";
+      document.body.append(link);
+      link.click();
+      link.remove();
+
+      window.setTimeout(() => URL.revokeObjectURL(url), 1500);
+    }
+
+    function makeIco(pngEntries) {
+      // Each entry contains a square PNG. Modern ICO readers accept embedded PNG data.
+      const count = pngEntries.length;
+      const headerSize = 6 + count * 16;
+      let totalSize = headerSize;
+
+      const images = pngEntries.map(entry => {
+        const bytes = new Uint8Array(entry.buffer);
+        totalSize += bytes.length;
+        return { size: entry.size, bytes };
+      });
+
+      const result = new Uint8Array(totalSize);
+      const view = new DataView(result.buffer);
+
+      view.setUint16(0, 0, true); // Reserved
+      view.setUint16(2, 1, true); // ICO file type
+      view.setUint16(4, count, true);
+
+      let imageOffset = headerSize;
+
+      images.forEach((entry, index) => {
+        const position = 6 + index * 16;
+        const sizeByte = entry.size === 256 ? 0 : entry.size;
+
+        result[position] = sizeByte;
+        result[position + 1] = sizeByte;
+        result[position + 2] = 0; // No palette
+        result[position + 3] = 0;
+
+        view.setUint16(position + 4, 1, true); // Color planes
+        view.setUint16(position + 6, 32, true); // Bits per pixel
+        view.setUint32(position + 8, entry.bytes.length, true);
+        view.setUint32(position + 12, imageOffset, true);
+
+        result.set(entry.bytes, imageOffset);
+        imageOffset += entry.bytes.length;
+      });
+
+      return new Blob([result], { type: "image/x-icon" });
+    }
+
+    function crc32(bytes) {
+      if (!crc32.table) {
+        crc32.table = new Uint32Array(256);
+
+        for (let n = 0; n < 256; n++) {
+          let c = n;
+          for (let k = 0; k < 8; k++) {
+            c = (c & 1) ? (0xedb88320 ^ (c >>> 1)) : (c >>> 1);
+          }
+          crc32.table[n] = c >>> 0;
+        }
+      }
+
+      let crc = 0xffffffff;
+      for (let i = 0; i < bytes.length; i++) {
+        crc = crc32.table[(crc ^ bytes[i]) & 0xff] ^ (crc >>> 8);
+      }
+      return (crc ^ 0xffffffff) >>> 0;
+    }
+
+    function concatBytes(parts) {
+      const total = parts.reduce((sum, part) => sum + part.length, 0);
+      const combined = new Uint8Array(total);
+      let offset = 0;
+
+      for (const part of parts) {
+        combined.set(part, offset);
+        offset += part.length;
+      }
+
+      return combined;
+    }
+
+    function zipStored(files) {
+      // Build a standard ZIP archive using STORE (no compression).
+      // This avoids loading a third-party ZIP library.
+      const encoder = new TextEncoder();
+
+      function dosDateTime(date) {
+        const year = Math.max(1980, date.getFullYear());
+        const dosTime =
+          (date.getHours() << 11) |
+          (date.getMinutes() << 5) |
+          Math.floor(date.getSeconds() / 2);
+
+        const dosDate =
+          ((year - 1980) << 9) |
+          ((date.getMonth() + 1) << 5) |
+          date.getDate();
+
+        return { dosTime, dosDate };
+      }
+
+      const dateParts = dosDateTime(new Date());
+      const localParts = [];
+      const centralParts = [];
+      let localOffset = 0;
+
+      const zipU16 = (view, offset, value) => view.setUint16(offset, value, true);
+      const zipU32 = (view, offset, value) => view.setUint32(offset, value >>> 0, true);
+
+      async function build() {
+        for (const file of files) {
+          const nameBytes = encoder.encode(file.name);
+          const data = new Uint8Array(await file.blob.arrayBuffer());
+          const checksum = crc32(data);
+
+          const localHeader = new Uint8Array(30);
+          const localView = new DataView(localHeader.buffer);
+
+          zipU32(localView, 0, 0x04034b50);
+          zipU16(localView, 4, 20);
+          zipU16(localView, 6, 0x0800);
+          zipU16(localView, 8, 0);
+          zipU16(localView, 10, dateParts.dosTime);
+          zipU16(localView, 12, dateParts.dosDate);
+          zipU32(localView, 14, checksum);
+          zipU32(localView, 18, data.length);
+          zipU32(localView, 22, data.length);
+          zipU16(localView, 26, nameBytes.length);
+          zipU16(localView, 28, 0);
+
+          localParts.push(localHeader, nameBytes, data);
+
+          const centralHeader = new Uint8Array(46);
+          const centralView = new DataView(centralHeader.buffer);
+
+          zipU32(centralView, 0, 0x02014b50);
+          zipU16(centralView, 4, 20);
+          zipU16(centralView, 6, 20);
+          zipU16(centralView, 8, 0x0800);
+          zipU16(centralView, 10, 0);
+          zipU16(centralView, 12, dateParts.dosTime);
+          zipU16(centralView, 14, dateParts.dosDate);
+          zipU32(centralView, 16, checksum);
+          zipU32(centralView, 20, data.length);
+          zipU32(centralView, 24, data.length);
+          zipU16(centralView, 28, nameBytes.length);
+          zipU16(centralView, 30, 0);
+          zipU16(centralView, 32, 0);
+          zipU16(centralView, 34, 0);
+          zipU16(centralView, 36, 0);
+          zipU32(centralView, 38, 0);
+          zipU32(centralView, 42, localOffset);
+
+          centralParts.push(centralHeader, nameBytes);
+          localOffset += localHeader.length + nameBytes.length + data.length;
+        }
+
+        const centralBytes = concatBytes(centralParts);
+        const localBytes = concatBytes(localParts);
+        const endHeader = new Uint8Array(22);
+        const endView = new DataView(endHeader.buffer);
+
+        zipU32(endView, 0, 0x06054b50);
+        zipU16(endView, 4, 0);
+        zipU16(endView, 6, 0);
+        zipU16(endView, 8, files.length);
+        zipU16(endView, 10, files.length);
+        zipU32(endView, 12, centralBytes.length);
+        zipU32(endView, 16, localBytes.length);
+        zipU16(endView, 20, 0);
+
+        const allBytes = concatBytes([localBytes, centralBytes, endHeader]);
+        return new Blob([allBytes], { type: "application/zip" });
+      }
+
+      return build();
+    }
+
+    function blobToDataURL(blob) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = () => reject(new Error("Could not prepare the SVG icon."));
+        reader.readAsDataURL(blob);
+      });
+    }
+
+    async function buildPackage() {
+      if (busy) return;
+
+      busy = true;
+      els.download.disabled = true;
+      els.downloadPng.disabled = true;
+      els.download.textContent = "Generating package…";
+      setStatus("Rendering icon sizes and preparing your ZIP file…");
+
+      try {
+        const sizes = [
+          16, 32, 48, 150, 180, 192, 512
+        ];
+
+        const files = [];
+        const rendered = {};
+
+        for (const size of sizes) {
+          const canvas = renderCanvas(size);
+          const blob = await canvasToBlob(canvas);
+          rendered[size] = blob;
+
+          const filename = size === 150
+            ? "mstile-150x150.png"
+            : size === 180
+              ? "apple-touch-icon.png"
+              : size === 192
+                ? "android-chrome-192x192.png"
+                : size === 512
+                  ? "android-chrome-512x512.png"
+                  : `favicon-${size}x${size}.png`;
+
+          files.push({ name: filename, blob });
+        }
+
+        const icoBlob = makeIco([
+          { size: 16, buffer: await rendered[16].arrayBuffer() },
+          { size: 32, buffer: await rendered[32].arrayBuffer() },
+          { size: 48, buffer: await rendered[48].arrayBuffer() }
+        ]);
+
+        files.push({ name: "favicon.ico", blob: icoBlob });
+
+        const svgDataURL = await blobToDataURL(rendered[512]);
+        const svgBase64 = svgDataURL.split(",")[1];
+
+        if (!svgBase64) {
+          throw new Error("Could not encode the SVG wrapper.");
+        }
+
+        const svg = [
+          '<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">',
+          `<image width="512" height="512" href="data:image/png;base64,${svgBase64}"/>`,
+          "</svg>"
+        ].join("");
+
+        files.push({
+          name: "favicon.svg",
+          blob: new Blob([svg], { type: "image/svg+xml;charset=utf-8" })
+        });
+
+        const manifest = {
+          name: "My Website",
+          short_name: "Website",
+          icons: [
+            {
+              src: "/android-chrome-192x192.png",
+              sizes: "192x192",
+              type: "image/png"
+            },
+            {
+              src: "/android-chrome-512x512.png",
+              sizes: "512x512",
+              type: "image/png"
+            }
+          ],
+          theme_color: currentOptions().background,
+          background_color: currentOptions().background,
+          display: "standalone"
+        };
+
+        files.push({
+          name: "site.webmanifest",
+          blob: new Blob(
+            [JSON.stringify(manifest, null, 2)],
+            { type: "application/manifest+json;charset=utf-8" }
+          )
+        });
+
+        const browserConfig = [
+          '<?xml version="1.0" encoding="utf-8"?>',
+          '<browserconfig>',
+          '  <msapplication>',
+          '    <tile>',
+          '      <square150x150logo src="/mstile-150x150.png"/>',
+          `      <TileColor>${currentOptions().background}</TileColor>`,
+          '    </tile>',
+          '  </msapplication>',
+          '</browserconfig>'
+        ].join("\n");
+
+        files.push({
+          name: "browserconfig.xml",
+          blob: new Blob([browserConfig], { type: "application/xml;charset=utf-8" })
+        });
+
+        const readme = [
+          "FAVICON AND APP ICON PACKAGE",
+          "",
+          "1. Upload the generated files to your website's public root folder.",
+          "2. Copy the HTML snippet below into the <head> section of your homepage.",
+          "3. Make sure each asset URL matches where you uploaded the files.",
+          "4. Test the website on desktop and mobile.",
+          "",
+          getHtmlSnippet(),
+          "",
+          "FILES:",
+          "favicon.ico - multi-size ICO containing PNG image data",
+          "favicon-16x16.png - small browser icon",
+          "favicon-32x32.png - browser icon",
+          "favicon-48x48.png - larger favicon",
+          "apple-touch-icon.png - 180x180 icon for Apple touch use",
+          "mstile-150x150.png - Windows tile image",
+          "android-chrome-192x192.png - Android/manifest icon",
+          "android-chrome-512x512.png - large Android/manifest icon",
+          "favicon.svg - SVG wrapper containing the generated PNG",
+          "site.webmanifest - sample web app manifest",
+          "browserconfig.xml - sample Windows tile settings",
+          "",
+          "Review platform requirements before using these files in production."
+        ].join("\n");
+
+        files.push({
+          name: "README.txt",
+          blob: new Blob([readme], { type: "text/plain;charset=utf-8" })
+        });
+
+        const zip = await zipStored(files);
+        downloadBlob(zip, "favicon-and-app-icons.zip");
+
+        setStatus("Your icon package is ready. Extract the ZIP and upload the files to your website.");
+      } catch (error) {
+        setStatus(error.message || "Could not generate the icon package.", true);
+      } finally {
+        busy = false;
+        els.download.disabled = false;
+        els.downloadPng.disabled = false;
+        els.download.textContent = "Generate & Download Icon Package";
+      }
+    }
+
+    $("#chooseFileButton").addEventListener("click", () => els.file.click());
+
+    els.file.addEventListener("change", event => {
+      loadUploadedFile(event.target.files?.[0]);
+      event.target.value = "";
+    });
+
+    els.dropArea.addEventListener("dragover", event => {
+      event.preventDefault();
+      els.dropArea.style.borderColor = "#2457d6";
+    });
+
+    els.dropArea.addEventListener("dragleave", () => {
+      els.dropArea.style.borderColor = "";
+    });
+
+    els.dropArea.addEventListener("drop", event => {
+      event.preventDefault();
+      els.dropArea.style.borderColor = "";
+      loadUploadedFile(event.dataTransfer?.files?.[0]);
+    });
+
+    $('input[name="sourceMode"][value="image"]').addEventListener("change", setSourceMode);
+    $('input[name="sourceMode"][value="text"]').addEventListener("change", setSourceMode);
+
+    [
+      els.iconText,
+      els.background,
+      els.foreground,
+      els.shape,
+      els.transparent,
+      els.fit
+    ].forEach(control => {
+      control.addEventListener("input", updatePreview);
+      control.addEventListener("change", updatePreview);
+    });
+
+    els.download.addEventListener("click", buildPackage);
+
+    els.downloadPng.addEventListener("click", async () => {
+      try {
+        const blob = await canvasToBlob(renderCanvas(512));
+        downloadBlob(blob, "icon-512x512.png");
+        setStatus("The 512 × 512 PNG was downloaded.");
+      } catch (error) {
+        setStatus(error.message || "Could not download the PNG.", true);
+      }
+    });
+
+    $("#copySnippetButton").addEventListener("click", async () => {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(els.snippet.value);
+        } else {
+          els.snippet.focus();
+          els.snippet.select();
+          const success = document.execCommand("copy");
+          if (!success) throw new Error("Clipboard access was unavailable. Select and copy the snippet manually.");
+        }
+
+        setStatus("HTML snippet copied.");
+      } catch (error) {
+        setStatus(error.message || "Could not copy the snippet.", true);
+      }
+    });
+
+    $("#resetButton").addEventListener("click", () => {
+      els.background.value = "#2457d6";
+      els.foreground.value = "#ffffff";
+      els.shape.value = "rounded";
+      els.transparent.checked = false;
+      els.fit.value = "contain";
+      els.iconText.value = "CT";
+
+      if (sourceObjectUrl) {
+        URL.revokeObjectURL(sourceObjectUrl);
+        sourceObjectUrl = null;
+      }
+
+      sourceImage = null;
+      els.fileName.textContent = "Choose a logo or image";
+      $('input[name="sourceMode"][value="text"]').checked = true;
+      setSourceMode();
+      setStatus("Design reset. You can now create a new icon.");
+    });
+
+    $("#year").textContent = new Date().getFullYear();
+
+    updatePreview();
+  </script>
+</body>
+</html>

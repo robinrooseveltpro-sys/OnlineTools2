@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Text Diff Checker – Compare Two Texts & Files Online</title>
+  <meta name="description" content="Compare two texts or files online. Highlight added and removed lines, ignore case or whitespace, view differences side by side or unified, and download a report privately.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2563eb">
+
+  <link rel="canonical" href="https://onlinetoolsandconverters.cc/tools/text-diff-checker.html">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../script.js" defer></script>
+
+  <style>
+    .diff-tool {
+      --df-ink: #172033;
+      --df-muted: #64748b;
+      --df-border: #dbe2ea;
+      --df-soft: #f8fafc;
+      --df-blue: #2563eb;
+      --df-add: #166534;
+      --df-add-bg: #dcfce7;
+      --df-del: #991b1b;
+      --df-del-bg: #fee2e2;
+      color: var(--df-ink);
+    }
+
+    .diff-tool *,
+    .diff-tool *::before,
+    .diff-tool *::after {
+      box-sizing: border-box;
+    }
+
+    .df-intro {
+      max-width: 900px;
+      margin-bottom: 1.5rem;
+    }
+
+    .df-intro h1 {
+      line-height: 1.15;
+      margin-bottom: .75rem;
+    }
+
+    .df-intro p {
+      color: var(--df-muted);
+      font-size: 1.03rem;
+      line-height: 1.75;
+    }
+
+    .df-kicker {
+      display: inline-block;
+      margin-bottom: .5rem;
+      color: var(--df-blue);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .df-card {
+      min-width: 0;
+      padding: clamp(1rem, 2.4vw, 1.5rem);
+      margin: 1.2rem 0;
+      border: 1px solid var(--df-border);
+      border-radius: 15px;
+      background: #fff;
+      box-shadow: 0 5px 22px rgba(15, 23, 42, .045);
+    }
+
+    .df-card h2,
+    .df-card h3 {
+      margin-top: 0;
+      line-height: 1.35;
+    }
+
+    .df-muted {
+      color: var(--df-muted);
+      font-size: .88rem;
+      line-height: 1.65;
+    }
+
+    .df-editors {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .df-editor-panel {
+      min-width: 0;
+    }
+
+    .df-editor-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: .5rem;
+    }
+
+    .df-editor-heading label {
+      font-weight: 800;
+      font-size: .95rem;
+    }
+
+    .df-editor-heading span {
+      color: var(--df-muted);
+      font-size: .78rem;
+    }
+
+    .df-textarea {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      min-height: 245px;
+      padding: .8rem;
+      resize: vertical;
+      border: 1px solid var(--df-border);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--df-ink);
+      font: inherit;
+      font-size: .87rem;
+      line-height: 1.7;
+      tab-size: 2;
+      white-space: pre;
+      overflow-wrap: normal;
+      overflow-x: auto;
+    }
+
+    .df-textarea:focus,
+    .df-button:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, .23);
+      outline-offset: 2px;
+      border-color: var(--df-blue);
+    }
+
+    .df-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin: 1rem 0;
+    }
+
+    .df-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: .62rem .85rem;
+      border: 1px solid var(--df-border);
+      border-radius: 9px;
+      background: #fff;
+      color: var(--df-ink);
+      font: inherit;
+      font-size: .86rem;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .df-button:hover {
+      background: #f1f5f9;
+    }
+
+    .df-button-primary {
+      color: #fff;
+      background: var(--df-blue);
+      border-color: var(--df-blue);
+    }
+
+    .df-button-primary:hover {
+      color: #fff;
+      background: #1d4ed8;
+      border-color: #1d4ed8;
+    }
+
+    .df-button-small {
+      min-height: 32px;
+      padding: .4rem .6rem;
+      font-size: .78rem;
+    }
+
+    .df-button:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .df-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem 1rem;
+      margin: 1rem 0;
+    }
+
+    .df-option {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      font-size: .85rem;
+      line-height: 1.5;
+      cursor: pointer;
+    }
+
+    .df-option input {
+      margin: 0;
+      accent-color: var(--df-blue);
+    }
+
+    .df-divider {
+      border: 0;
+      border-top: 1px solid var(--df-border);
+      margin: 1.3rem 0;
+    }
+
+    .df-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .65rem;
+      margin: 1rem 0;
+    }
+
+    .df-stat {
+      min-width: 0;
+      padding: .8rem;
+      border: 1px solid var(--df-border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .df-stat-label {
+      display: block;
+      color: var(--df-muted);
+      font-size: .78rem;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .df-stat-value {
+      display: block;
+      margin-top: .35rem;
+      font-size: 1.3rem;
+      font-weight: 850;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+    }
+
+    .df-status {
+      padding: .85rem 1rem;
+      margin: 1rem 0;
+      border: 1px solid var(--df-border);
+      border-radius: 10px;
+      background: var(--df-soft);
+      color: var(--df-ink);
+      font-size: .87rem;
+      line-height: 1.65;
+    }
+
+    .df-status-error {
+      border-color: #fecaca;
+      background: #fef2f2;
+      color: var(--df-del);
+    }
+
+    .df-status-success {
+      border-color: #bbf7d0;
+      background: #f0fdf4;
+      color: var(--df-add);
+    }
+
+    .df-view-switch {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin: 1rem 0;
+    }
+
+    .df-view-button[aria-pressed="true"] {
+      color: #fff;
+      background: var(--df-blue);
+      border-color: var(--df-blue);
+    }
+
+    .df-diff-scroll {
+      width: 100%;
+      max-height: 650px;
+      overflow: auto;
+      border: 1px solid var(--df-border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .df-side-table {
+      width: 100%;
+      min-width: 660px;
+      border-collapse: collapse;
+      table-layout: fixed;
+      font-size: .81rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    .df-side-table th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      padding: .7rem;
+      border-bottom: 1px solid var(--df-border);
+      background: #f1f5f9;
+      text-align: left;
+      font-family: inherit;
+      font-size: .78rem;
+    }
+
+    .df-side-table td {
+      border-bottom: 1px solid #edf0f4;
+      vertical-align: top;
+      padding: 0;
+    }
+
+    .df-line-number {
+      display: inline-block;
+      width: 46px;
+      flex: 0 0 46px;
+      padding: .45rem .4rem;
+      text-align: right;
+      color: #64748b;
+      background: #f8fafc;
+      border-right: 1px solid #e2e8f0;
+      user-select: none;
+    }
+
+    .df-line-content {
+      display: block;
+      flex: 1 1 auto;
+      min-width: 0;
+      padding: .45rem .65rem;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      line-height: 1.6;
+    }
+
+    .df-cell-inner {
+      display: flex;
+      min-width: 0;
+    }
+
+    .df-side-table .df-added {
+      background: var(--df-add-bg);
+      color: #14532d;
+    }
+
+    .df-side-table .df-removed {
+      background: var(--df-del-bg);
+      color: #7f1d1d;
+    }
+
+    .df-side-table .df-empty {
+      background: #f8fafc;
+    }
+
+    .df-unified {
+      min-width: 0;
+      padding: .45rem 0;
+    }
+
+    .df-unified-line {
+      display: flex;
+      align-items: stretch;
+      font: .81rem/1.65 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .df-prefix {
+      flex: 0 0 30px;
+      padding: .2rem .45rem;
+      text-align: center;
+      color: #64748b;
+      user-select: none;
+    }
+
+    .df-unified-content {
+      flex: 1 1 auto;
+      min-width: 0;
+      padding: .2rem .5rem;
+    }
+
+    .df-unified-line.df-added {
+      background: var(--df-add-bg);
+      color: #14532d;
+    }
+
+    .df-unified-line.df-added .df-prefix {
+      color: var(--df-add);
+      font-weight: 900;
+    }
+
+    .df-unified-line.df-removed {
+      background: var(--df-del-bg);
+      color: #7f1d1d;
+    }
+
+    .df-unified-line.df-removed .df-prefix {
+      color: var(--df-del);
+      font-weight: 900;
+    }
+
+    .df-blank-message {
+      padding: 1rem;
+      color: var(--df-muted);
+      font-size: .86rem;
+      line-height: 1.7;
+    }
+
+    .df-alert {
+      padding: .9rem 1rem;
+      margin: 1rem 0;
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      background: #eff6ff;
+      color: #1e3a8a;
+      font-size: .86rem;
+      line-height: 1.7;
+    }
+
+    .df-live {
+      min-height: 1.45em;
+      color: var(--df-muted);
+      font-size: .84rem;
+      line-height: 1.6;
+      margin: .7rem 0 0;
+    }
+
+    .df-content {
+      max-width: 900px;
+      margin: 2.5rem auto;
+    }
+
+    .df-content h2 {
+      margin-top: 2.1rem;
+      line-height: 1.4;
+    }
+
+    .df-content p,
+    .df-content li {
+      line-height: 1.8;
+    }
+
+    .df-faq {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--df-border);
+    }
+
+    .df-faq h3 {
+      margin: 0 0 .45rem;
+      font-size: 1rem;
+    }
+
+    .df-faq p {
+      margin: 0;
+      color: var(--df-muted);
+    }
+
+    @media (max-width: 850px) {
+      .df-editors {
+        grid-template-columns: 1fr;
+      }
+
+      .df-textarea {
+        min-height: 190px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .df-stats {
+        gap: .4rem;
+      }
+
+      .df-stat {
+        padding: .6rem;
+      }
+
+      .df-stat-value {
+        font-size: 1.05rem;
+      }
+
+      .df-buttons .df-button {
+        flex: 1 1 auto;
+      }
+    }
+
+    @media print {
+      .site-header,
+      .site-footer,
+      .df-input-card,
+      .df-content,
+      .df-buttons,
+      .df-view-switch {
+        display: none !important;
+      }
+
+      .df-card {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Text Diff Checker",
+    "url": "https://onlinetoolsandconverters.cc/tools/text-diff-checker.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "isAccessibleForFree": true,
+    "description": "Compare two text versions, view line additions and removals, ignore selected differences and download a text comparison report in the browser.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a text diff checker?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A text diff checker compares two versions of text and identifies added, removed and unchanged lines. It is useful for reviewing edits to code, writing, data and configuration files."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I ignore spaces or letter case?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. This tool can normalize repeated and leading or trailing whitespace, ignore case differences, and omit blank lines during the comparison."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this tool upload my text?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The comparison runs in a temporary browser Web Worker. No server-side comparison service is required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the downloaded report a Git patch?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The download is a readable text comparison report with line prefixes, not a patch guaranteed to be applicable by Git or the patch utility."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="ConvertToToolsOnline home">
+        <span class="brand-mark" aria-hidden="true">C</span>
+        <span class="brand-text">ConvertToToolsOnline</span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="primaryNav">
+        ☰
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Main navigation">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#tools">All tools</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container diff-tool" id="main">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span aria-hidden="true"> / </span>
+      <span>Text &amp; Developer Tools</span>
+      <span aria-hidden="true"> / </span>
+      <span aria-current="page">Text Diff Checker</span>
+    </nav>
+
+    <section class="df-intro">
+      <span class="df-kicker">Text &amp; file utilities</span>
+      <h1>Text Diff Checker &amp; File Comparator</h1>
+      <p>
+        Compare two versions of text and see exactly which lines were added,
+        removed or left unchanged. Compare code, documents, logs, CSV exports
+        and configuration files, with options to ignore case or whitespace.
+      </p>
+    </section>
+
+    <section class="df-card df-input-card">
+      <h2>Compare two versions</h2>
+      <p class="df-muted">
+        Paste your content or load text files. The comparison runs locally
+        in your browser. For large files, the tool limits the workload to
+        help prevent excessive memory use.
+      </p>
+
+      <div class="df-editors">
+        <div class="df-editor-panel">
+          <div class="df-editor-heading">
+            <label for="dfOriginal">Original text</label>
+            <span id="dfOriginalMeta">0 lines · 0 characters</span>
+          </div>
+
+          <textarea
+            class="df-textarea"
+            id="dfOriginal"
+            maxlength="120000"
+            spellcheck="false"
+            autocapitalize="off"
+            autocomplete="off"
+            aria-describedby="dfOriginalHelp">Name: Alice
+Email: alice@example.com
+Role: editor
+Status: active</textarea>
+
+          <p class="df-muted" id="dfOriginalHelp">
+            The original or earlier version.
+          </p>
+
+          <div class="df-buttons">
+            <button class="df-button df-button-small" type="button" id="dfOpenOriginal">
+              Upload original
+            </button>
+            <input id="dfFileOriginal" type="file" accept=".txt,.md,.csv,.tsv,.json,.xml,.html,.css,.js,.ts,.py,.sql,.yaml,.yml,.log,.env,.ini,.conf,.sh" hidden>
+          </div>
+        </div>
+
+        <div class="df-editor-panel">
+          <div class="df-editor-heading">
+            <label for="dfModified">Modified text</label>
+            <span id="dfModifiedMeta">0 lines · 0 characters</span>
+          </div>
+
+          <textarea
+            class="df-textarea"
+            id="dfModified"
+            maxlength="120000"
+            spellcheck="false"
+            autocapitalize="off"
+            autocomplete="off"
+            aria-describedby="dfModifiedHelp">Name: Alice
+Email: alice@new-example.com
+Role: editor
+Status: active
+Plan: pro</textarea>
+
+          <p class="df-muted" id="dfModifiedHelp">
+            The new or later version.
+          </p>
+
+          <div class="df-buttons">
+            <button class="df-button df-button-small" type="button" id="dfOpenModified">
+              Upload modified
+            </button>
+            <input id="dfFileModified" type="file" accept=".txt,.md,.csv,.tsv,.json,.xml,.html,.css,.js,.ts,.py,.sql,.yaml,.yml,.log,.env,.ini,.conf,.sh" hidden>
+          </div>
+        </div>
+      </div>
+
+      <div class="df-options">
+        <label class="df-option">
+          <input id="dfIgnoreWhitespace" type="checkbox">
+          Ignore whitespace differences
+        </label>
+
+        <label class="df-option">
+          <input id="dfIgnoreCase" type="checkbox">
+          Ignore letter case
+        </label>
+
+        <label class="df-option">
+          <input id="dfIgnoreBlankLines" type="checkbox">
+          Ignore blank lines
+        </label>
+
+        <label class="df-option">
+          <input id="dfHideUnchanged" type="checkbox">
+          Hide unchanged lines
+        </label>
+      </div>
+
+      <div class="df-buttons">
+        <button class="df-button df-button-primary" type="button" id="dfCompare">
+          Compare text
+        </button>
+        <button class="df-button" type="button" id="dfSample">
+          Load sample
+        </button>
+        <button class="df-button" type="button" id="dfSwap">
+          Swap sides
+        </button>
+        <button class="df-button" type="button" id="dfClear">
+          Clear
+        </button>
+      </div>
+
+      <div class="df-alert">
+        The comparison uses line-level LCS matching. This is intended for
+        ordinary text comparison, not binary files, a syntax-aware code review,
+        or a guaranteed Git-compatible patch.
+      </div>
+
+      <p class="df-live" id="dfInputMessage" aria-live="polite">
+        Comparison ready.
+      </p>
+    </section>
+
+    <section class="df-card">
+      <h2>Differences</h2>
+      <p class="df-muted">
+        Green indicates added lines; red indicates removed lines. When whitespace,
+        case or blank-line options are enabled, lines can compare as equal even
+        though their displayed text differs.
+      </p>
+
+      <div class="df-stats">
+        <div class="df-stat">
+          <span class="df-stat-label">Added lines</span>
+          <output class="df-stat-value" id="dfAdded">0</output>
+        </div>
+        <div class="df-stat">
+          <span class="df-stat-label">Removed lines</span>
+          <output class="df-stat-value" id="dfRemoved">0</output>
+        </div>
+        <div class="df-stat">
+          <span class="df-stat-label">Unchanged lines</span>
+          <output class="df-stat-value" id="dfUnchanged">0</output>
+        </div>
+      </div>
+
+      <div class="df-status" id="dfStatus" role="status" aria-live="polite">
+        Click Compare text to calculate the differences.
+      </div>
+
+      <div class="df-view-switch" role="group" aria-label="Comparison view">
+        <button
+          class="df-button df-view-button"
+          type="button"
+          id="dfSideView"
+          aria-pressed="true">
+          Side by side
+        </button>
+
+        <button
+          class="df-button df-view-button"
+          type="button"
+          id="dfUnifiedView"
+          aria-pressed="false">
+          Unified view
+        </button>
+      </div>
+
+      <div class="df-diff-scroll" id="dfDiffView" tabindex="0" aria-label="Text differences">
+        <p class="df-blank-message">
+          Results will appear here after comparison.
+        </p>
+      </div>
+
+      <div class="df-buttons">
+        <button class="df-button df-button-primary" type="button" id="dfCopyReport" disabled>
+          Copy comparison report
+        </button>
+        <button class="df-button" type="button" id="dfDownloadReport" disabled>
+          Download text report
+        </button>
+      </div>
+
+      <p class="df-live" id="dfActionMessage" aria-live="polite"></p>
+    </section>
+
+    <section class="df-content content prose">
+      <h2>How to compare two text files</h2>
+      <ol>
+        <li>Paste the old version into Original and the new version into Modified, or upload text files.</li>
+        <li>Choose whether to ignore whitespace, letter case or blank lines.</li>
+        <li>Click Compare text to generate the line-by-line differences.</li>
+        <li>Switch between side-by-side and unified views to make changes easier to review.</li>
+        <li>Copy the report or download it for later reference.</li>
+      </ol>
+
+      <h2>What does a diff checker do?</h2>
+      <p>
+        A diff checker compares two versions of content. Added lines are
+        present in the modified version but not the original; removed lines
+        are present in the original but not the modified version. Unchanged
+        lines provide context around the differences.
+      </p>
+
+      <h2>Understanding the comparison options</h2>
+
+      <h3>Ignore whitespace differences</h3>
+      <p>
+        This option trims leading and trailing whitespace and collapses runs
+        of whitespace within a line. It is useful when formatting changed
+        but the underlying text did not.
+      </p>
+
+      <h3>Ignore letter case</h3>
+      <p>
+        This option compares lines without distinguishing uppercase and
+        lowercase letters. For example, <code>STATUS: ACTIVE</code> and
+        <code>Status: Active</code> can compare as equal with this option.
+      </p>
+
+      <h3>Ignore blank lines</h3>
+      <p>
+        Empty or whitespace-only lines are excluded before matching. Use
+        this option when extra blank lines are not important to the review.
+        Because those lines are ignored, they will not appear as changes in
+        the resulting comparison.
+      </p>
+
+      <h3>Side-by-side and unified views</h3>
+      <p>
+        Side-by-side view aligns the original and modified versions in two
+        columns. Unified view presents both versions in one list, using
+        minus signs for removals and plus signs for additions.
+      </p>
+
+      <h2>What this tool is designed for</h2>
+      <ul>
+        <li>Comparing source code, scripts and configuration files.</li>
+        <li>Reviewing edits to articles, reports and other text documents.</li>
+        <li>Checking changes between CSV exports, logs and copied API responses.</li>
+        <li>Verifying that a small edit did not change unrelated lines.</li>
+      </ul>
+
+      <h2>Limitations to know</h2>
+      <p>
+        This is a line-oriented comparator, not a binary file comparison tool.
+        It does not parse source code or understand whether a change is
+        semantically safe. The same content reordered across a document may
+        appear as a removal and an addition.
+      </p>
+
+      <p>
+        The algorithm uses a longest-common-subsequence table. To keep memory
+        use predictable, the tool limits the number of lines and dynamic
+        programming cells. For a very large comparison, split the files into
+        smaller sections or use a dedicated diff application.
+      </p>
+
+      <h2>Frequently asked questions</h2>
+
+      <div class="df-faq">
+        <h3>Can I compare code and JSON files?</h3>
+        <p>
+          Yes. You can compare any text-based content by pasting it into the
+          editors or uploading supported text files. This tool does not parse
+          JSON or validate the syntax of source code.
+        </p>
+      </div>
+
+      <div class="df-faq">
+        <h3>Are my files uploaded to a server?</h3>
+        <p>
+          No server-side comparison service is needed. The tool runs its
+          comparison logic in a temporary browser Web Worker.
+        </p>
+      </div>
+
+      <div class="df-faq">
+        <h3>Why can a small change shift several line differences?</h3>
+        <p>
+          Line-based comparison tries to align the longest sequence of equal
+          lines. Inserted or moved blocks can cause a group of additions and
+          removals rather than a single highlighted edit.
+        </p>
+      </div>
+
+      <div class="df-faq">
+        <h3>Is the downloaded report an applicable Git patch?</h3>
+        <p>
+          No. It is a readable comparison report, not a patch guaranteed
+          to apply using Git or the patch utility.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>
+        <a href="../index.html">ConvertToToolsOnline</a>
+        · Free browser-based utility tools.
+      </p>
+      <p class="copyright">
+        © <span id="dfYear"></span> ConvertToToolsOnline
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const $ = (id) => document.getElementById(id);
+
+      const MAX_CHARS = 120000;
+      const MAX_LINES = 5000;
+      const MAX_CELLS = 3000000;
+      const WORKER_TIMEOUT_MS = 3000;
+      const MAX_FILE_BYTES = 1 * 1024 * 1024;
+
+      let activeJob = null;
+      let runSequence = 0;
+      let debounceTimer = null;
+      let actionTimer = null;
+      let latestResult = null;
+      let currentView = "side";
+      let originalFileName = "Original";
+      let modifiedFileName = "Modified";
+
+      function lineMetadata(text, options) {
+        let lines = text.split(/\r\n|\n|\r/);
+
+        const result = [];
+
+        lines.forEach((line, index) => {
+          if (options.ignoreBlankLines && line.trim() === "") {
+            return;
+          }
+
+          let key = line;
+
+          if (options.ignoreWhitespace) {
+            key = key.trim().replace(/\s+/gu, " ");
+          }
+
+          if (options.ignoreCase) {
+            key = key.toLowerCase();
+          }
+
+          result.push({
+            text: line,
+            key,
+            originalLine: index + 1
+          });
+        });
+
+        return result;
+      }
+
+      /*
+        The function is serialized and executed in a temporary Web Worker.
+        It uses an LCS matrix with a hard cell limit to keep memory bounded.
+      */
+      function diffWorkerMain() {
+        "use strict";
+
+        self.onmessage = function (event) {
+          const started = performance.now();
+
+          try {
+            const data = event.data || {};
+            const leftText = data.left;
+            const rightText = data.right;
+            const options = data.options || {};
+
+            if (
+              typeof leftText !== "string" ||
+              typeof rightText !== "string"
+            ) {
+              throw new Error("Both text inputs are required.");
+            }
+
+            if (
+              leftText.length > 120000 ||
+              rightText.length > 120000
+            ) {
+              throw new Error("Each text input must be at most 120,000 characters.");
+            }
+
+            function metadata(text) {
+              const raw = text.split(/\r\n|\n|\r/);
+
+              if (raw.length > 5000) {
+                throw new Error("Each input is limited to 5,000 lines. Compare smaller sections.");
+              }
+
+              const lines = [];
+
+              raw.forEach((line, index) => {
+                if (options.ignoreBlankLines && line.trim() === "") {
+                  return;
+                }
+
+                let key = line;
+
+                if (options.ignoreWhitespace) {
+                  key = key.trim().replace(/\s+/gu, " ");
+                }
+
+                if (options.ignoreCase) {
+                  key = key.toLowerCase();
+                }
+
+                lines.push({
+                  text: line,
+                  key,
+                  originalLine: index + 1
+                });
+              });
+
+              return lines;
+            }
+
+            const left = metadata(leftText);
+            const right = metadata(rightText);
+
+            const n = left.length;
+            const m = right.length;
+            const columns = m + 1;
+            const cells = (n + 1) * (m + 1);
+
+            if (cells > 3000000) {
+              throw new Error(
+                "This comparison is too large for the safe processing limit. Reduce the line count or compare smaller sections."
+              );
+            }
+
+            const dp = new Uint32Array(cells);
+
+            for (let i = n - 1; i >= 0; i--) {
+              const currentRow = i * columns;
+              const nextRow = (i + 1) * columns;
+
+              for (let j = m - 1; j >= 0; j--) {
+                if (left[i].key === right[j].key) {
+                  dp[currentRow + j] =
+                    dp[nextRow + j + 1] + 1;
+                } else {
+                  const removeScore = dp[nextRow + j];
+                  const addScore = dp[currentRow + j + 1];
+
+                  dp[currentRow + j] =
+                    removeScore >= addScore
+                      ? removeScore
+                      : addScore;
+                }
+              }
+            }
+
+            const operations = [];
+            let i = 0;
+            let j = 0;
+
+            while (i < n || j < m) {
+              if (
+                i < n &&
+                j < m &&
+                left[i].key === right[j].key
+              ) {
+                operations.push({
+                  type: "equal",
+                  left: left[i],
+                  right: right[j]
+                });
+
+                i++;
+                j++;
+              } else if (
+                i < n &&
+                (
+                  j >= m ||
+                  dp[(i + 1) * columns + j] >= dp[i * columns + j + 1]
+                )
+              ) {
+                operations.push({
+                  type: "delete",
+                  left: left[i],
+                  right: null
+                });
+
+                i++;
+              } else {
+                operations.push({
+                  type: "insert",
+                  left: null,
+                  right: right[j]
+                });
+
+                j++;
+              }
+            }
+
+            let added = 0;
+            let removed = 0;
+            let unchanged = 0;
+
+            operations.forEach((operation) => {
+              if (operation.type === "insert") added++;
+              else if (operation.type === "delete") removed++;
+              else unchanged++;
+            });
+
+            self.postMessage({
+              ok: true,
+              operations,
+              added,
+              removed,
+              unchanged,
+              leftLineCount: left.length,
+              rightLineCount: right.length,
+              cells,
+              durationMs: performance.now() - started
+            });
+          } catch (error) {
+            self.postMessage({
+              ok: false,
+              error: error && error.message
+                ? error.message
+                : "The comparison could not be completed.",
+              durationMs: performance.now() - started
+            });
+          }
+        };
+      }
+
+      function setText(id, text) {
+        $(id).textContent = String(text);
+      }
+
+      function formatNumber(value) {
+        return new Intl.NumberFormat().format(value);
+      }
+
+      function countLines(text) {
+        return text.length === 0 ? 0 : text.split(/\r\n|\n|\r/).length;
+      }
+
+      function updateEditorMeta() {
+        const left = $("dfOriginal").value;
+        const right = $("dfModified").value;
+
+        setText(
+          "dfOriginalMeta",
+          formatNumber(countLines(left)) + " lines · " +
+          formatNumber(left.length) + " characters"
+        );
+
+        setText(
+          "dfModifiedMeta",
+          formatNumber(countLines(right)) + " lines · " +
+          formatNumber(right.length) + " characters"
+        );
+      }
+
+      function showStatus(message, type = "") {
+        const node = $("dfStatus");
+        node.className = "df-status" + (type ? " df-status-" + type : "");
+        node.textContent = message;
+      }
+
+      function terminateJob() {
+        if (!activeJob) return;
+
+        clearTimeout(activeJob.timeout);
+
+        try {
+          activeJob.worker.terminate();
+        } catch (error) {
+          // The worker could have already stopped.
+        }
+
+        try {
+          URL.revokeObjectURL(activeJob.url);
+        } catch (error) {
+          // The URL could already have been revoked.
+        }
+
+        activeJob = null;
+      }
+
+      function clearDiffView() {
+        latestResult = null;
+        setText("dfAdded", "0");
+        setText("dfRemoved", "0");
+        setText("dfUnchanged", "0");
+
+        $("dfDiffView").replaceChildren();
+
+        const message = document.createElement("p");
+        message.className = "df-blank-message";
+        message.textContent =
+          "No comparison result is available. Click Compare text to run the comparison.";
+
+        $("dfDiffView").appendChild(message);
+
+        $("dfCopyReport").disabled = true;
+        $("dfDownloadReport").disabled = true;
+      }
+
+      function escapeFilenameText(value) {
+        return typeof value === "string" && value.length
+          ? value
+          : "Text";
+      }
+
+      function createLineCell(line, side, rowType) {
+        const td = document.createElement("td");
+
+        if (!line) {
+          td.className = "df-empty";
+          td.setAttribute("aria-label", "No line on this side");
+          return td;
+        }
+
+        if (rowType === "delete" && side === "left") {
+          td.classList.add("df-removed");
+        }
+
+        if (rowType === "insert" && side === "right") {
+          td.classList.add("df-added");
+        }
+
+        const inner = document.createElement("div");
+        inner.className = "df-cell-inner";
+
+        const number = document.createElement("span");
+        number.className = "df-line-number";
+        number.textContent = String(line.originalLine);
+        number.setAttribute("aria-hidden", "true");
+
+        const content = document.createElement("span");
+        content.className = "df-line-content";
+        content.textContent = line.text === "" ? " " : line.text;
+
+        inner.append(number, content);
+        td.appendChild(inner);
+
+        return td;
+      }
+
+      function buildSideRows(operations) {
+        const rows = [];
+        let index = 0;
+
+        while (index < operations.length) {
+          const operation = operations[index];
+
+          if (operation.type === "equal") {
+            rows.push({
+              type: "equal",
+              left: operation.left,
+              right: operation.right
+            });
+            index++;
+            continue;
+          }
+
+          const deleted = [];
+          const inserted = [];
+
+          while (
+            index < operations.length &&
+            operations[index].type !== "equal"
+          ) {
+            const current = operations[index];
+
+            if (current.type === "delete") deleted.push(current.left);
+            else if (current.type === "insert") inserted.push(current.right);
+
+            index++;
+          }
+
+          const rowCount = Math.max(deleted.length, inserted.length);
+
+          for (let k = 0; k < rowCount; k++) {
+            const leftLine = deleted[k] || null;
+            const rightLine = inserted[k] || null;
+
+            rows.push({
+              type: leftLine && rightLine
+                ? "change"
+                : leftLine
+                  ? "delete"
+                  : "insert",
+              left: leftLine,
+              right: rightLine
+            });
+          }
+        }
+
+        return rows;
+      }
+
+      function renderSideBySide(operations) {
+        const host = $("dfDiffView");
+        host.replaceChildren();
+
+        const rows = buildSideRows(operations);
+        const hideUnchanged = $("dfHideUnchanged").checked;
+        let hiddenCount = 0;
+
+        const table = document.createElement("table");
+        table.className = "df-side-table";
+
+        const thead = document.createElement("thead");
+        const headerRow = document.createElement("tr");
+
+        [escapeFilenameText(originalFileName), escapeFilenameText(modifiedFileName)]
+          .forEach((label) => {
+            const th = document.createElement("th");
+            th.scope = "col";
+            th.textContent = label;
+            headerRow.appendChild(th);
+          });
+
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        const tbody = document.createElement("tbody");
+
+        rows.forEach((row) => {
+          if (hideUnchanged && row.type === "equal") {
+            hiddenCount++;
+            return;
+          }
+
+          const tr = document.createElement("tr");
+
+          tr.appendChild(createLineCell(
+            row.left,
+            "left",
+            row.type === "change" ? "delete" : row.type
+          ));
+
+          tr.appendChild(createLineCell(
+            row.right,
+            "right",
+            row.type === "change" ? "insert" : row.type
+          ));
+
+          tbody.appendChild(tr);
+        });
+
+        table.appendChild(tbody);
+        host.appendChild(table);
+
+        if (hideUnchanged && hiddenCount > 0) {
+          const note = document.createElement("p");
+          note.className = "df-blank-message";
+          note.textContent =
+            formatNumber(hiddenCount) + " unchanged aligned row(s) hidden.";
+          host.appendChild(note);
+        }
+
+        if (tbody.children.length === 0) {
+          const message = document.createElement("p");
+          message.className = "df-blank-message";
+          message.textContent =
+            "No displayed differences. The texts may be identical or equivalent under the selected ignore options.";
+          host.appendChild(message);
+        }
+      }
+
+      function renderUnified(operations) {
+        const host = $("dfDiffView");
+        host.replaceChildren();
+
+        const view = document.createElement("div");
+        view.className = "df-unified";
+
+        const hideUnchanged = $("dfHideUnchanged").checked;
+        let hiddenCount = 0;
+
+        operations.forEach((operation) => {
+          if (hideUnchanged && operation.type === "equal") {
+            hiddenCount++;
+            return;
+          }
+
+          const line = document.createElement("div");
+          line.className = "df-unified-line";
+
+          const prefix = document.createElement("span");
+          prefix.className = "df-prefix";
+
+          const content = document.createElement("span");
+          content.className = "df-unified-content";
+
+          if (operation.type === "equal") {
+            prefix.textContent = " ";
+            content.textContent =
+              operation.left.text === "" ? " " : operation.left.text;
+          } else if (operation.type === "delete") {
+            line.classList.add("df-removed");
+            prefix.textContent = "−";
+            content.textContent =
+              operation.left.text === "" ? " " : operation.left.text;
+          } else {
+            line.classList.add("df-added");
+            prefix.textContent = "+";
+            content.textContent =
+              operation.right.text === "" ? " " : operation.right.text;
+          }
+
+          line.append(prefix, content);
+          view.appendChild(line);
+        });
+
+        host.appendChild(view);
+
+        if (hideUnchanged && hiddenCount > 0) {
+          const note = document.createElement("p");
+          note.className = "df-blank-message";
+          note.textContent =
+            formatNumber(hiddenCount) + " unchanged line(s) hidden.";
+          host.appendChild(note);
+        }
+
+        if (view.children.length === 0) {
+          const message = document.createElement("p");
+          message.className = "df-blank-message";
+          message.textContent =
+            "No displayed differences. The texts may be identical or equivalent under the selected ignore options.";
+          host.appendChild(message);
+        }
+      }
+
+      function renderResults(result) {
+        latestResult = result;
+
+        setText("dfAdded", formatNumber(result.added));
+        setText("dfRemoved", formatNumber(result.removed));
+        setText("dfUnchanged", formatNumber(result.unchanged));
+
+        if (result.added === 0 && result.removed === 0) {
+          showStatus(
+            "No line differences found under the selected comparison options. " +
+            "Compared in " + result.durationMs.toFixed(1) + " ms.",
+            "success"
+          );
+        } else {
+          showStatus(
+            "Comparison complete: " + formatNumber(result.added) +
+            " added and " + formatNumber(result.removed) +
+            " removed line(s). Runtime: " + result.durationMs.toFixed(1) + " ms.",
+            "success"
+          );
+        }
+
+        renderCurrentView();
+
+        $("dfCopyReport").disabled = false;
+        $("dfDownloadReport").disabled = false;
+        setText("dfInputMessage", "Comparison finished.");
+      }
+
+      function renderCurrentView() {
+        if (!latestResult) return;
+
+        $("dfSideView").setAttribute(
+          "aria-pressed",
+          currentView === "side" ? "true" : "false"
+        );
+
+        $("dfUnifiedView").setAttribute(
+          "aria-pressed",
+          currentView === "unified" ? "true" : "false"
+        );
+
+        if (currentView === "side") {
+          renderSideBySide(latestResult.operations);
+        } else {
+          renderUnified(latestResult.operations);
+        }
+      }
+
+      function compare(immediate = false) {
+        runSequence++;
+        const sequence = runSequence;
+
+        if (debounceTimer) clearTimeout(debounceTimer);
+        terminateJob();
+
+        updateEditorMeta();
+
+        const left = $("dfOriginal").value;
+        const right = $("dfModified").value;
+
+        if (left.length > MAX_CHARS || right.length > MAX_CHARS) {
+          showStatus("Each input is limited to 120,000 characters.", "error");
+          clearDiffView();
+          return;
+        }
+
+        if (typeof Worker === "undefined" || typeof Blob === "undefined") {
+          showStatus(
+            "This browser does not support the worker-based comparator required by this tool.",
+            "error"
+          );
+          clearDiffView();
+          return;
+        }
+
+        const options = {
+          ignoreWhitespace: $("dfIgnoreWhitespace").checked,
+          ignoreCase: $("dfIgnoreCase").checked,
+          ignoreBlankLines: $("dfIgnoreBlankLines").checked
+        };
+
+        setText("dfInputMessage", immediate ? "Comparing…" : "Input changed; comparison scheduled…");
+
+        const runWorker = () => {
+          if (sequence !== runSequence) return;
+
+          let worker;
+          let url;
+
+          try {
+            url = URL.createObjectURL(
+              new Blob(
+                ["(" + diffWorkerMain.toString() + ")();"],
+                { type: "text/javascript" }
+              )
+            );
+
+            worker = new Worker(url);
+          } catch (error) {
+            if (url) URL.revokeObjectURL(url);
+
+            showStatus(
+              "A temporary worker could not start. Your browser or site's security policy may block Blob workers.",
+              "error"
+            );
+            clearDiffView();
+            return;
+          }
+
+          const job = { worker, url, timeout: null };
+          activeJob = job;
+
+          const finish = () => {
+            clearTimeout(job.timeout);
+
+            try {
+              worker.terminate();
+            } catch (error) {
+              // Already stopped.
+            }
+
+            try {
+              URL.revokeObjectURL(url);
+            } catch (error) {
+              // Already revoked.
+            }
+
+            if (activeJob === job) activeJob = null;
+          };
+
+          job.timeout = window.setTimeout(() => {
+            if (activeJob !== job || sequence !== runSequence) return;
+
+            finish();
+            showStatus(
+              "Comparison exceeded the 3-second time limit and was stopped. Reduce the input size or split the comparison.",
+              "error"
+            );
+            clearDiffView();
+          }, WORKER_TIMEOUT_MS);
+
+          worker.onmessage = (event) => {
+            finish();
+
+            if (sequence !== runSequence) return;
+
+            const result = event.data;
+
+            if (!result || !result.ok) {
+              showStatus(
+                result && result.error
+                  ? result.error
+                  : "The comparison could not be completed.",
+                "error"
+              );
+              clearDiffView();
+              return;
+            }
+
+            renderResults(result);
+          };
+
+          worker.onerror = () => {
+            finish();
+
+            if (sequence !== runSequence) return;
+
+            showStatus(
+              "The comparison worker encountered an unexpected error.",
+              "error"
+            );
+            clearDiffView();
+          };
+
+          try {
+            worker.postMessage({ left, right, options });
+          } catch (error) {
+            finish();
+            showStatus("The comparison request could not be sent to the worker.", "error");
+            clearDiffView();
+          }
+        };
+
+        if (immediate) {
+          runWorker();
+        } else {
+          debounceTimer = window.setTimeout(runWorker, 350);
+        }
+      }
+
+      function createReport() {
+        if (!latestResult) return "";
+
+        const lines = [
+          "TEXT DIFF REPORT",
+          "================",
+          "Original: " + escapeFilenameText(originalFileName),
+          "Modified: " + escapeFilenameText(modifiedFileName),
+          "Added lines: " + latestResult.added,
+          "Removed lines: " + latestResult.removed,
+          "Unchanged aligned lines: " + latestResult.unchanged,
+          "Ignore whitespace: " + $("dfIgnoreWhitespace").checked,
+          "Ignore case: " + $("dfIgnoreCase").checked,
+          "Ignore blank lines: " + $("dfIgnoreBlankLines").checked,
+          "",
+          "LEGEND: + added, - removed, two spaces unchanged",
+          "This is a readable report, not a Git-compatible patch.",
+          ""
+        ];
+
+        latestResult.operations.forEach((operation) => {
+          if (operation.type === "equal") {
+            lines.push("  " + operation.left.text);
+          } else if (operation.type === "delete") {
+            lines.push("- " + operation.left.text);
+          } else {
+            lines.push("+ " + operation.right.text);
+          }
+        });
+
+        return lines.join("\n");
+      }
+
+      function announce(message) {
+        setText("dfActionMessage", message);
+
+        if (actionTimer) clearTimeout(actionTimer);
+
+        actionTimer = setTimeout(() => {
+          setText("dfActionMessage", "");
+        }, 4000);
+      }
+
+      async function copyText(text) {
+        if (!text) {
+          announce("There is no report to copy yet.");
+          return;
+        }
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+            announce("Comparison report copied.");
+            return;
+          }
+        } catch (error) {
+          // Fall back to the legacy copy method.
+        }
+
+        const area = document.createElement("textarea");
+        area.value = text;
+        area.setAttribute("readonly", "");
+        area.style.position = "fixed";
+        area.style.left = "-9999px";
+        area.style.top = "0";
+
+        document.body.appendChild(area);
+        area.select();
+
+        let success = false;
+
+        try {
+          success = document.execCommand("copy");
+        } catch (error) {
+          success = false;
+        }
+
+        area.remove();
+
+        announce(
+          success
+            ? "Comparison report copied."
+            : "Copy was blocked. Select the report text and copy it manually."
+        );
+      }
+
+      function downloadText(text, filename) {
+        if (!text) {
+          announce("There is no report to download.");
+          return;
+        }
+
+        try {
+          const blob = new Blob([text], {
+            type: "text/plain;charset=utf-8"
+          });
+
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+
+          link.href = url;
+          link.download = filename;
+
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+
+          window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+          announce("Text report download started.");
+        } catch (error) {
+          announce("The report could not be downloaded in this browser.");
+        }
+      }
+
+      function loadSample() {
+        originalFileName = "Original sample";
+        modifiedFileName = "Modified sample";
+
+        $("dfOriginal").value =
+          "Name: Alice\n" +
+          "Email: alice@example.com\n" +
+          "Role: editor\n" +
+          "Status: active";
+
+        $("dfModified").value =
+          "Name: Alice\n" +
+          "Email: alice@new-example.com\n" +
+          "Role: editor\n" +
+          "Status: active\n" +
+          "Plan: pro";
+
+        $("dfIgnoreWhitespace").checked = false;
+        $("dfIgnoreCase").checked = false;
+        $("dfIgnoreBlankLines").checked = false;
+        $("dfHideUnchanged").checked = false;
+
+        currentView = "side";
+        compare(true);
+      }
+
+      function clearAll() {
+        $("dfOriginal").value = "";
+        $("dfModified").value = "";
+
+        originalFileName = "Original";
+        modifiedFileName = "Modified";
+
+        $("dfFileOriginal").value = "";
+        $("dfFileModified").value = "";
+
+        setText("dfInputMessage", "Both editors cleared.");
+        compare(true);
+      }
+
+      function swapSides() {
+        const originalText = $("dfOriginal").value;
+        const modifiedText = $("dfModified").value;
+
+        $("dfOriginal").value = modifiedText;
+        $("dfModified").value = originalText;
+
+        const oldName = originalFileName;
+        originalFileName = modifiedFileName;
+        modifiedFileName = oldName;
+
+        compare(true);
+      }
+
+      async function loadFile(file, side) {
+        if (!file) return;
+
+        if (file.size > MAX_FILE_BYTES) {
+          announce("Each uploaded file is limited to 1 MiB.");
+          return;
+        }
+
+        const filename = file.name.replace(/[\\/:*?"<>|]/g, "_");
+
+        try {
+          const text = await file.text();
+
+          if (text.length > MAX_CHARS) {
+            announce("The file contains more than 120,000 characters. Use a smaller section.");
+            return;
+          }
+
+          if (side === "left") {
+            $("dfOriginal").value = text;
+            originalFileName = filename;
+          } else {
+            $("dfModified").value = text;
+            modifiedFileName = filename;
+          }
+
+          compare(true);
+          announce("Loaded " + filename + ".");
+        } catch (error) {
+          announce("This file could not be read by the browser.");
+        }
+      }
+
+      $("dfCompare").addEventListener("click", () => compare(true));
+      $("dfSample").addEventListener("click", loadSample);
+      $("dfSwap").addEventListener("click", swapSides);
+      $("dfClear").addEventListener("click", clearAll);
+
+      $("dfOriginal").addEventListener("input", () => compare(false));
+      $("dfModified").addEventListener("input", () => compare(false));
+
+      [
+        "dfIgnoreWhitespace",
+        "dfIgnoreCase",
+        "dfIgnoreBlankLines"
+      ].forEach((id) => {
+        $(id).addEventListener("change", () => compare(true));
+      });
+
+      $("dfHideUnchanged").addEventListener("change", renderCurrentView);
+
+      $("dfSideView").addEventListener("click", () => {
+        currentView = "side";
+        renderCurrentView();
+      });
+
+      $("dfUnifiedView").addEventListener("click", () => {
+        currentView = "unified";
+        renderCurrentView();
+      });
+
+      $("dfOpenOriginal").addEventListener("click", () => {
+        $("dfFileOriginal").click();
+      });
+
+      $("dfOpenModified").addEventListener("click", () => {
+        $("dfFileModified").click();
+      });
+
+      $("dfFileOriginal").addEventListener("change", () => {
+        loadFile($("dfFileOriginal").files[0], "left");
+      });
+
+      $("dfFileModified").addEventListener("change", () => {
+        loadFile($("dfFileModified").files[0], "right");
+      });
+
+      $("dfCopyReport").addEventListener("click", () => {
+        copyText(createReport());
+      });
+
+      $("dfDownloadReport").addEventListener("click", () => {
+        downloadText(createReport(), "text-diff-report.txt");
+      });
+
+      $("dfYear").textContent = String(new Date().getFullYear());
+
+      updateEditorMeta();
+      compare(true);
+    })();
+  </script>
+</body>
+</html>

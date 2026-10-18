@@ -1,0 +1,1776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>WCAG Contrast Checker – Free Color Accessibility Tool</title>
+  <meta name="description" content="Check foreground and background color contrast instantly. Test WCAG AA and AAA text contrast, preview colors, find more accessible alternatives, and copy CSS.">
+  <meta name="keywords" content="WCAG contrast checker, color contrast checker, accessibility checker, contrast ratio calculator, WCAG AA checker, WCAG AAA checker, accessible color palette">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2563eb">
+
+  <link rel="canonical" href="https://onlinetoolsandconverters.cc/tools/wcag-contrast-checker.html">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../script.js" defer></script>
+
+  <style>
+    .wcag-page {
+      --wcag-blue: #2563eb;
+      --wcag-border: #dbe2ea;
+      --wcag-muted: #64748b;
+      --wcag-panel: #ffffff;
+      --wcag-soft: #f8fafc;
+      --wcag-ink: #172033;
+      --wcag-good: #166534;
+      --wcag-good-bg: #dcfce7;
+      --wcag-bad: #991b1b;
+      --wcag-bad-bg: #fee2e2;
+      color: var(--wcag-ink);
+    }
+
+    .wcag-page *,
+    .wcag-page *::before,
+    .wcag-page *::after {
+      box-sizing: border-box;
+    }
+
+    .wcag-intro {
+      max-width: 850px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .wcag-intro h1 {
+      line-height: 1.15;
+      margin-bottom: .8rem;
+    }
+
+    .wcag-intro p {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: var(--wcag-muted);
+    }
+
+    .wcag-kicker {
+      display: inline-block;
+      color: var(--wcag-blue);
+      font-weight: 750;
+      font-size: .8rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: .55rem;
+    }
+
+    .wcag-workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 1.2rem;
+      align-items: start;
+      margin: 1.5rem 0;
+    }
+
+    .wcag-card {
+      background: var(--wcag-panel);
+      border: 1px solid var(--wcag-border);
+      border-radius: 16px;
+      padding: clamp(1rem, 2.5vw, 1.5rem);
+      min-width: 0;
+      box-shadow: 0 5px 22px rgba(15, 23, 42, .045);
+    }
+
+    .wcag-card h2,
+    .wcag-card h3 {
+      margin-top: 0;
+      line-height: 1.3;
+    }
+
+    .wcag-section-note {
+      color: var(--wcag-muted);
+      font-size: .92rem;
+      line-height: 1.6;
+      margin-top: -.35rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .wcag-color-control {
+      margin: 1rem 0 1.25rem;
+    }
+
+    .wcag-label {
+      display: block;
+      font-weight: 700;
+      font-size: .94rem;
+      margin-bottom: .45rem;
+    }
+
+    .wcag-input-row {
+      display: grid;
+      grid-template-columns: 54px minmax(0, 1fr);
+      gap: .6rem;
+      align-items: center;
+    }
+
+    .wcag-color-picker {
+      width: 54px;
+      height: 48px;
+      padding: 4px;
+      border: 1px solid var(--wcag-border);
+      border-radius: 9px;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .wcag-hex {
+      width: 100%;
+      min-width: 0;
+      height: 48px;
+      padding: .65rem .8rem;
+      border: 1px solid var(--wcag-border);
+      border-radius: 9px;
+      background: #fff;
+      color: #172033;
+      font: 600 1rem ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-transform: uppercase;
+    }
+
+    .wcag-hex:focus,
+    .wcag-color-picker:focus-visible,
+    .wcag-page button:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, .3);
+      outline-offset: 2px;
+    }
+
+    .wcag-hex[aria-invalid="true"] {
+      border-color: #dc2626;
+      background: #fff7f7;
+    }
+
+    .wcag-error {
+      color: var(--wcag-bad);
+      font-size: .85rem;
+      margin: .4rem 0 0;
+    }
+
+    .wcag-error:empty {
+      display: none;
+    }
+
+    .wcag-button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin: 1rem 0;
+    }
+
+    .wcag-btn {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: .4rem;
+      min-height: 42px;
+      padding: .65rem .9rem;
+      border: 1px solid var(--wcag-border);
+      border-radius: 9px;
+      color: #1e293b;
+      background: #fff;
+      font: inherit;
+      font-weight: 650;
+      font-size: .9rem;
+      cursor: pointer;
+      transition: background .15s ease, border-color .15s ease;
+    }
+
+    .wcag-btn:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    .wcag-btn-primary {
+      color: #fff;
+      background: var(--wcag-blue);
+      border-color: var(--wcag-blue);
+    }
+
+    .wcag-btn-primary:hover {
+      color: #fff;
+      background: #1d4ed8;
+      border-color: #1d4ed8;
+    }
+
+    .wcag-btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .wcag-preset {
+      font-size: .83rem;
+      min-height: 36px;
+      padding: .5rem .65rem;
+    }
+
+    .wcag-divider {
+      border: 0;
+      border-top: 1px solid var(--wcag-border);
+      margin: 1.4rem 0;
+    }
+
+    .wcag-ratio-panel {
+      padding: 1.2rem;
+      border: 1px solid var(--wcag-border);
+      border-radius: 12px;
+      background: var(--wcag-soft);
+      margin-bottom: 1rem;
+    }
+
+    .wcag-ratio-label {
+      color: var(--wcag-muted);
+      font-weight: 650;
+      font-size: .9rem;
+      margin-bottom: .4rem;
+    }
+
+    .wcag-ratio-value {
+      display: block;
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 850;
+      letter-spacing: -.05em;
+      line-height: 1.15;
+      color: var(--wcag-ink);
+      overflow-wrap: anywhere;
+    }
+
+    .wcag-ratio-caption {
+      color: var(--wcag-muted);
+      font-size: .9rem;
+      margin-top: .4rem;
+    }
+
+    .wcag-meter {
+      width: 100%;
+      height: 9px;
+      background: #e2e8f0;
+      border-radius: 100px;
+      overflow: hidden;
+      margin-top: 1rem;
+    }
+
+    .wcag-meter-fill {
+      width: 0;
+      height: 100%;
+      background: var(--wcag-blue);
+      border-radius: inherit;
+      transition: width .2s ease;
+    }
+
+    .wcag-verdict {
+      margin: .8rem 0 0;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .wcag-verdict.pass {
+      color: var(--wcag-good);
+    }
+
+    .wcag-verdict.fail {
+      color: var(--wcag-bad);
+    }
+
+    .wcag-criteria {
+      display: grid;
+      gap: .65rem;
+    }
+
+    .wcag-criterion {
+      display: flex;
+      gap: .8rem;
+      justify-content: space-between;
+      align-items: center;
+      padding: .85rem .9rem;
+      border: 1px solid var(--wcag-border);
+      border-radius: 10px;
+      min-width: 0;
+    }
+
+    .wcag-criterion-copy {
+      min-width: 0;
+    }
+
+    .wcag-criterion-title {
+      display: block;
+      font-weight: 750;
+      font-size: .93rem;
+      line-height: 1.4;
+    }
+
+    .wcag-criterion-detail {
+      display: block;
+      margin-top: .2rem;
+      color: var(--wcag-muted);
+      font-size: .82rem;
+      line-height: 1.5;
+    }
+
+    .wcag-status {
+      display: inline-block;
+      flex-shrink: 0;
+      text-align: center;
+      min-width: 68px;
+      padding: .36rem .5rem;
+      border-radius: 7px;
+      background: #e2e8f0;
+      color: #334155;
+      font-weight: 800;
+      font-size: .72rem;
+      letter-spacing: .02em;
+    }
+
+    .wcag-status.pass {
+      background: var(--wcag-good-bg);
+      color: var(--wcag-good);
+    }
+
+    .wcag-status.fail {
+      background: var(--wcag-bad-bg);
+      color: var(--wcag-bad);
+    }
+
+    .wcag-preview {
+      overflow: hidden;
+      border: 1px solid var(--wcag-border);
+      border-radius: 12px;
+      margin: 1rem 0;
+    }
+
+    .wcag-preview-top {
+      display: flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .75rem .9rem;
+      background: #f1f5f9;
+      border-bottom: 1px solid var(--wcag-border);
+      color: #475569;
+      font-size: .82rem;
+      font-weight: 650;
+    }
+
+    .wcag-preview-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #94a3b8;
+    }
+
+    .wcag-preview-canvas {
+      min-height: 220px;
+      padding: 1.4rem;
+      background: #fff;
+      color: #1f2937;
+      overflow-wrap: anywhere;
+    }
+
+    .wcag-preview-canvas h3 {
+      font-size: 1.8rem;
+      line-height: 1.3;
+      margin: 0 0 .8rem;
+    }
+
+    .wcag-preview-canvas p {
+      font-size: 1rem;
+      line-height: 1.7;
+      margin: 0 0 .8rem;
+    }
+
+    .wcag-preview-small {
+      font-size: .82rem !important;
+    }
+
+    .wcag-suggestions {
+      display: grid;
+      gap: .7rem;
+      margin: 1rem 0;
+    }
+
+    .wcag-suggestion {
+      border: 1px solid var(--wcag-border);
+      border-radius: 11px;
+      padding: .85rem;
+      min-width: 0;
+    }
+
+    .wcag-suggestion-header {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      margin-bottom: .55rem;
+    }
+
+    .wcag-swatch {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      border: 1px solid rgba(15, 23, 42, .2);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .wcag-suggestion-heading {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .wcag-suggestion-heading strong {
+      display: block;
+      font-size: .9rem;
+    }
+
+    .wcag-suggestion-heading code {
+      overflow-wrap: anywhere;
+      font-size: .83rem;
+    }
+
+    .wcag-suggestion-note {
+      color: var(--wcag-muted);
+      font-size: .82rem;
+      line-height: 1.5;
+      margin: .2rem 0 .7rem;
+    }
+
+    .wcag-suggestion .wcag-btn {
+      min-height: 36px;
+      width: 100%;
+    }
+
+    .wcag-css {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 10px;
+      padding: 1rem;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      overflow-x: auto;
+      font-size: .84rem;
+      line-height: 1.7;
+      margin: .8rem 0;
+    }
+
+    .wcag-live-message {
+      min-height: 1.5em;
+      font-size: .88rem;
+      line-height: 1.5;
+      color: var(--wcag-muted);
+      margin: .6rem 0 0;
+    }
+
+    .wcag-info {
+      background: #eff6ff;
+      color: #1e3a8a;
+      border: 1px solid #bfdbfe;
+      padding: 1rem;
+      border-radius: 10px;
+      font-size: .9rem;
+      line-height: 1.65;
+      margin: 1rem 0;
+    }
+
+    .wcag-content {
+      max-width: 900px;
+      margin: 2.5rem auto;
+    }
+
+    .wcag-content h2 {
+      margin-top: 2rem;
+    }
+
+    .wcag-content p,
+    .wcag-content li {
+      line-height: 1.8;
+    }
+
+    .wcag-content code {
+      overflow-wrap: anywhere;
+    }
+
+    .wcag-faq {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--wcag-border);
+    }
+
+    .wcag-faq h3 {
+      font-size: 1rem;
+      margin: 0 0 .45rem;
+    }
+
+    .wcag-faq p {
+      margin: 0;
+      color: var(--wcag-muted);
+    }
+
+    .wcag-page button,
+    .wcag-page input {
+      font-family: inherit;
+    }
+
+    .wcag-page input[type="color"] {
+      appearance: auto;
+    }
+
+    .wcag-disclaimer {
+      color: var(--wcag-muted);
+      font-size: .85rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 800px) {
+      .wcag-workspace {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .wcag-criterion {
+        padding: .75rem .65rem;
+        gap: .5rem;
+      }
+
+      .wcag-status {
+        min-width: 57px;
+        font-size: .67rem;
+        padding: .35rem .4rem;
+      }
+
+      .wcag-preview-canvas {
+        padding: 1rem;
+      }
+
+      .wcag-preview-canvas h3 {
+        font-size: 1.55rem;
+      }
+
+      .wcag-button-row .wcag-btn {
+        flex: 1 1 auto;
+      }
+    }
+
+    @media print {
+      .site-header,
+      .site-footer,
+      .wcag-button-row,
+      .wcag-color-control,
+      .wcag-content,
+      .wcag-suggestions,
+      .wcag-css,
+      .wcag-suggestion .wcag-btn {
+        display: none !important;
+      }
+
+      .wcag-workspace {
+        display: block;
+      }
+
+      .wcag-card {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "WCAG Contrast Checker",
+    "url": "https://onlinetoolsandconverters.cc/tools/wcag-contrast-checker.html",
+    "applicationCategory": "DesignApplication",
+    "operatingSystem": "Any",
+    "description": "A free browser-based color contrast checker with WCAG AA and AAA checks, live previews, and accessible color suggestions.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "isAccessibleForFree": true
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a color contrast ratio?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A color contrast ratio compares the relative luminance of foreground and background colors. It ranges from 1:1 for identical luminance to 21:1 for black and white."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What contrast ratio does WCAG AA require?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "WCAG 2.2 Level AA generally requires at least 4.5:1 for normal text and 3:1 for large text under Success Criterion 1.4.3."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What contrast ratio does WCAG AAA require?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "WCAG 2.2 Level AAA generally requires at least 7:1 for normal text and 4.5:1 for large text under Success Criterion 1.4.6."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are my colors uploaded?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The contrast calculation runs locally in your browser. This page does not need to upload your color values to calculate contrast."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="ConvertToToolsOnline home">
+        <span class="brand-mark" aria-hidden="true">C</span>
+        <span class="brand-text">ConvertToToolsOnline</span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="primaryNav">
+        ☰
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Main navigation">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#tools">All tools</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container wcag-page" id="main">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span aria-hidden="true"> / </span>
+      <span>Design &amp; Accessibility</span>
+      <span aria-hidden="true"> / </span>
+      <span aria-current="page">WCAG Contrast Checker</span>
+    </nav>
+
+    <section class="wcag-intro">
+      <span class="wcag-kicker">Design &amp; accessibility</span>
+      <h1>WCAG Contrast Checker</h1>
+      <p>
+        Test text and background colors, check WCAG AA and AAA contrast thresholds,
+        preview your color combination, and discover alternatives that are easier
+        to read. Calculations run directly in your browser.
+      </p>
+    </section>
+
+    <section class="wcag-workspace" aria-label="Color contrast tool">
+      <div class="wcag-card">
+        <h2>Choose your colors</h2>
+        <p class="wcag-section-note">
+          Enter a HEX color or use the color picker. Changes update the contrast
+          checks and preview automatically.
+        </p>
+
+        <div class="wcag-color-control">
+          <label class="wcag-label" for="foregroundHex">
+            Text / foreground color
+          </label>
+          <div class="wcag-input-row">
+            <input
+              class="wcag-color-picker"
+              type="color"
+              id="foregroundPicker"
+              value="#1f2937"
+              aria-label="Choose foreground color">
+            <input
+              class="wcag-hex"
+              type="text"
+              id="foregroundHex"
+              value="#1F2937"
+              maxlength="7"
+              autocomplete="off"
+              autocapitalize="characters"
+              spellcheck="false"
+              aria-describedby="foregroundError"
+              aria-invalid="false">
+          </div>
+          <p class="wcag-error" id="foregroundError" aria-live="polite"></p>
+        </div>
+
+        <div class="wcag-color-control">
+          <label class="wcag-label" for="backgroundHex">
+            Background color
+          </label>
+          <div class="wcag-input-row">
+            <input
+              class="wcag-color-picker"
+              type="color"
+              id="backgroundPicker"
+              value="#ffffff"
+              aria-label="Choose background color">
+            <input
+              class="wcag-hex"
+              type="text"
+              id="backgroundHex"
+              value="#FFFFFF"
+              maxlength="7"
+              autocomplete="off"
+              autocapitalize="characters"
+              spellcheck="false"
+              aria-describedby="backgroundError"
+              aria-invalid="false">
+          </div>
+          <p class="wcag-error" id="backgroundError" aria-live="polite"></p>
+        </div>
+
+        <div class="wcag-button-row">
+          <button class="wcag-btn" id="swapColors" type="button">
+            ⇄ Swap colors
+          </button>
+          <button class="wcag-btn" id="resetColors" type="button">
+            Reset
+          </button>
+          <button class="wcag-btn" id="randomColors" type="button">
+            Random pair
+          </button>
+        </div>
+
+        <hr class="wcag-divider">
+
+        <h3>Try a preset</h3>
+        <p class="wcag-section-note">
+          Select a sample combination to see the results.
+        </p>
+
+        <div class="wcag-button-row" aria-label="Color presets">
+          <button
+            class="wcag-btn wcag-preset"
+            type="button"
+            data-preset
+            data-fg="#000000"
+            data-bg="#FFFFFF">
+            Black / white
+          </button>
+
+          <button
+            class="wcag-btn wcag-preset"
+            type="button"
+            data-preset
+            data-fg="#1D4ED8"
+            data-bg="#FFFFFF">
+            Blue / white
+          </button>
+
+          <button
+            class="wcag-btn wcag-preset"
+            type="button"
+            data-preset
+            data-fg="#FFFFFF"
+            data-bg="#1D4ED8">
+            White / blue
+          </button>
+
+          <button
+            class="wcag-btn wcag-preset"
+            type="button"
+            data-preset
+            data-fg="#6B7280"
+            data-bg="#F3F4F6">
+            Gray / light gray
+          </button>
+
+          <button
+            class="wcag-btn wcag-preset"
+            type="button"
+            data-preset
+            data-fg="#166534"
+            data-bg="#DCFCE7">
+            Green / pale green
+          </button>
+
+          <button
+            class="wcag-btn wcag-preset"
+            type="button"
+            data-preset
+            data-fg="#991B1B"
+            data-bg="#FEE2E2">
+            Red / pale red
+          </button>
+        </div>
+
+        <p class="wcag-live-message" id="inputMessage" aria-live="polite">
+          Ready to check your color combination.
+        </p>
+      </div>
+
+      <div class="wcag-card">
+        <h2>Contrast results</h2>
+        <p class="wcag-section-note">
+          Threshold checks use the full calculated ratio, not the rounded number
+          displayed on screen.
+        </p>
+
+        <div class="wcag-ratio-panel">
+          <div class="wcag-ratio-label">Contrast ratio</div>
+          <output class="wcag-ratio-value" id="ratioOutput">14.68:1</output>
+          <div class="wcag-ratio-caption">
+            Maximum possible ratio: 21:1
+          </div>
+
+          <div
+            class="wcag-meter"
+            role="progressbar"
+            aria-label="Contrast ratio relative to the maximum possible ratio"
+            aria-valuemin="1"
+            aria-valuemax="21"
+            aria-valuenow="14.68"
+            id="ratioMeter">
+            <div class="wcag-meter-fill" id="ratioMeterFill"></div>
+          </div>
+
+          <p class="wcag-verdict" id="verdictText" aria-live="polite"></p>
+        </div>
+
+        <div class="wcag-criteria" id="criteriaResults">
+          <div class="wcag-criterion" data-criterion="aa-normal">
+            <div class="wcag-criterion-copy">
+              <span class="wcag-criterion-title">WCAG AA · Normal text</span>
+              <span class="wcag-criterion-detail">Minimum contrast: 4.5:1</span>
+            </div>
+            <span class="wcag-status" id="statusAANormal">PASS</span>
+          </div>
+
+          <div class="wcag-criterion" data-criterion="aa-large">
+            <div class="wcag-criterion-copy">
+              <span class="wcag-criterion-title">WCAG AA · Large text</span>
+              <span class="wcag-criterion-detail">Minimum contrast: 3:1</span>
+            </div>
+            <span class="wcag-status" id="statusAALarge">PASS</span>
+          </div>
+
+          <div class="wcag-criterion" data-criterion="aaa-normal">
+            <div class="wcag-criterion-copy">
+              <span class="wcag-criterion-title">WCAG AAA · Normal text</span>
+              <span class="wcag-criterion-detail">Minimum contrast: 7:1</span>
+            </div>
+            <span class="wcag-status" id="statusAAANormal">PASS</span>
+          </div>
+
+          <div class="wcag-criterion" data-criterion="aaa-large">
+            <div class="wcag-criterion-copy">
+              <span class="wcag-criterion-title">WCAG AAA · Large text</span>
+              <span class="wcag-criterion-detail">Minimum contrast: 4.5:1</span>
+            </div>
+            <span class="wcag-status" id="statusAAALarge">PASS</span>
+          </div>
+
+          <div class="wcag-criterion" data-criterion="non-text">
+            <div class="wcag-criterion-copy">
+              <span class="wcag-criterion-title">Non-text UI contrast reference</span>
+              <span class="wcag-criterion-detail">
+                3:1 reference for relevant UI components and graphics
+              </span>
+            </div>
+            <span class="wcag-status" id="statusNonText">PASS</span>
+          </div>
+        </div>
+
+        <div class="wcag-info">
+          Passing these contrast checks does not, by itself, prove that a whole
+          website conforms to WCAG. Other accessibility requirements must also
+          be evaluated.
+        </div>
+
+        <div class="wcag-button-row">
+          <button class="wcag-btn wcag-btn-primary" id="copyCss" type="button">
+            Copy CSS colors
+          </button>
+          <button class="wcag-btn" id="downloadReport" type="button">
+            Download report
+          </button>
+        </div>
+
+        <p class="wcag-live-message" id="actionMessage" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="wcag-workspace" aria-label="Color preview and suggestions">
+      <div class="wcag-card">
+        <h2>Live text preview</h2>
+        <p class="wcag-section-note">
+          See how your selected colors look on sample content.
+        </p>
+
+        <div class="wcag-preview">
+          <div class="wcag-preview-top">
+            <span class="wcag-preview-dot" aria-hidden="true"></span>
+            <span class="wcag-preview-dot" aria-hidden="true"></span>
+            <span class="wcag-preview-dot" aria-hidden="true"></span>
+            <span style="margin-left:.4rem">Sample page</span>
+          </div>
+
+          <div class="wcag-preview-canvas" id="previewCanvas">
+            <h3 id="previewHeading">Make your website easier to read</h3>
+            <p id="previewBody">
+              Good contrast helps more visitors read your content comfortably.
+              Check body text, navigation, form labels, and other important text.
+            </p>
+            <p class="wcag-preview-small" id="previewSmall">
+              This smaller text is included to help you review the selected colors.
+            </p>
+          </div>
+        </div>
+
+        <p class="wcag-disclaimer">
+          The preview demonstrates a solid foreground color on a solid background.
+          It does not evaluate gradients, images behind text, transparency, or every
+          possible element on your website.
+        </p>
+      </div>
+
+      <div class="wcag-card">
+        <h2>Improve your contrast</h2>
+        <p class="wcag-section-note">
+          These suggestions keep your background fixed and adjust the foreground
+          color toward black or white to find a nearby color that meets the
+          selected threshold when possible.
+        </p>
+
+        <div class="wcag-suggestions" id="suggestions">
+          <p class="wcag-section-note">
+            Suggestions will appear when the color values are valid.
+          </p>
+        </div>
+
+        <hr class="wcag-divider">
+
+        <h3>CSS color variables</h3>
+        <p class="wcag-section-note">
+          Copy these values into your stylesheet and adapt the variable names
+          to your project.
+        </p>
+
+        <pre class="wcag-css"><code id="cssSnippet">:root {
+  --text-color: #1F2937;
+  --background-color: #FFFFFF;
+}</code></pre>
+
+        <button class="wcag-btn" type="button" id="copyCssAgain">
+          Copy CSS snippet
+        </button>
+      </div>
+    </section>
+
+    <section class="wcag-content content prose">
+      <h2>How to use the WCAG Contrast Checker</h2>
+      <ol>
+        <li>Enter the text color and background color as HEX values, such as <code>#1F2937</code> and <code>#FFFFFF</code>.</li>
+        <li>Alternatively, open either color picker to select a color visually.</li>
+        <li>Read the calculated contrast ratio and check each AA and AAA status.</li>
+        <li>Review the live preview and use the suggestions if you need a more readable color.</li>
+        <li>Copy the CSS variables or download a text report for reference.</li>
+      </ol>
+
+      <h2>What is a contrast ratio?</h2>
+      <p>
+        A contrast ratio measures the difference in relative luminance between
+        two colors. A ratio of 1:1 means the colors have the same luminance;
+        black against white produces the maximum ratio of 21:1.
+      </p>
+
+      <p>
+        Hue alone does not determine contrast. Two colors may look different
+        while still having similar luminance, which can make text difficult
+        to read for some people.
+      </p>
+
+      <h2>WCAG AA and AAA contrast thresholds</h2>
+      <p>
+        For text, WCAG 2.2 Success Criterion 1.4.3 generally uses a minimum
+        contrast ratio of 4.5:1 for normal text and 3:1 for large text at
+        Level AA. Large text is generally at least 18-point regular text or
+        14-point bold text.
+      </p>
+
+      <p>
+        Level AAA under Success Criterion 1.4.6 generally requires 7:1 for
+        normal text and 4.5:1 for large text. These criteria have specific
+        exceptions, so the calculator should be used as a practical check,
+        not as a complete accessibility audit.
+      </p>
+
+      <p>
+        Relevant official guidance:
+        <a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html"
+           target="_blank" rel="noopener noreferrer">
+          W3C guidance for WCAG 2.2 contrast minimum
+        </a>.
+      </p>
+
+      <h2>Frequently asked questions</h2>
+
+      <div class="wcag-faq">
+        <h3>What is a good contrast ratio for normal text?</h3>
+        <p>
+          A ratio of at least 4.5:1 is the general WCAG AA minimum for normal
+          text. A higher ratio, such as 7:1, meets the standard AAA threshold
+          for normal text.
+        </p>
+      </div>
+
+      <div class="wcag-faq">
+        <h3>Can a color combination pass for large text but fail for normal text?</h3>
+        <p>
+          Yes. For example, a ratio of 3.5:1 meets the 3:1 AA threshold for
+          large text but does not meet the 4.5:1 AA threshold for normal text.
+        </p>
+      </div>
+
+      <div class="wcag-faq">
+        <h3>Does this tool check my entire website?</h3>
+        <p>
+          No. It checks one solid foreground and background color combination
+          at a time. A complete accessibility review also considers page
+          structure, keyboard access, form labels, focus indicators, images,
+          and other requirements.
+        </p>
+      </div>
+
+      <div class="wcag-faq">
+        <h3>Are my color values uploaded?</h3>
+        <p>
+          No upload is needed for the calculator. The contrast calculation
+          and suggestions are performed locally in your browser.
+        </p>
+      </div>
+
+      <div class="wcag-faq">
+        <h3>Why do two visually different colors sometimes fail?</h3>
+        <p>
+          Contrast is calculated from relative luminance rather than hue
+          difference alone. Colors with different hues may have similar
+          luminance and insufficient contrast.
+        </p>
+      </div>
+
+      <h2>How the contrast ratio is calculated</h2>
+      <p>
+        Each sRGB color channel is converted to linear light. Relative
+        luminance is then calculated using the standard weighted combination
+        of red, green, and blue channels.
+      </p>
+
+      <p>
+        If <code>L1</code> is the lighter color's relative luminance and
+        <code>L2</code> is the darker color's relative luminance, the ratio is:
+      </p>
+
+      <p><code>(L1 + 0.05) / (L2 + 0.05)</code></p>
+
+      <p>
+        The checker compares the unrounded result with each threshold, so
+        a value just below 4.5:1 is not treated as passing merely because
+        a displayed number looks rounded.
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>
+        <a href="../index.html">ConvertToToolsOnline</a>
+        · Free browser-based utility tools.
+      </p>
+      <p class="copyright">
+        © <span id="wcagYear"></span> ConvertToToolsOnline
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const $ = (id) => document.getElementById(id);
+
+      const fgHexInput = $("foregroundHex");
+      const bgHexInput = $("backgroundHex");
+      const fgPicker = $("foregroundPicker");
+      const bgPicker = $("backgroundPicker");
+
+      const ratioOutput = $("ratioOutput");
+      const verdictText = $("verdictText");
+      const meter = $("ratioMeter");
+      const meterFill = $("ratioMeterFill");
+      const inputMessage = $("inputMessage");
+      const actionMessage = $("actionMessage");
+      const suggestionsBox = $("suggestions");
+      const cssSnippet = $("cssSnippet");
+      const copyCssButton = $("copyCss");
+      const downloadButton = $("downloadReport");
+
+      const defaultForeground = "#1F2937";
+      const defaultBackground = "#FFFFFF";
+
+      let lastReport = null;
+      let messageTimer = null;
+
+      const criteria = [
+        {
+          id: "statusAANormal",
+          name: "WCAG AA normal text",
+          threshold: 4.5
+        },
+        {
+          id: "statusAALarge",
+          name: "WCAG AA large text",
+          threshold: 3
+        },
+        {
+          id: "statusAAANormal",
+          name: "WCAG AAA normal text",
+          threshold: 7
+        },
+        {
+          id: "statusAAALarge",
+          name: "WCAG AAA large text",
+          threshold: 4.5
+        },
+        {
+          id: "statusNonText",
+          name: "Non-text UI contrast reference",
+          threshold: 3
+        }
+      ];
+
+      const randomPairs = [
+        ["#FFFFFF", "#111827"],
+        ["#0F172A", "#F8FAFC"],
+        ["#1D4ED8", "#FFFFFF"],
+        ["#FFFFFF", "#166534"],
+        ["#7F1D1D", "#FEF2F2"],
+        ["#312E81", "#EEF2FF"],
+        ["#FFFFFF", "#334155"],
+        ["#064E3B", "#ECFDF5"]
+      ];
+
+      function normalizeHex(value) {
+        if (typeof value !== "string") return null;
+
+        let hex = value.trim().replace(/^#/, "");
+
+        if (/^[0-9a-fA-F]{3}$/.test(hex)) {
+          hex = hex.split("").map((char) => char + char).join("");
+        }
+
+        if (!/^[0-9a-fA-F]{6}$/.test(hex)) {
+          return null;
+        }
+
+        return "#" + hex.toUpperCase();
+      }
+
+      function hexToRgb(hex) {
+        const normalized = normalizeHex(hex);
+        if (!normalized) return null;
+
+        const value = normalized.slice(1);
+
+        return {
+          r: parseInt(value.slice(0, 2), 16),
+          g: parseInt(value.slice(2, 4), 16),
+          b: parseInt(value.slice(4, 6), 16)
+        };
+      }
+
+      function rgbToHex(rgb) {
+        const channel = (value) => {
+          const n = Math.round(Math.max(0, Math.min(255, value)));
+          return n.toString(16).padStart(2, "0");
+        };
+
+        return (
+          "#" +
+          channel(rgb.r) +
+          channel(rgb.g) +
+          channel(rgb.b)
+        ).toUpperCase();
+      }
+
+      function linearize(channel) {
+        const value = channel / 255;
+
+        return value <= 0.04045
+          ? value / 12.92
+          : Math.pow((value + 0.055) / 1.055, 2.4);
+      }
+
+      function luminance(hex) {
+        const rgb = hexToRgb(hex);
+        if (!rgb) return NaN;
+
+        return (
+          0.2126 * linearize(rgb.r) +
+          0.7152 * linearize(rgb.g) +
+          0.0722 * linearize(rgb.b)
+        );
+      }
+
+      function contrastRatio(first, second) {
+        const lum1 = luminance(first);
+        const lum2 = luminance(second);
+
+        if (!Number.isFinite(lum1) || !Number.isFinite(lum2)) {
+          return NaN;
+        }
+
+        const lighter = Math.max(lum1, lum2);
+        const darker = Math.min(lum1, lum2);
+
+        return (lighter + 0.05) / (darker + 0.05);
+      }
+
+      function displayRatio(value) {
+        return Number.isFinite(value) ? value.toFixed(2) + ":1" : "—";
+      }
+
+      function mixColors(first, second, amount) {
+        const a = hexToRgb(first);
+        const b = hexToRgb(second);
+
+        if (!a || !b) return null;
+
+        return rgbToHex({
+          r: a.r + (b.r - a.r) * amount,
+          g: a.g + (b.g - a.g) * amount,
+          b: a.b + (b.b - a.b) * amount
+        });
+      }
+
+      function setStatus(id, ratio, threshold) {
+        const node = $(id);
+
+        node.classList.remove("pass", "fail");
+
+        if (!Number.isFinite(ratio)) {
+          node.textContent = "WAIT";
+          node.setAttribute("aria-label", "Waiting for valid colors");
+          return;
+        }
+
+        const passes = ratio >= threshold;
+
+        node.textContent = passes ? "PASS" : "FAIL";
+        node.classList.add(passes ? "pass" : "fail");
+
+        node.setAttribute(
+          "aria-label",
+          passes
+            ? "Passes contrast threshold of " + threshold + " to 1"
+            : "Fails contrast threshold of " + threshold + " to 1"
+        );
+      }
+
+      function updateCriteria(ratio) {
+        criteria.forEach((criterion) => {
+          setStatus(criterion.id, ratio, criterion.threshold);
+        });
+      }
+
+      function markInvalid(input, errorId, message) {
+        input.setAttribute("aria-invalid", "true");
+        $(errorId).textContent = message;
+      }
+
+      function clearInvalid(input, errorId) {
+        input.setAttribute("aria-invalid", "false");
+        $(errorId).textContent = "";
+      }
+
+      function resetOutputForInvalidColors() {
+        ratioOutput.textContent = "—";
+        verdictText.textContent = "Enter valid HEX colors to calculate contrast.";
+        verdictText.className = "wcag-verdict";
+        meter.setAttribute("aria-valuenow", "1");
+        meterFill.style.width = "0%";
+
+        updateCriteria(NaN);
+
+        $("previewHeading").style.color = "";
+        $("previewBody").style.color = "";
+        $("previewSmall").style.color = "";
+        $("previewCanvas").style.backgroundColor = "";
+
+        suggestionsBox.replaceChildren();
+
+        const note = document.createElement("p");
+        note.className = "wcag-section-note";
+        note.textContent = "Fix the color values to calculate accessible alternatives.";
+        suggestionsBox.appendChild(note);
+
+        cssSnippet.textContent = "Enter valid HEX colors to create CSS variables.";
+
+        copyCssButton.disabled = true;
+        downloadButton.disabled = true;
+        lastReport = null;
+      }
+
+      function blendCandidate(foreground, background, target) {
+        const currentRatio = contrastRatio(foreground, background);
+
+        if (currentRatio >= target) {
+          return {
+            color: foreground,
+            amount: 0,
+            targetColor: foreground,
+            alreadyPasses: true
+          };
+        }
+
+        const endpoints = ["#000000", "#FFFFFF"];
+        const candidates = [];
+
+        endpoints.forEach((endColor) => {
+          if (contrastRatio(endColor, background) < target) {
+            return;
+          }
+
+          let low = 0;
+          let high = 1;
+
+          for (let i = 0; i < 30; i++) {
+            const middle = (low + high) / 2;
+            const mixed = mixColors(foreground, endColor, middle);
+
+            if (contrastRatio(mixed, background) >= target) {
+              high = middle;
+            } else {
+              low = middle;
+            }
+          }
+
+          const candidateColor = mixColors(foreground, endColor, high);
+
+          candidates.push({
+            color: candidateColor,
+            amount: high,
+            targetColor: endColor,
+            alreadyPasses: false
+          });
+        });
+
+        if (!candidates.length) {
+          return null;
+        }
+
+        candidates.sort((a, b) => a.amount - b.amount);
+
+        return candidates[0];
+      }
+
+      function makeSuggestion(title, result, background, target) {
+        const card = document.createElement("div");
+        card.className = "wcag-suggestion";
+
+        const header = document.createElement("div");
+        header.className = "wcag-suggestion-header";
+
+        const swatch = document.createElement("span");
+        swatch.className = "wcag-swatch";
+        swatch.style.backgroundColor = result ? result.color : "#FFFFFF";
+        swatch.setAttribute("aria-hidden", "true");
+
+        const headingBox = document.createElement("div");
+        headingBox.className = "wcag-suggestion-heading";
+
+        const heading = document.createElement("strong");
+        heading.textContent = title;
+
+        const code = document.createElement("code");
+        code.textContent = result ? result.color : "No valid solution";
+
+        headingBox.append(heading, code);
+        header.append(swatch, headingBox);
+        card.appendChild(header);
+
+        const note = document.createElement("p");
+        note.className = "wcag-suggestion-note";
+
+        if (!result) {
+          note.textContent =
+            "This background does not allow the selected target ratio with any foreground color. Adjust the background color.";
+          card.appendChild(note);
+          return card;
+        }
+
+        if (result.alreadyPasses) {
+          note.textContent =
+            "Your current foreground already meets the " +
+            target +
+            ":1 target. No color change is necessary.";
+        } else {
+          note.textContent =
+            "Mix toward " +
+            result.targetColor +
+            " by approximately " +
+            (result.amount * 100).toFixed(1) +
+            "% to meet the target while changing the current foreground as little as possible.";
+        }
+
+        card.appendChild(note);
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "wcag-btn";
+        button.textContent = result.alreadyPasses
+          ? "Keep current color"
+          : "Use " + result.color;
+
+        if (result.alreadyPasses) {
+          button.disabled = true;
+        }
+
+        button.dataset.suggestionColor = result.color;
+        button.setAttribute("aria-label", "Use suggested foreground color " + result.color);
+
+        card.appendChild(button);
+
+        return card;
+      }
+
+      function renderSuggestions(foreground, background) {
+        suggestionsBox.replaceChildren();
+
+        const aa = blendCandidate(foreground, background, 4.5);
+        const aaa = blendCandidate(foreground, background, 7);
+
+        suggestionsBox.append(
+          makeSuggestion("AA normal-text target · 4.5:1", aa, background, 4.5),
+          makeSuggestion("AAA normal-text target · 7:1", aaa, background, 7)
+        );
+      }
+
+      function buildReport(foreground, background, ratio) {
+        const lines = [
+          "WCAG CONTRAST CHECK REPORT",
+          "==========================",
+          "",
+          "Foreground color: " + foreground,
+          "Background color: " + background,
+          "Contrast ratio: " + ratio.toFixed(4) + ":1",
+          "",
+          "TEXT CONTRAST CHECKS",
+          "--------------------"
+        ];
+
+        criteria.forEach((criterion) => {
+          lines.push(
+            criterion.name +
+            " (" +
+            criterion.threshold +
+            ":1): " +
+            (ratio >= criterion.threshold ? "PASS" : "FAIL")
+          );
+        });
+
+        lines.push(
+          "",
+          "CSS VARIABLES",
+          "-------------",
+          ":root {",
+          "  --text-color: " + foreground + ";",
+          "  --background-color: " + background + ";",
+          "}",
+          "",
+          "Method: WCAG relative-luminance contrast ratio.",
+          "The ratios are checks of this color pair only, not a complete website audit.",
+          "Review the official WCAG requirements for exceptions and additional criteria."
+        );
+
+        return lines.join("\n");
+      }
+
+      function announce(message) {
+        actionMessage.textContent = message;
+
+        if (messageTimer) {
+          window.clearTimeout(messageTimer);
+        }
+
+        messageTimer = window.setTimeout(() => {
+          actionMessage.textContent = "";
+        }, 4000);
+      }
+
+      async function copyText(text) {
+        if (!text) {
+          announce("There is nothing to copy yet.");
+          return;
+        }
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+            announce("Copied to clipboard.");
+            return;
+          }
+        } catch (error) {
+          // Try the fallback below.
+        }
+
+        const temporary = document.createElement("textarea");
+        temporary.value = text;
+        temporary.setAttribute("readonly", "");
+        temporary.style.position = "fixed";
+        temporary.style.left = "-9999px";
+        temporary.style.top = "0";
+
+        document.body.appendChild(temporary);
+        temporary.select();
+
+        let copied = false;
+
+        try {
+          copied = document.execCommand("copy");
+        } catch (error) {
+          copied = false;
+        }
+
+        temporary.remove();
+
+        announce(
+          copied
+            ? "Copied to clipboard."
+            : "Copy was blocked by the browser. Select and copy the text manually."
+        );
+      }
+
+      function updateAll() {
+        const foreground = normalizeHex(fgHexInput.value);
+        const background = normalizeHex(bgHexInput.value);
+
+        if (!foreground) {
+          markInvalid(
+            fgHexInput,
+            "foregroundError",
+            "Enter a valid HEX color, such as #2563EB or #FFF."
+          );
+        } else {
+          clearInvalid(fgHexInput, "foregroundError");
+        }
+
+        if (!background) {
+          markInvalid(
+            bgHexInput,
+            "backgroundError",
+            "Enter a valid HEX color, such as #FFFFFF or #FFF."
+          );
+        } else {
+          clearInvalid(bgHexInput, "backgroundError");
+        }
+
+        if (!foreground || !background) {
+          inputMessage.textContent = "Correct the invalid color value to continue.";
+          resetOutputForInvalidColors();
+          return;
+        }
+
+        fgPicker.value = foreground;
+        bgPicker.value = background;
+
+        const ratio = contrastRatio(foreground, background);
+
+        ratioOutput.textContent = displayRatio(ratio);
+        meterFill.style.width = Math.min(100, Math.max(0, (ratio / 21) * 100)) + "%";
+        meter.setAttribute("aria-valuenow", String(Math.min(21, Math.max(1, ratio))));
+
+        const aaPass = ratio >= 4.5;
+        const aaaPass = ratio >= 7;
+
+        verdictText.className = "wcag-verdict " + (aaPass ? "pass" : "fail");
+
+        if (aaaPass) {
+          verdictText.textContent = "Meets the AA and AAA text contrast thresholds.";
+        } else if (aaPass) {
+          verdictText.textContent = "Meets AA text contrast thresholds, but not AAA normal-text contrast.";
+        } else if (ratio >= 3) {
+          verdictText.textContent = "Meets the large-text contrast thresholds, but fails normal-text AA.";
+        } else {
+          verdictText.textContent = "Fails all four listed WCAG text contrast thresholds.";
+        }
+
+        updateCriteria(ratio);
+
+        $("previewCanvas").style.backgroundColor = background;
+        $("previewHeading").style.color = foreground;
+        $("previewBody").style.color = foreground;
+        $("previewSmall").style.color = foreground;
+
+        cssSnippet.textContent =
+          ":root {\n" +
+          "  --text-color: " + foreground + ";\n" +
+          "  --background-color: " + background + ";\n" +
+          "}";
+
+        renderSuggestions(foreground, background);
+
+        lastReport = buildReport(foreground, background, ratio);
+        copyCssButton.disabled = false;
+        downloadButton.disabled = false;
+
+        inputMessage.textContent =
+          "Colors checked: " + foreground + " on " + background + ".";
+      }
+
+      function setColors(foreground, background) {
+        const normalizedForeground = normalizeHex(foreground);
+        const normalizedBackground = normalizeHex(background);
+
+        if (!normalizedForeground || !normalizedBackground) {
+          announce("Could not apply the selected colors.");
+          return;
+        }
+
+        fgHexInput.value = normalizedForeground;
+        bgHexInput.value = normalizedBackground;
+
+        fgPicker.value = normalizedForeground;
+        bgPicker.value = normalizedBackground;
+
+        updateAll();
+      }
+
+      fgHexInput.addEventListener("input", updateAll);
+      bgHexInput.addEventListener("input", updateAll);
+
+      fgHexInput.addEventListener("blur", () => {
+        const normalized = normalizeHex(fgHexInput.value);
+        if (normalized) fgHexInput.value = normalized;
+        updateAll();
+      });
+
+      bgHexInput.addEventListener("blur", () => {
+        const normalized = normalizeHex(bgHexInput.value);
+        if (normalized) bgHexInput.value = normalized;
+        updateAll();
+      });
+
+      fgPicker.addEventListener("input", () => {
+        fgHexInput.value = fgPicker.value.toUpperCase();
+        updateAll();
+      });
+
+      bgPicker.addEventListener("input", () => {
+        bgHexInput.value = bgPicker.value.toUpperCase();
+        updateAll();
+      });
+
+      $("swapColors").addEventListener("click", () => {
+        const foreground = normalizeHex(fgHexInput.value);
+        const background = normalizeHex(bgHexInput.value);
+
+        if (!foreground || !background) {
+          announce("Correct both HEX values before swapping.");
+          return;
+        }
+
+        setColors(background, foreground);
+      });
+
+      $("resetColors").addEventListener("click", () => {
+        setColors(defaultForeground, defaultBackground);
+        announce("Colors reset to the default combination.");
+      });
+
+      $("randomColors").addEventListener("click", () => {
+        const randomIndex = Math.floor(Math.random() * randomPairs.length);
+        const pair = randomPairs[randomIndex];
+
+        setColors(pair[0], pair[1]);
+        announce("A sample color pair has been selected.");
+      });
+
+      document.querySelectorAll("[data-preset]").forEach((button) => {
+        button.addEventListener("click", () => {
+          setColors(button.dataset.fg, button.dataset.bg);
+        });
+      });
+
+      suggestionsBox.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-suggestion-color]");
+
+        if (!button) return;
+
+        const normalized = normalizeHex(button.dataset.suggestionColor);
+        const background = normalizeHex(bgHexInput.value);
+
+        if (normalized && background) {
+          setColors(normalized, background);
+          announce("Suggested foreground color applied.");
+        }
+      });
+
+      $("copyCss").addEventListener("click", () => {
+        copyText(cssSnippet.textContent);
+      });
+
+      $("copyCssAgain").addEventListener("click", () => {
+        copyText(cssSnippet.textContent);
+      });
+
+      $("downloadReport").addEventListener("click", () => {
+        if (!lastReport) {
+          announce("Enter valid colors before downloading a report.");
+          return;
+        }
+
+        try {
+          const blob = new Blob([lastReport], {
+            type: "text/plain;charset=utf-8"
+          });
+
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+
+          link.href = url;
+          link.download = "wcag-contrast-report.txt";
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+
+          window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+          announce("Contrast report download started.");
+        } catch (error) {
+          announce("The report could not be downloaded in this browser.");
+        }
+      });
+
+      // Use the current year in the footer.
+      $("wcagYear").textContent = String(new Date().getFullYear());
+
+      // Initialize the calculator.
+      setColors(defaultForeground, defaultBackground);
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Mojibake Fixer – Repair Garbled Text & UTF-8 Online</title>
+  <meta name="description" content="Repair garbled UTF-8 text such as CafÃ© and â€™. Compare repair candidates, handle repeated encoding errors, decode HTML entities and download cleaned text privately.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#2563eb">
+
+  <link rel="canonical" href="https://onlinetoolsandconverters.cc/tools/mojibake-fixer.html">
+  <link rel="stylesheet" href="../style.css">
+  <script src="../script.js" defer></script>
+
+  <style>
+    .moji-tool {
+      --mj-ink: #172033;
+      --mj-muted: #64748b;
+      --mj-border: #dbe2ea;
+      --mj-soft: #f8fafc;
+      --mj-blue: #2563eb;
+      --mj-green: #166534;
+      --mj-green-bg: #dcfce7;
+      --mj-red: #991b1b;
+      --mj-red-bg: #fee2e2;
+      color: var(--mj-ink);
+    }
+
+    .moji-tool *,
+    .moji-tool *::before,
+    .moji-tool *::after {
+      box-sizing: border-box;
+    }
+
+    .mj-intro {
+      max-width: 900px;
+      margin-bottom: 1.5rem;
+    }
+
+    .mj-intro h1 {
+      line-height: 1.15;
+      margin-bottom: .75rem;
+    }
+
+    .mj-intro p {
+      color: var(--mj-muted);
+      font-size: 1.03rem;
+      line-height: 1.75;
+    }
+
+    .mj-kicker {
+      display: inline-block;
+      margin-bottom: .5rem;
+      color: var(--mj-blue);
+      font-weight: 800;
+      font-size: .78rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .mj-card {
+      min-width: 0;
+      padding: clamp(1rem, 2.5vw, 1.5rem);
+      border: 1px solid var(--mj-border);
+      border-radius: 15px;
+      background: #fff;
+      box-shadow: 0 5px 22px rgba(15, 23, 42, .045);
+      margin: 1.2rem 0;
+    }
+
+    .mj-card h2,
+    .mj-card h3 {
+      margin-top: 0;
+      line-height: 1.35;
+    }
+
+    .mj-muted {
+      color: var(--mj-muted);
+      font-size: .9rem;
+      line-height: 1.7;
+    }
+
+    .mj-textarea {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      min-height: 215px;
+      padding: .85rem;
+      border: 1px solid var(--mj-border);
+      border-radius: 10px;
+      background: #fff;
+      color: var(--mj-ink);
+      font: inherit;
+      font-size: .92rem;
+      line-height: 1.7;
+      resize: vertical;
+      overflow-wrap: anywhere;
+    }
+
+    .mj-textarea:focus,
+    .mj-select:focus,
+    .mj-input:focus,
+    .mj-btn:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, .24);
+      outline-offset: 2px;
+      border-color: var(--mj-blue);
+    }
+
+    .mj-textarea[aria-invalid="true"] {
+      border-color: #dc2626;
+      background: #fff7f7;
+    }
+
+    .mj-output {
+      background: #f8fafc;
+    }
+
+    .mj-label {
+      display: block;
+      margin-bottom: .45rem;
+      font-size: .92rem;
+      font-weight: 750;
+    }
+
+    .mj-field {
+      min-width: 0;
+      margin: 1rem 0;
+    }
+
+    .mj-field small {
+      display: block;
+      margin-top: .35rem;
+      color: var(--mj-muted);
+      font-size: .8rem;
+      line-height: 1.55;
+    }
+
+    .mj-input,
+    .mj-select {
+      display: block;
+      width: 100%;
+      min-height: 43px;
+      padding: .6rem .75rem;
+      border: 1px solid var(--mj-border);
+      border-radius: 9px;
+      background: #fff;
+      color: var(--mj-ink);
+      font: inherit;
+      font-size: .92rem;
+    }
+
+    .mj-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin: 1rem 0;
+    }
+
+    .mj-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+      padding: .62rem .85rem;
+      border: 1px solid var(--mj-border);
+      border-radius: 9px;
+      background: #fff;
+      color: var(--mj-ink);
+      font: inherit;
+      font-size: .87rem;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .mj-btn:hover {
+      background: #f1f5f9;
+    }
+
+    .mj-btn-primary {
+      background: var(--mj-blue);
+      border-color: var(--mj-blue);
+      color: #fff;
+    }
+
+    .mj-btn-primary:hover {
+      color: #fff;
+      background: #1d4ed8;
+      border-color: #1d4ed8;
+    }
+
+    .mj-btn-small {
+      min-height: 33px;
+      padding: .4rem .6rem;
+      font-size: .78rem;
+    }
+
+    .mj-btn:disabled {
+      cursor: not-allowed;
+      opacity: .5;
+    }
+
+    .mj-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .65rem;
+      margin: 1rem 0;
+    }
+
+    .mj-option {
+      display: flex;
+      align-items: flex-start;
+      gap: .6rem;
+      min-width: 0;
+      padding: .75rem;
+      border: 1px solid var(--mj-border);
+      border-radius: 9px;
+      background: #fff;
+      cursor: pointer;
+      font-size: .85rem;
+      line-height: 1.55;
+    }
+
+    .mj-option input {
+      flex-shrink: 0;
+      margin-top: .2rem;
+      accent-color: var(--mj-blue);
+    }
+
+    .mj-option strong {
+      display: block;
+      font-size: .87rem;
+    }
+
+    .mj-divider {
+      border: 0;
+      border-top: 1px solid var(--mj-border);
+      margin: 1.3rem 0;
+    }
+
+    .mj-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: .65rem;
+      margin: 1rem 0;
+    }
+
+    .mj-stat {
+      min-width: 0;
+      padding: .8rem;
+      border: 1px solid var(--mj-border);
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    .mj-stat-label {
+      display: block;
+      color: var(--mj-muted);
+      font-size: .78rem;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .mj-stat-value {
+      display: block;
+      margin-top: .35rem;
+      font-size: 1.25rem;
+      font-weight: 850;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    .mj-alert {
+      padding: .9rem 1rem;
+      margin: 1rem 0;
+      border: 1px solid #bfdbfe;
+      border-radius: 10px;
+      background: #eff6ff;
+      color: #1e3a8a;
+      font-size: .86rem;
+      line-height: 1.7;
+    }
+
+    .mj-alert-warning {
+      border-color: #fde68a;
+      background: #fffbeb;
+      color: #854d0e;
+    }
+
+    .mj-alert-success {
+      border-color: #bbf7d0;
+      background: #f0fdf4;
+      color: #166534;
+    }
+
+    .mj-message {
+      min-height: 1.45em;
+      color: var(--mj-muted);
+      font-size: .84rem;
+      line-height: 1.6;
+      margin: .7rem 0 0;
+    }
+
+    .mj-error {
+      color: var(--mj-red);
+      font-size: .87rem;
+      line-height: 1.6;
+      margin: .7rem 0;
+    }
+
+    .mj-error:empty {
+      display: none;
+    }
+
+    .mj-candidate-list {
+      display: grid;
+      gap: .8rem;
+      margin-top: 1rem;
+    }
+
+    .mj-candidate {
+      min-width: 0;
+      padding: .9rem;
+      border: 1px solid var(--mj-border);
+      border-radius: 11px;
+      background: #fff;
+    }
+
+    .mj-candidate.is-recommended {
+      border-color: #86efac;
+      background: #f7fff9;
+    }
+
+    .mj-candidate.is-selected {
+      outline: 2px solid rgba(37, 99, 235, .28);
+      outline-offset: 1px;
+    }
+
+    .mj-candidate-heading {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .45rem;
+      margin-bottom: .65rem;
+    }
+
+    .mj-candidate-title {
+      flex: 1 1 160px;
+      font-size: .9rem;
+      font-weight: 850;
+      overflow-wrap: anywhere;
+    }
+
+    .mj-tag {
+      display: inline-block;
+      padding: .28rem .45rem;
+      border-radius: 6px;
+      background: #e2e8f0;
+      color: #334155;
+      font-size: .7rem;
+      font-weight: 850;
+    }
+
+    .mj-tag-green {
+      background: var(--mj-green-bg);
+      color: var(--mj-green);
+    }
+
+    .mj-candidate-preview {
+      max-height: 145px;
+      overflow: auto;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      padding: .75rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background: #f8fafc;
+      color: #1e293b;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .81rem;
+      line-height: 1.65;
+    }
+
+    .mj-candidate-meta {
+      color: var(--mj-muted);
+      font-size: .79rem;
+      line-height: 1.55;
+      margin: .55rem 0;
+    }
+
+    .mj-inline-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: .4rem;
+    }
+
+    .mj-content {
+      max-width: 900px;
+      margin: 2.5rem auto;
+    }
+
+    .mj-content h2 {
+      margin-top: 2.1rem;
+      line-height: 1.4;
+    }
+
+    .mj-content p,
+    .mj-content li {
+      line-height: 1.8;
+    }
+
+    .mj-content code {
+      overflow-wrap: anywhere;
+    }
+
+    .mj-faq {
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--mj-border);
+    }
+
+    .mj-faq h3 {
+      margin: 0 0 .45rem;
+      font-size: 1rem;
+    }
+
+    .mj-faq p {
+      margin: 0;
+      color: var(--mj-muted);
+    }
+
+    @media (max-width: 650px) {
+      .mj-options {
+        grid-template-columns: 1fr;
+      }
+
+      .mj-stats {
+        gap: .45rem;
+      }
+
+      .mj-stat {
+        padding: .65rem;
+      }
+
+      .mj-stat-value {
+        font-size: 1.05rem;
+      }
+
+      .mj-buttons .mj-btn {
+        flex: 1 1 auto;
+      }
+
+      .mj-textarea {
+        min-height: 185px;
+      }
+    }
+
+    @media print {
+      .site-header,
+      .site-footer,
+      .mj-input-card,
+      .mj-content,
+      .mj-buttons {
+        display: none !important;
+      }
+
+      .mj-card {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Mojibake Fixer and Text Encoding Repair",
+    "url": "https://onlinetoolsandconverters.cc/tools/mojibake-fixer.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any",
+    "isAccessibleForFree": true,
+    "description": "Repair common garbled UTF-8 text, compare encoding repair candidates, decode HTML entities and download text using a browser-based tool.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is mojibake?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mojibake is garbled text caused when data is decoded using an incorrect character encoding. For example, UTF-8 text containing café may display as CafÃ© if its bytes are interpreted incorrectly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can every garbled string be repaired?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Some encoding errors are reversible, but information may be lost if characters have already been replaced with question marks or Unicode replacement characters. Review repair candidates before using the result."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does this tool upload my text?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The repair and text transformations run locally in your browser. No server-side repair API is needed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the tool fix every language encoding?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The automatic repair focuses on common Western UTF-8 text misread as Windows-1252 or ISO-8859-1. Other encoding mismatches, such as some legacy East Asian encodings, may require a separate encoding-specific converter."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="../index.html" aria-label="ConvertToToolsOnline home">
+        <span class="brand-mark" aria-hidden="true">C</span>
+        <span class="brand-text">ConvertToToolsOnline</span>
+      </a>
+
+      <button
+        class="nav-toggle"
+        type="button"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+        aria-controls="primaryNav">
+        ☰
+      </button>
+
+      <nav class="primary-nav" id="primaryNav" aria-label="Main navigation">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../index.html#tools">All tools</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container moji-tool" id="main">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="../index.html">Home</a>
+      <span aria-hidden="true"> / </span>
+      <span>Text &amp; Data Tools</span>
+      <span aria-hidden="true"> / </span>
+      <span aria-current="page">Mojibake Fixer</span>
+    </nav>
+
+    <section class="mj-intro">
+      <span class="mj-kicker">Text &amp; encoding tools</span>
+      <h1>Mojibake Fixer &amp; Text Encoding Repair</h1>
+      <p>
+        Repair garbled text such as <code>CafÃ©</code>, <code>FranÃ§ais</code>,
+        or <code>â€™</code>. Compare alternative repairs, handle repeated
+        encoding mistakes, and copy or download the restored text.
+      </p>
+    </section>
+
+    <section class="mj-card mj-input-card">
+      <h2>Paste your garbled text</h2>
+      <p class="mj-muted">
+        This tool focuses on common Western text that was originally UTF-8
+        but was interpreted as Windows-1252 or Latin-1. Repair suggestions
+        are heuristic; always review the output before replacing important data.
+      </p>
+
+      <div class="mj-field">
+        <label class="mj-label" for="mjInput">Original / garbled text</label>
+        <textarea
+          class="mj-textarea"
+          id="mjInput"
+          spellcheck="false"
+          autocapitalize="off"
+          autocomplete="off"
+          placeholder="Paste text here, for example: FranÃ§ais — cafÃ© — â€™quotesâ€™"
+          aria-describedby="mjInputHelp"></textarea>
+        <small id="mjInputHelp" class="mj-muted">
+          Maximum 500,000 characters per analysis. Plain text and text files are supported.
+        </small>
+      </div>
+
+      <div class="mj-buttons">
+        <button class="mj-btn mj-btn-primary" type="button" id="mjAnalyze">
+          Analyze &amp; find repairs
+        </button>
+        <button class="mj-btn" type="button" id="mjSample">
+          Load example
+        </button>
+        <button class="mj-btn" type="button" id="mjClear">
+          Clear
+        </button>
+        <button class="mj-btn" type="button" id="mjOpenFile">
+          Open text file
+        </button>
+        <input
+          id="mjFile"
+          type="file"
+          accept=".txt,.csv,.tsv,.json,.xml,.srt,.vtt,.md,.html,.sql,.log,.text"
+          hidden>
+      </div>
+
+      <div class="mj-field">
+        <label class="mj-label" for="mjPasses">Maximum repair passes</label>
+        <select class="mj-select" id="mjPasses">
+          <option value="1">1 pass — simple mistakes</option>
+          <option value="2" selected>2 passes — common repeated errors</option>
+          <option value="3">3 passes — multiple encoding mistakes</option>
+        </select>
+        <small>
+          Extra passes may repair text that was incorrectly decoded multiple times,
+          but they can also create false candidates.
+        </small>
+      </div>
+
+      <h3>Repair methods</h3>
+      <div class="mj-options">
+        <label class="mj-option">
+          <input type="checkbox" id="mjWindows" checked>
+          <span>
+            <strong>Windows-1252 repair</strong>
+            Try to reverse common UTF-8 text misread using Windows-1252.
+          </span>
+        </label>
+
+        <label class="mj-option">
+          <input type="checkbox" id="mjLatin" checked>
+          <span>
+            <strong>Latin-1 repair</strong>
+            Try the ISO-8859-1 / Latin-1 byte interpretation.
+          </span>
+        </label>
+      </div>
+
+      <hr class="mj-divider">
+
+      <h3>Optional output cleanup</h3>
+      <p class="mj-muted">
+        These options change the chosen candidate. They are not automatically
+        assumed to be correct for every document.
+      </p>
+
+      <div class="mj-options">
+        <label class="mj-option">
+          <input type="checkbox" id="mjStripBom" checked>
+          <span>
+            <strong>Remove leading BOM</strong>
+            Remove a leading Unicode byte-order mark from the output.
+          </span>
+        </label>
+
+        <label class="mj-option">
+          <input type="checkbox" id="mjDecodeEntities">
+          <span>
+            <strong>Decode HTML entities</strong>
+            Convert items such as <code>&amp;eacute;</code> and <code>&amp;amp;</code>.
+          </span>
+        </label>
+
+        <label class="mj-option">
+          <input type="checkbox" id="mjNormalize">
+          <span>
+            <strong>Normalize Unicode to NFC</strong>
+            Normalize canonically equivalent character sequences.
+          </span>
+        </label>
+      </div>
+
+      <p class="mj-error" id="mjError" role="alert" aria-live="polite"></p>
+      <p class="mj-message" id="mjInputStatus" aria-live="polite">
+        Paste text or load the example to begin.
+      </p>
+    </section>
+
+    <section class="mj-card">
+      <h2>Repair candidates</h2>
+      <p class="mj-muted">
+        Candidate scores are heuristic indicators of common encoding artifacts,
+        not probabilities or guarantees. Compare the choices and select the
+        version that preserves your intended meaning.
+      </p>
+
+      <div class="mj-stats">
+        <div class="mj-stat">
+          <span class="mj-stat-label">Input characters</span>
+          <output class="mj-stat-value" id="mjInputChars">0</output>
+        </div>
+        <div class="mj-stat">
+          <span class="mj-stat-label">Candidates</span>
+          <output class="mj-stat-value" id="mjCandidateCount">0</output>
+        </div>
+        <div class="mj-stat">
+          <span class="mj-stat-label">Current output</span>
+          <output class="mj-stat-value" id="mjOutputChars">0</output>
+        </div>
+      </div>
+
+      <div class="mj-candidate-list" id="mjCandidates">
+        <div class="mj-alert">
+          No candidates yet. Paste text and select <strong>Analyze &amp; find repairs</strong>.
+        </div>
+      </div>
+
+      <p class="mj-message" id="mjCandidateStatus" aria-live="polite"></p>
+    </section>
+
+    <section class="mj-card">
+      <h2>Selected output</h2>
+      <p class="mj-muted">
+        The top-ranked candidate is suggested as a starting point when the
+        heuristic score improves. You can edit the output manually before
+        copying or downloading it.
+      </p>
+
+      <div class="mj-field">
+        <label class="mj-label" for="mjOutput">Repaired text</label>
+        <textarea
+          class="mj-textarea mj-output"
+          id="mjOutput"
+          spellcheck="false"
+          autocapitalize="off"
+          autocomplete="off"
+          placeholder="Your selected text appears here."
+          aria-describedby="mjOutputHelp"></textarea>
+        <small id="mjOutputHelp" class="mj-muted">
+          Review all changes carefully. If the original bytes were lost,
+          no repair tool can always recover them.
+        </small>
+      </div>
+
+      <div class="mj-buttons">
+        <button class="mj-btn mj-btn-primary" type="button" id="mjCopy">
+          Copy output
+        </button>
+        <button class="mj-btn" type="button" id="mjDownload">
+          Download repaired file
+        </button>
+      </div>
+
+      <p class="mj-message" id="mjActionStatus" aria-live="polite"></p>
+
+      <div class="mj-alert mj-alert-warning">
+        <strong>Important:</strong> automatic encoding repair is not proof
+        that the output is correct. Review names, symbols, URLs, code and
+        non-English text before using a repaired file in production.
+      </div>
+    </section>
+
+    <section class="mj-content content prose">
+      <h2>What is mojibake?</h2>
+      <p>
+        Mojibake is garbled text produced when bytes are decoded using the
+        wrong character encoding. For example, the word <em>café</em> may
+        appear as <code>CafÃ©</code> after UTF-8 bytes are interpreted using
+        a different character table.
+      </p>
+
+      <p>
+        UTF-8 encodes many characters with multiple bytes. If each of those
+        bytes is treated as a separate character, the resulting text can look
+        like random symbols, incorrect punctuation or extra accented letters.
+      </p>
+
+      <h2>Common examples</h2>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Garbled text</th>
+              <th scope="col">Possible repair</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>CafÃ©</code></td>
+              <td><code>Café</code></td>
+            </tr>
+            <tr>
+              <td><code>FranÃ§ais</code></td>
+              <td><code>Français</code></td>
+            </tr>
+            <tr>
+              <td><code>â€™</code></td>
+              <td><code>’</code></td>
+            </tr>
+            <tr>
+              <td><code>â€œHelloâ€</code></td>
+              <td><code>“Hello”</code>, depending on the original bytes</td>
+            </tr>
+            <tr>
+              <td><code>ÃƒÂ©</code></td>
+              <td><code>é</code>, after multiple successful repair passes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>How to repair garbled text</h2>
+      <ol>
+        <li>Paste the original text, or open a supported text file.</li>
+        <li>Choose one or more repair methods and the maximum number of passes.</li>
+        <li>Analyze the text to generate and rank possible repair candidates.</li>
+        <li>Compare the candidates and select the one that matches the intended text.</li>
+        <li>Apply any optional cleanup, check the output, and copy or download it.</li>
+      </ol>
+
+      <h2>Why multiple repair candidates matter</h2>
+      <p>
+        Character encodings are not always recoverable by guessing. Some text
+        might contain legitimate accented characters, symbols or mixed-language
+        content. A transformation that fixes one word may damage another.
+        Comparing alternatives is safer than silently replacing the entire
+        document with a single guess.
+      </p>
+
+      <h2>Can this tool fix every character-encoding error?</h2>
+      <p>
+        No. This tool focuses on common Western cases involving UTF-8 text
+        misread as Windows-1252 or ISO-8859-1. Some older East Asian encoding
+        mistakes require different methods. If the source has already replaced
+        unknown characters with ordinary question marks or replacement symbols,
+        the lost information may no longer be recoverable.
+      </p>
+
+      <h2>Does the tool upload my text?</h2>
+      <p>
+        The transformations and candidate generation run in your browser.
+        This page does not require a server-based repair API. Be mindful that
+        other services, browser extensions or unrelated scripts on a website
+        can have their own data-handling behavior.
+      </p>
+
+      <h2>Frequently asked questions</h2>
+
+      <div class="mj-faq">
+        <h3>Why does my CSV or subtitle file contain strange symbols?</h3>
+        <p>
+          One possibility is that a program interpreted the file using the
+          wrong character encoding. The same symptom can have other causes,
+          so inspect the output and keep a copy of the original.
+        </p>
+      </div>
+
+      <div class="mj-faq">
+        <h3>Will Unicode normalization repair mojibake?</h3>
+        <p>
+          Not by itself. NFC normalization combines canonically equivalent
+          sequences, but it cannot generally reverse an incorrect byte-decoding
+          operation. That is why normalization is an optional, separate step.
+        </p>
+      </div>
+
+      <div class="mj-faq">
+        <h3>Can I use the tool with source code?</h3>
+        <p>
+          Yes, but compare results carefully. Even a seemingly harmless text
+          transformation can change string literals, identifiers, comments or
+          encoded data. Keep the original source and review all changes.
+        </p>
+      </div>
+
+      <div class="mj-faq">
+        <h3>Can I repair a file that displays question marks instead of letters?</h3>
+        <p>
+          If the original character bytes have already been replaced with
+          question marks, the missing characters cannot reliably be recovered
+          from those question marks alone. Restore from an original or backup
+          where possible.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>
+        <a href="../index.html">ConvertToToolsOnline</a>
+        · Free browser-based utility tools.
+      </p>
+      <p class="copyright">
+        © <span id="mjYear"></span> ConvertToToolsOnline
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const $ = (id) => document.getElementById(id);
+
+      const MAX_CHARS = 500000;
+      const MAX_FILE_BYTES = 2 * 1024 * 1024;
+
+      const input = $("mjInput");
+      const output = $("mjOutput");
+      const candidatesBox = $("mjCandidates");
+      const fileInput = $("mjFile");
+
+      let candidates = [];
+      let selectedCandidate = null;
+      let activeBaseText = "";
+      let currentFileName = "";
+      let actionTimer = null;
+
+      /*
+        These Unicode characters correspond to bytes 0x80-0x9F when
+        interpreted through Windows-1252.
+      */
+      const WINDOWS_1252_BYTES = new Map([
+        [0x20AC, 0x80],
+        [0x201A, 0x82],
+        [0x0192, 0x83],
+        [0x201E, 0x84],
+        [0x2026, 0x85],
+        [0x2020, 0x86],
+        [0x2021, 0x87],
+        [0x02C6, 0x88],
+        [0x2030, 0x89],
+        [0x0160, 0x8A],
+        [0x2039, 0x8B],
+        [0x0152, 0x8C],
+        [0x017D, 0x8E],
+        [0x2018, 0x91],
+        [0x2019, 0x92],
+        [0x201C, 0x93],
+        [0x201D, 0x94],
+        [0x2022, 0x95],
+        [0x2013, 0x96],
+        [0x2014, 0x97],
+        [0x02DC, 0x98],
+        [0x2122, 0x99],
+        [0x0161, 0x9A],
+        [0x203A, 0x9B],
+        [0x0153, 0x9C],
+        [0x017E, 0x9E],
+        [0x0178, 0x9F]
+      ]);
+
+      const MOJIBAKE_MARKERS = [
+        /Ã[\u0080-\u00BF]/gu,
+        /Â[\u0080-\u00BF]/gu,
+        /â(?:€|‚|„|…|†|‡|ˆ|‰|Š|‹|Œ|Ž|‘|’|“|”|•|–|—|˜|™|š|›|œ|ž|Ÿ)/gu,
+        /ï»¿/gu,
+        /ðŸ/gu,
+        /ÃƒÂ/gu,
+        /\uFFFD/gu,
+        /\uFEFF/gu
+      ];
+
+      function countMatches(text, pattern) {
+        const flags = pattern.flags.includes("g")
+          ? pattern.flags
+          : pattern.flags + "g";
+
+        const fresh = new RegExp(pattern.source, flags);
+        return Array.from(text.matchAll(fresh)).length;
+      }
+
+      function qualityScore(text) {
+        let penalty = 0;
+
+        MOJIBAKE_MARKERS.forEach((pattern) => {
+          penalty += countMatches(text, pattern) * 12;
+        });
+
+        penalty += countMatches(
+          text,
+          /[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/gu
+        ) * 15;
+
+        return Math.max(0, 100 - penalty);
+      }
+
+      function suspiciousMarkerAt(character) {
+        return /^(?:Ã|Â|â|ï|ð)$/u.test(character);
+      }
+
+      function decodeCandidateChunk(chunk, mode) {
+        const bytes = [];
+
+        for (const character of chunk) {
+          const codePoint = character.codePointAt(0);
+
+          if (
+            mode === "windows1252" &&
+            WINDOWS_1252_BYTES.has(codePoint)
+          ) {
+            bytes.push(WINDOWS_1252_BYTES.get(codePoint));
+            continue;
+          }
+
+          if (codePoint <= 0xFF) {
+            bytes.push(codePoint);
+            continue;
+          }
+
+          /*
+            Preserve unrelated Unicode characters by encoding them as UTF-8
+            bytes. This allows a repair to work within mixed-language text
+            without converting the entire document into a single-byte charset.
+          */
+          const encoded = new TextEncoder().encode(character);
+
+          for (const byte of encoded) {
+            bytes.push(byte);
+          }
+        }
+
+        try {
+          return new TextDecoder("utf-8", { fatal: true })
+            .decode(new Uint8Array(bytes));
+        } catch (error) {
+          return null;
+        }
+      }
+
+      function repairPass(text, mode) {
+        const chars = Array.from(text);
+        const result = [];
+        let changed = false;
+        let i = 0;
+
+        /*
+          Only inspect suspicious-marker positions. Test short nearby chunks,
+          longest first, and accept a repair only when it improves the local
+          heuristic score. This helps preserve legitimate accented text such
+          as "Café" when another part of the same document is garbled.
+        */
+        while (i < chars.length) {
+          const current = chars[i];
+
+          if (!suspiciousMarkerAt(current)) {
+            result.push(current);
+            i++;
+            continue;
+          }
+
+          const maxLength = Math.min(12, chars.length - i);
+          let replacement = null;
+          let replacementLength = 0;
+
+          for (let length = maxLength; length >= 2; length--) {
+            const chunk = chars.slice(i, i + length).join("");
+            const decoded = decodeCandidateChunk(chunk, mode);
+
+            if (
+              decoded !== null &&
+              decoded !== chunk &&
+              qualityScore(decoded) > qualityScore(chunk)
+            ) {
+              replacement = decoded;
+              replacementLength = length;
+              break;
+            }
+          }
+
+          if (replacement !== null) {
+            result.push(replacement);
+            i += replacementLength;
+            changed = true;
+          } else {
+            result.push(current);
+            i++;
+          }
+        }
+
+        const repaired = result.join("");
+
+        return {
+          text: repaired,
+          changed: changed && repaired !== text
+        };
+      }
+
+      function generateCandidates(original, passLimit, methods) {
+        const first = {
+          text: original,
+          passes: 0,
+          methods: [],
+          score: qualityScore(original)
+        };
+
+        const allByText = new Map([[original, first]]);
+        let frontier = [first];
+
+        for (let pass = 1; pass <= passLimit; pass++) {
+          const nextFrontier = [];
+
+          for (const parent of frontier) {
+            for (const mode of methods) {
+              const repaired = repairPass(parent.text, mode);
+
+              if (!repaired.changed || allByText.has(repaired.text)) {
+                continue;
+              }
+
+              const candidate = {
+                text: repaired.text,
+                passes: pass,
+                methods: parent.methods.concat(mode),
+                score: qualityScore(repaired.text)
+              };
+
+              allByText.set(candidate.text, candidate);
+              nextFrontier.push(candidate);
+            }
+          }
+
+          frontier = nextFrontier;
+
+          if (frontier.length === 0) {
+            break;
+          }
+        }
+
+        return Array.from(allByText.values()).sort((a, b) => {
+          if (b.score !== a.score) return b.score - a.score;
+          return a.passes - b.passes;
+        });
+      }
+
+      function methodName(method) {
+        return method === "windows1252"
+          ? "Windows-1252"
+          : "Latin-1";
+      }
+
+      function processOutput(text) {
+        let result = text;
+
+        if ($("mjStripBom").checked) {
+          result = result.replace(/^\uFEFF/, "");
+        }
+
+        if ($("mjDecodeEntities").checked) {
+          const decoder = document.createElement("textarea");
+          decoder.innerHTML = result;
+          result = decoder.value;
+        }
+
+        if ($("mjNormalize").checked && typeof result.normalize === "function") {
+          result = result.normalize("NFC");
+        }
+
+        return result;
+      }
+
+      function formatNumber(value) {
+        return new Intl.NumberFormat().format(value);
+      }
+
+      function lineCount(text) {
+        return text.length === 0 ? 0 : text.split(/\r\n|\n|\r/).length;
+      }
+
+      function updateStats() {
+        setText("mjInputChars", formatNumber(Array.from(input.value).length));
+        setText("mjOutputChars", formatNumber(Array.from(output.value).length));
+        setText("mjCandidateCount", formatNumber(candidates.length));
+      }
+
+      function setText(id, value) {
+        $(id).textContent = String(value);
+      }
+
+      function createTag(text, green = false) {
+        const tag = document.createElement("span");
+        tag.className = "mj-tag" + (green ? " mj-tag-green" : "");
+        tag.textContent = text;
+        return tag;
+      }
+
+      function renderCandidates() {
+        candidatesBox.replaceChildren();
+
+        if (!candidates.length) {
+          const message = document.createElement("div");
+          message.className = "mj-alert";
+          message.textContent =
+            "No valid repair candidates were generated. The input may already be readable, or it may use an unsupported encoding pattern.";
+          candidatesBox.appendChild(message);
+          updateStats();
+          return;
+        }
+
+        const original = candidates.find((item) => item.passes === 0);
+        const originalScore = original ? original.score : 0;
+        const recommended = candidates[0];
+        const hasImprovement =
+          recommended &&
+          recommended.passes > 0 &&
+          recommended.score > originalScore;
+
+        candidates.forEach((candidate, index) => {
+          const card = document.createElement("article");
+          card.className = "mj-candidate";
+
+          if (hasImprovement && index === 0) {
+            card.classList.add("is-recommended");
+          }
+
+          if (
+            selectedCandidate &&
+            candidate.text === selectedCandidate.text
+          ) {
+            card.classList.add("is-selected");
+          }
+
+          const heading = document.createElement("div");
+          heading.className = "mj-candidate-heading";
+
+          const title = document.createElement("span");
+          title.className = "mj-candidate-title";
+
+          if (candidate.passes === 0) {
+            title.textContent = "Original text";
+          } else {
+            title.textContent =
+              "Repair · " +
+              candidate.methods.map(methodName).join(" → ");
+          }
+
+          heading.appendChild(title);
+
+          if (hasImprovement && index === 0) {
+            heading.appendChild(createTag("Top suggestion", true));
+          }
+
+          if (
+            selectedCandidate &&
+            candidate.text === selectedCandidate.text
+          ) {
+            heading.appendChild(createTag("Selected", false));
+          }
+
+          card.appendChild(heading);
+
+          const preview = document.createElement("pre");
+          preview.className = "mj-candidate-preview";
+          preview.textContent = candidate.text || "(Empty text)";
+          card.appendChild(preview);
+
+          const meta = document.createElement("p");
+          meta.className = "mj-candidate-meta";
+          meta.textContent =
+            "Heuristic score: " + candidate.score +
+            "/100 · Passes: " + candidate.passes +
+            " · Characters: " + formatNumber(Array.from(candidate.text).length);
+
+          card.appendChild(meta);
+
+          const actions = document.createElement("div");
+          actions.className = "mj-buttons";
+
+          const useButton = document.createElement("button");
+          useButton.type = "button";
+          useButton.className = "mj-btn mj-btn-primary mj-btn-small";
+          useButton.textContent = "Use this candidate";
+          useButton.dataset.useIndex = String(index);
+
+          const copyButton = document.createElement("button");
+          copyButton.type = "button";
+          copyButton.className = "mj-btn mj-btn-small";
+          copyButton.textContent = "Copy candidate";
+          copyButton.dataset.copyIndex = String(index);
+
+          actions.append(useButton, copyButton);
+          card.appendChild(actions);
+          candidatesBox.appendChild(card);
+        });
+
+        updateStats();
+      }
+
+      function selectCandidate(candidate) {
+        selectedCandidate = candidate;
+        activeBaseText = candidate.text;
+        output.value = processOutput(activeBaseText);
+        renderCandidates();
+        updateStats();
+
+        setText(
+          "mjCandidateStatus",
+          "Selected candidate with " + candidate.score +
+          "/100 heuristic score. Review the output before using it."
+        );
+      }
+
+      function analyze() {
+        const text = input.value;
+
+        if (text.length > MAX_CHARS) {
+          setText(
+            "mjError",
+            "The input exceeds 500,000 characters. Use a smaller text selection or split the content into parts."
+          );
+          input.setAttribute("aria-invalid", "true");
+          candidates = [];
+          selectedCandidate = null;
+          activeBaseText = "";
+          output.value = "";
+          renderCandidates();
+          updateStats();
+          return;
+        }
+
+        setText("mjError", "");
+        input.setAttribute("aria-invalid", "false");
+
+        if (!text.length) {
+          candidates = [];
+          selectedCandidate = null;
+          activeBaseText = "";
+          output.value = "";
+          renderCandidates();
+
+          setText("mjInputStatus", "Enter some text to analyze.");
+          setText("mjCandidateStatus", "No input to analyze.");
+
+          return;
+        }
+
+        const methods = [];
+
+        if ($("mjWindows").checked) methods.push("windows1252");
+        if ($("mjLatin").checked) methods.push("latin1");
+
+        if (methods.length === 0) {
+          setText("mjError", "Select at least one repair method.");
+          candidates = [];
+          renderCandidates();
+          return;
+        }
+
+        const passes = Number($("mjPasses").value);
+
+        if (![1, 2, 3].includes(passes)) {
+          setText("mjError", "Choose a valid repair-pass setting.");
+          return;
+        }
+
+        candidates = generateCandidates(text, passes, methods);
+
+        selectedCandidate = candidates[0] || null;
+        activeBaseText = selectedCandidate ? selectedCandidate.text : text;
+        output.value = processOutput(activeBaseText);
+
+        renderCandidates();
+
+        const changed =
+          selectedCandidate &&
+          selectedCandidate.text !== text &&
+          selectedCandidate.score > qualityScore(text);
+
+        setText(
+          "mjInputStatus",
+          "Analysis complete. " + candidates.length + " distinct candidate(s) generated."
+        );
+
+        setText(
+          "mjCandidateStatus",
+          changed
+            ? "A candidate scored better against the common mojibake patterns. Check that its actual text is correct."
+            : "No higher-scoring candidate was found. The original is preserved as the leading option unless a stronger candidate was identified."
+        );
+
+        updateStats();
+      }
+
+      function updateOutputOptions() {
+        if (selectedCandidate) {
+          activeBaseText = selectedCandidate.text;
+        } else if (!activeBaseText) {
+          activeBaseText = input.value;
+        }
+
+        output.value = processOutput(activeBaseText);
+        updateStats();
+      }
+
+      function announce(message) {
+        setText("mjActionStatus", message);
+
+        if (actionTimer) window.clearTimeout(actionTimer);
+
+        actionTimer = window.setTimeout(() => {
+          setText("mjActionStatus", "");
+        }, 4000);
+      }
+
+      async function copyText(text) {
+        if (!text) {
+          announce("There is no text to copy.");
+          return;
+        }
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+            announce("Copied to clipboard.");
+            return;
+          }
+        } catch (error) {
+          // Try the compatibility fallback below.
+        }
+
+        const area = document.createElement("textarea");
+        area.value = text;
+        area.setAttribute("readonly", "");
+        area.style.position = "fixed";
+        area.style.left = "-9999px";
+        area.style.top = "0";
+
+        document.body.appendChild(area);
+        area.select();
+
+        let copied = false;
+
+        try {
+          copied = document.execCommand("copy");
+        } catch (error) {
+          copied = false;
+        }
+
+        area.remove();
+
+        announce(
+          copied
+            ? "Copied to clipboard."
+            : "Copy was blocked. Select the output text and copy it manually."
+        );
+      }
+
+      function safeDownloadName(originalName) {
+        if (!originalName) return "repaired-text.txt";
+
+        const trimmed = originalName.trim();
+        const match = trimmed.match(/^(.+?)(\.[^.]+)?$/);
+
+        if (!match) return "repaired-text.txt";
+
+        const base = match[1]
+          .replace(/[\\/:*?"<>|]/g, "_")
+          .slice(0, 120) || "repaired-text";
+
+        const extension = (match[2] || ".txt")
+          .replace(/[\\/:*?"<>|]/g, "")
+          .slice(0, 20);
+
+        return base + ".repaired" + extension;
+      }
+
+      function downloadOutput() {
+        const text = output.value;
+
+        if (!text) {
+          announce("There is no output to download.");
+          return;
+        }
+
+        try {
+          const blob = new Blob([text], {
+            type: "text/plain;charset=utf-8"
+          });
+
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+
+          link.href = url;
+          link.download = safeDownloadName(currentFileName);
+
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+
+          window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+          announce("Download started.");
+        } catch (error) {
+          announce("The file could not be downloaded in this browser.");
+        }
+      }
+
+      function loadSample() {
+        input.value = "Broken text: FranÃƒÂ§ais — cafÃ© — â€œHelloâ€ — price: â‚¬20";
+        currentFileName = "";
+        analyze();
+      }
+
+      function clearTool() {
+        input.value = "";
+        output.value = "";
+        currentFileName = "";
+        selectedCandidate = null;
+        activeBaseText = "";
+        candidates = [];
+
+        fileInput.value = "";
+
+        setText("mjError", "");
+        setText("mjInputStatus", "Paste text or load an example.");
+        setText("mjCandidateStatus", "");
+        setText("mjActionStatus", "");
+
+        renderCandidates();
+        updateStats();
+      }
+
+      async function loadFile(file) {
+        if (!file) return;
+
+        if (file.size > MAX_FILE_BYTES) {
+          setText("mjError", "The selected file is larger than 2 MiB. Please choose a smaller text file.");
+          fileInput.value = "";
+          return;
+        }
+
+        const allowedExtensions =
+          /\.(txt|csv|tsv|json|xml|srt|vtt|md|html|sql|log|text)$/i;
+
+        if (!allowedExtensions.test(file.name)) {
+          setText("mjError", "Choose a supported text file such as TXT, CSV, JSON, XML, SRT, VTT, MD, HTML, SQL or LOG.");
+          fileInput.value = "";
+          return;
+        }
+
+        try {
+          const content = await file.text();
+
+          input.value = content;
+          currentFileName = file.name;
+
+          analyze();
+
+          setText(
+            "mjInputStatus",
+            "Loaded " + file.name + " (" + formatNumber(file.size) + " bytes)."
+          );
+        } catch (error) {
+          setText("mjError", "The file could not be read by this browser.");
+        }
+      }
+
+      input.addEventListener("input", () => {
+        currentFileName = "";
+        setText("mjError", "");
+        setText(
+          "mjInputStatus",
+          "Input changed. Analyze again to refresh repair candidates."
+        );
+
+        updateStats();
+      });
+
+      output.addEventListener("input", updateStats);
+
+      $("mjAnalyze").addEventListener("click", analyze);
+      $("mjSample").addEventListener("click", loadSample);
+      $("mjClear").addEventListener("click", clearTool);
+
+      $("mjOpenFile").addEventListener("click", () => {
+        fileInput.click();
+      });
+
+      fileInput.addEventListener("change", () => {
+        loadFile(fileInput.files && fileInput.files[0]);
+      });
+
+      $("mjWindows").addEventListener("change", analyze);
+      $("mjLatin").addEventListener("change", analyze);
+      $("mjPasses").addEventListener("change", analyze);
+
+      ["mjStripBom", "mjDecodeEntities", "mjNormalize"].forEach((id) => {
+        $(id).addEventListener("change", updateOutputOptions);
+      });
+
+      candidatesBox.addEventListener("click", (event) => {
+        const useButton = event.target.closest("[data-use-index]");
+        const copyButton = event.target.closest("[data-copy-index]");
+
+        if (useButton) {
+          const index = Number(useButton.dataset.useIndex);
+
+          if (Number.isInteger(index) && candidates[index]) {
+            selectCandidate(candidates[index]);
+          }
+
+          return;
+        }
+
+        if (copyButton) {
+          const index = Number(copyButton.dataset.copyIndex);
+
+          if (Number.isInteger(index) && candidates[index]) {
+            copyText(processOutput(candidates[index].text));
+          }
+        }
+      });
+
+      $("mjCopy").addEventListener("click", () => {
+        copyText(output.value);
+      });
+
+      $("mjDownload").addEventListener("click", downloadOutput);
+
+      $("mjYear").textContent = String(new Date().getFullYear());
+
+      updateStats();
+    })();
+  </script>
+</body>
+</html>
