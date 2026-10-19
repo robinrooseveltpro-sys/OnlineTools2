@@ -4,2611 +4,3209 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>XML Sitemap Validator | Check Sitemap Errors and Extract URLs</title>
-  <meta name="description" content="Validate XML sitemaps and sitemap indexes, detect malformed URLs and duplicate entries, inspect lastmod dates, and export sitemap URLs or validation reports.">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#ffffff">
+  <title>XML Sitemap Validator Online - Free Sitemap Checker</title>
 
-  <link rel="canonical" href="https://converttotoolsonline.com/sitemap-xml-validator.html">
+  <meta name="description"
+    content="Validate XML sitemaps online for syntax errors, sitemap structure, missing URLs, duplicate entries, invalid lastmod dates and Google sitemap limits. Check sitemap XML or fetch a sitemap URL.">
+
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="theme-color" content="#2563eb">
+
+  <link rel="canonical"
+    href="https://onlinetoolsandconverters.cc/sitemap-xml-validator.html">
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
 
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="ConvertToToolsOnline">
-  <meta property="og:title" content="XML Sitemap Validator">
-  <meta property="og:description" content="Validate sitemap XML, find common structural errors, detect duplicate URLs, and export your sitemap entries.">
-  <meta property="og:url" content="https://converttotoolsonline.com/sitemap-xml-validator.html">
+  <meta property="og:site_name" content="Online Tools &amp; Converters">
+  <meta property="og:title"
+    content="XML Sitemap Validator Online - Free Sitemap Checker">
+  <meta property="og:description"
+    content="Check sitemap XML syntax, URL entries, sitemap indexes, lastmod dates, duplicate URLs and common sitemap problems with this free browser-based tool.">
+  <meta property="og:url"
+    content="https://onlinetoolsandconverters.cc/sitemap-xml-validator.html">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="XML Sitemap Validator">
-  <meta name="twitter:description" content="Check XML sitemap structure, find duplicate URLs, review errors, and extract URLs locally.">
+  <meta name="twitter:title"
+    content="XML Sitemap Validator Online">
+  <meta name="twitter:description"
+    content="Validate XML sitemaps, find structural errors, check URLs and review important sitemap limits before submitting to search engines.">
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://converttotoolsonline.com/"
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "XML Sitemap Validator",
-        "item": "https://converttotoolsonline.com/sitemap-xml-validator.html"
-      }
-    ]
+    "@type": "WebApplication",
+    "name": "XML Sitemap Validator",
+    "url": "https://onlinetoolsandconverters.cc/sitemap-xml-validator.html",
+    "description": "A free browser-based XML sitemap validator that checks XML syntax, sitemap and sitemap-index structure, location elements, URL formatting, duplicate URLs, lastmod dates, and common sitemap limits.",
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires a modern JavaScript-enabled web browser.",
+    "isAccessibleForFree": true,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Online Tools & Converters",
+      "url": "https://onlinetoolsandconverters.cc/"
+    }
   }
   </script>
 
   <style>
-    :root {
-      color-scheme: light;
-      --blue: #2563eb;
-      --blue-dark: #1d4ed8;
-      --purple: #7c3aed;
-      --ink: #172033;
-      --muted: #64748b;
-      --line: #e5eaf2;
-      --bg: #f7f9fc;
-      --soft-blue: #eff6ff;
-      --soft-purple: #f5f0ff;
-      --green: #087f5b;
-      --red: #b42318;
-      --amber: #92400e;
-      --radius: 17px;
-      --shadow: 0 12px 35px rgba(31, 41, 55, .06);
-    }
+    /* ==========================================
+       XML SITEMAP VALIDATOR
+       Complete page-specific stylesheet.
+    ========================================== */
 
-    * {
+    .sv,
+    .sv * {
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 90px;
-    }
+    .sv {
+      --sv-primary: #2563eb;
+      --sv-primary-hover: #1d4ed8;
+      --sv-text: #172033;
+      --sv-muted: #64748b;
+      --sv-border: #e2e8f0;
+      --sv-bg: #f8fafc;
+      --sv-white: #ffffff;
+      --sv-green: #15803d;
+      --sv-red: #b91c1c;
+      --sv-orange: #b45309;
 
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: Inter, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: var(--sv-text);
+      background: var(--sv-bg);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
       font-size: 15px;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    button,
-    input,
-    textarea {
-      font: inherit;
-    }
-
-    a {
-      color: var(--blue);
-      text-decoration: none;
-    }
-
-    a:hover {
-      color: var(--blue-dark);
-    }
-
-    button:focus-visible,
-    input:focus-visible,
-    textarea:focus-visible,
-    a:focus-visible {
-      outline: 3px solid #93c5fd;
-      outline-offset: 3px;
-    }
-
-    button:disabled {
-      opacity: .5;
-      cursor: not-allowed;
-    }
-
-    h1, h2, h3, p {
+      line-height: 1.65;
       overflow-wrap: anywhere;
     }
 
-    .container {
-      width: min(1080px, calc(100% - 32px));
+    .sv button,
+    .sv input,
+    .sv select,
+    .sv textarea {
+      font: inherit;
+    }
+
+    .sv button {
+      cursor: pointer;
+    }
+
+    .sv a {
+      color: var(--sv-primary);
+    }
+
+    .sv button:focus-visible,
+    .sv input:focus-visible,
+    .sv select:focus-visible,
+    .sv textarea:focus-visible,
+    .sv a:focus-visible,
+    .sv summary:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, .3);
+      outline-offset: 3px;
+    }
+
+    .sv-container {
+      width: min(1100px, calc(100% - 32px));
       margin-inline: auto;
     }
 
-    /* Header */
-
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      border-bottom: 1px solid var(--line);
-      background: rgba(255, 255, 255, .97);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+    .sv-skip {
+      position: absolute;
+      top: -100px;
+      left: 12px;
+      z-index: 100;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--sv-text);
     }
 
-    .header-inner {
+    .sv-skip:focus {
+      top: 12px;
+    }
+
+    /* Navigation */
+
+    .sv-header {
+      background: #fff;
+      border-bottom: 1px solid var(--sv-border);
+    }
+
+    .sv-nav {
+      min-height: 68px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
-      min-height: 72px;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-block: 10px;
     }
 
-    .brand {
+    .sv-brand {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      color: var(--ink);
-      font-size: 17px;
+      color: var(--sv-text) !important;
+      text-decoration: none;
+      font-size: 16px;
       font-weight: 800;
-      letter-spacing: -.5px;
+      letter-spacing: -.3px;
     }
 
-    .brand:hover {
-      color: var(--ink);
-    }
-
-    .brand-icon {
+    .sv-logo {
+      width: 38px;
+      height: 38px;
       display: grid;
       place-items: center;
-      width: 40px;
-      height: 40px;
-      flex-shrink: 0;
-      border-radius: 12px;
-      color: white;
-      background: linear-gradient(135deg, var(--blue), var(--purple));
+      border-radius: 11px;
+      background: var(--sv-primary);
+      color: #fff;
+      font-weight: 850;
     }
 
-    .brand-name span {
-      color: var(--blue);
-    }
-
-    .main-nav {
+    .sv-nav-links {
       display: flex;
       align-items: center;
-      gap: 6px;
-    }
-
-    .main-nav a {
-      padding: 9px 12px;
-      border-radius: 10px;
-      color: #475569;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .main-nav a:hover,
-    .main-nav a.active {
-      background: var(--soft-blue);
-      color: var(--blue-dark);
-    }
-
-    /* Breadcrumb and hero */
-
-    .breadcrumb {
-      display: flex;
       flex-wrap: wrap;
-      gap: 9px;
-      padding-top: 24px;
-      color: var(--muted);
-      font-size: 12px;
+      gap: 17px;
     }
 
-    .breadcrumb a {
-      color: #52627a;
+    .sv-nav-links a {
+      font-size: 13px;
+      font-weight: 600;
+      color: #475569;
+      text-decoration: none;
     }
 
-    .hero {
-      padding: 42px 8px 32px;
+    .sv-nav-links a:hover {
+      color: var(--sv-primary);
+    }
+
+    /* Page intro */
+
+    .sv-intro {
+      padding: 36px 0 25px;
       text-align: center;
     }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 14px;
-      padding: 6px 12px;
-      border: 1px solid #dbeafe;
-      border-radius: 999px;
-      background: var(--soft-blue);
-      color: var(--blue-dark);
-      font-size: 11px;
+    .sv-eyebrow {
+      margin: 0 0 8px;
+      color: var(--sv-primary);
+      font-size: 12px;
       font-weight: 800;
-      letter-spacing: .5px;
+      letter-spacing: 1.3px;
       text-transform: uppercase;
     }
 
-    .eyebrow-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--purple);
+    .sv-intro h1 {
+      max-width: 900px;
+      margin: 0 auto 13px;
+      font-size: clamp(29px, 5vw, 43px);
+      line-height: 1.17;
+      letter-spacing: -1.4px;
+      font-weight: 800;
     }
 
-    h1 {
-      max-width: 850px;
-      margin: 0 auto 14px;
-      font-size: clamp(32px, 5vw, 48px);
-      line-height: 1.16;
-      letter-spacing: -1.6px;
-    }
-
-    .gradient-text {
-      color: var(--blue);
-      background: linear-gradient(100deg, var(--blue), var(--purple));
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      max-width: 740px;
+    .sv-intro-text {
+      max-width: 810px;
       margin: 0 auto;
-      color: var(--muted);
+      color: var(--sv-muted);
       font-size: 15px;
+      line-height: 1.85;
     }
 
-    /* Main tool */
-
-    .tool-card {
-      padding: 28px;
-      border: 1px solid var(--line);
-      border-radius: 21px;
-      background: white;
-      box-shadow: var(--shadow);
-    }
-
-    .tool-heading {
+    .sv-breadcrumb {
       display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 22px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 17px;
+      color: var(--sv-muted);
+      font-size: 12px;
     }
 
-    .tool-heading h2 {
-      margin: 0 0 5px;
-      font-size: 23px;
-      line-height: 1.4;
-      letter-spacing: -.6px;
+    .sv-breadcrumb a {
+      text-decoration: none;
     }
 
-    .tool-heading p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
+    /* Main application */
+
+    .sv-app {
+      background: #fff;
+      border: 1px solid var(--sv-border);
+      border-radius: 15px;
+      box-shadow: 0 8px 28px rgba(15, 23, 42, .045);
+      overflow: hidden;
     }
 
-    .privacy-badge {
-      flex-shrink: 0;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: #ecfdf5;
-      color: var(--green);
-      font-size: 11px;
-      font-weight: 800;
-    }
-
-    .input-label {
-      display: block;
-      margin-bottom: 8px;
-      color: #334155;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .input-toolbar {
+    .sv-app-heading {
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 10px;
+      gap: 12px;
+      padding: 18px 21px;
+      border-bottom: 1px solid var(--sv-border);
     }
 
-    .toolbar-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
+    .sv-app-heading h2 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.4;
     }
 
-    textarea {
-      width: 100%;
-      min-height: 280px;
-      padding: 15px;
-      border: 1px solid #d7dfeb;
-      border-radius: 12px;
-      background: #fcfdff;
-      color: #1e293b;
-      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+    .sv-local-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 10px;
+      border: 1px solid #dcfce7;
+      border-radius: 30px;
+      background: #f0fdf4;
+      color: #166534;
       font-size: 12px;
-      line-height: 1.8;
+      font-weight: 700;
+    }
+
+    .sv-local-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+
+    .sv-step {
+      padding: 20px;
+      border-bottom: 1px solid var(--sv-border);
+    }
+
+    .sv-step:last-child {
+      border-bottom: 0;
+    }
+
+    .sv-step-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 13px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .sv-step-number {
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      width: 29px;
+      height: 29px;
+      border-radius: 9px;
+      color: #fff;
+      background: var(--sv-primary);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    /* Input fields */
+
+    .sv-field {
+      min-width: 0;
+    }
+
+    .sv-field label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .sv-input,
+    .sv-select {
+      display: block;
+      width: 100%;
+      min-height: 42px;
+      padding: 9px 11px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      background: #fff;
+      color: var(--sv-text);
+      font-size: 13px;
+    }
+
+    .sv-help {
+      margin: 6px 0 0;
+      color: var(--sv-muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .sv-url-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 9px;
+      align-items: end;
+    }
+
+    .sv-editor {
+      display: block;
+      width: 100%;
+      min-height: 330px;
+      padding: 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 11px;
+      background: #fff;
+      color: #172033;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas,
+        "Liberation Mono", monospace;
+      font-size: 12px;
+      line-height: 1.75;
       resize: vertical;
       tab-size: 2;
     }
 
-    textarea:focus {
-      border-color: var(--blue);
-      outline-offset: 2px;
+    .sv-editor:focus {
+      outline: none;
+      border-color: var(--sv-primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, .1);
     }
 
-    .input-meta {
+    .sv-editor::placeholder {
+      color: #94a3b8;
+      opacity: 1;
+    }
+
+    .sv-file-row {
       display: flex;
+      align-items: center;
       flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 8px;
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: 11px;
+      gap: 10px;
+      margin-top: 11px;
     }
 
-    .help-text {
-      margin: 14px 0 0;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.85;
-    }
-
-    .file-input {
+    .sv-file-input {
       position: absolute;
       width: 1px;
       height: 1px;
+      margin: -1px;
       padding: 0;
-      overflow: hidden;
       clip: rect(0, 0, 0, 0);
+      overflow: hidden;
       white-space: nowrap;
-      clip-path: inset(50%);
       border: 0;
     }
 
-    .button-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 20px;
+    .sv-file-name {
+      color: var(--sv-muted);
+      font-size: 12px;
+      min-width: 0;
+      overflow-wrap: anywhere;
     }
 
-    .button {
+    /* Buttons */
+
+    .sv-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 15px;
+    }
+
+    .sv-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      min-height: 43px;
+      min-height: 39px;
       padding: 9px 14px;
-      border: 1px solid transparent;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 800;
-      transition:
-        transform .18s,
-        background .18s,
-        border-color .18s;
-    }
-
-    .button:hover:not(:disabled) {
-      transform: translateY(-1px);
-    }
-
-    .button-primary {
-      background: linear-gradient(110deg, var(--blue), var(--purple));
-      color: white;
-      box-shadow: 0 5px 14px rgba(79, 70, 229, .16);
-    }
-
-    .button-primary:hover:not(:disabled) {
-      color: white;
-      opacity: .94;
-    }
-
-    .button-secondary {
-      border-color: #dbe2ec;
-      background: white;
+      border: 1px solid var(--sv-border);
+      border-radius: 9px;
+      background: #fff;
       color: #334155;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.45;
+      text-align: center;
     }
 
-    .button-secondary:hover:not(:disabled) {
-      border-color: #94a3b8;
+    .sv-btn:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+
+    .sv-btn-primary {
+      background: var(--sv-primary);
+      border-color: var(--sv-primary);
+      color: #fff;
+    }
+
+    .sv-btn-primary:hover {
+      background: var(--sv-primary-hover);
+      border-color: var(--sv-primary-hover);
+      color: #fff;
+    }
+
+    .sv-btn:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
+
+    .sv-status {
+      min-height: 25px;
+      margin: 0;
+      padding: 0 20px 13px;
+      color: #166534;
+      font-size: 13px;
+      overflow-wrap: anywhere;
+    }
+
+    .sv-status-error {
+      color: var(--sv-red);
+    }
+
+    /* Validation result */
+
+    .sv-results {
+      margin: 0 20px 20px;
+      padding: 18px;
+      border: 1px solid var(--sv-border);
+      border-radius: 12px;
       background: #f8fafc;
     }
 
-    .button-small {
-      min-height: 35px;
-      padding: 6px 10px;
-      font-size: 11px;
-    }
-
-    .feedback {
-      margin-top: 16px;
-      padding: 12px 14px;
-      border-radius: 10px;
-      font-size: 12px;
-      line-height: 1.8;
-    }
-
-    .feedback:empty {
+    .sv-results[hidden] {
       display: none;
     }
 
-    .feedback.error {
-      border: 1px solid #fecaca;
-      background: #fef2f2;
-      color: var(--red);
-    }
-
-    .feedback.success {
-      border: 1px solid #bbf7d0;
-      background: #f0fdf4;
-      color: #166534;
-    }
-
-    .feedback.info {
-      border: 1px solid #dbeafe;
-      background: var(--soft-blue);
-      color: var(--blue-dark);
-    }
-
-    /* Results */
-
-    .results {
-      margin-top: 29px;
-      padding-top: 27px;
-      border-top: 1px solid var(--line);
-    }
-
-    .results[hidden] {
-      display: none;
-    }
-
-    .results-heading {
-      margin-bottom: 18px;
-    }
-
-    .results-heading h2 {
-      margin: 0 0 5px;
-      font-size: 23px;
-      line-height: 1.4;
-    }
-
-    .results-heading p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    .status-panel {
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: 15px;
-      background: #fff;
-    }
-
-    .status-line {
+    .sv-result-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 12px;
+      margin-bottom: 13px;
     }
 
-    .status-title {
+    .sv-result-header h3 {
       margin: 0;
       font-size: 17px;
-      font-weight: 850;
+      line-height: 1.45;
     }
 
-    .status-chip {
+    .sv-verdict {
       display: inline-flex;
       align-items: center;
-      min-height: 29px;
+      gap: 6px;
       padding: 5px 10px;
-      border-radius: 999px;
-      background: #ecfdf5;
-      color: var(--green);
-      font-size: 11px;
+      border-radius: 30px;
+      font-size: 12px;
       font-weight: 800;
     }
 
-    .status-chip.warning {
-      background: #fffbeb;
-      color: var(--amber);
+    .sv-verdict-valid {
+      background: #dcfce7;
+      color: #166534;
     }
 
-    .status-chip.error {
-      background: #fef2f2;
-      color: var(--red);
+    .sv-verdict-errors {
+      background: #fee2e2;
+      color: #991b1b;
     }
 
-    .status-description {
-      margin: 0;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.9;
+    .sv-verdict-warnings {
+      background: #fef3c7;
+      color: #92400e;
     }
 
-    .metric-grid {
+    .sv-stats {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 15px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 17px;
     }
 
-    .metric {
+    .sv-stat {
       min-width: 0;
-      padding: 15px;
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      background: white;
+      padding: 12px;
+      background: #fff;
+      border: 1px solid var(--sv-border);
+      border-radius: 10px;
     }
 
-    .metric-label {
+    .sv-stat-label {
       display: block;
-      margin-bottom: 5px;
-      color: var(--muted);
+      color: var(--sv-muted);
       font-size: 11px;
-      line-height: 1.6;
+      font-weight: 650;
+      line-height: 1.5;
+      margin-bottom: 5px;
     }
 
-    .metric-value {
+    .sv-stat-value {
       display: block;
-      font-size: clamp(19px, 3vw, 27px);
-      font-weight: 850;
-      line-height: 1.4;
+      font-size: clamp(17px, 2vw, 24px);
+      font-weight: 800;
+      line-height: 1.3;
+      letter-spacing: -.3px;
       overflow-wrap: anywhere;
     }
 
-    .metric-value.purple {
-      color: var(--purple);
+    .sv-result-section {
+      margin-top: 17px;
     }
 
-    .metric-value.positive {
-      color: var(--green);
+    .sv-result-section h4 {
+      margin: 0 0 9px;
+      font-size: 14px;
     }
 
-    .metric-value.negative {
-      color: var(--red);
-    }
-
-    .result-section {
-      margin-top: 25px;
-    }
-
-    .result-section h3 {
-      margin: 0 0 10px;
-      font-size: 17px;
-    }
-
-    .issue-list {
+    .sv-check-list {
       display: grid;
-      gap: 10px;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
 
-    .issue-card {
+    .sv-check-item {
       display: grid;
-      grid-template-columns: 85px minmax(0, 1fr);
-      gap: 12px;
-      padding: 14px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: white;
+      grid-template-columns: 100px minmax(0, 1fr);
+      gap: 11px;
+      align-items: start;
+      padding: 11px 12px;
+      background: #fff;
+      border: 1px solid var(--sv-border);
+      border-radius: 9px;
+      font-size: 12px;
+      line-height: 1.7;
     }
 
-    .issue-level {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      align-self: start;
-      padding: 5px 8px;
-      border-radius: 7px;
-      background: var(--soft-blue);
-      color: var(--blue-dark);
-      font-size: 10px;
-      font-weight: 850;
-      text-transform: uppercase;
+    .sv-issue-label {
+      font-weight: 800;
     }
 
-    .issue-level.error {
-      background: #fef2f2;
-      color: var(--red);
+    .sv-issue-error {
+      color: #b91c1c;
     }
 
-    .issue-level.warning {
-      background: #fffbeb;
-      color: var(--amber);
+    .sv-issue-warning {
+      color: #a16207;
     }
 
-    .issue-level.success {
-      background: #ecfdf5;
-      color: var(--green);
+    .sv-issue-info {
+      color: #1d4ed8;
     }
 
-    .issue-content strong {
-      display: block;
-      margin-bottom: 3px;
+    .sv-issue-success {
+      color: #15803d;
+    }
+
+    .sv-issue-message {
+      min-width: 0;
+      color: #475569;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .sv-no-issues {
+      padding: 13px;
+      border: 1px solid #bbf7d0;
+      border-radius: 9px;
+      background: #f0fdf4;
+      color: #166534;
       font-size: 13px;
     }
 
-    .issue-content p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.8;
+    .sv-details {
+      max-height: 390px;
+      overflow: auto;
+      background: #fff;
+      border: 1px solid var(--sv-border);
+      border-radius: 10px;
     }
 
-    .issue-value {
-      margin-top: 6px !important;
-      color: #334155 !important;
-      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-      overflow-wrap: anywhere;
-    }
-
-    .table-scroll {
+    .sv-detail-table {
       width: 100%;
-      overflow-x: auto;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .result-table {
-      width: 100%;
-      min-width: 680px;
       border-collapse: collapse;
       font-size: 12px;
     }
 
-    .result-table th {
-      padding: 12px 10px;
-      background: #f8fafc;
-      color: #475569;
-      font-size: 11px;
-      font-weight: 800;
+    .sv-detail-table th,
+    .sv-detail-table td {
+      padding: 10px;
+      border-bottom: 1px solid var(--sv-border);
       text-align: left;
-      white-space: nowrap;
-    }
-
-    .result-table td {
-      padding: 11px 10px;
-      border-top: 1px solid var(--line);
       vertical-align: top;
-      text-align: left;
     }
 
-    .url-cell {
-      min-width: 270px;
+    .sv-detail-table th {
+      position: sticky;
+      top: 0;
+      background: #f1f5f9;
+      font-weight: 800;
+    }
+
+    .sv-detail-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .sv-url-cell {
       max-width: 450px;
       overflow-wrap: anywhere;
-      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      word-break: break-word;
+    }
+
+    .sv-report-note {
+      margin: 13px 0 0;
+      color: var(--sv-muted);
       font-size: 11px;
+      line-height: 1.7;
     }
 
-    .table-note {
-      margin: 9px 0 0;
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.8;
+    /* Supporting SEO content */
+
+    .sv-content {
+      padding: 36px 0 58px;
     }
 
-    .result-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 19px;
+    .sv-content-intro h2 {
+      margin: 0 0 13px;
+      font-size: clamp(23px, 4vw, 30px);
+      line-height: 1.35;
+      letter-spacing: -.6px;
     }
 
-    /* Educational content */
-
-    .content-section {
-      padding-top: 53px;
-    }
-
-    .section-title {
-      margin: 0 0 10px;
-      font-size: clamp(24px, 4vw, 32px);
-      line-height: 1.3;
-      letter-spacing: -.8px;
-    }
-
-    .section-lead {
-      max-width: 790px;
-      margin: 0 0 24px;
-      color: var(--muted);
+    .sv-content-intro p {
+      max-width: 890px;
+      margin: 0 0 14px;
+      color: #475569;
       font-size: 14px;
+      line-height: 1.9;
     }
 
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 15px;
-    }
-
-    .info-card {
-      padding: 21px;
-      border: 1px solid var(--line);
-      border-radius: 15px;
+    .sv-guide {
+      margin-top: 23px;
+      padding: 6px 22px;
       background: #fff;
-    }
-
-    .info-icon {
-      display: grid;
-      place-items: center;
-      width: 38px;
-      height: 38px;
-      margin-bottom: 14px;
-      border-radius: 11px;
-      background: var(--soft-blue);
-      color: var(--blue-dark);
-    }
-
-    .info-card h3 {
-      margin: 0 0 8px;
-      font-size: 15px;
-    }
-
-    .info-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.9;
-    }
-
-    .formula-panel {
-      margin-top: 20px;
-      padding: 23px;
-      border: 1px solid var(--line);
-      border-radius: 15px;
-      background: white;
-    }
-
-    .formula-panel h3 {
-      margin: 0 0 10px;
-      font-size: 17px;
-    }
-
-    .formula-panel p {
-      margin: 0 0 12px;
-      color: #52627a;
-      font-size: 13px;
-      line-height: 1.9;
-    }
-
-    .formula {
-      display: block;
-      margin: 12px 0;
-      padding: 13px;
-      border-radius: 10px;
-      background: #f1f5f9;
-      color: #334155;
-      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
-      font-size: 12px;
-      line-height: 1.85;
-      overflow-wrap: anywhere;
-    }
-
-    /* FAQs: final main-content section */
-
-    .faq-list {
-      display: grid;
-      gap: 12px;
-      margin-top: 21px;
-    }
-
-    .faq-item {
-      padding: 19px 21px;
-      border: 1px solid var(--line);
+      border: 1px solid var(--sv-border);
       border-radius: 14px;
-      background: white;
     }
 
-    .faq-item h3 {
-      margin: 0 0 8px;
+    .sv-guide details {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--sv-border);
+    }
+
+    .sv-guide details:last-child {
+      border-bottom: 0;
+    }
+
+    .sv-guide summary {
+      cursor: pointer;
+      color: var(--sv-text);
       font-size: 15px;
-      line-height: 1.6;
+      font-weight: 750;
+      line-height: 1.65;
     }
 
-    .faq-item p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 13px;
+    .sv-guide summary::marker {
+      color: var(--sv-primary);
+    }
+
+    .sv-guide details[open] summary {
+      margin-bottom: 13px;
+    }
+
+    .sv-guide h3 {
+      margin: 22px 0 8px;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .sv-guide p,
+    .sv-guide li {
+      color: #475569;
+      font-size: 14px;
       line-height: 1.9;
+    }
+
+    .sv-guide p {
+      margin: 0 0 14px;
+    }
+
+    .sv-guide p:last-child {
+      margin-bottom: 0;
+    }
+
+    .sv-guide ol,
+    .sv-guide ul {
+      margin: 12px 0 17px;
+      padding-left: 23px;
+    }
+
+    .sv-guide li {
+      margin-bottom: 7px;
+    }
+
+    .sv-guide code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #f1f5f9;
+    }
+
+    .sv-related {
+      margin-top: 30px;
+    }
+
+    .sv-related h2 {
+      margin: 0 0 12px;
+      font-size: 21px;
+    }
+
+    .sv-related-link {
+      display: block;
+      padding: 14px;
+      border: 1px solid var(--sv-border);
+      border-radius: 10px;
+      background: #fff;
+      text-decoration: none;
+    }
+
+    .sv-related-link strong {
+      display: block;
+      color: var(--sv-text);
+    }
+
+    .sv-related-link span {
+      display: block;
+      color: var(--sv-muted);
+      font-size: 12px;
     }
 
     /* Footer */
 
-    .site-footer {
-      margin-top: 57px;
-      border-top: 1px solid var(--line);
-      background: white;
+    .sv-footer {
+      padding: 24px 0;
+      border-top: 1px solid var(--sv-border);
+      background: #fff;
     }
 
-    .footer-inner {
+    .sv-footer-inner {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       justify-content: space-between;
-      gap: 30px;
-      padding-top: 29px;
-      padding-bottom: 27px;
+      flex-wrap: wrap;
+      gap: 14px;
     }
 
-    .footer-about {
-      max-width: 540px;
-    }
-
-    .footer-about p {
-      margin: 12px 0 0;
-      color: var(--muted);
+    .sv-footer p {
+      margin: 0;
+      color: var(--sv-muted);
       font-size: 12px;
-      line-height: 1.9;
     }
 
-    .footer-nav {
+    .sv-footer-links {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px 18px;
-      padding-top: 8px;
+      gap: 14px;
     }
 
-    .footer-nav a {
-      color: #64748b;
+    .sv-footer-links a {
+      color: #475569;
       font-size: 12px;
-      font-weight: 650;
-    }
-
-    .footer-nav a:hover {
-      color: var(--blue);
-    }
-
-    .footer-bottom {
-      padding: 15px 0;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 11px;
-      text-align: center;
-    }
-
-    .footer-bottom p {
-      margin: 0;
-    }
-
-    @media print {
-      .site-header,
-      .breadcrumb,
-      .hero,
-      .tool-heading,
-      .input-toolbar,
-      .button-row,
-      .feedback,
-      .content-section,
-      .site-footer,
-      .result-actions {
-        display: none !important;
-      }
-
-      body {
-        color: #111;
-        background: #fff;
-      }
-
-      .container {
-        width: 100%;
-        max-width: none;
-      }
-
-      .tool-card {
-        padding: 0;
-        border: 0;
-        box-shadow: none;
-      }
-
-      .results[hidden] {
-        display: none !important;
-      }
-
-      .results {
-        display: block !important;
-        padding: 0;
-        border: 0;
-      }
-
-      .table-scroll {
-        overflow: visible;
-      }
-
-      .result-table {
-        min-width: 0;
-        font-size: 9px;
-      }
-
-      .result-table th,
-      .result-table td {
-        padding: 5px;
-        white-space: normal;
-      }
-
-      .metric,
-      .status-panel,
-      .issue-card {
-        break-inside: avoid;
-      }
+      text-decoration: none;
     }
 
     @media (max-width: 760px) {
-      .tool-card {
-        padding: 22px;
+      .sv-container {
+        width: calc(100% - 24px);
       }
 
-      .metric-grid {
+      .sv-nav {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 11px;
+      }
+
+      .sv-nav-links {
+        gap: 12px;
+      }
+
+      .sv-stats {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .info-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-inner {
+      .sv-footer-inner {
         flex-direction: column;
+        align-items: flex-start;
       }
     }
 
-    @media (max-width: 520px) {
-      .container {
-        width: calc(100% - 26px);
-      }
-
-      .header-inner {
-        min-height: 64px;
-        gap: 7px;
-      }
-
-      .brand {
-        gap: 7px;
-        font-size: 12px;
-        letter-spacing: -.3px;
-      }
-
-      .brand-icon {
-        width: 32px;
-        height: 32px;
-      }
-
-      .main-nav a {
-        padding: 7px 8px;
-        font-size: 11px;
-      }
-
-      .breadcrumb {
-        padding-top: 19px;
-      }
-
-      .hero {
-        padding: 33px 4px 26px;
-      }
-
-      h1 {
-        font-size: 33px;
-        letter-spacing: -1.2px;
-      }
-
-      .hero p {
-        font-size: 13px;
-      }
-
-      .tool-card {
-        padding: 17px 13px;
-        border-radius: 17px;
-      }
-
-      .tool-heading {
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .tool-heading h2 {
-        font-size: 21px;
-      }
-
-      textarea {
-        min-height: 245px;
-        padding: 12px;
-        font-size: 11px;
-      }
-
-      .button-row .button,
-      .result-actions .button {
-        flex: 1 1 auto;
-      }
-
-      .metric-grid {
+    @media (max-width: 480px) {
+      .sv-nav-links {
         gap: 9px;
       }
 
-      .metric {
+      .sv-nav-links a {
+        font-size: 11px;
+      }
+
+      .sv-brand {
+        font-size: 14px;
+      }
+
+      .sv-logo {
+        width: 34px;
+        height: 34px;
+      }
+
+      .sv-intro {
+        padding-top: 27px;
+      }
+
+      .sv-intro h1 {
+        letter-spacing: -.7px;
+      }
+
+      .sv-step {
+        padding: 14px;
+      }
+
+      .sv-url-row {
+        grid-template-columns: 1fr;
+      }
+
+      .sv-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .sv-btn {
+        padding-inline: 8px;
+      }
+
+      .sv-results {
+        margin-inline: 12px;
         padding: 12px;
       }
 
-      .metric-value {
-        font-size: 19px;
-      }
-
-      .issue-card {
+      .sv-check-item {
         grid-template-columns: 1fr;
-        gap: 7px;
+        gap: 3px;
       }
 
-      .issue-level {
-        justify-self: start;
+      .sv-guide {
+        padding-inline: 15px;
       }
 
-      .formula-panel,
-      .faq-item {
-        padding: 17px;
-      }
-
-      .content-section {
-        padding-top: 43px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
-        transition-duration: .01ms !important;
+      .sv-detail-table th,
+      .sv-detail-table td {
+        padding: 8px;
       }
     }
   </style>
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="ConvertToToolsOnline homepage">
-        <span class="brand-icon" aria-hidden="true">
-          <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
-            <path d="M4 7H14M11 4L14 7L11 10"
-              stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M20 17H10M13 14L10 17L13 20"
-              stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-        <span class="brand-name">ConvertTo<span>Tools</span>Online</span>
-      </a>
+  <a class="sv-skip" href="#sitemap-validator">Skip to sitemap validator</a>
 
-      <nav class="main-nav" aria-label="Main navigation">
-        <a href="index.html">Home</a>
-        <a href="sitemap-xml-validator.html" class="active" aria-current="page">
-          Sitemap Validator
+  <div class="sv">
+
+    <header class="sv-header">
+      <div class="sv-container sv-nav">
+
+        <a class="sv-brand" href="/"
+          aria-label="Online Tools and Converters home">
+          <span class="sv-logo" aria-hidden="true">OT</span>
+          <span>Online Tools &amp; Converters</span>
         </a>
-      </nav>
-    </div>
-  </header>
 
-  <main class="container">
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="index.html">Home</a>
-      <span aria-hidden="true">/</span>
-      <span aria-current="page">XML Sitemap Validator</span>
-    </nav>
+        <nav class="sv-nav-links" aria-label="Main navigation">
+          <a href="/">Home</a>
+          <a href="/#tools">All tools</a>
+          <a href="/#categories">Categories</a>
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
+        </nav>
 
-    <section class="hero">
-      <span class="eyebrow">
-        <span class="eyebrow-dot" aria-hidden="true"></span>
-        Website SEO · XML utilities
-      </span>
-
-      <h1>
-        XML Sitemap
-        <span class="gradient-text">Validator</span>
-      </h1>
-
-      <p>
-        Check sitemap XML and sitemap index files for structural problems,
-        invalid URL entries, duplicate locations, and common metadata issues.
-        Extract the URLs or export a report for your next SEO review.
-      </p>
-    </section>
-
-    <section class="tool-card" aria-labelledby="validator-title">
-      <div class="tool-heading">
-        <div>
-          <h2 id="validator-title">Validate your sitemap XML</h2>
-          <p>Paste XML or upload a file to inspect its contents.</p>
-        </div>
-        <span class="privacy-badge">Local processing</span>
       </div>
+    </header>
 
-      <div class="input-toolbar">
-        <label class="input-label" for="xmlInput">Sitemap XML source</label>
+    <main>
 
-        <div class="toolbar-actions">
-          <label for="fileInput" class="button button-secondary button-small">
-            Upload XML
-          </label>
+      <section class="sv-container sv-intro">
 
-          <input
-            id="fileInput"
-            class="file-input"
-            type="file"
-            accept=".xml,.txt,.sitemap,application/xml,text/xml,text/plain"
-          >
+        <p class="sv-eyebrow">Free technical SEO tool</p>
 
-          <button type="button" id="urlExample" class="button button-secondary button-small">
-            URL Set Example
-          </button>
+        <h1>XML Sitemap Validator</h1>
 
-          <button type="button" id="indexExample" class="button button-secondary button-small">
-            Index Example
-          </button>
-        </div>
-      </div>
+        <p class="sv-intro-text">
+          Validate XML sitemaps online, check sitemap indexes, find
+          missing or invalid URL entries, inspect lastmod dates, and
+          review common sitemap errors before submitting your sitemap
+          to Google Search Console or Bing Webmaster Tools.
+        </p>
 
-      <textarea
-        id="xmlInput"
-        spellcheck="false"
-        autocomplete="off"
-        autocapitalize="off"
-        aria-describedby="sourceHelp"
-        placeholder="Paste your sitemap.xml or sitemap index here..."
-      ></textarea>
+        <nav class="sv-breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="/#categories">Developer &amp; Web</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Sitemap XML Validator</span>
+        </nav>
 
-      <div class="input-meta">
-        <span id="sourceStats">0 characters</span>
-        <span>Maximum input size: 5 MiB</span>
-      </div>
-
-      <p class="help-text" id="sourceHelp">
-        This tool validates XML pasted or uploaded locally. It does not
-        fetch live sitemap URLs, test page responses, or confirm Google indexing.
-        For remote checks, obtain the XML file first and load it here.
-      </p>
-
-      <div class="button-row">
-        <button type="button" id="validateButton" class="button button-primary">
-          Validate Sitemap
-          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M5 12H19M12 5L19 12L12 19"
-              stroke="currentColor" stroke-width="2"
-              stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-
-        <button type="button" id="copyURLs" class="button button-secondary" disabled>
-          Copy Extracted URLs
-        </button>
-
-        <button type="button" id="downloadURLs" class="button button-secondary" disabled>
-          Download URL List
-        </button>
-
-        <button type="button" id="downloadReport" class="button button-secondary" disabled>
-          Download Report CSV
-        </button>
-
-        <button type="button" id="resetButton" class="button button-secondary">
-          Clear
-        </button>
-      </div>
-
-      <div id="feedback" class="feedback" role="status" aria-live="polite"></div>
-
-      <section id="results" class="results" aria-labelledby="results-title" hidden>
-        <div class="results-heading">
-          <h2 id="results-title">Validation report</h2>
-          <p id="resultsDescription"></p>
-        </div>
-
-        <div class="status-panel">
-          <div class="status-line">
-            <h3 class="status-title" id="statusTitle">Validation complete</h3>
-            <span id="statusChip" class="status-chip">Checked</span>
-          </div>
-          <p class="status-description" id="statusDescription"></p>
-        </div>
-
-        <div class="metric-grid">
-          <div class="metric">
-            <span class="metric-label">Entries found</span>
-            <output class="metric-value" id="entryCount">0</output>
-          </div>
-
-          <div class="metric">
-            <span class="metric-label">Valid URL locations</span>
-            <output class="metric-value" id="validCount">0</output>
-          </div>
-
-          <div class="metric">
-            <span class="metric-label">Errors</span>
-            <output class="metric-value negative" id="errorCount">0</output>
-          </div>
-
-          <div class="metric">
-            <span class="metric-label">Warnings</span>
-            <output class="metric-value purple" id="warningCount">0</output>
-          </div>
-
-          <div class="metric">
-            <span class="metric-label">Duplicate locations</span>
-            <output class="metric-value" id="duplicateCount">0</output>
-          </div>
-
-          <div class="metric">
-            <span class="metric-label">Namespace status</span>
-            <output class="metric-value" id="namespaceStatus">—</output>
-          </div>
-        </div>
-
-        <section class="result-section" aria-labelledby="issues-heading">
-          <h3 id="issues-heading">Findings and recommendations</h3>
-          <div id="issueList" class="issue-list"></div>
-        </section>
-
-        <section class="result-section" aria-labelledby="urls-heading">
-          <h3 id="urls-heading">Extracted URL locations</h3>
-
-          <div class="table-scroll">
-            <table class="result-table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">URL / Sitemap location</th>
-                  <th scope="col">Entry status</th>
-                  <th scope="col">Last modified</th>
-                </tr>
-              </thead>
-              <tbody id="urlRows"></tbody>
-            </table>
-          </div>
-
-          <p class="table-note" id="urlTableNote"></p>
-        </section>
-
-        <div class="notice" style="margin-top:20px">
-          <strong>Scope limitation:</strong> A valid XML structure does not prove
-          that a listed page is online, crawlable, canonical, indexable, or indexed by Google.
-          This report examines the supplied XML only.
-        </div>
       </section>
-    </section>
 
-    <!-- Supporting content -->
-    <section class="content-section" aria-labelledby="how-title">
-      <h2 class="section-title" id="how-title">
-        How to validate an XML sitemap
-      </h2>
+      <!-- SITEMAP VALIDATOR APPLICATION -->
 
-      <p class="section-lead">
-        A sitemap provides search engines with a list of URLs that a site
-        wants them to discover. Validating the XML before deployment can help
-        you catch common formatting problems and duplicate entries.
-      </p>
+      <section class="sv-container" id="sitemap-validator"
+        aria-labelledby="sv-tool-heading">
 
-      <div class="info-grid">
-        <article class="info-card">
-          <span class="info-icon" aria-hidden="true">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
-              <path d="M6 3H15L19 7V21H6V3Z"
-                stroke="currentColor" stroke-width="1.8"
-                stroke-linejoin="round"/>
-              <path d="M14 3V8H19M9 12H16M9 16H16"
-                stroke="currentColor" stroke-width="1.8"
-                stroke-linecap="round"/>
-            </svg>
-          </span>
-          <h3>Check XML structure</h3>
+        <div class="sv-app">
+
+          <div class="sv-app-heading">
+
+            <h2 id="sv-tool-heading">Check your XML sitemap</h2>
+
+            <span class="sv-local-badge">
+              <span class="sv-local-dot" aria-hidden="true"></span>
+              XML checked in your browser
+            </span>
+
+          </div>
+
+          <!-- FETCH REMOTE SITEMAP -->
+
+          <section class="sv-step" aria-labelledby="sv-url-heading">
+
+            <h3 class="sv-step-heading" id="sv-url-heading">
+              <span class="sv-step-number">1</span>
+              Fetch a sitemap from its URL (optional)
+            </h3>
+
+            <div class="sv-url-row">
+
+              <div class="sv-field">
+                <label for="sv-url">Sitemap URL</label>
+
+                <input
+                  class="sv-input"
+                  type="url"
+                  id="sv-url"
+                  placeholder="https://example.com/sitemap.xml"
+                  autocomplete="url"
+                  spellcheck="false"
+                >
+
+                <p class="sv-help">
+                  The server must permit the browser to read the response.
+                  If fetching is blocked, download the XML and upload it below.
+                </p>
+              </div>
+
+              <button class="sv-btn"
+                type="button" id="sv-fetch">
+                Fetch sitemap
+              </button>
+
+            </div>
+
+          </section>
+
+          <!-- PASTE OR UPLOAD XML -->
+
+          <section class="sv-step" aria-labelledby="sv-input-heading">
+
+            <h3 class="sv-step-heading" id="sv-input-heading">
+              <span class="sv-step-number">2</span>
+              Paste or upload XML
+            </h3>
+
+            <div class="sv-field">
+
+              <label for="sv-xml">Sitemap XML content</label>
+
+              <textarea
+                class="sv-editor"
+                id="sv-xml"
+                spellcheck="false"
+                autocapitalize="off"
+                autocomplete="off"
+                placeholder='<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://example.com/</loc>
+    <lastmod>2026-10-19</lastmod>
+  </url>
+</urlset>'
+                aria-describedby="sv-xml-help"
+              ></textarea>
+
+              <p class="sv-help" id="sv-xml-help">
+                Paste a standard XML urlset or sitemap index.
+                This tool checks uncompressed XML text, not .gz files.
+              </p>
+
+            </div>
+
+            <div class="sv-file-row">
+
+              <label class="sv-btn" for="sv-file">
+                Upload XML file
+              </label>
+
+              <input
+                class="sv-file-input"
+                id="sv-file"
+                type="file"
+                accept=".xml,.txt,application/xml,text/xml,text/plain"
+              >
+
+              <span class="sv-file-name" id="sv-file-name">
+                No file selected
+              </span>
+
+            </div>
+
+            <div class="sv-actions">
+
+              <button class="sv-btn sv-btn-primary"
+                type="button" id="sv-validate">
+                Validate sitemap
+              </button>
+
+              <button class="sv-btn"
+                type="button" id="sv-sample-urlset">
+                Load URL sitemap example
+              </button>
+
+              <button class="sv-btn"
+                type="button" id="sv-sample-index">
+                Load index example
+              </button>
+
+              <button class="sv-btn"
+                type="button" id="sv-clear">
+                Clear
+              </button>
+
+            </div>
+
+          </section>
+
+          <!-- RESULTS -->
+
+          <p class="sv-status" id="sv-status"
+            role="status" aria-live="polite"></p>
+
+          <section class="sv-results" id="sv-results"
+            aria-labelledby="sv-results-heading" hidden>
+
+            <div class="sv-result-header">
+
+              <h3 id="sv-results-heading">Validation report</h3>
+
+              <span class="sv-verdict" id="sv-verdict">
+                Not checked
+              </span>
+
+            </div>
+
+            <div class="sv-stats">
+
+              <div class="sv-stat">
+                <span class="sv-stat-label">Entries</span>
+                <output class="sv-stat-value" id="sv-count">—</output>
+              </div>
+
+              <div class="sv-stat">
+                <span class="sv-stat-label">Unique locations</span>
+                <output class="sv-stat-value" id="sv-unique">—</output>
+              </div>
+
+              <div class="sv-stat">
+                <span class="sv-stat-label">XML size</span>
+                <output class="sv-stat-value" id="sv-size">—</output>
+              </div>
+
+              <div class="sv-stat">
+                <span class="sv-stat-label">lastmod coverage</span>
+                <output class="sv-stat-value" id="sv-lastmod">—</output>
+              </div>
+
+            </div>
+
+            <div class="sv-result-section">
+
+              <h4>Issues and recommendations</h4>
+
+              <div id="sv-no-issues" class="sv-no-issues" hidden>
+                No issues were reported.
+              </div>
+
+              <ul class="sv-check-list" id="sv-issues"></ul>
+
+            </div>
+
+            <div class="sv-result-section" id="sv-entry-section" hidden>
+
+              <h4>Entry inspection</h4>
+
+              <div class="sv-details">
+
+                <table class="sv-detail-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Location</th>
+                      <th scope="col">lastmod</th>
+                      <th scope="col">Result</th>
+                    </tr>
+                  </thead>
+
+                  <tbody id="sv-entry-body"></tbody>
+                </table>
+
+              </div>
+
+              <p class="sv-report-note">
+                The table shows up to 200 entries. All entries are included
+                in the aggregate counts.
+              </p>
+
+            </div>
+
+            <div class="sv-actions">
+
+              <button class="sv-btn"
+                type="button" id="sv-copy-report">
+                Copy report
+              </button>
+
+              <button class="sv-btn"
+                type="button" id="sv-download-report">
+                Download report
+              </button>
+
+            </div>
+
+            <p class="sv-report-note">
+              A successful local validation does not guarantee that a search
+              engine can crawl every listed page or that every URL will be
+              indexed. Server responses, robots rules, redirects, canonical
+              URLs, and search-engine processing must be checked separately.
+            </p>
+
+          </section>
+
+        </div>
+
+      </section>
+
+      <!-- SEO SUPPORTING GUIDE -->
+
+      <article class="sv-container sv-content">
+
+        <header class="sv-content-intro">
+
+          <h2>Free XML Sitemap Validator and Sitemap Checker</h2>
+
           <p>
-            Identify malformed XML, unexpected root elements, missing
-            locations, and an absent or incorrect sitemap namespace.
+            An XML sitemap gives search engines a structured list of
+            URLs that a website wants to make available for crawling.
+            A sitemap can help search engines discover important pages,
+            especially on large websites, new websites, or sites with
+            complex internal navigation. A sitemap does not guarantee
+            that its URLs will be crawled or indexed, but a correctly
+            formed file makes the submitted URL list easier to process.
           </p>
-        </article>
 
-        <article class="info-card">
-          <span class="info-icon" aria-hidden="true">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
-              <circle cx="10.5" cy="10.5" r="6.5"
-                stroke="currentColor" stroke-width="1.8"/>
-              <path d="M15.5 15.5L21 21M7.5 10.5H13.5"
-                stroke="currentColor" stroke-width="1.8"
-                stroke-linecap="round"/>
-            </svg>
-          </span>
-          <h3>Find common issues</h3>
           <p>
-            Inspect invalid URL locations, repeated entries, mixed hosts,
-            malformed last-modified values, and out-of-range priority values.
+            This free sitemap XML validator checks the basic structure
+            of a standard XML URL sitemap or sitemap index. It reports
+            XML parsing problems, missing location elements, malformed
+            URLs, duplicate locations, questionable lastmod values, and
+            entry counts that exceed common sitemap limits. You can
+            paste XML, upload a file, or attempt to fetch a sitemap URL
+            when the remote server permits browser access.
           </p>
-        </article>
 
-        <article class="info-card">
-          <span class="info-icon" aria-hidden="true">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
-              <path d="M12 3V15M7 10L12 15L17 10M5 20H19"
-                stroke="currentColor" stroke-width="1.8"
-                stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-          <h3>Extract and export URLs</h3>
           <p>
-            Copy the discovered locations or download them as a text file.
-            Export findings as CSV for documentation and subsequent checks.
+            Use the report as a practical pre-submission check before
+            sending your sitemap to Google Search Console or Bing
+            Webmaster Tools. The validator focuses on the XML provided
+            to it; it does not replace a live crawl, a robots.txt check,
+            URL inspection, or the indexing reports available in
+            webmaster tools.
           </p>
-        </article>
-      </div>
 
-      <div class="formula-panel">
-        <h3>Sitemap XML formats</h3>
+        </header>
+
+        <div class="sv-guide">
+
+          <details>
+            <summary>1. What is an XML sitemap?</summary>
+
+            <p>
+              An XML sitemap is a structured document that lists URLs
+              associated with a website. Its most common form uses a
+              root element named <code>urlset</code> and individual
+              <code>url</code> entries. Each URL entry normally contains
+              a <code>loc</code> element identifying the page.
+              An optional <code>lastmod</code> element can describe
+              when that page was last significantly modified.
+            </p>
+
+            <p>
+              Search engines can use sitemap information as a discovery
+              signal. It can be helpful when a website has many pages,
+              recently published pages, pages that are not linked
+              prominently from the homepage, or a structure that makes
+              URL discovery more difficult. Internal links and other
+              discovery methods still matter: a sitemap is not a
+              substitute for a crawlable website architecture.
+            </p>
+
+            <p>
+              A sitemap typically lists the canonical URLs that a site
+              wants search engines to consider. Avoid intentionally
+              listing URLs that redirect to another destination,
+              duplicate pages that should consolidate elsewhere,
+              error pages, or URLs that are not meant to appear in
+              search results. Keep the list consistent with the
+              website's actual URL structure.
+            </p>
+
+            <p>
+              An XML sitemap is different from an HTML sitemap.
+              An HTML sitemap is a page primarily intended to help
+              visitors navigate a site, while an XML sitemap follows
+              a format intended for search-engine discovery. A site
+              can use both when each serves a useful purpose.
+            </p>
+          </details>
+
+          <details>
+            <summary>2. What does an XML sitemap validator check?</summary>
+
+            <p>
+              A sitemap validator examines whether the supplied XML
+              can be parsed and whether its main elements follow the
+              expected sitemap structure. This helps identify problems
+              such as unclosed tags, mismatched elements, missing
+              location values, and root elements that do not represent
+              a normal URL sitemap or a sitemap index.
+            </p>
+
+            <p>
+              It can also inspect the contents of each entry. A URL
+              should be an absolute address rather than a relative
+              path, and optional date information should be formatted
+              correctly. Duplicate locations can indicate unnecessary
+              repetition, while an incorrect namespace can prevent
+              a file from conforming to the expected sitemap format.
+            </p>
+
+            <p>
+              This tool reports structural errors separately from
+              advisory issues. A missing optional lastmod value, for
+              example, is not the same type of problem as malformed
+              XML. A valid-looking XML document can still contain
+              unsuitable URLs, incorrect dates, or outdated page
+              addresses, so the results should be reviewed in context.
+            </p>
+
+            <p>
+              Local validation does not establish that a web server
+              returns a successful response for every listed page.
+              It also cannot determine whether a page is blocked
+              by a robots rule, declares a different canonical URL,
+              or is eligible for indexing. Those questions require
+              separate website and search-console checks.
+            </p>
+          </details>
+
+          <details>
+            <summary>3. How to validate a sitemap step by step</summary>
+
+            <p>
+              You can validate sitemap XML by pasting the document
+              directly into the editor, uploading an XML file, or
+              entering a public sitemap address into the optional
+              fetch field. The fastest method is usually to copy
+              the contents of your current sitemap file.
+            </p>
+
+            <ol>
+              <li>Open the sitemap file or visit its public URL.</li>
+              <li>Copy the complete XML or select the local file.</li>
+              <li>Paste the XML or upload the file into the validator.</li>
+              <li>Click Validate sitemap.</li>
+              <li>Read the verdict and review all errors and warnings.</li>
+              <li>Inspect the listed locations and their lastmod values.</li>
+              <li>Correct the original sitemap file if necessary.</li>
+              <li>Revalidate the corrected version before publishing it.</li>
+            </ol>
+
+            <p>
+              If you attempt to fetch a remote sitemap and the browser
+              cannot read the response, that failure does not necessarily
+              mean the sitemap itself is invalid. Browsers restrict
+              cross-origin requests unless the remote server permits
+              access through CORS. Download the XML and upload it
+              locally when a remote fetch is blocked.
+            </p>
+
+            <p>
+              After a corrected sitemap has been uploaded to your
+              website, check the public file at its actual URL.
+              Then submit or resubmit the sitemap address through
+              the relevant webmaster tools if appropriate. Search
+              engines may need time to fetch and process the update.
+            </p>
+          </details>
+
+          <details>
+            <summary>4. XML syntax errors and common sitemap problems</summary>
+
+            <p>
+              XML requires properly nested and closed elements.
+              For example, an opening <code>url</code> element
+              must have a matching closing tag, and a child element
+              must be closed before its parent ends. A mismatched
+              closing tag, unescaped ampersand, or truncated file
+              can prevent a parser from reading the document.
+            </p>
+
+            <p>
+              Attribute values and text must also follow XML rules.
+              A raw ampersand used as part of a URL query should
+              normally be encoded as <code>&amp;amp;</code> in the
+              XML source. When the XML is parsed, the entity is
+              decoded back to the ampersand that belongs in the URL.
+              This distinction is important when a sitemap lists
+              URLs with query parameters.
+            </p>
+
+            <p>
+              Another frequent issue is the wrong root structure.
+              A conventional URL sitemap uses <code>urlset</code>,
+              while a sitemap index uses <code>sitemapindex</code>.
+              Mixing their child element types can make the document
+              structurally incorrect even if the XML syntax itself
+              is valid.
+            </p>
+
+            <p>
+              Use a validator to locate the problem, then correct
+              the file at its source. If a content-management system
+              generates the sitemap automatically, fix the relevant
+              configuration or page data rather than repeatedly
+              editing a generated file that will be overwritten.
+            </p>
+          </details>
+
+          <details>
+            <summary>5. What are urlset and sitemap index files?</summary>
+
+            <p>
+              A <code>urlset</code> sitemap lists individual webpage
+              locations. Each <code>url</code> element represents a
+              location, with optional metadata such as last modification
+              time. It is the familiar format used by websites that
+              have a manageable number of sitemap entries in one file.
+            </p>
+
+            <p>
+              A sitemap index contains references to other sitemap
+              files. Its root element is <code>sitemapindex</code>,
+              and its child entries are <code>sitemap</code> elements.
+              Each entry normally contains a <code>loc</code> value
+              pointing to a child sitemap. The index makes it possible
+              to organise a larger URL inventory into multiple files.
+            </p>
+
+            <p>
+              The distinction matters during validation. A normal URL
+              sitemap contains page locations, whereas an index points
+              to sitemap documents. A sitemap index should not be
+              treated as though each of its child locations were
+              a webpage entry in a regular sitemap.
+            </p>
+
+            <p>
+              When validating an index, check that every child sitemap
+              location is absolute and that the referenced sitemap
+              files are published and accessible. This browser-based
+              validator checks the structure and addresses listed
+              in the index, but it does not recursively download
+              and validate each child sitemap.
+            </p>
+          </details>
+
+          <details>
+            <summary>6. What is the sitemap XML namespace?</summary>
+
+            <p>
+              A standard sitemap declares the namespace
+              <code>http://www.sitemaps.org/schemas/sitemap/0.9</code>
+              on its <code>urlset</code> or <code>sitemapindex</code>
+              root element. The namespace identifies the vocabulary
+              used by the document and helps XML-aware software
+              distinguish sitemap elements from unrelated XML elements.
+            </p>
+
+            <p>
+              A common sitemap declaration looks like this:
+            </p>
+
+            <p>
+              <code>
+                &lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+              </code>
+            </p>
+
+            <p>
+              A document can be well-formed XML without using the
+              correct sitemap namespace. For that reason, parsing
+              successfully is only the first step. A validator should
+              also check whether the root structure uses the expected
+              sitemap vocabulary and whether location entries are
+              in the appropriate place.
+            </p>
+
+            <p>
+              Some sitemap files include extension namespaces for
+              images, video, news, or language-related annotations.
+              Such extensions can add useful metadata, but they do
+              not remove the need for the standard sitemap structure.
+              The validator focuses on common URL and sitemap-index
+              requirements rather than fully validating every
+              extension schema.
+            </p>
+          </details>
+
+          <details>
+            <summary>7. What is lastmod in a sitemap?</summary>
+
+            <p>
+              The <code>lastmod</code> element describes the date
+              or date-time when a page was last significantly modified.
+              It can provide useful information about changes that
+              matter to search engines. A significant change can
+              include a meaningful update to the main content,
+              structured data, or important links.
+            </p>
+
+            <p>
+              A simple value can use the ISO-style date format
+              <code>2026-10-19</code>. A date-time value may include
+              the time and time-zone information. The exact value
+              should reflect the actual modification rather than
+              a date invented solely to make a sitemap appear new.
+            </p>
+
+            <p>
+              Missing lastmod is not automatically a fatal structural
+              error. However, incorrect or misleading dates should
+              be corrected. The presence of the element is useful
+              only when its information is reasonably accurate.
+              Updating every page's lastmod each time an unrelated
+              file changes can reduce the value of the metadata.
+            </p>
+
+            <p>
+              This validator checks the syntax of supplied lastmod
+              values and reports their coverage. It cannot independently
+              confirm when the corresponding webpage was actually
+              updated. Compare the dates with your website's publishing
+              process or source-control history when accuracy matters.
+            </p>
+          </details>
+
+          <details>
+            <summary>8. How many URLs can an XML sitemap contain?</summary>
+
+            <p>
+              Google's published sitemap guidance specifies a maximum
+              of 50,000 URLs or 50 MB uncompressed for a single
+              sitemap file. A sitemap that exceeds those limits
+              should be split into smaller sitemaps, with a sitemap
+              index used when appropriate. <a
+                href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/large-sitemaps/"
+                target="_blank" rel="noopener noreferrer">See Google's sitemap-index documentation</a>.
+            </p>
+
+            <p>
+              These limits apply to the sitemap format accepted by
+              Google; other crawler implementations may provide
+              additional guidance. This tool uses the commonly
+              documented Google limits as a practical validation
+              baseline rather than claiming that every search engine
+              has identical processing rules.
+            </p>
+
+            <p>
+              A website with fewer than the maximum number of pages
+              can still benefit from multiple files when the content
+              has clear sections, languages, page types, or separate
+              publishing systems. Dividing a sitemap can make
+              management and debugging easier even before a file
+              reaches the technical size limit.
+            </p>
+
+            <p>
+              Count and size are different measurements. A sitemap
+              containing a modest number of very long URLs may
+              consume more space than expected, while a compact
+              sitemap with short URLs can contain many entries.
+              Always review both metrics when diagnosing a
+              large-sitemap problem.
+            </p>
+          </details>
+
+          <details>
+            <summary>9. What makes a sitemap URL valid?</summary>
+
+            <p>
+              A sitemap location should be a complete absolute URL,
+              including its scheme and hostname. For example,
+              <code>https://example.com/about.html</code> identifies
+              a complete address. A relative path such as
+              <code>/about.html</code> is not an equivalent
+              replacement for the absolute location in a sitemap.
+            </p>
+
+            <p>
+              Check that URLs use the intended hostname, scheme,
+              and canonical version of the website. If your site
+              redirects HTTP pages to HTTPS, the sitemap should
+              generally list the canonical HTTPS addresses instead
+              of repeatedly listing the redirecting alternatives.
+              The same principle applies to unwanted hostname,
+              slash, or file-extension variations.
+            </p>
+
+            <p>
+              An absolute URL can still be an unsuitable sitemap entry.
+              The page may return an error, be redirected, be blocked
+              from crawling, or specify another canonical URL.
+              Structural validation checks address formatting;
+              it does not establish that the destination is eligible
+              for indexing.
+            </p>
+
+            <p>
+              Sitemap URL choices should match the site's actual
+              publishing configuration. Make sure the locations
+              listed in the sitemap are reachable, canonical,
+              and intended to be discovered through search engines.
+            </p>
+          </details>
+
+          <details>
+            <summary>10. Why duplicate URLs and redirects matter</summary>
+
+            <p>
+              Duplicate entries list the same location more than
+              once in a sitemap. Repetition usually provides no
+              additional discovery value and can indicate an export
+              or generation problem. Remove duplicates so that the
+              sitemap remains clear and easier to inspect.
+            </p>
+
+            <p>
+              Redirecting URLs can also make a sitemap less useful.
+              If an old page redirects to a current canonical page,
+              update the sitemap to list the final URL where appropriate.
+              Maintaining obsolete locations can make the file harder
+              to manage and does not replace proper redirect handling.
+            </p>
+
+            <p>
+              A duplicate URL is not the same thing as duplicate
+              webpage content. Two different addresses might display
+              similar content even though both addresses are unique
+              strings. A sitemap validator can identify repeated
+              locations in the XML, but content duplication and
+              canonicalisation require additional checks.
+            </p>
+
+            <p>
+              After updating the file, inspect important pages
+              individually in Google Search Console or another
+              crawler when necessary. Confirm that the intended
+              canonical URL responds correctly and that internal
+              links point to the version you want search engines
+              to discover.
+            </p>
+          </details>
+
+          <details>
+            <summary>11. How to submit a sitemap to Google and Bing</summary>
+
+            <p>
+              After publishing a valid sitemap at a public URL,
+              add or submit that URL through the relevant webmaster
+              service. Google Search Console provides a Sitemaps
+              section for submitting and reviewing known sitemaps.
+              Bing Webmaster Tools provides sitemap submission
+              and reporting features for verified sites.
+            </p>
+
+            <p>
+              You can also declare a sitemap location in the site's
+              robots.txt file using a Sitemap directive. The URL
+              should be absolute, for example:
+              <code>Sitemap: https://example.com/sitemap.xml</code>.
+              This helps crawlers discover the file, but it does
+              not guarantee that they will crawl every listed page.
+            </p>
+
+            <p>
+              Submit the public sitemap location, not the contents
+              of the XML pasted into this validator. The validator
+              only checks the supplied text in the browser. Your
+              actual sitemap must be hosted at a reachable URL
+              that the search engine can fetch.
+            </p>
+
+            <p>
+              After submission, review the webmaster service's
+              status and any reported fetch or parsing errors.
+              Correct the source sitemap or hosting issue when
+              a failure is reported. A successful submission
+              means the file has been provided for processing;
+              it does not mean that every page will be indexed.
+            </p>
+          </details>
+
+          <details>
+            <summary>12. Can this validator test a sitemap URL directly?</summary>
+
+            <p>
+              Yes, it can attempt to retrieve a sitemap from a
+              URL you enter. When the sitemap is available from
+              the same website or the remote server permits
+              cross-origin access, the validator can read the
+              response and inspect its XML.
+            </p>
+
+            <p>
+              Browsers enforce cross-origin restrictions. A
+              third-party sitemap server may refuse to expose
+              its response to this page even though you can
+              open that sitemap directly in a browser tab.
+              This is a browser security policy, not proof that
+              the XML is invalid. The MDN
+              <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CORS"
+                target="_blank" rel="noopener noreferrer">CORS documentation</a>
+              explains this restriction.
+            </p>
+
+            <p>
+              When remote fetching is blocked, download the
+              sitemap through your browser and upload its XML
+              file into the validator, or copy and paste the
+              contents. Local validation remains useful for
+              syntax and structure even when direct retrieval
+              cannot be completed from this page.
+            </p>
+
+            <p>
+              The direct-fetch feature does not behave like a
+              server-side crawler. It does not impersonate
+              Googlebot or Bingbot, recursively fetch sitemap
+              index children, or independently verify all
+              listed webpage response codes.
+            </p>
+          </details>
+
+          <details>
+            <summary>13. What are changefreq and priority?</summary>
+
+            <p>
+              Older sitemap examples often include
+              <code>changefreq</code> and <code>priority</code>.
+              The first describes an expected update frequency
+              such as daily or weekly. The second expresses a
+              relative priority within the website's URL list.
+              Both are optional sitemap metadata.
+            </p>
+
+            <p>
+              Google documents that it ignores the
+              <code>priority</code> and <code>changefreq</code>
+              values. Adding them therefore does not compel
+              Google to crawl a page more often or to rank it
+              above another page. An accurate lastmod value
+              is a more useful signal when it genuinely reflects
+              a significant update.
+            </p>
+
+            <p>
+              You do not need to add these optional values to
+              every sitemap merely because an example contains
+              them. Focus on valid locations, a correct XML
+              structure, accurate modification dates where
+              supplied, and a sitemap file that matches your
+              current canonical URLs.
+            </p>
+          </details>
+
+          <details>
+            <summary>14. Common XML sitemap validation errors</summary>
+
+            <h3>XML parsing error</h3>
+            <p>
+              Check for missing closing tags, mismatched elements,
+              invalid entities, truncated XML, and malformed
+              attributes. Correct the XML source before submission.
+            </p>
+
+            <h3>Missing loc element</h3>
+            <p>
+              Each sitemap URL entry and each sitemap-index
+              entry needs an appropriate location element.
+              Check the XML element structure and ensure that
+              the location has a meaningful value.
+            </p>
+
+            <h3>Relative URL instead of an absolute URL</h3>
+            <p>
+              Replace relative paths with complete addresses
+              that include the scheme and hostname. Use the
+              intended canonical URL rather than a shortened path.
+            </p>
+
+            <h3>Invalid lastmod value</h3>
+            <p>
+              Use an appropriate date or date-time format and
+              ensure the value represents an actual page update.
+              Avoid placeholder strings or invented dates.
+            </p>
+
+            <h3>Duplicate URL entries</h3>
+            <p>
+              Remove repeated locations and review the sitemap
+              generator if the duplicates return after publishing
+              a regenerated file.
+            </p>
+
+            <h3>Too many URLs or excessive file size</h3>
+            <p>
+              Split the sitemap into smaller files and use an
+              index when appropriate. Check both uncompressed
+              file size and entry count before publishing.
+            </p>
+          </details>
+
+          <details>
+            <summary>15. Frequently asked questions about sitemap validation</summary>
+
+            <h3>Is this XML sitemap validator free?</h3>
+            <p>
+              Yes. You can paste XML or upload a supported file
+              and run the validator in your browser without
+              creating an account.
+            </p>
+
+            <h3>Can it validate a sitemap index?</h3>
+            <p>
+              Yes. It recognizes the standard sitemap-index
+              structure and checks its sitemap entries and
+              required location values. It does not recursively
+              download and validate each child sitemap.
+            </p>
+
+            <h3>Does a valid sitemap guarantee indexing?</h3>
+            <p>
+              No. Sitemap validity means the file passes the
+              checks performed by this tool. Indexing also
+              depends on crawling, canonicalisation, content,
+              access rules, and the search engine's systems.
+            </p>
+
+            <h3>How many URLs can a sitemap contain?</h3>
+            <p>
+              Google's published guideline allows up to 50,000
+              URLs in one sitemap and a maximum uncompressed
+              size of 50 MB. Larger URL sets can be split
+              into separate sitemap files.
+            </p>
+
+            <h3>Does the tool support compressed .gz sitemaps?</h3>
+            <p>
+              This browser-only version accepts uncompressed
+              XML text, not gzip-compressed sitemap files.
+              Extract the XML before uploading it.
+            </p>
+
+            <h3>Can it check whether each URL returns HTTP 200?</h3>
+            <p>
+              No. It checks URL formatting and sitemap structure.
+              Live status checks require separate requests to
+              the target pages and may be restricted by browser
+              security policies.
+            </p>
+
+            <h3>Why does fetching a public URL sometimes fail?</h3>
+            <p>
+              The remote server may block browser cross-origin
+              access, the URL may be unavailable, or the server
+              may return an error. Try downloading the XML and
+              uploading the local file instead.
+            </p>
+
+            <h3>Is lastmod required?</h3>
+            <p>
+              It is optional in standard sitemap entries.
+              When supplied, it should accurately reflect
+              the page's significant modification date.
+            </p>
+
+            <h3>Do priority and changefreq improve rankings?</h3>
+            <p>
+              Google says it ignores these values. Prioritise
+              accurate sitemap locations and lastmod information
+              instead of relying on optional hints.
+            </p>
+
+            <h3>Can I use this for Bing Webmaster Tools?</h3>
+            <p>
+              Yes. XML structure and common sitemap checks are
+              useful before submitting the file to Bing or
+              another search engine. Consult each service's
+              guidance for additional requirements.
+            </p>
+
+            <h3>Does the validator change my sitemap file?</h3>
+            <p>
+              No. It validates the supplied XML and provides
+              diagnostics. Correct the source file separately
+              and validate the updated version.
+            </p>
+
+            <h3>Can a sitemap contain HTML pages and tool URLs?</h3>
+            <p>
+              A sitemap can list canonical URLs for pages
+              you want search engines to discover, including
+              tool pages. Ensure those addresses are absolute,
+              reachable, and intended for indexing.
+            </p>
+
+          </details>
+
+        </div>
+
+        <section class="sv-related" aria-labelledby="sv-related-heading">
+
+          <h2 id="sv-related-heading">Explore more online tools</h2>
+
+          <a class="sv-related-link" href="/#tools">
+            <strong>Browse all tools and converters</strong>
+            <span>
+              Explore developer tools, image utilities, text tools,
+              calculators, and other practical online resources.
+            </span>
+          </a>
+
+        </section>
+
+      </article>
+
+    </main>
+
+    <footer class="sv-footer">
+      <div class="sv-container sv-footer-inner">
 
         <p>
-          Standard sitemaps use the sitemap protocol namespace
-          <code>http://www.sitemaps.org/schemas/sitemap/0.9</code>.
-          A URL set contains URL entries; a sitemap index contains references
-          to other sitemap files.
+          © <span id="sv-year">2026</span> Online Tools &amp; Converters.
         </p>
 
-        <code class="formula">
-          &lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
-          <br>  &lt;url&gt;&lt;loc&gt;https://example.com/page.html&lt;/loc&gt;&lt;/url&gt;
-          <br>&lt;/urlset&gt;
-        </code>
+        <nav class="sv-footer-links" aria-label="Footer navigation">
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/privacy-policy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms</a>
+        </nav>
 
-        <code class="formula">
-          &lt;sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
-          <br>  &lt;sitemap&gt;&lt;loc&gt;https://example.com/sitemap-1.xml&lt;/loc&gt;&lt;/sitemap&gt;
-          <br>&lt;/sitemapindex&gt;
-        </code>
-
-        <p>
-          The examples above illustrate the structure. Replace the sample
-          URLs with real locations on your own website.
-        </p>
-
-        <p>
-          The official sitemap protocol permits up to 50,000 URLs per sitemap
-          and an uncompressed file size of 50 MB. This browser tool deliberately
-          limits pasted or uploaded input to 5 MiB for responsiveness. That is
-          a tool limitation, not a change to the sitemap protocol.
-        </p>
       </div>
-    </section>
+    </footer>
 
-    <!-- FAQs: final main-content section -->
-    <section class="content-section" aria-labelledby="faq-title">
-      <h2 class="section-title" id="faq-title">Frequently asked questions</h2>
+  </div>
 
-      <div class="faq-list">
-        <article class="faq-item">
-          <h3>What is an XML sitemap validator?</h3>
-          <p>
-            It checks supplied sitemap XML for formatting and common structural
-            issues. This tool also checks URL locations, duplicates, some optional
-            metadata values, and extracts the listed URLs.
-          </p>
-        </article>
-
-        <article class="faq-item">
-          <h3>Can this tool validate a sitemap index?</h3>
-          <p>
-            Yes. It recognizes both standard URL sets and sitemap index
-            documents. It checks the index entries but does not automatically
-            download and validate the child sitemap files.
-          </p>
-        </article>
-
-        <article class="faq-item">
-          <h3>Does this tool check whether every URL is online?</h3>
-          <p>
-            No. It validates URL syntax and other properties visible in the
-            XML. It does not request each page or determine its HTTP response,
-            canonical tag, robots directive, or Google indexing status.
-          </p>
-        </article>
-
-        <article class="faq-item">
-          <h3>What is the difference between a URL set and a sitemap index?</h3>
-          <p>
-            A URL set contains individual page locations. A sitemap index
-            contains references to other sitemap files. They have different
-            root elements and different entry types.
-          </p>
-        </article>
-
-        <article class="faq-item">
-          <h3>Why are duplicate sitemap URLs a problem?</h3>
-          <p>
-            Repeated entries are usually unnecessary and may indicate a
-            sitemap generation or maintenance issue. This tool identifies
-            repeated normalized locations in the submitted document so you
-            can review and remove unintended duplicates.
-          </p>
-        </article>
-
-        <article class="faq-item">
-          <h3>Is the lastmod tag required?</h3>
-          <p>
-            It is optional in the standard sitemap format. When provided,
-            it should represent the page's actual modification date or time.
-            An inaccurate date is not useful simply because the field exists.
-          </p>
-        </article>
-
-        <article class="faq-item">
-          <h3>Can a valid sitemap guarantee that Google indexes my pages?</h3>
-          <p>
-            No. A sitemap can help search engines discover URLs, but it
-            does not guarantee crawling, indexing, or improved rankings.
-            Page quality, access, canonicalization, indexing directives,
-            and other signals also matter.
-          </p>
-        </article>
-
-        <article class="faq-item">
-          <h3>Does this tool upload my XML?</h3>
-          <p>
-            The validation runs locally in your browser, and the page's
-            tool code does not transmit the submitted XML to a validation
-            server. Website hosting, analytics, and advertising services
-            configured separately may have their own data practices.
-          </p>
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <div class="footer-about">
-        <a class="brand" href="index.html">
-          <span class="brand-icon" aria-hidden="true">
-            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
-              <path d="M4 7H14M11 4L14 7L11 10"
-                stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M20 17H10M13 14L10 17L13 20"
-                stroke="currentColor" stroke-width="2"
-                stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-          <span class="brand-name">ConvertTo<span>Tools</span>Online</span>
-        </a>
-
-        <p>
-          ConvertToToolsOnline provides practical browser-based utilities
-          for website owners, developers, and everyday digital tasks.
-        </p>
-      </div>
-
-      <nav class="footer-nav" aria-label="Footer navigation">
-        <a href="index.html">Home</a>
-        <a href="contact.html">Contact Us</a>
-      </nav>
-    </div>
-
-    <div class="footer-bottom">
-      <div class="container">
-        <p>
-          &copy; <span id="copyrightYear">2026</span>
-          ConvertToToolsOnline. All rights reserved.
-        </p>
-      </div>
-    </div>
-  </footer>
+  <!-- SITEMAP XML VALIDATION ENGINE -->
 
   <script>
     (() => {
       "use strict";
 
-      const MAX_BYTES = 5 * 1024 * 1024;
-      const MAX_VISIBLE_URLS = 300;
-      const SITEMAP_NAMESPACE =
-        "http://www.sitemaps.org/schemas/sitemap/0.9";
-      const MAX_PROTOCOL_ENTRIES = 50000;
+      const $ = id => document.getElementById(id);
 
-      const xmlInput = document.getElementById("xmlInput");
-      const fileInput = document.getElementById("fileInput");
-      const sourceStats = document.getElementById("sourceStats");
-      const feedback = document.getElementById("feedback");
-      const results = document.getElementById("results");
+      const NS = "http://www.sitemaps.org/schemas/sitemap/0.9";
+      const MAX_ENTRIES = 50000;
+      const MAX_BYTES = 50 * 1024 * 1024;
+      const MAX_DISPLAYED_ENTRIES = 200;
 
-      const validateButton = document.getElementById("validateButton");
-      const copyURLsButton = document.getElementById("copyURLs");
-      const downloadURLsButton = document.getElementById("downloadURLs");
-      const downloadReportButton = document.getElementById("downloadReport");
+      const el = {
+        url: $("sv-url"),
+        fetch: $("sv-fetch"),
+        xml: $("sv-xml"),
+        file: $("sv-file"),
+        fileName: $("sv-file-name"),
 
-      let latestReport = null;
-      let editVersion = 0;
+        validate: $("sv-validate"),
+        sampleUrlset: $("sv-sample-urlset"),
+        sampleIndex: $("sv-sample-index"),
+        clear: $("sv-clear"),
 
-      function makeElement(tag, className, text) {
-        const element = document.createElement(tag);
+        status: $("sv-status"),
+        results: $("sv-results"),
+        verdict: $("sv-verdict"),
 
-        if (className) {
-          element.className = className;
-        }
+        count: $("sv-count"),
+        unique: $("sv-unique"),
+        size: $("sv-size"),
+        lastmod: $("sv-lastmod"),
 
-        if (text !== undefined && text !== null) {
-          element.textContent = String(text);
-        }
+        issues: $("sv-issues"),
+        noIssues: $("sv-no-issues"),
 
-        return element;
+        entrySection: $("sv-entry-section"),
+        entryBody: $("sv-entry-body"),
+
+        copyReport: $("sv-copy-report"),
+        downloadReport: $("sv-download-report"),
+        year: $("sv-year")
+      };
+
+      let lastReport = null;
+      let statusTimer = null;
+      let fetchController = null;
+
+      function setText(node, value) {
+        if (node) node.textContent = String(value);
+      }
+
+      function setStatus(message, isError = false) {
+        setText(el.status, message);
+        el.status.classList.toggle("sv-status-error", isError);
       }
 
       function formatNumber(value) {
         return Number(value).toLocaleString();
       }
 
-      function showFeedback(message, type) {
-        feedback.textContent = message;
-        feedback.className = "feedback " + type;
-      }
-
-      function clearFeedback() {
-        feedback.textContent = "";
-        feedback.className = "feedback";
-      }
-
-      function invalidateResults() {
-        editVersion += 1;
-        latestReport = null;
-        results.hidden = true;
-        copyURLsButton.disabled = true;
-        downloadURLsButton.disabled = true;
-        downloadReportButton.disabled = true;
-      }
-
-      function updateSourceStats() {
-        const text = xmlInput.value;
-        const bytes = new Blob([text]).size;
-
-        sourceStats.textContent =
-          formatNumber(text.length) + " characters · " +
-          formatNumber(bytes) + " bytes";
-      }
-
-      function isValidDate(value) {
-        const text = value.trim();
-
-        if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
-          const date = new Date(text + "T00:00:00Z");
-
-          return Number.isFinite(date.getTime()) &&
-            date.toISOString().slice(0, 10) === text;
+      function formatBytes(bytes) {
+        if (!Number.isFinite(bytes) || bytes < 0) return "—";
+        if (bytes < 1024) return bytes + " B";
+        if (bytes < 1024 * 1024) {
+          return (bytes / 1024).toFixed(1) + " KB";
         }
-
-        const pattern =
-          /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:\d{2})$/;
-
-        if (!pattern.test(text)) {
-          return false;
-        }
-
-        const dateTime = Date.parse(text);
-
-        if (!Number.isFinite(dateTime)) {
-          return false;
-        }
-
-        const datePrefix = text.slice(0, 10);
-        const datePart = new Date(datePrefix + "T00:00:00Z");
-
-        return Number.isFinite(datePart.getTime()) &&
-          datePart.toISOString().slice(0, 10) === datePrefix;
+        return (bytes / (1024 * 1024)).toFixed(2) + " MB";
       }
 
-      function findDirectChildren(element, localName) {
-        return Array.from(element.children).filter(child =>
-          child.localName === localName
-        );
+      function localName(node) {
+        return node.localName ||
+          node.nodeName.split(":").pop();
       }
 
-      function findDirectChild(element, localName) {
-        return findDirectChildren(element, localName)[0] || null;
+      function directChildren(node, name) {
+        return Array.from(node.children || [])
+          .filter(child => localName(child) === name);
       }
 
-      function directText(element, localName) {
-        const child = findDirectChild(element, localName);
+      function firstChildText(node, name) {
+        const child = directChildren(node, name)[0];
         return child ? child.textContent.trim() : "";
       }
 
-      function addIssue(report, level, title, detail, value = "", entry = "") {
-        report.issues.push({
-          level,
-          title,
-          detail,
-          value,
-          entry
-        });
+      function validateLastmod(value) {
+        const text = String(value || "").trim();
+
+        if (!text) return false;
+
+        const dateOnly = /^\d{4}-\d{2}-\d{2}$/.test(text);
+
+        const dateTime =
+          /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:\d{2})$/i
+          .test(text);
+
+        if (!dateOnly && !dateTime) return false;
+
+        const date = new Date(text);
+
+        if (!Number.isFinite(date.getTime())) return false;
+
+        if (dateOnly) {
+          const [year, month, day] = text.split("-").map(Number);
+
+          return date.getUTCFullYear() === year &&
+            date.getUTCMonth() + 1 === month &&
+            date.getUTCDate() === day;
+        }
+
+        return true;
       }
 
-      function readLocation(entry, report, index, seenLocations, firstHost) {
-        const locElements = findDirectChildren(entry, "loc");
-        const label = "Entry " + index;
+      function parseAbsoluteUrl(rawValue) {
+        const value = String(rawValue || "").trim();
 
-        if (locElements.length === 0) {
-          addIssue(
-            report,
-            "error",
-            label + " is missing its loc element",
-            "Each sitemap URL entry or sitemap-index entry must have a location.",
-            "",
-            label
-          );
-
+        if (!value) {
           return {
-            entry: index,
-            loc: "",
             valid: false,
-            duplicate: false,
-            lastmod: directText(entry, "lastmod")
+            message: "The location value is empty."
           };
         }
 
-        if (locElements.length > 1) {
-          addIssue(
-            report,
-            "error",
-            label + " has multiple loc elements",
-            "Use exactly one direct loc element for each entry.",
-            locElements.map(element => element.textContent.trim()).join(" | "),
-            label
-          );
-        }
-
-        const loc = locElements[0].textContent.trim();
-
-        if (!loc) {
-          addIssue(
-            report,
-            "error",
-            label + " has an empty loc element",
-            "Provide an absolute HTTP or HTTPS URL.",
-            loc,
-            label
-          );
-
+        if (/\s/.test(value)) {
           return {
-            entry: index,
-            loc,
             valid: false,
-            duplicate: false,
-            lastmod: directText(entry, "lastmod")
+            message: "The URL contains unescaped whitespace."
           };
         }
 
-        if (/\s/.test(loc)) {
-          addIssue(
-            report,
-            "error",
-            label + " contains whitespace in its URL",
-            "Whitespace in URL locations should be properly percent-encoded.",
-            loc,
-            label
-          );
-
+        if (value.length > 2048) {
           return {
-            entry: index,
-            loc,
             valid: false,
-            duplicate: false,
-            lastmod: directText(entry, "lastmod")
+            message: "The URL exceeds the 2,048-character sitemap guideline."
           };
         }
 
-        if (loc.length > 2048) {
-          addIssue(
-            report,
-            "error",
-            label + " exceeds the 2,048-character location limit",
-            "The sitemap protocol limits URL locations to 2,048 characters.",
-            loc.slice(0, 300),
-            label
-          );
-
-          return {
-            entry: index,
-            loc,
-            valid: false,
-            duplicate: false,
-            lastmod: directText(entry, "lastmod")
-          };
-        }
-
-        let parsedURL;
+        let url;
 
         try {
-          parsedURL = new URL(loc);
-        } catch (error) {
-          addIssue(
-            report,
-            "error",
-            label + " is not an absolute valid URL",
-            "Use a full URL including http:// or https://.",
-            loc,
-            label
-          );
-
+          url = new URL(value);
+        } catch (_) {
           return {
-            entry: index,
-            loc,
             valid: false,
-            duplicate: false,
-            lastmod: directText(entry, "lastmod")
+            message: "The location is not a valid absolute URL."
           };
         }
 
-        if (!["http:", "https:"].includes(parsedURL.protocol)) {
-          addIssue(
-            report,
-            "error",
-            label + " uses an unsupported URL protocol",
-            "Sitemap locations must use HTTP or HTTPS.",
-            loc,
-            label
-          );
-
+        if (url.protocol !== "http:" && url.protocol !== "https:") {
           return {
-            entry: index,
-            loc,
             valid: false,
-            duplicate: false,
-            lastmod: directText(entry, "lastmod")
+            message: "Sitemap locations should use HTTP or HTTPS."
           };
         }
 
-        if (!parsedURL.hostname) {
-          addIssue(
-            report,
-            "error",
-            label + " has no hostname",
-            "Provide a full URL with a hostname.",
-            loc,
-            label
-          );
-
+        if (!url.hostname) {
           return {
-            entry: index,
-            loc,
             valid: false,
-            duplicate: false,
-            lastmod: directText(entry, "lastmod")
+            message: "The URL has no hostname."
           };
-        }
-
-        if (parsedURL.username || parsedURL.password) {
-          addIssue(
-            report,
-            "warning",
-            label + " contains URL credentials",
-            "Sitemap locations normally should not contain embedded login credentials.",
-            loc,
-            label
-          );
-        }
-
-        if (parsedURL.hash) {
-          addIssue(
-            report,
-            "warning",
-            label + " contains a fragment",
-            "Fragments generally identify parts of a document rather than separate page URLs.",
-            loc,
-            label
-          );
-        }
-
-        const host = parsedURL.hostname.toLowerCase();
-
-        if (firstHost.value === null) {
-          firstHost.value = host;
-        } else if (host !== firstHost.value) {
-          addIssue(
-            report,
-            "warning",
-            label + " uses a different hostname",
-            "Review sitemap host consistency. Cross-site sitemap submission has specific requirements.",
-            loc,
-            label
-          );
-        }
-
-        const normalizedURL = parsedURL.href.replace(/#.*$/, "");
-        const duplicate = seenLocations.has(normalizedURL);
-
-        if (duplicate) {
-          addIssue(
-            report,
-            "error",
-            label + " duplicates a previous location",
-            "Repeated normalized locations should usually be removed from the sitemap.",
-            loc,
-            label
-          );
-        } else {
-          seenLocations.add(normalizedURL);
-        }
-
-        const lastmod = directText(entry, "lastmod");
-
-        if (findDirectChildren(entry, "lastmod").length > 1) {
-          addIssue(
-            report,
-            "warning",
-            label + " has multiple lastmod elements",
-            "Use at most one lastmod value for an entry.",
-            lastmod,
-            label
-          );
-        }
-
-        if (lastmod && !isValidDate(lastmod)) {
-          addIssue(
-            report,
-            "warning",
-            label + " has an invalid lastmod value",
-            "Use a valid date such as 2026-10-15 or a W3C-style date-time.",
-            lastmod,
-            label
-          );
-        }
-
-        const changefreq = directText(entry, "changefreq");
-
-        if (changefreq) {
-          const allowed = [
-            "always", "hourly", "daily", "weekly",
-            "monthly", "yearly", "never"
-          ];
-
-          if (!allowed.includes(changefreq)) {
-            addIssue(
-              report,
-              "warning",
-              label + " has an unsupported changefreq value",
-              "Review the Sitemap protocol's permitted changefreq values.",
-              changefreq,
-              label
-            );
-          }
-        }
-
-        const priority = directText(entry, "priority");
-
-        if (priority) {
-          const number = Number(priority);
-
-          if (
-            priority.trim() === "" ||
-            !Number.isFinite(number) ||
-            number < 0 ||
-            number > 1
-          ) {
-            addIssue(
-              report,
-              "warning",
-              label + " has an invalid priority",
-              "When included, priority must be a number from 0.0 to 1.0.",
-              priority,
-              label
-            );
-          }
         }
 
         return {
-          entry: index,
-          loc,
           valid: true,
-          duplicate,
-          lastmod
+          url,
+          value
         };
       }
 
-      function inspectXML(source) {
+      function addIssue(report, severity, message, entryNumber = null) {
+        report.issues.push({
+          severity,
+          message,
+          entryNumber
+        });
+      }
+
+      function getDirectLocations(entry) {
+        return directChildren(entry, "loc");
+      }
+
+      function validateSitemap(xmlText, sourceUrl = "") {
         const report = {
-          rootType: "",
-          namespaceOK: false,
-          entries: [],
+          sourceUrl,
+          rootType: "unknown",
+          entries: 0,
+          uniqueLocations: 0,
+          bytes: new TextEncoder().encode(xmlText).length,
+          lastmodCount: 0,
+          duplicateCount: 0,
           issues: [],
-          fatal: false
+          rows: [],
+          xmlParsed: false,
+          namespaceValid: false,
+          structuralErrors: 0,
+          errors: 0,
+          warnings: 0,
+          info: 0,
+          verdict: "invalid"
         };
 
-        const bytes = new Blob([source]).size;
-
-        if (bytes > MAX_BYTES) {
-          addIssue(
-            report,
-            "error",
-            "Input exceeds the browser tool limit",
-            "This tool accepts up to 5 MiB of pasted or uploaded XML.",
-            formatNumber(bytes) + " bytes"
-          );
-          report.fatal = true;
+        if (!String(xmlText).trim()) {
+          addIssue(report, "error", "The XML input is empty.");
+          finalizeReport(report);
           return report;
         }
 
-        if (!source.trim()) {
+        if (report.bytes > MAX_BYTES) {
           addIssue(
             report,
             "error",
-            "No XML was supplied",
-            "Paste a sitemap or upload an XML file before validating."
+            "The uncompressed XML exceeds 50 MB. Split the sitemap into smaller files."
           );
-          report.fatal = true;
+          finalizeReport(report);
           return report;
         }
 
-        if (/<!DOCTYPE/i.test(source)) {
+        if (report.bytes === 0) {
+          addIssue(report, "error", "The file contains no XML data.");
+          finalizeReport(report);
+          return report;
+        }
+
+        const declaration = xmlText.match(
+          /^\s*<\?xml\b[^?]*encoding\s*=\s*["']([^"']+)["']/i
+        );
+
+        if (declaration &&
+            !/^utf-?8$/i.test(declaration[1])) {
           addIssue(
             report,
             "warning",
-            "DOCTYPE declaration detected",
-            "This browser-only validator does not need a document type declaration. Remove it if it is unnecessary."
+            "The XML declaration specifies " + declaration[1] +
+            ". Sitemap files should use UTF-8 encoding."
           );
         }
 
-        let doc;
+        let document;
 
         try {
           const parser = new DOMParser();
-          doc = parser.parseFromString(source, "application/xml");
-        } catch (error) {
-          addIssue(
-            report,
-            "error",
-            "The XML could not be parsed",
-            "Review the document syntax and try again."
+
+          document = parser.parseFromString(
+            xmlText,
+            "application/xml"
           );
-          report.fatal = true;
+
+        } catch (_) {
+          addIssue(report, "error", "The XML parser could not read the document.");
+          finalizeReport(report);
           return report;
         }
 
-        const parserErrors = Array.from(doc.getElementsByTagName("*"))
-          .filter(element => element.localName === "parsererror");
+        const parserErrors = Array.from(
+          document.getElementsByTagName("parsererror")
+        );
 
-        if (
-          parserErrors.length > 0 ||
-          !doc.documentElement ||
-          doc.documentElement.localName === "parsererror"
-        ) {
-          const detail = parserErrors.length
+        if (parserErrors.length > 0 ||
+            !document.documentElement) {
+          const details = parserErrors[0]
             ? parserErrors[0].textContent.trim().slice(0, 500)
-            : "The document contains malformed XML.";
+            : "The XML document has no valid root element.";
 
           addIssue(
             report,
             "error",
-            "Malformed XML",
-            detail || "Check that all elements and attributes are correctly formed."
+            "XML syntax error: " + details
           );
 
-          report.fatal = true;
+          finalizeReport(report);
           return report;
         }
 
-        const root = doc.documentElement;
-        const rootName = root.localName;
-        const correctNamespace = root.namespaceURI === SITEMAP_NAMESPACE;
+        report.xmlParsed = true;
 
-        report.namespaceOK = correctNamespace;
+        const root = document.documentElement;
+        const rootName = localName(root);
 
-        if (rootName === "urlset") {
-          report.rootType = "URL set";
-        } else if (rootName === "sitemapindex") {
-          report.rootType = "Sitemap index";
+        report.rootType = rootName;
+
+        if (root.namespaceURI !== NS) {
+          addIssue(
+            report,
+            "error",
+            "The root element must use the standard sitemap namespace: " + NS
+          );
         } else {
+          report.namespaceValid = true;
+        }
+
+        if (rootName !== "urlset" &&
+            rootName !== "sitemapindex") {
           addIssue(
             report,
             "error",
-            "Unexpected root element",
-            "Expected urlset or sitemapindex as the document root.",
-            rootName
+            'Unknown root element "' + rootName +
+            '". Expected <urlset> or <sitemapindex>.'
           );
 
-          report.fatal = true;
+          finalizeReport(report);
           return report;
         }
 
-        if (!correctNamespace) {
+        const entryName = rootName === "urlset"
+          ? "url"
+          : "sitemap";
+
+        report.rootType = rootName === "urlset"
+          ? "URL sitemap"
+          : "Sitemap index";
+
+        const entries = directChildren(root, entryName);
+
+        report.entries = entries.length;
+
+        if (!entries.length) {
           addIssue(
             report,
             "error",
-            "Missing or incorrect sitemap namespace",
-            "The root element must use " + SITEMAP_NAMESPACE,
-            root.namespaceURI || "(no namespace)"
+            "No <" + entryName + "> entries were found under the root element."
           );
         }
 
-        const expectedEntryName =
-          rootName === "urlset" ? "url" : "sitemap";
-
-        const unexpectedChildren = Array.from(root.children)
-          .filter(child => child.localName !== expectedEntryName);
-
-        if (unexpectedChildren.length > 0) {
+        if (entries.length > MAX_ENTRIES) {
           addIssue(
             report,
             "error",
-            "Unexpected direct child elements",
-            "A " + rootName + " document should contain direct " +
-              expectedEntryName + " entries, not unrelated child elements.",
-            unexpectedChildren.map(child => child.localName).join(", ")
+            "The file contains " + formatNumber(entries.length) +
+            " entries, exceeding the 50,000-entry sitemap limit."
           );
         }
 
-        const directEntries = Array.from(root.children)
-          .filter(child => child.localName === expectedEntryName);
+        const validLocations = [];
+        const seenLocations = new Map();
+        let lastmodCount = 0;
+        let invalidLastmodCount = 0;
 
-        if (directEntries.length === 0) {
+        let sourceOrigin = null;
+        let sourceDirectory = null;
+
+        if (sourceUrl) {
+          try {
+            const parsedSource = new URL(sourceUrl);
+
+            sourceOrigin = parsedSource.origin;
+
+            const path = parsedSource.pathname;
+            sourceDirectory = path.slice(0, path.lastIndexOf("/") + 1);
+
+          } catch (_) {
+            sourceOrigin = null;
+          }
+        }
+
+        for (let index = 0; index < entries.length; index++) {
+          const entry = entries[index];
+          const entryNumber = index + 1;
+          const locElements = getDirectLocations(entry);
+
+          const row = {
+            index: entryNumber,
+            loc: "",
+            lastmod: "",
+            severity: "success",
+            messages: []
+          };
+
+          if (locElements.length === 0) {
+            row.severity = "error";
+            row.messages.push("Missing required <loc> element.");
+
+            addIssue(
+              report,
+              "error",
+              "Entry " + entryNumber + " is missing <loc>.",
+              entryNumber
+            );
+
+          } else if (locElements.length > 1) {
+            row.severity = "error";
+            row.messages.push("Multiple <loc> elements were found.");
+
+            addIssue(
+              report,
+              "error",
+              "Entry " + entryNumber + " has more than one <loc> element.",
+              entryNumber
+            );
+          }
+
+          const rawLoc = locElements.length
+            ? locElements[0].textContent.trim()
+            : "";
+
+          row.loc = rawLoc;
+
+          let locResult = null;
+
+          if (rawLoc) {
+            locResult = parseAbsoluteUrl(rawLoc);
+
+            if (!locResult.valid) {
+              row.severity = "error";
+              row.messages.push(locResult.message);
+
+              addIssue(
+                report,
+                "error",
+                "Entry " + entryNumber + ": " + locResult.message,
+                entryNumber
+              );
+
+            } else {
+              const parsed = locResult.url;
+
+              validLocations.push(parsed.href);
+
+              if (seenLocations.has(parsed.href)) {
+                report.duplicateCount++;
+
+                row.severity = "warning";
+                row.messages.push("Duplicate location.");
+
+                addIssue(
+                  report,
+                  "warning",
+                  "Duplicate URL in entries " +
+                    seenLocations.get(parsed.href) + " and " +
+                    entryNumber + ": " + parsed.href,
+                  entryNumber
+                );
+
+              } else {
+                seenLocations.set(parsed.href, entryNumber);
+              }
+
+              if (parsed.hash) {
+                if (row.severity === "success") {
+                  row.severity = "warning";
+                }
+
+                row.messages.push("URL contains a fragment.");
+
+                addIssue(
+                  report,
+                  "warning",
+                  "Entry " + entryNumber +
+                  " contains a URL fragment. Sitemap locations should generally identify crawlable page URLs without fragments.",
+                  entryNumber
+                );
+              }
+
+              if (parsed.href.length > 2048) {
+                if (row.severity === "success") {
+                  row.severity = "warning";
+                }
+
+                row.messages.push("Long URL.");
+
+                addIssue(
+                  report,
+                  "warning",
+                  "Entry " + entryNumber +
+                  " exceeds the recommended URL length.",
+                  entryNumber
+                );
+              }
+
+              if (sourceOrigin && rootName === "urlset" &&
+                  parsed.origin !== sourceOrigin) {
+                if (row.severity === "success") {
+                  row.severity = "warning";
+                }
+
+                row.messages.push("Different URL origin from sitemap.");
+
+                addIssue(
+                  report,
+                  "warning",
+                  "Entry " + entryNumber +
+                  " uses a different origin from the fetched sitemap URL. Check the sitemap's site scope and any approved cross-site submission configuration.",
+                  entryNumber
+                );
+              }
+            }
+          }
+
+          const lastmodElements = directChildren(entry, "lastmod");
+
+          if (lastmodElements.length > 1) {
+            if (row.severity === "success") {
+              row.severity = "warning";
+            }
+
+            row.messages.push("Multiple lastmod elements.");
+
+            addIssue(
+              report,
+              "warning",
+              "Entry " + entryNumber +
+              " contains multiple <lastmod> elements.",
+              entryNumber
+            );
+          }
+
+          const lastmod = lastmodElements.length
+            ? lastmodElements[0].textContent.trim()
+            : "";
+
+          row.lastmod = lastmod;
+
+          if (lastmod) {
+            lastmodCount++;
+
+            if (!validateLastmod(lastmod)) {
+              invalidLastmodCount++;
+
+              if (row.severity === "success") {
+                row.severity = "warning";
+              }
+
+              row.messages.push("Invalid lastmod date.");
+
+              addIssue(
+                report,
+                "warning",
+                "Entry " + entryNumber +
+                " has an invalid or unsupported lastmod value: " + lastmod,
+                entryNumber
+              );
+            }
+          }
+
+          if (rootName === "urlset") {
+            const priorityElements = directChildren(entry, "priority");
+
+            if (priorityElements.length) {
+              const value = priorityElements[0].textContent.trim();
+
+              if (
+                value !== "" &&
+                (!/^(?:0(?:\.\d+)?|1(?:\.0+)?)$/.test(value) ||
+                  Number(value) < 0 ||
+                  Number(value) > 1)
+              ) {
+                addIssue(
+                  report,
+                  "warning",
+                  "Entry " + entryNumber +
+                  " contains an invalid priority value. Expected a value between 0.0 and 1.0.",
+                  entryNumber
+                );
+              }
+            }
+
+            const changefreqElements = directChildren(entry, "changefreq");
+
+            if (changefreqElements.length) {
+              const value = changefreqElements[0].textContent.trim();
+
+              const allowed = [
+                "always", "hourly", "daily", "weekly",
+                "monthly", "yearly", "never"
+              ];
+
+              if (value && !allowed.includes(value)) {
+                addIssue(
+                  report,
+                  "warning",
+                  "Entry " + entryNumber +
+                  " has an unrecognised changefreq value.",
+                  entryNumber
+                );
+              }
+            }
+          }
+
+          if (rootName === "sitemapindex" && locResult && locResult.valid) {
+            const childSitemapUrl = locResult.url;
+
+            if (sourceOrigin && childSitemapUrl.origin !== sourceOrigin) {
+              if (row.severity === "success") {
+                row.severity = "warning";
+              }
+
+              row.messages.push("Child sitemap is on another origin.");
+
+              addIssue(
+                report,
+                "warning",
+                "Sitemap index entry " + entryNumber +
+                " references another origin. Confirm that your cross-site sitemap arrangement is supported and configured.",
+                entryNumber
+              );
+            }
+
+            if (
+              sourceDirectory &&
+              childSitemapUrl.origin === sourceOrigin &&
+              !childSitemapUrl.pathname.startsWith(sourceDirectory)
+            ) {
+              if (row.severity === "success") {
+                row.severity = "warning";
+              }
+
+              row.messages.push("Child sitemap path is outside the index directory.");
+
+              addIssue(
+                report,
+                "warning",
+                "Sitemap index entry " + entryNumber +
+                " points outside the index file's directory hierarchy. Review sitemap-index location rules.",
+                entryNumber
+              );
+            }
+          }
+
+          if (row.severity === "success" && !row.messages.length) {
+            row.messages.push("No entry-level issue detected.");
+          }
+
+          report.rows.push(row);
+        }
+
+        report.uniqueLocations = seenLocations.size;
+        report.lastmodCount = lastmodCount;
+        report.invalidLastmodCount = invalidLastmodCount;
+
+        if (report.entries > 0 && rootName === "urlset") {
+          const coverage = (lastmodCount / report.entries) * 100;
+
+          if (lastmodCount === 0) {
+            addIssue(
+              report,
+              "info",
+              "No lastmod dates were supplied. This element is optional; include it when you can report accurate modification dates."
+            );
+          } else if (coverage < 50) {
+            addIssue(
+              report,
+              "info",
+              "lastmod is present on fewer than half of the entries. Consider whether accurate modification dates can be supplied consistently."
+            );
+          }
+        }
+
+        if (report.duplicateCount > 0) {
           addIssue(
             report,
-            "error",
-            "No sitemap entries found",
-            "Add at least one " + expectedEntryName + " entry with a loc value."
+            "warning",
+            "Remove repeated locations where possible. Duplicate entries do not provide additional URL discovery value."
           );
         }
 
-        if (directEntries.length > MAX_PROTOCOL_ENTRIES) {
-          addIssue(
-            report,
-            "error",
-            "Entry count exceeds the protocol limit",
-            "A single sitemap or sitemap index can contain up to 50,000 entries.",
-            String(directEntries.length)
-          );
+        if (rootName === "urlset" && sourceOrigin) {
+          const sample = validLocations.slice(0, 100);
+
+          if (sample.length === 0) {
+            addIssue(
+              report,
+              "error",
+              "No valid absolute HTTP or HTTPS locations were found."
+            );
+          }
         }
 
-        const seenLocations = new Set();
-        const firstHost = { value: null };
-
-        directEntries.forEach((entry, index) => {
-          const result = readLocation(
-            entry,
-            report,
-            index + 1,
-            seenLocations,
-            firstHost
-          );
-
-          report.entries.push(result);
-        });
-
-        const duplicateCount = report.entries.filter(entry =>
-          entry.duplicate
-        ).length;
-
-        const validCount = report.entries.filter(entry =>
-          entry.valid
-        ).length;
-
-        if (validCount === report.entries.length &&
-            duplicateCount === 0 &&
-            report.issues.filter(issue => issue.level === "error").length === 0) {
-          addIssue(
-            report,
-            "success",
-            "All location entries passed the basic URL checks",
-            "No missing or malformed locations were detected in the supplied entries."
-          );
-        }
-
+        finalizeReport(report);
         return report;
       }
 
-      function renderIssues(report) {
-        const container = document.getElementById("issueList");
-        container.replaceChildren();
+      function finalizeReport(report) {
+        report.errors = report.issues.filter(
+          issue => issue.severity === "error"
+        ).length;
 
-        if (report.issues.length === 0) {
-          const card = makeElement("article", "issue-card");
-          const badge = makeElement("span", "issue-level success", "Passed");
-          const content = makeElement("div", "issue-content");
-          content.append(
-            makeElement("strong", "", "No issues detected"),
-            makeElement("p", "", "The supplied XML passed the checks performed by this tool.")
+        report.warnings = report.issues.filter(
+          issue => issue.severity === "warning"
+        ).length;
+
+        report.info = report.issues.filter(
+          issue => issue.severity === "info"
+        ).length;
+
+        if (report.errors > 0) {
+          report.verdict = "invalid";
+        } else if (report.warnings > 0) {
+          report.verdict = "warnings";
+        } else {
+          report.verdict = "valid";
+        }
+      }
+
+      function appendIssue(report, severity, message) {
+        const li = document.createElement("li");
+        li.className = "sv-check-item";
+
+        const label = document.createElement("span");
+        label.className = "sv-issue-label";
+
+        const labels = {
+          error: "ERROR",
+          warning: "WARNING",
+          info: "INFO",
+          success: "OK"
+        };
+
+        label.textContent = labels[severity] || "INFO";
+        label.classList.add("sv-issue-" + severity);
+
+        const text = document.createElement("span");
+        text.className = "sv-issue-message";
+        text.textContent = message;
+
+        li.append(label, text);
+        el.issues.appendChild(li);
+      }
+
+      function renderResults(report) {
+        lastReport = report;
+
+        el.results.hidden = false;
+        el.issues.replaceChildren();
+        el.entryBody.replaceChildren();
+
+        setText(el.count, formatNumber(report.entries));
+        setText(el.unique, formatNumber(report.uniqueLocations));
+        setText(el.size, formatBytes(report.bytes));
+
+        const lastmodCoverage = report.entries > 0
+          ? Math.round(report.lastmodCount / report.entries * 100) + "%"
+          : "—";
+
+        setText(el.lastmod, lastmodCoverage);
+
+        el.verdict.className = "sv-verdict";
+
+        if (report.verdict === "valid") {
+          el.verdict.classList.add("sv-verdict-valid");
+          setText(el.verdict, "No blocking issues");
+
+        } else if (report.verdict === "warnings") {
+          el.verdict.classList.add("sv-verdict-warnings");
+          setText(el.verdict, "Review warnings");
+
+        } else {
+          el.verdict.classList.add("sv-verdict-errors");
+          setText(el.verdict, "Errors found");
+        }
+
+        const orderedSeverities = [
+          "error",
+          "warning",
+          "info"
+        ];
+
+        const issues = [];
+
+        for (const severity of orderedSeverities) {
+          for (const issue of report.issues) {
+            if (issue.severity === severity) {
+              issues.push(issue);
+            }
+          }
+        }
+
+        el.noIssues.hidden = issues.length !== 0;
+
+        if (!issues.length) {
+          el.issues.hidden = true;
+          setText(el.noIssues, "No errors or warnings were reported.");
+        } else {
+          el.issues.hidden = false;
+
+          for (const issue of issues) {
+            appendIssue(report, issue.severity, issue.message);
+          }
+        }
+
+        if (report.rows.length) {
+          el.entrySection.hidden = false;
+
+          report.rows
+            .slice(0, MAX_DISPLAYED_ENTRIES)
+            .forEach(row => {
+              const tr = document.createElement("tr");
+
+              const tdIndex = document.createElement("td");
+              tdIndex.textContent = String(row.index);
+
+              const tdLoc = document.createElement("td");
+              tdLoc.className = "sv-url-cell";
+              tdLoc.textContent = row.loc || "(missing loc)";
+
+              const tdLastmod = document.createElement("td");
+              tdLastmod.textContent = row.lastmod || "—";
+
+              const tdResult = document.createElement("td");
+              tdResult.textContent =
+                row.severity.toUpperCase() + ": " +
+                row.messages.join(" ");
+
+              tr.append(tdIndex, tdLoc, tdLastmod, tdResult);
+
+              el.entryBody.appendChild(tr);
+            });
+
+        } else {
+          el.entrySection.hidden = true;
+        }
+
+        const summary = [
+          "Document type: " + report.rootType,
+          "XML parsed: " + (report.xmlParsed ? "yes" : "no"),
+          "Sitemap namespace: " + (report.namespaceValid ? "correct" : "not verified"),
+          "Entries: " + report.entries,
+          "Unique locations: " + report.uniqueLocations,
+          "File size: " + formatBytes(report.bytes),
+          "lastmod values: " + report.lastmodCount,
+          "Errors: " + report.errors,
+          "Warnings: " + report.warnings,
+          "Information: " + report.info
+        ].join("\n");
+
+        report.summary = summary;
+
+        reportTextCache = buildReportText(report);
+      }
+
+      let reportTextCache = "";
+
+      function buildReportText(report) {
+        const lines = [
+          "XML Sitemap Validator Report",
+          "============================",
+          "Source: " + (report.sourceUrl || "Pasted or uploaded XML"),
+          "Document type: " + report.rootType,
+          "XML parsed: " + (report.xmlParsed ? "Yes" : "No"),
+          "Namespace correct: " + (report.namespaceValid ? "Yes" : "No"),
+          "Verdict: " + report.verdict.toUpperCase(),
+          "Entries: " + report.entries,
+          "Unique locations: " + report.uniqueLocations,
+          "File size: " + formatBytes(report.bytes),
+          "lastmod values: " + report.lastmodCount,
+          "Errors: " + report.errors,
+          "Warnings: " + report.warnings,
+          "Information: " + report.info,
+          "",
+          "Issues",
+          "------"
+        ];
+
+        if (!report.issues.length) {
+          lines.push("No errors or warnings were reported.");
+        } else {
+          report.issues.forEach(issue => {
+            lines.push(
+              "[" + issue.severity.toUpperCase() + "] " + issue.message
+            );
+          });
+        }
+
+        lines.push("", "Entry details", "-------------");
+
+        report.rows.forEach(row => {
+          lines.push(
+            "#" + row.index +
+            " [" + row.severity.toUpperCase() + "] " +
+            (row.loc || "(missing loc)") +
+            " | lastmod: " + (row.lastmod || "—") +
+            " | " + row.messages.join(" ")
           );
-          card.append(badge, content);
-          container.appendChild(card);
+        });
+
+        lines.push(
+          "",
+          "Limitations",
+          "This report checks the provided XML locally. It does not guarantee crawlability, HTTP status, canonical selection, or indexing."
+        );
+
+        return lines.join("\n");
+      }
+
+      function runValidation() {
+        const xml = el.xml.value;
+
+        if (!xml.trim()) {
+          setStatus("Paste XML, upload a file, or fetch a sitemap first.", true);
+          el.results.hidden = true;
+          lastReport = null;
           return;
         }
 
-        report.issues.forEach(issue => {
-          const card = makeElement("article", "issue-card");
-          const badge = makeElement(
-            "span",
-            "issue-level " + issue.level,
-            issue.level
+        setStatus("Validating sitemap XML...");
+
+        try {
+          const report = validateSitemap(
+            xml,
+            el.url.value.trim()
           );
 
-          const content = makeElement("div", "issue-content");
-          content.append(
-            makeElement("strong", "", issue.title),
-            makeElement("p", "", issue.detail)
+          renderResults(report);
+
+          if (report.verdict === "valid") {
+            setStatus("Validation complete. No blocking issues were found.");
+          } else if (report.verdict === "warnings") {
+            setStatus(
+              "Validation complete. Review the reported warnings before submission."
+            );
+          } else {
+            setStatus(
+              "Validation complete. Fix the reported errors and validate again.",
+              true
+            );
+          }
+
+        } catch (error) {
+          setStatus(
+            error.message || "The XML could not be validated.",
+            true
           );
-
-          if (issue.entry) {
-            const entryText = makeElement("p", "", issue.entry);
-            entryText.className = "issue-value";
-            content.appendChild(entryText);
-          }
-
-          if (issue.value) {
-            const valueText = makeElement("p", "issue-value", issue.value);
-            content.appendChild(valueText);
-          }
-
-          card.append(badge, content);
-          container.appendChild(card);
-        });
+        }
       }
 
-      function renderURLTable(report) {
-        const tbody = document.getElementById("urlRows");
-        tbody.replaceChildren();
+      async function fetchRemoteSitemap() {
+        const rawUrl = el.url.value.trim();
 
-        const visibleEntries = report.entries.slice(0, MAX_VISIBLE_URLS);
+        if (!rawUrl) {
+          setStatus("Enter a sitemap URL first.", true);
+          return;
+        }
 
-        visibleEntries.forEach(entry => {
-          const row = document.createElement("tr");
+        let parsedUrl;
 
-          const values = [
-            entry.entry,
-            entry.loc || "(missing location)",
-            entry.valid
-              ? entry.duplicate
-                ? "Duplicate"
-                : "Valid URL syntax"
-              : "Invalid / missing URL",
-            entry.lastmod || "Not provided"
-          ];
+        try {
+          parsedUrl = new URL(rawUrl);
+        } catch (_) {
+          setStatus("Enter a valid absolute sitemap URL.", true);
+          return;
+        }
 
-          values.forEach((value, index) => {
-            const cell = document.createElement("td");
-            cell.textContent = String(value);
+        if (!["http:", "https:"].includes(parsedUrl.protocol)) {
+          setStatus("Use an HTTP or HTTPS sitemap URL.", true);
+          return;
+        }
 
-            if (index === 1) {
-              cell.className = "url-cell";
-            }
+        if (
+          window.location.protocol === "https:" &&
+          parsedUrl.protocol === "http:"
+        ) {
+          setStatus(
+            "This page uses HTTPS and the browser may block insecure HTTP requests. Use an HTTPS sitemap URL or upload the XML file instead.",
+            true
+          );
+          return;
+        }
 
-            row.appendChild(cell);
+        if (fetchController) {
+          fetchController.abort();
+        }
+
+        fetchController = new AbortController();
+
+        const controller = fetchController;
+        const timeout = setTimeout(() => controller.abort(), 15000);
+
+        setStatus("Fetching sitemap URL...");
+
+        el.fetch.disabled = true;
+
+        try {
+          const response = await fetch(parsedUrl.href, {
+            method: "GET",
+            mode: "cors",
+            credentials: "omit",
+            redirect: "follow",
+            cache: "no-store",
+            signal: controller.signal
           });
 
-          tbody.appendChild(row);
-        });
+          if (!response.ok) {
+            throw new Error(
+              "The server returned HTTP " + response.status + "."
+            );
+          }
 
-        document.getElementById("urlTableNote").textContent =
-          report.entries.length > MAX_VISIBLE_URLS
-            ? "Showing the first " + MAX_VISIBLE_URLS +
-              " entries. The copy and download functions include all extracted locations."
-            : report.entries.length === 0
-              ? "No entries are available to display."
-              : "All " + formatNumber(report.entries.length) + " entries are displayed.";
-      }
+          const contentLength = Number(
+            response.headers.get("content-length")
+          );
 
-      function renderReport(report) {
-        const errors = report.issues.filter(issue =>
-          issue.level === "error"
-        ).length;
+          if (Number.isFinite(contentLength) &&
+              contentLength > MAX_BYTES) {
+            throw new Error(
+              "The remote file is larger than the 50 MB limit."
+            );
+          }
 
-        const warnings = report.issues.filter(issue =>
-          issue.level === "warning"
-        ).length;
+          const text = await response.text();
 
-        const validLocations = report.entries.filter(entry =>
-          entry.valid
-        ).length;
+          const actualBytes = new TextEncoder().encode(text).length;
 
-        const duplicates = report.entries.filter(entry =>
-          entry.duplicate
-        ).length;
+          if (actualBytes > MAX_BYTES) {
+            throw new Error(
+              "The fetched XML exceeds 50 MB uncompressed."
+            );
+          }
 
-        const chip = document.getElementById("statusChip");
+          el.xml.value = text;
 
-        chip.className = "status-chip";
+          if (response.url) {
+            el.url.value = response.url;
+          }
 
-        if (errors > 0) {
-          chip.classList.add("error");
-          chip.textContent = "Errors found";
-          document.getElementById("statusTitle").textContent =
-            "Review required";
-        } else if (warnings > 0) {
-          chip.classList.add("warning");
-          chip.textContent = "Warnings";
-          document.getElementById("statusTitle").textContent =
-            "Passed with warnings";
-        } else {
-          chip.textContent = "Basic checks passed";
-          document.getElementById("statusTitle").textContent =
-            "No structural issues detected";
+          setText(
+            el.fileName,
+            "Fetched from " + (response.url || parsedUrl.href)
+          );
+
+          setStatus("Sitemap fetched. Running validation...");
+
+          runValidation();
+
+        } catch (error) {
+          if (error.name === "AbortError") {
+            setStatus(
+              "The request timed out or was cancelled. Try again or upload the XML file.",
+              true
+            );
+
+          } else if (
+            error instanceof TypeError ||
+            /fetch/i.test(error.message || "")
+          ) {
+            setStatus(
+              "The browser could not read the remote sitemap. This may be a CORS, network, or server restriction. Download the XML and upload it instead.",
+              true
+            );
+
+          } else {
+            setStatus(
+              error.message || "The sitemap could not be fetched.",
+              true
+            );
+          }
+
+        } finally {
+          clearTimeout(timeout);
+
+          if (fetchController === controller) {
+            fetchController = null;
+          }
+
+          el.fetch.disabled = false;
         }
-
-        document.getElementById("statusDescription").textContent =
-          report.fatal
-            ? "The document could not be fully inspected. Correct the fatal issue and validate it again."
-            : "Detected document type: " + report.rootType +
-              ". This report checks the supplied XML structure and does not test live page availability or Google indexing.";
-
-        document.getElementById("resultsDescription").textContent =
-          "Validation completed for the supplied " +
-          (report.rootType || "XML") + ".";
-
-        document.getElementById("entryCount").textContent =
-          formatNumber(report.entries.length);
-
-        document.getElementById("validCount").textContent =
-          formatNumber(validLocations);
-
-        document.getElementById("errorCount").textContent =
-          formatNumber(errors);
-
-        document.getElementById("warningCount").textContent =
-          formatNumber(warnings);
-
-        document.getElementById("duplicateCount").textContent =
-          formatNumber(duplicates);
-
-        document.getElementById("namespaceStatus").textContent =
-          report.namespaceOK ? "Correct" : "Problem";
-
-        renderIssues(report);
-        renderURLTable(report);
-
-        results.hidden = false;
-
-        copyURLsButton.disabled = report.entries.length === 0;
-        downloadURLsButton.disabled = report.entries.length === 0;
-        downloadReportButton.disabled = false;
       }
 
-      function validateCurrentInput() {
-        clearFeedback();
+      function sampleUrlset() {
+        el.xml.value =
+`<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://example.com/</loc>
+    <lastmod>2026-10-19</lastmod>
+  </url>
+  <url>
+    <loc>https://example.com/about.html</loc>
+    <lastmod>2026-10-15</lastmod>
+  </url>
+  <url>
+    <loc>https://example.com/contact.html</loc>
+    <lastmod>2026-10-12</lastmod>
+  </url>
+</urlset>`;
 
-        const source = xmlInput.value;
-        const byteSize = new Blob([source]).size;
+        el.url.value = "";
+        setText(el.fileName, "Sample URL sitemap loaded");
 
-        if (byteSize > MAX_BYTES) {
-          const report = {
-            rootType: "",
-            namespaceOK: false,
-            entries: [],
-            issues: [{
-              level: "error",
-              title: "Input exceeds the 5 MiB tool limit",
-              detail: "Use a smaller file or split the input into separate sitemap documents.",
-              value: formatNumber(byteSize) + " bytes",
-              entry: ""
-            }],
-            fatal: true
-          };
+        setStatus("Sample URL sitemap loaded. Click Validate sitemap.");
+        el.results.hidden = true;
+      }
 
-          latestReport = report;
-          renderReport(report);
-          showFeedback("The input is too large for this browser tool.", "error");
+      function sampleIndex() {
+        el.xml.value =
+`<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://example.com/sitemap-pages.xml</loc>
+    <lastmod>2026-10-19</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://example.com/sitemap-tools.xml</loc>
+    <lastmod>2026-10-18</lastmod>
+  </sitemap>
+</sitemapindex>`;
+
+        el.url.value = "";
+        setText(el.fileName, "Sample sitemap index loaded");
+
+        setStatus("Sample sitemap index loaded. Click Validate sitemap.");
+        el.results.hidden = true;
+      }
+
+      async function loadFile(file) {
+        if (!file) return;
+
+        if (!/\.(xml|txt)$/i.test(file.name)) {
+          setStatus(
+            "Choose an uncompressed XML or TXT file. Extract .gz files before uploading.",
+            true
+          );
+          el.file.value = "";
           return;
         }
 
-        const report = inspectXML(source);
-        latestReport = report;
-
-        renderReport(report);
-
-        const errorCount = report.issues.filter(issue =>
-          issue.level === "error"
-        ).length;
-
-        const warningCount = report.issues.filter(issue =>
-          issue.level === "warning"
-        ).length;
-
-        if (errorCount > 0) {
-          showFeedback(
-            "Validation finished. " + errorCount +
-            " error(s) found. Review the findings and correct the XML.",
-            "error"
+        if (file.size > MAX_BYTES) {
+          setStatus(
+            "The file exceeds the 50 MB uncompressed sitemap limit.",
+            true
           );
-        } else if (warningCount > 0) {
-          showFeedback(
-            "Validation finished with " + warningCount +
-            " warning(s). Review the findings before publishing.",
-            "info"
-          );
-        } else {
-          showFeedback(
-            "Validation finished. No errors or warnings were detected by these checks.",
-            "success"
-          );
-        }
-      }
-
-      function getExtractedURLs() {
-        if (!latestReport) {
-          return [];
-        }
-
-        return latestReport.entries
-          .filter(entry => entry.loc)
-          .map(entry => entry.loc);
-      }
-
-      async function copyExtractedURLs() {
-        const urls = getExtractedURLs();
-
-        if (urls.length === 0) {
+          el.file.value = "";
           return;
         }
 
         try {
-          const text = urls.join("\n");
+          const text = await file.text();
 
+          if (new TextEncoder().encode(text).length > MAX_BYTES) {
+            throw new Error("The file exceeds 50 MB.");
+          }
+
+          el.xml.value = text;
+          setText(el.fileName, file.name);
+
+          setStatus("File loaded. Click Validate sitemap.");
+          el.results.hidden = true;
+
+        } catch (error) {
+          setStatus(
+            error.message || "The selected file could not be read.",
+            true
+          );
+
+        } finally {
+          el.file.value = "";
+        }
+      }
+
+      function clearAll() {
+        if (fetchController) {
+          fetchController.abort();
+          fetchController = null;
+        }
+
+        el.url.value = "";
+        el.xml.value = "";
+
+        setText(el.fileName, "No file selected");
+        el.results.hidden = true;
+
+        el.issues.replaceChildren();
+        el.entryBody.replaceChildren();
+
+        lastReport = null;
+        reportTextCache = "";
+
+        setStatus("Input and previous report cleared.");
+      }
+
+      async function copyReport() {
+        if (!lastReport) {
+          setStatus("Validate a sitemap before copying the report.", true);
+          return;
+        }
+
+        const reportText = buildReportText(lastReport);
+
+        try {
           if (navigator.clipboard && window.isSecureContext) {
-            await navigator.clipboard.writeText(text);
+            await navigator.clipboard.writeText(reportText);
+
           } else {
-            const textarea = document.createElement("textarea");
-            textarea.value = text;
-            textarea.setAttribute("readonly", "");
-            textarea.style.position = "fixed";
-            textarea.style.opacity = "0";
+            const temporary = document.createElement("textarea");
 
-            document.body.appendChild(textarea);
-            textarea.select();
+            temporary.value = reportText;
+            temporary.setAttribute("readonly", "");
+            temporary.style.position = "fixed";
+            temporary.style.left = "-9999px";
 
-            const copied = document.execCommand("copy");
-            textarea.remove();
+            document.body.appendChild(temporary);
+            temporary.select();
 
-            if (!copied) {
-              throw new Error("Copy failed");
+            const success = document.execCommand("copy");
+            temporary.remove();
+
+            if (!success) {
+              throw new Error("Clipboard command failed.");
             }
           }
 
-          showFeedback(
-            formatNumber(urls.length) + " location(s) copied.",
-            "success"
-          );
-        } catch (error) {
-          showFeedback(
-            "The browser blocked clipboard access. Use Download URL List instead.",
-            "error"
+          setStatus("Validation report copied.");
+
+        } catch (_) {
+          setStatus(
+            "The browser blocked copying. You can still download the report.",
+            true
           );
         }
       }
 
-      function saveBlob(blob, filename) {
+      function downloadReport() {
+        if (!lastReport) {
+          setStatus("Validate a sitemap before downloading the report.", true);
+          return;
+        }
+
+        const blob = new Blob(
+          [buildReportText(lastReport)],
+          { type: "text/plain;charset=utf-8" }
+        );
+
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
 
         link.href = url;
-        link.download = filename;
-        link.style.display = "none";
+        link.download = "sitemap-validation-report.txt";
 
         document.body.appendChild(link);
         link.click();
         link.remove();
 
-        window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+        setTimeout(() => URL.revokeObjectURL(url), 30000);
+
+        setStatus("Validation report downloaded.");
       }
 
-      function downloadURLList() {
-        const urls = getExtractedURLs();
+      /* Event handlers */
 
-        if (urls.length === 0) {
-          return;
-        }
+      el.validate.addEventListener("click", runValidation);
+      el.fetch.addEventListener("click", fetchRemoteSitemap);
 
-        const text = urls.join("\n") + "\n";
-        const blob = new Blob([text], {
-          type: "text/plain;charset=utf-8;"
-        });
+      el.sampleUrlset.addEventListener("click", sampleUrlset);
+      el.sampleIndex.addEventListener("click", sampleIndex);
+      el.clear.addEventListener("click", clearAll);
 
-        saveBlob(blob, "sitemap-urls.txt");
+      el.copyReport.addEventListener("click", copyReport);
+      el.downloadReport.addEventListener("click", downloadReport);
 
-        showFeedback(
-          "Your URL list has been prepared for download.",
-          "success"
-        );
-      }
-
-      function csvCell(value) {
-        let text = String(value ?? "");
-
-        if (/^[\s]*[=+\-@]/.test(text)) {
-          text = "'" + text;
-        }
-
-        return '"' + text.replace(/"/g, '""') + '"';
-      }
-
-      function downloadValidationReport() {
-        if (!latestReport) {
-          return;
-        }
-
-        const report = latestReport;
-
-        const rows = [
-          ["Section", "Type", "Title", "Details", "Value", "Entry"],
-          [
-            "Summary",
-            "Info",
-            "Document type",
-            report.rootType,
-            "",
-            ""
-          ],
-          [
-            "Summary",
-            report.namespaceOK ? "Success" : "Error",
-            "Sitemap namespace",
-            report.namespaceOK ? "Correct namespace" : "Missing or incorrect namespace",
-            SITEMAP_NAMESPACE,
-            ""
-          ]
-        ];
-
-        report.issues.forEach(issue => {
-          rows.push([
-            "Finding",
-            issue.level,
-            issue.title,
-            issue.detail,
-            issue.value,
-            issue.entry
-          ]);
-        });
-
-        report.entries.forEach(entry => {
-          rows.push([
-            "Location",
-            entry.valid
-              ? entry.duplicate
-                ? "Duplicate"
-                : "Valid URL syntax"
-              : "Invalid",
-            "Entry " + entry.entry,
-            "Last modified: " + (entry.lastmod || "Not provided"),
-            entry.loc,
-            String(entry.entry)
-          ]);
-        });
-
-        const csv = "\uFEFF" + rows
-          .map(row => row.map(csvCell).join(","))
-          .join("\r\n");
-
-        const blob = new Blob([csv], {
-          type: "text/csv;charset=utf-8;"
-        });
-
-        saveBlob(blob, "sitemap-validation-report.csv");
-
-        showFeedback(
-          "Your validation report has been prepared for download.",
-          "success"
-        );
-      }
-
-      function sampleURLSet() {
-        return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://example.com/</loc>
-    <lastmod>2026-10-10</lastmod>
-  </url>
-  <url>
-    <loc>https://example.com/about.html</loc>
-    <lastmod>2026-10-12</lastmod>
-  </url>
-  <url>
-    <loc>https://example.com/contact.html</loc>
-  </url>
-</urlset>`;
-      }
-
-      function sampleIndex() {
-        return `<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap>
-    <loc>https://example.com/sitemap-pages.xml</loc>
-    <lastmod>2026-10-10</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://example.com/sitemap-tools.xml</loc>
-    <lastmod>2026-10-12</lastmod>
-  </sitemap>
-</sitemapindex>`;
-      }
-
-      function setXML(source) {
-        xmlInput.value = source;
-        updateSourceStats();
-        invalidateResults();
-        clearFeedback();
-      }
-
-      function resetTool() {
-        setXML("");
-        fileInput.value = "";
-        results.hidden = true;
-        latestReport = null;
-
-        copyURLsButton.disabled = true;
-        downloadURLsButton.disabled = true;
-        downloadReportButton.disabled = true;
-
-        clearFeedback();
-        xmlInput.focus();
-      }
-
-      xmlInput.addEventListener("input", () => {
-        updateSourceStats();
-        invalidateResults();
-        clearFeedback();
+      el.file.addEventListener("change", () => {
+        loadFile(el.file.files && el.file.files[0]);
       });
 
-      fileInput.addEventListener("change", async () => {
-        const file = fileInput.files && fileInput.files[0];
-
-        if (!file) {
-          return;
+      el.xml.addEventListener("keydown", event => {
+        if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+          event.preventDefault();
+          runValidation();
         }
-
-        if (file.size > MAX_BYTES) {
-          showFeedback(
-            "The selected file exceeds the 5 MiB tool limit.",
-            "error"
-          );
-
-          fileInput.value = "";
-          return;
-        }
-
-        try {
-          const content = await file.text();
-
-          if (new Blob([content]).size > MAX_BYTES) {
-            throw new Error("The decoded file exceeds the tool limit.");
-          }
-
-          setXML(content);
-          showFeedback(
-            "Loaded " + file.name + ". Review the source and select Validate Sitemap.",
-            "info"
-          );
-        } catch (error) {
-          showFeedback(
-            "The file could not be read. Try a standard UTF-8 XML file.",
-            "error"
-          );
-        }
-
-        fileInput.value = "";
       });
 
-      document.getElementById("urlExample").addEventListener("click", () => {
-        setXML(sampleURLSet());
-      });
+      el.year.textContent = String(new Date().getFullYear());
 
-      document.getElementById("indexExample").addEventListener("click", () => {
-        setXML(sampleIndex());
-      });
-
-      validateButton.addEventListener("click", validateCurrentInput);
-      copyURLsButton.addEventListener("click", copyExtractedURLs);
-      downloadURLsButton.addEventListener("click", downloadURLList);
-      downloadReportButton.addEventListener("click", downloadValidationReport);
-      document.getElementById("resetButton").addEventListener("click", resetTool);
-
-      document.getElementById("copyrightYear").textContent =
-        String(new Date().getFullYear());
-
-      updateSourceStats();
     })();
   </script>
+
 </body>
 </html>
