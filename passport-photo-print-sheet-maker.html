@@ -4,388 +4,3269 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Passport Photo Print Sheet Maker – A4, 4×6 & Letter</title>
-  <meta name="description" content="Arrange multiple passport and ID photos on A4, 4×6, 5×7 or Letter paper. Set photo dimensions, copies, margins, and cutting guides, then download a print-ready PDF or image.">
+  <title>Passport Photo Print Sheet Maker Online | Free Photo Tool</title>
+
+  <meta name="description"
+    content="Create a passport photo print sheet online for A4, 4×6, 5×7 or Letter paper. Crop photos, adjust positioning, choose photo sizes, add cut lines, and download print-ready PNG or JPG sheets.">
+
   <meta name="robots" content="index,follow,max-image-preview:large">
-  <meta name="theme-color" content="#f6f8fc">
-  <link rel="canonical" href="https://onlinetoolsandconverters.cc/tools/passport-photo-print-sheet-maker.html">
-  <link rel="stylesheet" href="../style.css">
+  <meta name="theme-color" content="#2563eb">
+
+  <link rel="canonical"
+    href="https://onlinetoolsandconverters.cc/passport-photo-print-sheet-maker.html">
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Online Tools &amp; Converters">
-  <meta property="og:title" content="Passport Photo Print Sheet Maker">
-  <meta property="og:description" content="Create photo print sheets with multiple photos, exact dimensions, copy counts and cutting guides.">
-  <meta property="og:url" content="https://onlinetoolsandconverters.cc/tools/passport-photo-print-sheet-maker.html">
+  <meta property="og:title"
+    content="Passport Photo Print Sheet Maker Online">
+  <meta property="og:description"
+    content="Crop a passport or ID photo and arrange multiple copies on A4, 4×6, 5×7 or Letter paper. Preview your layout and export a print-ready image in your browser.">
+  <meta property="og:url"
+    content="https://onlinetoolsandconverters.cc/passport-photo-print-sheet-maker.html">
+
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Passport Photo Print Sheet Maker">
-  <meta name="twitter:description" content="Arrange passport photos on printable paper directly in your browser.">
+  <meta name="twitter:title"
+    content="Free Passport Photo Print Sheet Maker">
+  <meta name="twitter:description"
+    content="Prepare a printable passport photo sheet with custom dimensions, crop positioning, multiple copies, and cutting guides.">
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     "name": "Passport Photo Print Sheet Maker",
-    "url": "https://onlinetoolsandconverters.cc/tools/passport-photo-print-sheet-maker.html",
+    "url": "https://onlinetoolsandconverters.cc/passport-photo-print-sheet-maker.html",
+    "description": "A free browser-based tool for cropping passport and ID photographs to selected dimensions and arranging multiple copies on printable photo sheets.",
     "applicationCategory": "MultimediaApplication",
     "operatingSystem": "Any",
+    "browserRequirements": "Requires a modern browser with JavaScript enabled.",
     "isAccessibleForFree": true,
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
     },
-    "description": "Create printable passport and ID photo sheets in the browser. Set paper dimensions, photo size, copy counts, margins, and cutting guides, then export as PDF, PNG, or JPEG."
+    "publisher": {
+      "@type": "Organization",
+      "name": "Online Tools & Converters",
+      "url": "https://onlinetoolsandconverters.cc/"
+    }
   }
   </script>
 
-  <script src="../script.js" defer></script>
+  <style>
+    /* ===========================================
+       PASSPORT PHOTO PRINT SHEET MAKER
+       Page-specific styles in this HTML file.
+    =========================================== */
+
+    .pp,
+    .pp * {
+      box-sizing: border-box;
+    }
+
+    .pp {
+      --pp-primary: #2563eb;
+      --pp-primary-hover: #1d4ed8;
+      --pp-text: #172033;
+      --pp-muted: #64748b;
+      --pp-border: #e2e8f0;
+      --pp-bg: #f8fafc;
+      --pp-white: #ffffff;
+
+      background: var(--pp-bg);
+      color: var(--pp-text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      overflow-wrap: anywhere;
+    }
+
+    .pp button,
+    .pp input,
+    .pp select {
+      font: inherit;
+    }
+
+    .pp button {
+      cursor: pointer;
+    }
+
+    .pp a {
+      color: var(--pp-primary);
+    }
+
+    .pp button:focus-visible,
+    .pp input:focus-visible,
+    .pp select:focus-visible,
+    .pp a:focus-visible,
+    .pp summary:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, .3);
+      outline-offset: 3px;
+    }
+
+    .pp-container {
+      width: min(1080px, calc(100% - 32px));
+      margin-inline: auto;
+    }
+
+    .pp-skip {
+      position: absolute;
+      top: -100px;
+      left: 12px;
+      z-index: 100;
+      padding: 10px 14px;
+      color: #172033;
+      background: #fff;
+      border-radius: 8px;
+    }
+
+    .pp-skip:focus {
+      top: 12px;
+    }
+
+    /* Navigation */
+
+    .pp-header {
+      background: #fff;
+      border-bottom: 1px solid var(--pp-border);
+    }
+
+    .pp-nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-block: 10px;
+    }
+
+    .pp-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--pp-text) !important;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -.3px;
+    }
+
+    .pp-logo {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: var(--pp-primary);
+      color: #fff;
+      font-weight: 850;
+    }
+
+    .pp-nav-links {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 17px;
+    }
+
+    .pp-nav-links a {
+      color: #475569;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .pp-nav-links a:hover {
+      color: var(--pp-primary);
+    }
+
+    /* Intro */
+
+    .pp-intro {
+      padding: 35px 0 23px;
+      text-align: center;
+    }
+
+    .pp-eyebrow {
+      margin: 0 0 8px;
+      color: var(--pp-primary);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .pp-intro h1 {
+      max-width: 900px;
+      margin: 0 auto 13px;
+      font-size: clamp(28px, 5vw, 43px);
+      line-height: 1.17;
+      letter-spacing: -1.35px;
+      font-weight: 800;
+    }
+
+    .pp-intro-text {
+      max-width: 790px;
+      margin: 0 auto;
+      color: var(--pp-muted);
+      font-size: 15px;
+    }
+
+    .pp-breadcrumb {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 17px;
+      color: var(--pp-muted);
+      font-size: 12px;
+    }
+
+    .pp-breadcrumb a {
+      text-decoration: none;
+    }
+
+    /* Application card */
+
+    .pp-app {
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid var(--pp-border);
+      border-radius: 15px;
+      box-shadow: 0 8px 28px rgba(15, 23, 42, .045);
+    }
+
+    .pp-app-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 18px 21px;
+      border-bottom: 1px solid var(--pp-border);
+    }
+
+    .pp-app-heading h2 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.4;
+    }
+
+    .pp-private-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 10px;
+      border: 1px solid #dcfce7;
+      border-radius: 40px;
+      background: #f0fdf4;
+      color: #166534;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .pp-private-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+
+    .pp-step {
+      padding: 20px;
+      border-bottom: 1px solid var(--pp-border);
+    }
+
+    .pp-step:last-child {
+      border-bottom: 0;
+    }
+
+    .pp-step-heading {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 14px;
+      font-size: 17px;
+      line-height: 1.4;
+    }
+
+    .pp-step-number {
+      flex: 0 0 auto;
+      width: 29px;
+      height: 29px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      color: #fff;
+      background: var(--pp-primary);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    /* File upload */
+
+    .pp-dropzone {
+      position: relative;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+      min-height: 155px;
+      padding: 22px;
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      background: #f8fbff;
+      text-align: center;
+      transition: background .15s, border-color .15s;
+    }
+
+    .pp-dropzone.pp-dragover {
+      border-color: var(--pp-primary);
+      background: #eff6ff;
+    }
+
+    .pp-upload-icon {
+      display: grid;
+      place-items: center;
+      width: 39px;
+      height: 39px;
+      border-radius: 12px;
+      background: #dbeafe;
+      color: var(--pp-primary);
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .pp-drop-title {
+      font-size: 15px;
+      font-weight: 750;
+    }
+
+    .pp-drop-help {
+      margin: 0;
+      color: var(--pp-muted);
+      font-size: 12px;
+    }
+
+    .pp-hidden-file {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+    }
+
+    /* Form controls */
+
+    .pp-settings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .pp-field {
+      min-width: 0;
+    }
+
+    .pp-field label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .pp-input,
+    .pp-select {
+      width: 100%;
+      min-height: 41px;
+      padding: 9px 11px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      background: #fff;
+      color: var(--pp-text);
+      font-size: 13px;
+    }
+
+    .pp-help {
+      margin: 6px 0 0;
+      color: var(--pp-muted);
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .pp-custom-dimensions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .pp-checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px 22px;
+      margin-top: 16px;
+    }
+
+    .pp-checkbox {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: #334155;
+      font-size: 13px;
+      line-height: 1.55;
+      cursor: pointer;
+    }
+
+    .pp-checkbox input {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 auto;
+      margin-top: 3px;
+      accent-color: var(--pp-primary);
+    }
+
+    /* Crop workspace */
+
+    .pp-crop-layout {
+      display: grid;
+      grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .pp-crop-preview-area {
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid var(--pp-border);
+      border-radius: 12px;
+      background: #f8fafc;
+      text-align: center;
+    }
+
+    .pp-crop-preview-area h4 {
+      margin: 0 0 12px;
+      font-size: 14px;
+    }
+
+    .pp-preview-placeholder {
+      display: grid;
+      place-items: center;
+      min-height: 210px;
+      color: var(--pp-muted);
+      font-size: 13px;
+      padding: 20px;
+    }
+
+    .pp-crop-canvas {
+      display: block;
+      max-width: 100%;
+      max-height: 390px;
+      width: auto;
+      height: auto;
+      margin: 0 auto;
+      border: 1px solid #cbd5e1;
+      background: #fff;
+    }
+
+    .pp-crop-note {
+      margin: 10px 0 0;
+      color: var(--pp-muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .pp-range-field {
+      margin-bottom: 20px;
+    }
+
+    .pp-range-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .pp-range-value {
+      color: var(--pp-primary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .pp-range {
+      display: block;
+      width: 100%;
+      accent-color: var(--pp-primary);
+    }
+
+    /* Buttons */
+
+    .pp-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .pp-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      min-height: 39px;
+      padding: 9px 14px;
+      border: 1px solid var(--pp-border);
+      border-radius: 9px;
+      background: #fff;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.45;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .pp-btn:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+
+    .pp-btn-primary {
+      border-color: var(--pp-primary);
+      background: var(--pp-primary);
+      color: #fff;
+    }
+
+    .pp-btn-primary:hover {
+      background: var(--pp-primary-hover);
+      border-color: var(--pp-primary-hover);
+      color: #fff;
+    }
+
+    .pp-btn:disabled {
+      opacity: .48;
+      cursor: not-allowed;
+    }
+
+    /* Sheet settings */
+
+    .pp-sheet-settings {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .pp-setting-inline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .pp-setting-inline .pp-input {
+      max-width: 105px;
+    }
+
+    /* Preview */
+
+    .pp-sheet-preview-wrap {
+      margin-top: 22px;
+      padding: 18px;
+      border: 1px solid var(--pp-border);
+      border-radius: 12px;
+      background: #f8fafc;
+    }
+
+    .pp-sheet-preview-wrap h3 {
+      margin: 0 0 5px;
+      font-size: 16px;
+    }
+
+    .pp-sheet-preview-wrap > p {
+      margin: 0 0 14px;
+      color: var(--pp-muted);
+      font-size: 12px;
+    }
+
+    .pp-sheet-canvas {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 760px;
+      margin: 0 auto;
+      background: #fff;
+      border: 1px solid #cbd5e1;
+      box-shadow: 0 4px 18px rgba(15, 23, 42, .08);
+    }
+
+    .pp-status {
+      min-height: 25px;
+      margin: 0;
+      padding: 0 20px 12px;
+      color: #166534;
+      font-size: 13px;
+    }
+
+    .pp-status-error {
+      color: #b91c1c;
+    }
+
+    .pp-summary {
+      padding: 13px 15px;
+      margin: 0 20px 19px;
+      background: #f8fafc;
+      border: 1px solid var(--pp-border);
+      border-radius: 10px;
+      color: #475569;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    /* SEO content */
+
+    .pp-content {
+      padding: 36px 0 58px;
+    }
+
+    .pp-content-intro h2 {
+      margin: 0 0 13px;
+      font-size: clamp(23px, 4vw, 30px);
+      line-height: 1.35;
+      letter-spacing: -.6px;
+    }
+
+    .pp-content-intro p {
+      max-width: 880px;
+      margin: 0 0 14px;
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .pp-guide {
+      margin-top: 23px;
+      padding: 6px 22px;
+      border: 1px solid var(--pp-border);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .pp-guide details {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--pp-border);
+    }
+
+    .pp-guide details:last-child {
+      border-bottom: 0;
+    }
+
+    .pp-guide summary {
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 750;
+      line-height: 1.65;
+      color: var(--pp-text);
+    }
+
+    .pp-guide summary::marker {
+      color: var(--pp-primary);
+    }
+
+    .pp-guide details[open] summary {
+      margin-bottom: 13px;
+    }
+
+    .pp-guide h3 {
+      margin: 22px 0 8px;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .pp-guide p,
+    .pp-guide li {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .pp-guide p {
+      margin: 0 0 14px;
+    }
+
+    .pp-guide p:last-child {
+      margin-bottom: 0;
+    }
+
+    .pp-guide ol,
+    .pp-guide ul {
+      padding-left: 23px;
+      margin: 12px 0 17px;
+    }
+
+    .pp-guide li {
+      margin-bottom: 7px;
+    }
+
+    .pp-guide code {
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: #f1f5f9;
+    }
+
+    .pp-related {
+      margin-top: 30px;
+    }
+
+    .pp-related h2 {
+      margin: 0 0 12px;
+      font-size: 21px;
+    }
+
+    .pp-related-link {
+      display: block;
+      padding: 14px;
+      background: #fff;
+      border: 1px solid var(--pp-border);
+      border-radius: 10px;
+      text-decoration: none;
+    }
+
+    .pp-related-link strong {
+      display: block;
+      color: var(--pp-text);
+    }
+
+    .pp-related-link span {
+      display: block;
+      color: var(--pp-muted);
+      font-size: 12px;
+    }
+
+    /* Footer */
+
+    .pp-footer {
+      padding: 24px 0;
+      border-top: 1px solid var(--pp-border);
+      background: #fff;
+    }
+
+    .pp-footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .pp-footer p {
+      margin: 0;
+      color: var(--pp-muted);
+      font-size: 12px;
+    }
+
+    .pp-footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .pp-footer-links a {
+      color: #475569;
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    @media (max-width: 800px) {
+      .pp-container {
+        width: calc(100% - 24px);
+      }
+
+      .pp-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 11px;
+      }
+
+      .pp-nav-links {
+        gap: 12px;
+      }
+
+      .pp-crop-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .pp-crop-canvas {
+        max-height: 360px;
+      }
+
+      .pp-settings-grid,
+      .pp-sheet-settings {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .pp-footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .pp-nav-links {
+        gap: 9px;
+      }
+
+      .pp-nav-links a {
+        font-size: 11px;
+      }
+
+      .pp-brand {
+        font-size: 14px;
+      }
+
+      .pp-logo {
+        height: 34px;
+        width: 34px;
+      }
+
+      .pp-intro {
+        padding-top: 27px;
+      }
+
+      .pp-intro h1 {
+        letter-spacing: -.7px;
+      }
+
+      .pp-step {
+        padding: 14px;
+      }
+
+      .pp-settings-grid,
+      .pp-sheet-settings,
+      .pp-custom-dimensions {
+        grid-template-columns: 1fr;
+      }
+
+      .pp-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .pp-btn {
+        min-width: 0;
+        padding-inline: 8px;
+      }
+
+      .pp-guide {
+        padding-inline: 15px;
+      }
+
+      .pp-sheet-preview-wrap {
+        padding: 10px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .pp *,
+      .pp *::before,
+      .pp *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="../index.html" aria-label="Online Tools and Converters home">
-      <span class="brand-mark" aria-hidden="true">✦</span>
-      <span class="brand-text">Online Tools <span>&amp; Converters</span></span>
-    </a>
+  <a class="pp-skip" href="#passport-photo-tool">Skip to photo maker</a>
 
-    <button class="nav-toggle" type="button"
-      aria-label="Open navigation menu"
-      aria-expanded="false" aria-controls="pm-navigation">
-      <span class="nav-toggle-bars"></span>
-    </button>
+  <div class="pp">
 
-    <nav class="primary-nav" id="pm-navigation" aria-label="Main navigation">
-      <ul>
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../index.html#tools">All tools</a></li>
-        <li><a href="../about.html">About</a></li>
-        <li><a href="../contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+    <header class="pp-header">
+      <div class="pp-container pp-nav">
 
-<main class="container content-area" data-tool="passport-photo-print-sheet-maker">
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <ol>
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../index.html#tools">Tools</a></li>
-      <li aria-current="page">Passport Photo Print Sheet Maker</li>
-    </ol>
-  </nav>
+        <a class="pp-brand" href="/" aria-label="Online Tools and Converters home">
+          <span class="pp-logo" aria-hidden="true">OT</span>
+          <span>Online Tools &amp; Converters</span>
+        </a>
 
-  <section class="page-head">
-    <p class="eyebrow">Free photo printing utility</p>
-    <h1>Passport Photo Print Sheet Maker</h1>
-    <p class="lead">
-      Arrange photos for passport applications, identity documents, or
-      photo printing. Mix multiple images, set the number of copies for
-      each, choose a paper size, and download a print-ready sheet.
-    </p>
-  </section>
+        <nav class="pp-nav-links" aria-label="Main navigation">
+          <a href="/">Home</a>
+          <a href="/#tools">All tools</a>
+          <a href="/#categories">Categories</a>
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
+        </nav>
 
-  <section class="tool-layout">
-    <div class="panel">
-      <h2>1. Add your photos</h2>
-      <p>Select up to 10 JPG, PNG, or WebP images. Set copy counts individually.</p>
-
-      <label class="dropzone" id="pm-dropzone" for="pm-files">
-        <p><strong>Choose photos or drop them here</strong></p>
-        <p>Use different photos on the same print sheet.</p>
-        <p class="hint">Maximum 10 images · 15 MB per image</p>
-        <input id="pm-files" type="file"
-          accept="image/jpeg,image/png,image/webp"
-          multiple>
-      </label>
-
-      <div id="pm-file-status" class="status" role="status" aria-live="polite"></div>
-
-      <div class="btn-row">
-        <button class="btn btn-secondary" type="button" id="pm-add-more">Add more photos</button>
-        <button class="btn btn-secondary" type="button" id="pm-clear-photos">Remove all</button>
       </div>
+    </header>
 
-      <div class="section">
-        <h3>Photo queue</h3>
-        <p class="hint">Change each photo's copy count or remove images you don't need.</p>
-        <div id="pm-photo-list" class="tool-grid">
-          <div class="empty" id="pm-empty">
-            No photos selected yet.
-          </div>
-        </div>
-      </div>
+    <main>
 
-      <div class="section">
-        <h2>2. Photo dimensions</h2>
+      <section class="pp-container pp-intro">
 
-        <div class="field">
-          <label for="pm-photo-preset">Photo size preset</label>
-          <select id="pm-photo-preset">
-            <option value="35x45">35 × 45 mm — common passport format</option>
-            <option value="2x2">2 × 2 inches — square format</option>
-            <option value="35x35">35 × 35 mm — square format</option>
-            <option value="30x40">30 × 40 mm</option>
-            <option value="custom">Custom dimensions</option>
-          </select>
-          <p class="hint">
-            Presets are convenient dimensions, not confirmation of the current
-            requirements of a particular issuing authority. Check your application instructions.
-          </p>
-        </div>
+        <p class="pp-eyebrow">Free online photo tool</p>
 
-        <div class="field-row">
-          <div class="field">
-            <label for="pm-photo-width">Photo width (mm)</label>
-            <input id="pm-photo-width" type="number" min="10" max="100" step="0.1" value="35">
-          </div>
-          <div class="field">
-            <label for="pm-photo-height">Photo height (mm)</label>
-            <input id="pm-photo-height" type="number" min="10" max="100" step="0.1" value="45">
-          </div>
-        </div>
+        <h1>Passport Photo Print Sheet Maker</h1>
 
-        <div class="field">
-          <label for="pm-fit">Fit image inside photo dimensions</label>
-          <select id="pm-fit">
-            <option value="cover">Fill photo area — crop edges if needed</option>
-            <option value="contain">Fit entire image — may leave space</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="pm-background">Photo-area background colour</label>
-          <select id="pm-background">
-            <option value="#ffffff">White</option>
-            <option value="#eeeeee">Light grey</option>
-            <option value="#e7efff">Light blue</option>
-          </select>
-          <p class="hint">
-            This fills transparent or unused areas only. It does not remove or replace
-            the background of an ordinary photo.
-          </p>
-        </div>
-      </div>
-
-      <div class="section">
-        <h2>3. Paper and layout</h2>
-
-        <div class="field">
-          <label for="pm-paper">Paper size</label>
-          <select id="pm-paper">
-            <option value="A4">A4 — 210 × 297 mm</option>
-            <option value="Letter">US Letter — 215.9 × 279.4 mm</option>
-            <option value="4x6">4 × 6 inch photo paper</option>
-            <option value="5x7">5 × 7 inch photo paper</option>
-            <option value="A5">A5 — 148 × 210 mm</option>
-            <option value="custom">Custom paper dimensions</option>
-          </select>
-        </div>
-
-        <div id="pm-custom-paper" class="field-row" hidden>
-          <div class="field">
-            <label for="pm-paper-width">Paper width (mm)</label>
-            <input id="pm-paper-width" type="number" min="50" max="500" step="0.1" value="210">
-          </div>
-          <div class="field">
-            <label for="pm-paper-height">Paper height (mm)</label>
-            <input id="pm-paper-height" type="number" min="50" max="500" step="0.1" value="297">
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="pm-orientation">Paper orientation</label>
-          <select id="pm-orientation">
-            <option value="auto">Auto — fit the most photos</option>
-            <option value="portrait">Portrait</option>
-            <option value="landscape">Landscape</option>
-          </select>
-        </div>
-
-        <div class="field-row">
-          <div class="field">
-            <label for="pm-margin">Page margin (mm)</label>
-            <input id="pm-margin" type="number" min="0" max="30" step="0.5" value="4">
-          </div>
-          <div class="field">
-            <label for="pm-gap">Gap between photos (mm)</label>
-            <input id="pm-gap" type="number" min="0" max="20" step="0.5" value="2">
-          </div>
-        </div>
-
-        <div class="field">
-          <label for="pm-dpi">Export resolution</label>
-          <select id="pm-dpi">
-            <option value="150">150 DPI — smaller image</option>
-            <option value="300" selected>300 DPI — print-oriented</option>
-          </select>
-          <p class="hint">
-            PDF pages use physical dimensions. PNG and JPEG files are rendered at the selected pixel density;
-            printer and application settings can still affect the final printed size.
-          </p>
-        </div>
-
-        <div class="field">
-          <label class="checkbox-row">
-            <input type="checkbox" id="pm-cut-guides" checked>
-            Show cutting guides
-          </label>
-
-          <label class="checkbox-row">
-            <input type="checkbox" id="pm-photo-border">
-            Add solid photo borders
-          </label>
-
-          <label class="checkbox-row">
-            <input type="checkbox" id="pm-fill-sheet">
-            Fill the last page with extra copies
-          </label>
-          <p class="hint">
-            If enabled, extra copies repeat in queue order to fill otherwise empty slots.
-          </p>
-        </div>
-      </div>
-
-      <div class="btn-row">
-        <button class="btn btn-primary" type="button" id="pm-generate">
-          Generate print sheet
-        </button>
-        <button class="btn btn-secondary" type="button" id="pm-reset">
-          Reset layout
-        </button>
-      </div>
-
-      <div class="status" id="pm-status" role="status" aria-live="polite"></div>
-    </div>
-
-    <aside>
-      <div class="panel">
-        <h2>Print sheet preview</h2>
-        <p class="hint" id="pm-preview-note">
-          Add a photo to see your sheet layout.
+        <p class="pp-intro-text">
+          Crop a passport or ID photo, choose its print dimensions,
+          and arrange multiple copies on an A4, 4×6, 5×7 or Letter
+          sheet. Preview the layout, add cutting guides, and download
+          a print-ready image directly from your browser.
         </p>
 
-        <div class="preview-box">
-          <canvas id="pm-preview" class="output-canvas"
-            aria-label="Preview of the passport photo print sheet"></canvas>
-        </div>
+        <nav class="pp-breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="/#categories">Images &amp; media</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Passport Photo Print Sheet Maker</span>
+        </nav>
 
-        <div class="stats">
-          <div class="stat">
-            <strong id="pm-stat-photos">0</strong>
-            <span>Images</span>
+      </section>
+
+      <section class="pp-container" id="passport-photo-tool"
+        aria-labelledby="pp-tool-heading">
+
+        <div class="pp-app">
+
+          <div class="pp-app-heading">
+
+            <h2 id="pp-tool-heading">Create your photo print sheet</h2>
+
+            <span class="pp-private-badge">
+              <span class="pp-private-dot" aria-hidden="true"></span>
+              Browser-based processing
+            </span>
+
           </div>
-          <div class="stat">
-            <strong id="pm-stat-copies">0</strong>
-            <span>Copies</span>
+
+          <!-- STEP 1: UPLOAD -->
+
+          <section class="pp-step" aria-labelledby="pp-upload-heading">
+
+            <h3 class="pp-step-heading" id="pp-upload-heading">
+              <span class="pp-step-number">1</span>
+              Upload your photo
+            </h3>
+
+            <div class="pp-dropzone" id="pp-dropzone">
+
+              <span class="pp-upload-icon" aria-hidden="true">↑</span>
+
+              <div class="pp-drop-title" id="pp-upload-title">
+                Choose a photo or drag it here
+              </div>
+
+              <p class="pp-drop-help">
+                JPG, PNG or WebP · Maximum 20 MB · Processed in your browser
+              </p>
+
+              <label class="pp-btn pp-btn-primary" for="pp-file">
+                Choose photo
+              </label>
+
+              <input
+                class="pp-hidden-file"
+                id="pp-file"
+                type="file"
+                accept="image/jpeg,image/png,image/webp,.jpg,.jpeg,.png,.webp"
+                aria-describedby="pp-upload-help"
+              >
+
+            </div>
+
+            <p class="pp-help" id="pp-upload-help">
+              Use a clear, well-lit photo. This tool arranges and crops
+              an existing image; it does not automatically remove backgrounds
+              or verify official biometric requirements.
+            </p>
+
+          </section>
+
+          <!-- STEP 2: PHOTO DIMENSIONS -->
+
+          <section class="pp-step" aria-labelledby="pp-size-heading">
+
+            <h3 class="pp-step-heading" id="pp-size-heading">
+              <span class="pp-step-number">2</span>
+              Choose your photo size
+            </h3>
+
+            <div class="pp-settings-grid">
+
+              <div class="pp-field">
+                <label for="pp-photo-size">Photo size preset</label>
+
+                <select class="pp-select" id="pp-photo-size">
+                  <option value="nepal">Nepal / common ID — 35 × 45 mm</option>
+                  <option value="uk">UK paper photo — 35 × 45 mm</option>
+                  <option value="india">India / common ID — 35 × 45 mm</option>
+                  <option value="schengen">Schengen — 35 × 45 mm</option>
+                  <option value="us">US passport — 51 × 51 mm (2 × 2 in)</option>
+                  <option value="canada">Canada passport — 50 × 70 mm</option>
+                  <option value="custom">Custom dimensions</option>
+                </select>
+
+                <p class="pp-help">
+                  Presets set physical dimensions, not full document compliance.
+                </p>
+              </div>
+
+              <div class="pp-field">
+                <label for="pp-paper-size">Print paper</label>
+
+                <select class="pp-select" id="pp-paper-size">
+                  <option value="a4">A4 — 210 × 297 mm</option>
+                  <option value="letter">US Letter — 8.5 × 11 in</option>
+                  <option value="4x6">4 × 6 in photo paper — landscape</option>
+                  <option value="5x7">5 × 7 in photo paper — landscape</option>
+                </select>
+
+                <p class="pp-help">
+                  Choose the same paper size in your print dialog.
+                </p>
+              </div>
+
+              <div class="pp-field">
+                <label for="pp-resolution">Output resolution</label>
+
+                <select class="pp-select" id="pp-resolution">
+                  <option value="300" selected>300 DPI — print quality</option>
+                  <option value="150">150 DPI — smaller image</option>
+                </select>
+
+                <p class="pp-help">
+                  Exports include resolution metadata where supported.
+                </p>
+              </div>
+
+            </div>
+
+            <div class="pp-custom-dimensions" id="pp-custom-fields" hidden>
+
+              <div class="pp-field">
+                <label for="pp-photo-width">Photo width (mm)</label>
+
+                <input
+                  class="pp-input"
+                  id="pp-photo-width"
+                  type="number"
+                  min="10"
+                  max="100"
+                  step="0.5"
+                  value="35"
+                >
+              </div>
+
+              <div class="pp-field">
+                <label for="pp-photo-height">Photo height (mm)</label>
+
+                <input
+                  class="pp-input"
+                  id="pp-photo-height"
+                  type="number"
+                  min="10"
+                  max="100"
+                  step="0.5"
+                  value="45"
+                >
+              </div>
+
+            </div>
+
+            <div class="pp-checkbox-row">
+
+              <label class="pp-checkbox">
+                <input type="checkbox" id="pp-guides" checked>
+                <span>Show alignment guides in the crop preview</span>
+              </label>
+
+              <label class="pp-checkbox">
+                <input type="checkbox" id="pp-cut-lines" checked>
+                <span>Add cutting guides around each print</span>
+              </label>
+
+            </div>
+
+          </section>
+
+          <!-- STEP 3: CROP -->
+
+          <section class="pp-step" aria-labelledby="pp-crop-heading">
+
+            <h3 class="pp-step-heading" id="pp-crop-heading">
+              <span class="pp-step-number">3</span>
+              Adjust photo crop
+            </h3>
+
+            <div class="pp-crop-layout">
+
+              <div class="pp-crop-preview-area">
+
+                <h4>Photo preview</h4>
+
+                <div class="pp-preview-placeholder" id="pp-crop-empty">
+                  Upload a photo to preview its crop here.
+                </div>
+
+                <canvas
+                  id="pp-crop-canvas"
+                  class="pp-crop-canvas"
+                  width="450"
+                  height="580"
+                  aria-label="Cropped photo preview"
+                  hidden
+                ></canvas>
+
+                <p class="pp-crop-note" id="pp-crop-note">
+                  Your selected photo will be fitted to the chosen aspect ratio.
+                  Use the sliders to reposition the crop.
+                </p>
+
+              </div>
+
+              <div>
+
+                <div class="pp-range-field">
+
+                  <div class="pp-range-head">
+                    <label for="pp-zoom">Zoom</label>
+                    <output class="pp-range-value" id="pp-zoom-value">100%</output>
+                  </div>
+
+                  <input
+                    class="pp-range"
+                    id="pp-zoom"
+                    type="range"
+                    min="100"
+                    max="250"
+                    step="1"
+                    value="100"
+                  >
+
+                  <p class="pp-help">
+                    Increase zoom to crop closer into the original photo.
+                  </p>
+
+                </div>
+
+                <div class="pp-range-field">
+
+                  <div class="pp-range-head">
+                    <label for="pp-horizontal">Horizontal position</label>
+                    <output class="pp-range-value" id="pp-horizontal-value">50%</output>
+                  </div>
+
+                  <input
+                    class="pp-range"
+                    id="pp-horizontal"
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="1"
+                    value="50"
+                  >
+
+                </div>
+
+                <div class="pp-range-field">
+
+                  <div class="pp-range-head">
+                    <label for="pp-vertical">Vertical position</label>
+                    <output class="pp-range-value" id="pp-vertical-value">50%</output>
+                  </div>
+
+                  <input
+                    class="pp-range"
+                    id="pp-vertical"
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="1"
+                    value="50"
+                  >
+
+                </div>
+
+                <div class="pp-field">
+                  <label for="pp-transparent-bg">
+                    Fill transparent parts with
+                  </label>
+
+                  <select class="pp-select" id="pp-transparent-bg">
+                    <option value="#ffffff">White</option>
+                    <option value="#f1f5f9">Light gray</option>
+                    <option value="#dbeafe">Light blue</option>
+                    <option value="transparent">Transparent</option>
+                  </select>
+
+                  <p class="pp-help">
+                    This affects transparent pixels only. It does not remove
+                    the existing background from an ordinary photo.
+                  </p>
+                </div>
+
+                <div class="pp-actions">
+
+                  <button class="pp-btn" type="button" id="pp-reset-crop">
+                    Reset crop
+                  </button>
+
+                  <button class="pp-btn"
+                    type="button" id="pp-download-single" disabled>
+                    Download one photo
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+          <!-- STEP 4: SHEET LAYOUT -->
+
+          <section class="pp-step" aria-labelledby="pp-layout-heading">
+
+            <h3 class="pp-step-heading" id="pp-layout-heading">
+              <span class="pp-step-number">4</span>
+              Arrange the print sheet
+            </h3>
+
+            <div class="pp-sheet-settings">
+
+              <div class="pp-field">
+                <label for="pp-copies">Number of copies</label>
+
+                <input
+                  class="pp-input"
+                  id="pp-copies"
+                  type="number"
+                  min="1"
+                  max="1000"
+                  step="1"
+                  value="6"
+                  disabled
+                >
+
+                <p class="pp-help">
+                  Enter a number or fill the sheet automatically.
+                </p>
+              </div>
+
+              <div class="pp-field">
+                <label for="pp-margin">Outer margin (mm)</label>
+
+                <input
+                  class="pp-input"
+                  id="pp-margin"
+                  type="number"
+                  min="0"
+                  max="25"
+                  step="0.5"
+                  value="3"
+                >
+
+                <p class="pp-help">
+                  Space between the page edge and photo layout.
+                </p>
+              </div>
+
+              <div class="pp-field">
+                <label for="pp-gap">Photo spacing (mm)</label>
+
+                <input
+                  class="pp-input"
+                  id="pp-gap"
+                  type="number"
+                  min="0"
+                  max="20"
+                  step="0.5"
+                  value="2"
+                >
+
+                <p class="pp-help">
+                  Space between neighboring photos.
+                </p>
+              </div>
+
+            </div>
+
+            <div class="pp-checkbox-row">
+
+              <label class="pp-checkbox">
+                <input type="checkbox" id="pp-auto-fill" checked>
+                <span>Fill the available sheet with as many copies as fit</span>
+              </label>
+
+            </div>
+
+            <div class="pp-actions">
+
+              <button class="pp-btn pp-btn-primary"
+                type="button" id="pp-generate" disabled>
+                Generate print sheet
+              </button>
+
+            </div>
+
+            <p class="pp-help">
+              The tool fits the selected photo dimensions into the paper area.
+              It does not stretch photos to fill empty spaces. The maximum
+              supported output is 16 million canvas pixels per sheet.
+            </p>
+
+            <!-- Generated sheet preview -->
+
+            <div class="pp-sheet-preview-wrap" id="pp-sheet-preview-wrap" hidden>
+
+              <h3>Print sheet preview</h3>
+
+              <p id="pp-sheet-description">
+                Your generated layout will appear here.
+              </p>
+
+              <canvas
+                class="pp-sheet-canvas"
+                id="pp-sheet-canvas"
+                width="1"
+                height="1"
+                aria-label="Generated passport photo print sheet"
+              ></canvas>
+
+              <div class="pp-actions">
+
+                <button class="pp-btn pp-btn-primary"
+                  type="button" id="pp-download-png" disabled>
+                  Download PNG
+                </button>
+
+                <button class="pp-btn"
+                  type="button" id="pp-download-jpg" disabled>
+                  Download JPG
+                </button>
+
+                <button class="pp-btn"
+                  type="button" id="pp-print" disabled>
+                  Print / Save PDF
+                </button>
+
+              </div>
+
+              <p class="pp-help">
+                For exact physical dimensions, print at 100% or Actual Size.
+                Avoid “Fit to page.” If using Save as PDF, confirm that the
+                selected paper size matches the sheet you generated.
+              </p>
+
+            </div>
+
+          </section>
+
+          <p class="pp-status" id="pp-status"
+            role="status" aria-live="polite"></p>
+
+          <div class="pp-summary" id="pp-summary">
+            Upload your photo, choose its print dimensions, and generate a sheet.
+            Your selected image is processed locally in this browser.
           </div>
-          <div class="stat">
-            <strong id="pm-stat-capacity">—</strong>
-            <span>Per page</span>
-          </div>
+
         </div>
 
-        <div class="result-line" id="pm-layout-summary">
-          Select photos to start.
+      </section>
+
+      <!-- SUPPORTING SEO CONTENT -->
+
+      <article class="pp-container pp-content">
+
+        <header class="pp-content-intro">
+
+          <h2>Passport Photo Print Sheet Maker Online</h2>
+
+          <p>
+            A passport photo print sheet maker helps arrange multiple copies
+            of a photograph on a single sheet of paper. Instead of opening
+            a desktop graphics editor and manually measuring every photo,
+            you can select the dimensions you need, adjust the crop, set
+            the paper size, and generate a printable layout in your browser.
+          </p>
+
+          <p>
+            This free passport photo print sheet tool supports common photo
+            dimensions, custom measurements, A4 paper, US Letter paper,
+            and popular photo-paper sizes. It includes crop positioning,
+            zoom controls, copy-count settings, cut guides, a preview,
+            and PNG or JPG downloads. The print option also lets you use
+            your browser's print dialog to print the layout or save it as PDF.
+          </p>
+
+          <p>
+            The main purpose is to simplify photo arrangement. It does not
+            certify that a photograph meets a particular passport, visa,
+            immigration, or identity-document authority's requirements.
+            Select the dimensions required by your application and check
+            the official photo rules before submitting or printing.
+          </p>
+
+        </header>
+
+        <div class="pp-guide">
+
+          <details>
+            <summary>1. What is a passport photo print sheet maker?</summary>
+
+            <p>
+              A passport photo print sheet maker places repeated copies
+              of a selected photograph onto a printable page. The layout
+              uses a chosen physical width and height for each photo,
+              along with page margins and gaps between copies. These
+              measurements determine how many photos can fit on the sheet.
+            </p>
+
+            <p>
+              The tool is useful when a photo needs to be printed several
+              times for passport applications, visa paperwork, identity
+              documents, school forms, membership cards, or other situations
+              that require a specific photo size. You can create one
+              layout and print several copies together rather than
+              arranging each image separately.
+            </p>
+
+            <p>
+              This page combines a basic cropper with an automatic grid
+              layout. It can fit an uploaded image to a selected aspect
+              ratio, let you change zoom and crop position, and calculate
+              the placement of multiple photos on a page. The resulting
+              image can be saved or printed.
+            </p>
+
+            <p>
+              Unlike a full photo-editing studio, this tool focuses on
+              cropping and print layout rather than retouching, facial
+              recognition, or automatic background removal. It is designed
+              to handle the repeatable task of making a correctly sized
+              print sheet from an existing photograph.
+            </p>
+          </details>
+
+          <details>
+            <summary>2. How to make a passport photo print sheet</summary>
+
+            <p>
+              Begin with a clear photo file on your computer or phone.
+              Select the appropriate photo-size preset or enter custom
+              dimensions. Check the aspect ratio and adjust the crop
+              controls so the important part of the image stays inside
+              the frame. The preview shows how the cropped image will
+              appear in the final layout.
+            </p>
+
+            <ol>
+              <li>Upload a supported JPG, PNG, or WebP photograph.</li>
+              <li>Choose the photo size required by your application.</li>
+              <li>Adjust the zoom and horizontal or vertical crop position.</li>
+              <li>Select A4, Letter, 4×6, or 5×7 paper.</li>
+              <li>Set the outer margin and gap between photos.</li>
+              <li>Enter the number of copies or enable automatic filling.</li>
+              <li>Generate the print sheet and inspect its preview.</li>
+              <li>Download the image or open the print dialog.</li>
+            </ol>
+
+            <p>
+              The generated sheet depends on the chosen photo dimensions
+              and available page area. If the layout cannot accommodate
+              the requested number of copies, reduce the quantity, choose
+              a larger sheet, reduce the margins or spacing, or choose
+              a smaller photo size only when your issuing authority allows it.
+            </p>
+
+            <p>
+              Before printing, confirm that the printer paper matches
+              the selected sheet. Select Actual Size or 100% in the print
+              dialog so that the dimensions are not changed to fit a
+              different page. Measure a printed result when exact
+              physical dimensions are important.
+            </p>
+          </details>
+
+          <details>
+            <summary>3. Passport photo sizes and country requirements</summary>
+
+            <p>
+              Passport and visa photo requirements vary by authority.
+              A common print size is 35 × 45 mm, while US passport
+              photographs require a square 2 × 2 inch image. Canada
+              uses a 50 × 70 mm passport photo format. These dimensions
+              are useful starting points, but dimensions alone do not
+              determine whether a photograph will be accepted.
+            </p>
+
+            <p>
+              The authority may also specify the required head size,
+              eye position, facial expression, background, lighting,
+              image sharpness, date of the photograph, and whether
+              a printed or digital photo is required. Requirements
+              can change, and special visa or application categories
+              may use different specifications.
+            </p>
+
+            <p>
+              The presets on this page select common photo dimensions.
+              They are not an official validation system and do not
+              check facial proportions or automatically certify the
+              background. Verify the relevant rules before using a
+              print sheet for an application.
+            </p>
+
+            <p>
+              Official references include the
+              <a href="https://www.gov.uk/photos-for-passports/photo-requirements"
+                target="_blank" rel="noopener noreferrer">UK passport photo requirements</a>
+              and the
+              <a href="https://travel.state.gov/en/passports/apply/help/photos.html"
+                target="_blank" rel="noopener noreferrer">US Department of State photo guidance</a>.
+              Check the equivalent official authority for the country
+              and document you are applying for.
+            </p>
+          </details>
+
+          <details>
+            <summary>4. How to crop and position the photo</summary>
+
+            <p>
+              Cropping determines which part of the uploaded image
+              appears in the final photo. If the original image has
+              a different aspect ratio from the selected print size,
+              some of its edges must be excluded to fill the frame
+              without stretching the picture.
+            </p>
+
+            <p>
+              The zoom slider lets you enlarge the crop to show a
+              smaller portion of the original photograph. Horizontal
+              position moves the crop towards the left or right of
+              the source image. Vertical position moves it towards
+              the top or bottom. These controls can help keep the
+              subject centred while preserving a suitable amount
+              of space around the face.
+            </p>
+
+            <p>
+              The alignment guides are visual aids for examining
+              the crop. They are not calibrated biometric measurements
+              and do not guarantee that the face is the correct
+              size for an official document. Compare the actual
+              printed dimensions and facial positioning with the
+              requirements of the receiving authority.
+            </p>
+
+            <p>
+              Start with a well-framed original photograph whenever
+              possible. Excessive zoom can reduce the effective
+              image detail, particularly when the uploaded file is
+              small. A high-resolution, sharply focused source image
+              usually produces a better print than enlarging a
+              low-resolution image.
+            </p>
+          </details>
+
+          <details>
+            <summary>5. A4 versus 4×6 and 5×7 photo paper</summary>
+
+            <p>
+              A4 paper measures 210 × 297 mm and is commonly used
+              in many countries. US Letter paper measures 8.5 × 11
+              inches. Photo paper is frequently sold in sizes such
+              as 4 × 6 inches and 5 × 7 inches. The tool includes
+              these formats so you can choose the paper available
+              at home or at a photo shop.
+            </p>
+
+            <p>
+              The number of copies that fit depends on the photo
+              dimensions, paper orientation, outer margins, and
+              spacing. An A4 sheet will often accommodate more
+              small portrait photos than a 4 × 6 inch sheet, while
+              a small photo print can be convenient when a lab
+              only offers standard photo-paper sizes.
+            </p>
+
+            <p>
+              Automatic filling calculates the maximum grid that
+              fits within the usable paper area. If you want fewer
+              copies, turn off automatic filling and select the
+              number you need. The remaining page area is left
+              unused rather than stretching the photos to cover it.
+            </p>
+
+            <p>
+              These dimensions describe the layout selected in
+              this tool. Printers can have non-printable edges,
+              and some print dialogs apply scaling automatically.
+              For accurate output, choose the same paper size
+              in the printer settings and disable scaling when
+              the print workflow supports actual-size output.
+            </p>
+          </details>
+
+          <details>
+            <summary>6. What does 300 DPI mean for printed photos?</summary>
+
+            <p>
+              DPI means dots per inch and is commonly used when
+              discussing print resolution. A print-ready image
+              needs sufficient pixel dimensions for the intended
+              physical size. At 300 pixels per inch, a 35 mm wide
+              image corresponds to approximately 413 pixels,
+              and a 45 mm high image corresponds to approximately
+              531 pixels after rounding.
+            </p>
+
+            <p>
+              The print sheet is rendered using the selected
+              resolution and physical page dimensions. The
+              generated canvas is converted to an image file,
+              with resolution metadata added where supported.
+              The printer or image application can still alter
+              its physical output if it scales the image.
+            </p>
+
+            <p>
+              A 300 DPI export cannot recover detail that was
+              absent from the original photo. Sharpness, focus,
+              lighting, image compression, and source resolution
+              still influence the final quality. Enlarging
+              a small image can make pixels more visible rather
+              than creating new genuine detail.
+            </p>
+
+            <p>
+              For the best result, use a clear original photograph,
+              select the correct physical size, export the sheet,
+              and print at actual size. If a document authority
+              has separate digital-photo specifications, check
+              those independently from the print resolution.
+            </p>
+          </details>
+
+          <details>
+            <summary>7. How margins, spacing, and cutting guides work</summary>
+
+            <p>
+              Outer margins leave a border between the arranged
+              photos and the edge of the paper. Photo spacing
+              controls the distance between adjacent images.
+              These settings help make the sheet easier to trim
+              and can account for the practical needs of a home
+              printer or photo-printing workflow.
+            </p>
+
+            <p>
+              Cutting guides are optional borders around individual
+              photo positions. They help you see where one photo
+              ends and the next begins. A small gap can make it
+              easier to cut the sheet without accidentally
+              removing part of the photograph.
+            </p>
+
+            <p>
+              More spacing and larger margins use additional
+              paper, so the maximum number of copies may be
+              smaller. If a requested grid does not fit, the
+              converter reports the available capacity instead
+              of silently shrinking the photo dimensions.
+            </p>
+
+            <p>
+              The cutting guides are visual aids only. They do
+              not represent an official trim tolerance, and
+              they do not account for every printer's alignment
+              error. Use an appropriate paper cutter or scissors,
+              and measure a test print before preparing a
+              batch of important photographs.
+            </p>
+          </details>
+
+          <details>
+            <summary>8. How to print the generated photo sheet correctly</summary>
+
+            <p>
+              After generating the sheet, preview it to ensure
+              the photo positions and quantity are correct.
+              Download the PNG or JPG, or use Print / Save PDF
+              to open the browser's print dialog with the
+              selected physical page dimensions.
+            </p>
+
+            <ol>
+              <li>Choose the same paper size selected in the tool.</li>
+              <li>Use Actual Size or 100% scale where available.</li>
+              <li>Disable Fit to Page if exact dimensions are required.</li>
+              <li>Check printer margins and borderless-print options.</li>
+              <li>Print a test and measure the photo dimensions.</li>
+            </ol>
+
+            <p>
+              Printer drivers differ. Some printers cannot print
+              to the very edge of a sheet, and some automatically
+              resize documents to match their printable area.
+              These adjustments can affect the physical size
+              even when the image itself was rendered correctly.
+            </p>
+
+            <p>
+              If you save the sheet as a PDF through the print
+              dialog, check the PDF page dimensions before
+              sending it to a photo lab. For exact-size output,
+              confirm that the shop prints the supplied sheet
+              at its original dimensions rather than resizing
+              it to a different paper format.
+            </p>
+          </details>
+
+          <details>
+            <summary>9. Can this tool change the photo background?</summary>
+
+            <p>
+              This tool can choose a fill colour for transparent
+              pixels in an image. This is useful for transparent
+              PNG files, where an otherwise invisible area might
+              otherwise remain transparent in the output.
+              Available fills include white, light gray, and
+              light blue, as well as leaving the background transparent.
+            </p>
+
+            <p>
+              Selecting a fill colour does not remove an existing
+              opaque background. A normal JPEG or a PNG with
+              a fully opaque wall behind the subject retains
+              that background. Automatic background removal
+              requires a separate image-segmentation or editing
+              feature that is not part of this tool.
+            </p>
+
+            <p>
+              Do not assume that a solid colour alone makes
+              a photograph compliant with an official application.
+              Authorities may have detailed requirements about
+              background uniformity, shadows, clothing, facial
+              visibility, and image processing. Check those
+              instructions before submitting the photograph.
+            </p>
+          </details>
+
+          <details>
+            <summary>10. Does the passport photo maker upload my image?</summary>
+
+            <p>
+              The photo loading, cropping, sheet generation,
+              and image export included in this page run in
+              the browser. The code used for these operations
+              does not send the chosen photo to a remote
+              conversion server. Local processing also means
+              that a dedicated image-processing server is not
+              required for the tool's main functions.
+            </p>
+
+            <p>
+              Nevertheless, the statement applies to the
+              functionality included in this page. The
+              broader website, hosting platform, analytics,
+              browser extensions, or other scripts may have
+              separate behaviour. Review the website's
+              privacy policy if you need information about
+              the entire site.
+            </p>
+
+            <p>
+              Use caution with confidential or restricted
+              images. Do not upload or process an image
+              in any environment unless you are authorised
+              to do so and understand the relevant data-handling
+              requirements. Browser-based processing can
+              reduce unnecessary transmission but cannot
+              guarantee every aspect of a device's privacy.
+            </p>
+          </details>
+
+          <details>
+            <summary>11. Common passport photo printing problems</summary>
+
+            <p>
+              Photos that print too large or too small are
+              often caused by scaling in the print dialog.
+              Choose the sheet's actual paper size and check
+              the scale setting. If the printer applies
+              Fit to Page, the physical output can differ
+              from the dimensions represented by the image.
+            </p>
+
+            <p>
+              A soft or pixelated print can result from a
+              low-resolution original, excessive zoom, or
+              poor focus. Exporting at 300 DPI does not
+              create missing facial detail. Start with
+              a clear, high-quality image and avoid
+              unnecessary enlargements.
+            </p>
+
+            <p>
+              If a face looks improperly positioned, adjust
+              horizontal and vertical crop positioning and
+              check the crop preview before regenerating
+              the sheet. Make sure important facial features
+              are not cropped by the selected frame.
+            </p>
+
+            <p>
+              If the photos seem too close together, increase
+              the gap or outer margin. If too few copies fit,
+              choose a larger paper size or reduce spacing
+              within the limits of your printing needs.
+              Confirm the resulting layout in the sheet
+              preview before printing multiple copies.
+            </p>
+          </details>
+
+          <details>
+            <summary>12. Who can use a passport photo print sheet maker?</summary>
+
+            <p>
+              This tool can be useful for people preparing
+              passport or visa paperwork, students needing
+              identity photographs, applicants preparing
+              forms, families printing multiple copies,
+              and small print shops arranging supplied images
+              on standard photo paper.
+            </p>
+
+            <p>
+              It can also help staff prepare basic ID-photo
+              layouts when each image already meets the
+              organisation's photography and data-handling
+              rules. Users can set dimensions and copy counts
+              without arranging every copy individually
+              in a general-purpose image editor.
+            </p>
+
+            <p>
+              Anyone preparing official documents should
+              confirm the relevant photo requirements first.
+              A correct print layout does not independently
+              validate identity, the date the image was
+              taken, facial proportions, background quality,
+              or compliance with the receiving authority's
+              rules.
+            </p>
+          </details>
+
+          <details>
+            <summary>13. Frequently asked questions about passport photo printing</summary>
+
+            <h3>Is this passport photo print sheet maker free?</h3>
+            <p>
+              Yes. The photo cropping and print-sheet functions
+              included on this page are available without
+              a paid photo-editing subscription.
+            </p>
+
+            <h3>Which image formats can I upload?</h3>
+            <p>
+              The tool supports JPG, PNG, and WebP images
+              in compatible modern browsers. The upload
+              limit is 20 MB per file.
+            </p>
+
+            <h3>Which paper sizes are supported?</h3>
+            <p>
+              You can choose A4, US Letter, 4 × 6 inch
+              photo paper, or 5 × 7 inch photo paper.
+              Check the selected paper size before printing.
+            </p>
+
+            <h3>Can I choose a custom passport photo size?</h3>
+            <p>
+              Yes. Select Custom dimensions and enter a
+              width and height in millimetres. The tool
+              adjusts the crop ratio to match your dimensions.
+            </p>
+
+            <h3>How many passport photos fit on a sheet?</h3>
+            <p>
+              The number depends on the photo dimensions,
+              paper size, margins, and spacing. Enable
+              automatic filling to calculate the maximum
+              grid supported by the selected settings.
+            </p>
+
+            <h3>Can I download the print sheet?</h3>
+            <p>
+              Yes. Once a sheet has been generated, you
+              can download it as PNG or JPG. The browser's
+              Print / Save PDF function can also be used
+              to print or save the page as a PDF.
+            </p>
+
+            <h3>Can I download just one cropped photo?</h3>
+            <p>
+              Yes. Use Download one photo to export the
+              currently cropped image at the selected
+              photo dimensions and output resolution.
+            </p>
+
+            <h3>Does this tool guarantee an official passport photo?</h3>
+            <p>
+              No. It handles crop dimensions and print layout.
+              It does not verify facial measurements, image
+              recency, official background requirements,
+              or the complete eligibility rules of any authority.
+            </p>
+
+            <h3>Will it automatically remove a background?</h3>
+            <p>
+              No. It can fill transparent pixels in an
+              image, but it does not remove an opaque
+              background from an ordinary photograph.
+            </p>
+
+            <h3>Does it upload my photograph?</h3>
+            <p>
+              The image-processing functions in this page
+              run in your browser and do not send the
+              photograph to a conversion server. Other
+              website components can have separate
+              data-handling practices.
+            </p>
+
+            <h3>Why is my printed photo the wrong size?</h3>
+            <p>
+              Check the print dialog's paper size and
+              scaling options. Use Actual Size or 100%
+              when supported, then measure a test print.
+            </p>
+
+            <h3>Can I use this tool on a mobile phone?</h3>
+            <p>
+              Yes. The interface is responsive and supports
+              compatible mobile browsers. Large images
+              can require more memory and processing time.
+            </p>
+
+          </details>
+
         </div>
 
-        <div class="btn-row" style="margin-top:16px">
-          <button class="btn btn-primary" type="button" id="pm-download-pdf" disabled>
-            Download PDF
-          </button>
-          <button class="btn btn-secondary" type="button" id="pm-download-png" disabled>
-            Download PNG
-          </button>
-          <button class="btn btn-secondary" type="button" id="pm-download-jpg" disabled>
-            Download JPEG
-          </button>
-        </div>
+        <section class="pp-related" aria-labelledby="pp-related-heading">
 
-        <div class="notice" style="margin-top:16px">
-          <strong>Print tip:</strong> print the PDF at <strong>Actual size / 100%</strong>.
-          Turn off “Fit to page” if exact photo dimensions matter. Check your printer's
-          non-printable margins before using the sheet for a formal application.
-        </div>
+          <h2 id="pp-related-heading">Explore more online tools</h2>
 
-        <p class="hint" id="pm-export-note">
-          Photo processing runs in your browser. Your images are not uploaded to this website.
+          <a class="pp-related-link" href="/#tools">
+            <strong>Browse all tools and converters</strong>
+            <span>
+              Explore image tools, text utilities, developer tools,
+              calculators, and other everyday online tools.
+            </span>
+          </a>
+
+        </section>
+
+      </article>
+
+    </main>
+
+    <footer class="pp-footer">
+      <div class="pp-container pp-footer-inner">
+
+        <p>
+          © <span id="pp-year">2026</span> Online Tools &amp; Converters.
         </p>
+
+        <nav class="pp-footer-links" aria-label="Footer navigation">
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/privacy-policy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms</a>
+        </nav>
+
       </div>
-    </aside>
-  </section>
+    </footer>
 
-  <article class="content prose">
-    <h2>How the passport photo print sheet maker works</h2>
-    <p>
-      This tool arranges one or more images into a sheet that you can print
-      on A4, US Letter, 4 × 6 inch, 5 × 7 inch or A5 paper. Select photo
-      dimensions, set how many copies are required for each image, and choose
-      margins, spacing, orientation and cutting guides.
-    </p>
-
-    <h2>How to get the correct printed size</h2>
-    <p>
-      Start with the dimensions required by the organisation receiving your photo.
-      Different passport, visa, identity-card and application processes can have
-      different rules, including face size, head position, background, recency,
-      expression and paper or digital requirements. A correctly sized print sheet
-      does not guarantee the underlying photo will be accepted.
-    </p>
-    <p>
-      Download the PDF when you need a document with defined paper dimensions.
-      When printing, choose the correct paper and use Actual size or 100% scaling.
-      Avoid automatic enlargement or reduction if you require a particular physical
-      photo size.
-    </p>
-
-    <h2>Privacy and image handling</h2>
-    <p>
-      Photos are loaded and laid out locally in your browser. The tool does not
-      upload photos to a remote image-processing service. When finished, close
-      the page to discard the working session.
-    </p>
-
-    <h2>Frequently asked questions</h2>
-    <details>
-      <summary>Can I put different people's photos on one sheet?</summary>
-      <p>Yes. Add multiple photos and set a separate copy count for each image.</p>
-    </details>
-    <details>
-      <summary>Does the tool remove photo backgrounds?</summary>
-      <p>No. The background colour setting fills transparent or unused areas; it does not remove an existing photo background.</p>
-    </details>
-    <details>
-      <summary>Why should I print at 100%?</summary>
-      <p>Fit-to-page scaling can resize the page, causing the physical dimensions of each photo to differ from your chosen measurements.</p>
-    </details>
-    <details>
-      <summary>Does this guarantee official passport photo compliance?</summary>
-      <p>No. Photo dimensions and acceptance rules vary. Confirm the latest requirements with the relevant issuing authority before submitting a photo.</p>
-    </details>
-
-    <section class="related">
-      <h2>Explore more tools</h2>
-      <ul>
-        <li><a href="../index.html#tools">All online tools →</a></li>
-        <li><a href="video-file-size-calculator.html">Video File Size Calculator →</a></li>
-        <li><a href="srt-subtitle-checker.html">SRT Subtitle Checker →</a></li>
-      </ul>
-    </section>
-  </article>
-</main>
-
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <a class="footer-brand" href="../index.html">Online Tools &amp; Converters</a>
-    <nav class="footer-links" aria-label="Footer navigation">
-      <a href="../index.html">Home</a>
-      <a href="../about.html">About</a>
-      <a href="../contact.html">Contact</a>
-      <a href="../privacy-policy.html">Privacy Policy</a>
-      <a href="../terms-of-use.html">Terms of Use</a>
-    </nav>
-    <p class="copyright">© <span id="current-year">2026</span> Online Tools &amp; Converters. All rights reserved.</p>
   </div>
-</footer>
+
+  <!-- PHOTO CROPPING, SHEET GENERATION, AND EXPORT -->
+
+  <script>
+    (() => {
+      "use strict";
+
+      const $ = id => document.getElementById(id);
+
+      const el = {
+        file: $("pp-file"),
+        dropzone: $("pp-dropzone"),
+        uploadTitle: $("pp-upload-title"),
+
+        photoSize: $("pp-photo-size"),
+        customFields: $("pp-custom-fields"),
+        photoWidth: $("pp-photo-width"),
+        photoHeight: $("pp-photo-height"),
+        paperSize: $("pp-paper-size"),
+        resolution: $("pp-resolution"),
+
+        zoom: $("pp-zoom"),
+        zoomValue: $("pp-zoom-value"),
+        horizontal: $("pp-horizontal"),
+        horizontalValue: $("pp-horizontal-value"),
+        vertical: $("pp-vertical"),
+        verticalValue: $("pp-vertical-value"),
+        background: $("pp-transparent-bg"),
+        guides: $("pp-guides"),
+        cutLines: $("pp-cut-lines"),
+
+        cropCanvas: $("pp-crop-canvas"),
+        cropEmpty: $("pp-crop-empty"),
+        cropNote: $("pp-crop-note"),
+
+        copies: $("pp-copies"),
+        autoFill: $("pp-auto-fill"),
+        margin: $("pp-margin"),
+        gap: $("pp-gap"),
+
+        generate: $("pp-generate"),
+        single: $("pp-download-single"),
+        resetCrop: $("pp-reset-crop"),
+
+        sheetWrap: $("pp-sheet-preview-wrap"),
+        sheetCanvas: $("pp-sheet-canvas"),
+        sheetDescription: $("pp-sheet-description"),
+
+        downloadPng: $("pp-download-png"),
+        downloadJpg: $("pp-download-jpg"),
+        print: $("pp-print"),
+
+        status: $("pp-status"),
+        summary: $("pp-summary"),
+        year: $("pp-year")
+      };
+
+      const MAX_FILE_BYTES = 20 * 1024 * 1024;
+      const MAX_ROWS = 1000;
+      const MAX_CANVAS_PIXELS = 16000000;
+      const MM_PER_INCH = 25.4;
+
+      const PHOTO_PRESETS = {
+        nepal: { width: 35, height: 45 },
+        uk: { width: 35, height: 45 },
+        india: { width: 35, height: 45 },
+        schengen: { width: 35, height: 45 },
+        us: { width: 51, height: 51 },
+        canada: { width: 50, height: 70 }
+      };
+
+      const PAPER_PRESETS = {
+        a4: { width: 210, height: 297, label: "A4" },
+        letter: { width: 215.9, height: 279.4, label: "US Letter" },
+        "4x6": { width: 152.4, height: 101.6, label: "4 × 6 inch" },
+        "5x7": { width: 177.8, height: 127, label: "5 × 7 inch" }
+      };
+
+      let photoImage = null;
+      let photoFileName = "";
+      let sheetReady = false;
+      let currentLayout = null;
+      let fileGeneration = 0;
+
+      function setText(node, value) {
+        if (node) node.textContent = String(value);
+      }
+
+      function setStatus(message, isError = false) {
+        setText(el.status, message);
+        el.status.classList.toggle("pp-status-error", isError);
+      }
+
+      function showSummary(message) {
+        setText(el.summary, message);
+      }
+
+      function mmToPixels(mm, dpi) {
+        return Math.round(mm * dpi / MM_PER_INCH);
+      }
+
+      function formatNumber(value) {
+        return Number(value).toLocaleString();
+      }
+
+      function photoDimensions() {
+        const preset = el.photoSize.value;
+
+        if (preset === "custom") {
+          const width = Number(el.photoWidth.value);
+          const height = Number(el.photoHeight.value);
+
+          if (
+            !Number.isFinite(width) ||
+            !Number.isFinite(height) ||
+            width < 10 ||
+            width > 100 ||
+            height < 10 ||
+            height > 100
+          ) {
+            throw new Error(
+              "Custom photo width and height must each be between 10 and 100 mm."
+            );
+          }
+
+          return { width, height };
+        }
+
+        return PHOTO_PRESETS[preset];
+      }
+
+      function paperDimensions() {
+        const dimensions = PAPER_PRESETS[el.paperSize.value];
+
+        if (!dimensions) {
+          throw new Error("Choose a supported paper size.");
+        }
+
+        return dimensions;
+      }
+
+      function getCropSettings() {
+        return {
+          zoom: Number(el.zoom.value) / 100,
+          horizontal: Number(el.horizontal.value) / 100,
+          vertical: Number(el.vertical.value) / 100,
+          background: el.background.value
+        };
+      }
+
+      function sourceCrop(image, targetAspect, settings) {
+        let sourceWidth;
+        let sourceHeight;
+
+        const imageAspect = image.naturalWidth / image.naturalHeight;
+
+        if (imageAspect > targetAspect) {
+          sourceHeight = image.naturalHeight;
+          sourceWidth = sourceHeight * targetAspect;
+        } else {
+          sourceWidth = image.naturalWidth;
+          sourceHeight = sourceWidth / targetAspect;
+        }
+
+        sourceWidth /= settings.zoom;
+        sourceHeight /= settings.zoom;
+
+        sourceWidth = Math.min(sourceWidth, image.naturalWidth);
+        sourceHeight = Math.min(sourceHeight, image.naturalHeight);
+
+        const availableX = Math.max(
+          0,
+          image.naturalWidth - sourceWidth
+        );
+
+        const availableY = Math.max(
+          0,
+          image.naturalHeight - sourceHeight
+        );
+
+        const sx = availableX * settings.horizontal;
+        const sy = availableY * settings.vertical;
+
+        return {
+          sx,
+          sy,
+          sw: sourceWidth,
+          sh: sourceHeight
+        };
+      }
+
+      function fillCanvasBackground(context, width, height, background) {
+        context.clearRect(0, 0, width, height);
+
+        if (background !== "transparent") {
+          context.fillStyle = background;
+          context.fillRect(0, 0, width, height);
+        }
+      }
+
+      function drawPhoto(
+        context,
+        image,
+        x,
+        y,
+        width,
+        height,
+        settings,
+        background
+      ) {
+        const targetAspect = width / height;
+        const crop = sourceCrop(image, targetAspect, settings);
+
+        fillCanvasBackground(context, width, height, background);
+
+        context.drawImage(
+          image,
+          crop.sx,
+          crop.sy,
+          crop.sw,
+          crop.sh,
+          x,
+          y,
+          width,
+          height
+        );
+      }
+
+      function updateRangeLabels() {
+        setText(el.zoomValue, el.zoom.value + "%");
+        setText(el.horizontalValue, el.horizontal.value + "%");
+        setText(el.verticalValue, el.vertical.value + "%");
+      }
+
+      function updatePhotoPresetControls() {
+        const isCustom = el.photoSize.value === "custom";
+        el.customFields.hidden = !isCustom;
+      }
+
+      function refreshButtonStates() {
+        el.generate.disabled = !photoImage;
+        el.single.disabled = !photoImage;
+
+        el.downloadPng.disabled = !sheetReady;
+        el.downloadJpg.disabled = !sheetReady;
+        el.print.disabled = !sheetReady;
+
+        el.copies.disabled = el.autoFill.checked;
+      }
+
+      function markDirty(message) {
+        sheetReady = false;
+        currentLayout = null;
+        el.sheetWrap.hidden = true;
+
+        refreshButtonStates();
+
+        if (photoImage) {
+          showSummary(
+            "Settings have changed. Generate the print sheet again to update the preview and downloads."
+          );
+        }
+
+        if (message) setStatus(message);
+      }
+
+      function updateCropPreview() {
+        if (!photoImage) {
+          el.cropCanvas.hidden = true;
+          el.cropEmpty.hidden = false;
+          return;
+        }
+
+        let dimensions;
+
+        try {
+          dimensions = photoDimensions();
+        } catch (error) {
+          setStatus(error.message, true);
+          return;
+        }
+
+        const aspect = dimensions.width / dimensions.height;
+
+        let canvasWidth;
+        let canvasHeight;
+
+        if (aspect >= 1) {
+          canvasWidth = 520;
+          canvasHeight = Math.max(1, Math.round(canvasWidth / aspect));
+        } else {
+          canvasHeight = 640;
+          canvasWidth = Math.max(1, Math.round(canvasHeight * aspect));
+        }
+
+        el.cropCanvas.width = canvasWidth;
+        el.cropCanvas.height = canvasHeight;
+
+        const context = el.cropCanvas.getContext("2d");
+
+        drawPhoto(
+          context,
+          photoImage,
+          0,
+          0,
+          canvasWidth,
+          canvasHeight,
+          getCropSettings(),
+          el.background.value
+        );
+
+        if (el.guides.checked) {
+          context.save();
+
+          context.strokeStyle = "rgba(37, 99, 235, 0.72)";
+          context.lineWidth = Math.max(1, canvasWidth / 450);
+          context.setLineDash([
+            Math.max(4, canvasWidth / 35),
+            Math.max(3, canvasWidth / 60)
+          ]);
+
+          context.beginPath();
+          context.moveTo(canvasWidth / 2, 0);
+          context.lineTo(canvasWidth / 2, canvasHeight);
+          context.moveTo(0, canvasHeight * 0.36);
+          context.lineTo(canvasWidth, canvasHeight * 0.36);
+          context.moveTo(0, canvasHeight * 0.66);
+          context.lineTo(canvasWidth, canvasHeight * 0.66);
+          context.stroke();
+
+          context.restore();
+        }
+
+        el.cropCanvas.hidden = false;
+        el.cropEmpty.hidden = true;
+
+        setText(
+          el.cropNote,
+          "Preview ratio: " + dimensions.width + " × " +
+            dimensions.height + " mm. Alignment guides are visual aids only."
+        );
+      }
+
+      function validateLayoutSettings() {
+        const photo = photoDimensions();
+        const paper = paperDimensions();
+
+        const margin = Number(el.margin.value);
+        const gap = Number(el.gap.value);
+
+        if (!Number.isFinite(margin) || margin < 0 || margin > 25) {
+          throw new Error("Outer margin must be between 0 and 25 mm.");
+        }
+
+        if (!Number.isFinite(gap) || gap < 0 || gap > 20) {
+          throw new Error("Photo spacing must be between 0 and 20 mm.");
+        }
+
+        return {
+          photo,
+          paper,
+          margin,
+          gap,
+          dpi: Number(el.resolution.value)
+        };
+      }
+
+      function calculateLayout() {
+        const settings = validateLayoutSettings();
+
+        const { photo, paper, margin, gap, dpi } = settings;
+
+        const sheetWidth = mmToPixels(paper.width, dpi);
+        const sheetHeight = mmToPixels(paper.height, dpi);
+
+        const photoWidth = mmToPixels(photo.width, dpi);
+        const photoHeight = mmToPixels(photo.height, dpi);
+
+        const marginPx = mmToPixels(margin, dpi);
+        const gapPx = mmToPixels(gap, dpi);
+
+        const availableWidth = sheetWidth - 2 * marginPx;
+        const availableHeight = sheetHeight - 2 * marginPx;
+
+        const columns = Math.floor(
+          (availableWidth + gapPx) / (photoWidth + gapPx)
+        );
+
+        const rows = Math.floor(
+          (availableHeight + gapPx) / (photoHeight + gapPx)
+        );
+
+        const capacity = Math.max(0, columns) * Math.max(0, rows);
+
+        if (columns < 1 || rows < 1 || capacity < 1) {
+          throw new Error(
+            "The selected photo does not fit on this paper. Choose a larger sheet, smaller photo dimensions, or smaller margins."
+          );
+        }
+
+        let copies;
+
+        if (el.autoFill.checked) {
+          copies = Math.min(capacity, MAX_ROWS);
+        } else {
+          copies = Math.floor(Number(el.copies.value));
+
+          if (
+            !Number.isFinite(copies) ||
+            copies < 1 ||
+            copies > MAX_ROWS
+          ) {
+            throw new Error(
+              "Enter a copy count between 1 and " + MAX_ROWS + "."
+            );
+          }
+
+          if (copies > capacity) {
+            throw new Error(
+              "Only " + capacity +
+              " copies fit using the current paper, photo size, margin, and spacing. Reduce the copy count or change the layout settings."
+            );
+          }
+        }
+
+        const actualRows = Math.ceil(copies / columns);
+
+        const usedWidth = columns * photoWidth +
+          (columns - 1) * gapPx;
+
+        const usedHeight = actualRows * photoHeight +
+          (actualRows - 1) * gapPx;
+
+        if (
+          usedWidth > sheetWidth ||
+          usedHeight > sheetHeight ||
+          sheetWidth * sheetHeight > MAX_CANVAS_PIXELS
+        ) {
+          throw new Error(
+            "The requested sheet exceeds the safe rendering limits. Choose 150 DPI or use a smaller paper size."
+          );
+        }
+
+        return {
+          ...settings,
+          dpi,
+          sheetWidth,
+          sheetHeight,
+          photoWidth,
+          photoHeight,
+          marginPx,
+          gapPx,
+          columns,
+          rows: actualRows,
+          capacity,
+          copies,
+          usedWidth,
+          usedHeight
+        };
+      }
+
+      function renderSheet() {
+        if (!photoImage) {
+          setStatus("Upload a photo before generating the sheet.", true);
+          return;
+        }
+
+        try {
+          const layout = calculateLayout();
+
+          const canvas = el.sheetCanvas;
+          canvas.width = layout.sheetWidth;
+          canvas.height = layout.sheetHeight;
+
+          const context = canvas.getContext("2d", {
+            alpha: false
+          });
+
+          if (!context) {
+            throw new Error("The browser could not create a rendering canvas.");
+          }
+
+          context.fillStyle = "#ffffff";
+          context.fillRect(
+            0,
+            0,
+            layout.sheetWidth,
+            layout.sheetHeight
+          );
+
+          const settings = getCropSettings();
+
+          let index = 0;
+
+          const totalRows = Math.ceil(
+            layout.copies / layout.columns
+          );
+
+          const top = Math.round(
+            (layout.sheetHeight - layout.usedHeight) / 2
+          );
+
+          for (let row = 0; row < totalRows; row++) {
+            const remaining = layout.copies - index;
+
+            const itemsInRow = Math.min(
+              layout.columns,
+              remaining
+            );
+
+            const rowWidth = itemsInRow * layout.photoWidth +
+              (itemsInRow - 1) * layout.gapPx;
+
+            const left = Math.round(
+              (layout.sheetWidth - rowWidth) / 2
+            );
+
+            const y = top + row *
+              (layout.photoHeight + layout.gapPx);
+
+            for (let col = 0; col < itemsInRow; col++) {
+              const x = left + col *
+                (layout.photoWidth + layout.gapPx);
+
+              drawPhoto(
+                context,
+                photoImage,
+                x,
+                y,
+                layout.photoWidth,
+                layout.photoHeight,
+                settings,
+                layout.background
+              );
+
+              if (el.cutLines.checked) {
+                context.save();
+
+                context.strokeStyle = "#334155";
+                context.lineWidth = Math.max(1, layout.dpi / 300);
+                context.setLineDash([
+                  Math.max(3, layout.dpi * 0.025),
+                  Math.max(2, layout.dpi * 0.015)
+                ]);
+
+                context.strokeRect(
+                  x + 0.5,
+                  y + 0.5,
+                  layout.photoWidth - 1,
+                  layout.photoHeight - 1
+                );
+
+                context.restore();
+              }
+
+              index++;
+            }
+          }
+
+          currentLayout = layout;
+          sheetReady = true;
+
+          el.sheetWrap.hidden = false;
+          refreshButtonStates();
+
+          const dimensions = layout.photo;
+
+          setText(
+            el.sheetDescription,
+            layout.paper.label + " · " +
+              layout.sheetWidth + " × " +
+              layout.sheetHeight + " px · " +
+              layout.dpi + " DPI · " +
+              dimensions.width + " × " +
+              dimensions.height + " mm per photo"
+          );
+
+          showSummary(
+            "Generated " + formatNumber(layout.copies) +
+            " photo(s) in " + formatNumber(layout.columns) +
+            " column(s) and " + formatNumber(totalRows) +
+            " row(s). Physical sheet: " +
+            layout.paper.width + " × " +
+            layout.paper.height + " mm. The preview uses the selected " +
+            layout.dpi + " DPI pixel dimensions."
+          );
+
+          setStatus("Print sheet generated successfully.");
+
+        } catch (error) {
+          sheetReady = false;
+          currentLayout = null;
+          el.sheetWrap.hidden = true;
+
+          refreshButtonStates();
+
+          setStatus(
+            error && error.message
+              ? error.message
+              : "The sheet could not be generated.",
+            true
+          );
+        }
+      }
+
+      function loadImageFile(file) {
+        return new Promise((resolve, reject) => {
+          const objectUrl = URL.createObjectURL(file);
+          const image = new Image();
+
+          image.onload = () => {
+            URL.revokeObjectURL(objectUrl);
+            resolve(image);
+          };
+
+          image.onerror = () => {
+            URL.revokeObjectURL(objectUrl);
+            reject(
+              new Error("The browser could not open this image. Try another JPG, PNG, or WebP file.")
+            );
+          };
+
+          image.src = objectUrl;
+        });
+      }
+
+      async function loadPhoto(file) {
+        if (!file) return;
+
+        const thisGeneration = ++fileGeneration;
+
+        const extensionAllowed = /\.(jpe?g|png|webp)$/i.test(file.name);
+
+        if (!file.type.startsWith("image/") || !extensionAllowed) {
+          setStatus(
+            "Choose a JPG, PNG, or WebP image.",
+            true
+          );
+          return;
+        }
+
+        if (file.size > MAX_FILE_BYTES) {
+          setStatus(
+            "This image exceeds the 20 MB upload limit. Choose a smaller image.",
+            true
+          );
+          return;
+        }
+
+        if (file.size === 0) {
+          setStatus("The selected image file is empty.", true);
+          return;
+        }
+
+        setStatus("Loading photo...");
+
+        try {
+          const image = await loadImageFile(file);
+
+          if (thisGeneration !== fileGeneration) return;
+
+          if (!image.naturalWidth || !image.naturalHeight) {
+            throw new Error("The image has invalid dimensions.");
+          }
+
+          photoImage = image;
+          photoFileName = file.name;
+
+          el.uploadTitle.textContent =
+            file.name + " · " +
+            image.naturalWidth + " × " +
+            image.naturalHeight + " px";
+
+          updateCropPreview();
+          markDirty();
+
+          setStatus("Photo loaded. Adjust the crop and generate your sheet.");
+
+          refreshButtonStates();
+
+        } catch (error) {
+          if (thisGeneration !== fileGeneration) return;
+
+          setStatus(
+            error && error.message
+              ? error.message
+              : "The image could not be loaded.",
+            true
+          );
+        }
+      }
+
+      function resetCrop() {
+        el.zoom.value = "100";
+        el.horizontal.value = "50";
+        el.vertical.value = "50";
+
+        updateRangeLabels();
+        updateCropPreview();
+        markDirty("Crop settings reset.");
+      }
+
+      function canvasToBlob(canvas, type, quality) {
+        return new Promise((resolve, reject) => {
+          canvas.toBlob(blob => {
+            if (!blob) {
+              reject(new Error("The browser could not export this image."));
+              return;
+            }
+
+            resolve(blob);
+          }, type, quality);
+        });
+      }
+
+      function buildCrcTable() {
+        const table = new Uint32Array(256);
+
+        for (let n = 0; n < 256; n++) {
+          let c = n;
+
+          for (let k = 0; k < 8; k++) {
+            c = c & 1
+              ? 0xedb88320 ^ (c >>> 1)
+              : c >>> 1;
+          }
+
+          table[n] = c >>> 0;
+        }
+
+        return table;
+      }
+
+      const CRC_TABLE = buildCrcTable();
+
+      function crc32(bytes) {
+        let crc = 0xffffffff;
+
+        for (let i = 0; i < bytes.length; i++) {
+          crc = (crc >>> 8) ^
+            CRC_TABLE[(crc ^ bytes[i]) & 0xff];
+        }
+
+        return (crc ^ 0xffffffff) >>> 0;
+      }
+
+      function createPngChunk(type, data) {
+        const chunk = new Uint8Array(data.length + 12);
+        const view = new DataView(chunk.buffer);
+
+        view.setUint32(0, data.length, false);
+
+        for (let i = 0; i < 4; i++) {
+          chunk[4 + i] = type.charCodeAt(i);
+        }
+
+        chunk.set(data, 8);
+
+        view.setUint32(
+          8 + data.length,
+          crc32(chunk.subarray(4, 8 + data.length)),
+          false
+        );
+
+        return chunk;
+      }
+
+      async function addPngDpi(blob, dpi) {
+        const bytes = new Uint8Array(await blob.arrayBuffer());
+
+        if (
+          bytes.length < 33 ||
+          bytes[0] !== 137 ||
+          bytes[1] !== 80 ||
+          bytes[2] !== 78 ||
+          bytes[3] !== 71
+        ) {
+          return blob;
+        }
+
+        const chunks = [];
+        let offset = 8;
+        let sawHeader = false;
+
+        const pixelsPerMeter = Math.round(dpi / 0.0254);
+
+        const physData = new Uint8Array(9);
+        const physView = new DataView(physData.buffer);
+
+        physView.setUint32(0, pixelsPerMeter, false);
+        physView.setUint32(4, pixelsPerMeter, false);
+        physData[8] = 1;
+
+        const physicalChunk = createPngChunk("pHYs", physData);
+
+        while (offset + 12 <= bytes.length) {
+          const length = new DataView(
+            bytes.buffer,
+            bytes.byteOffset + offset,
+            4
+          ).getUint32(0, false);
+
+          const end = offset + 12 + length;
+
+          if (end > bytes.length) {
+            return blob;
+          }
+
+          const type = String.fromCharCode(
+            bytes[offset + 4],
+            bytes[offset + 5],
+            bytes[offset + 6],
+            bytes[offset + 7]
+          );
+
+          if (type !== "pHYs") {
+            chunks.push(bytes.slice(offset, end));
+          }
+
+          if (type === "IHDR") {
+            chunks.push(physicalChunk);
+            sawHeader = true;
+          }
+
+          offset = end;
+
+          if (type === "IEND") break;
+        }
+
+        if (!sawHeader) return blob;
+
+        let totalLength = 8;
+
+        for (const chunk of chunks) {
+          totalLength += chunk.length;
+        }
+
+        const output = new Uint8Array(totalLength);
+        output.set(bytes.slice(0, 8), 0);
+
+        let targetOffset = 8;
+
+        for (const chunk of chunks) {
+          output.set(chunk, targetOffset);
+          targetOffset += chunk.length;
+        }
+
+        return new Blob([output], { type: "image/png" });
+      }
+
+      async function addJpegDpi(blob, dpi) {
+        const bytes = new Uint8Array(await blob.arrayBuffer());
+
+        if (
+          bytes.length < 4 ||
+          bytes[0] !== 0xff ||
+          bytes[1] !== 0xd8
+        ) {
+          return blob;
+        }
+
+        let offset = 2;
+
+        while (offset + 4 < bytes.length) {
+          if (bytes[offset] !== 0xff) {
+            offset++;
+            continue;
+          }
+
+          const marker = bytes[offset + 1];
+
+          if (marker === 0xda || marker === 0xd9) {
+            break;
+          }
+
+          if (
+            marker === 0xd8 ||
+            marker === 0x01 ||
+            (marker >= 0xd0 && marker <= 0xd7)
+          ) {
+            offset += 2;
+            continue;
+          }
+
+          const segmentLength =
+            (bytes[offset + 2] << 8) | bytes[offset + 3];
+
+          if (segmentLength < 2 || offset + 2 + segmentLength > bytes.length) {
+            break;
+          }
+
+          if (
+            marker === 0xe0 &&
+            bytes[offset + 4] === 0x4a &&
+            bytes[offset + 5] === 0x46 &&
+            bytes[offset + 6] === 0x49 &&
+            bytes[offset + 7] === 0x46 &&
+            bytes[offset + 8] === 0
+          ) {
+            const density = Math.min(65535, Math.max(1, Math.round(dpi)));
+
+            bytes[offset + 11] = 1;
+            bytes[offset + 12] = (density >> 8) & 0xff;
+            bytes[offset + 13] = density & 0xff;
+            bytes[offset + 14] = (density >> 8) & 0xff;
+            bytes[offset + 15] = density & 0xff;
+
+            return new Blob([bytes], { type: "image/jpeg" });
+          }
+
+          offset += 2 + segmentLength;
+        }
+
+        return blob;
+      }
+
+      async function exportCanvas(canvas, format, dpi) {
+        const mime = format === "jpg"
+          ? "image/jpeg"
+          : "image/png";
+
+        const blob = await canvasToBlob(
+          canvas,
+          mime,
+          format === "jpg" ? 0.95 : undefined
+        );
+
+        return format === "jpg"
+          ? addJpegDpi(blob, dpi)
+          : addPngDpi(blob, dpi);
+      }
+
+      function downloadBlob(blob, fileName) {
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement("a");
+
+        anchor.href = url;
+        anchor.download = fileName;
+
+        document.body.appendChild(anchor);
+        anchor.click();
+        anchor.remove();
+
+        setTimeout(() => URL.revokeObjectURL(url), 30000);
+      }
+
+      async function downloadSheet(format) {
+        if (!sheetReady || !currentLayout) {
+          setStatus("Generate the print sheet before downloading.", true);
+          return;
+        }
+
+        try {
+          setStatus("Preparing your download...");
+
+          const blob = await exportCanvas(
+            el.sheetCanvas,
+            format,
+            currentLayout.dpi
+          );
+
+          const paperSlug = el.paperSize.value;
+
+          downloadBlob(
+            blob,
+            "passport-photo-sheet-" + paperSlug + "." +
+              (format === "jpg" ? "jpg" : "png")
+          );
+
+          setStatus(
+            "Your " + format.toUpperCase() + " print sheet is ready to download."
+          );
+
+        } catch (error) {
+          setStatus(
+            error.message || "The sheet could not be exported.",
+            true
+          );
+        }
+      }
+
+      async function downloadSinglePhoto() {
+        if (!photoImage) {
+          setStatus("Upload a photo first.", true);
+          return;
+        }
+
+        try {
+          const dimensions = photoDimensions();
+          const dpi = Number(el.resolution.value);
+
+          const width = mmToPixels(dimensions.width, dpi);
+          const height = mmToPixels(dimensions.height, dpi);
+
+          const canvas = document.createElement("canvas");
+          canvas.width = width;
+          canvas.height = height;
+
+          const context = canvas.getContext("2d");
+
+          if (!context) {
+            throw new Error("The browser could not create an image canvas.");
+          }
+
+          drawPhoto(
+            context,
+            photoImage,
+            0,
+            0,
+            width,
+            height,
+            getCropSettings(),
+            el.background.value
+          );
+
+          const blob = await exportCanvas(canvas, "png", dpi);
+
+          downloadBlob(blob, "cropped-passport-photo.png");
+
+          setStatus(
+            "Your cropped photo has been exported at the selected pixel dimensions."
+          );
+
+        } catch (error) {
+          setStatus(
+            error.message || "The cropped photo could not be downloaded.",
+            true
+          );
+        }
+      }
+
+      async function printSheet() {
+        if (!sheetReady || !currentLayout) {
+          setStatus("Generate the print sheet before printing.", true);
+          return;
+        }
+
+        /*
+         * Open the window synchronously during the click to reduce
+         * the likelihood of a browser popup blocker preventing printing.
+         */
+
+        const printWindow = window.open("", "_blank");
+
+        if (!printWindow) {
+          setStatus(
+            "The print window was blocked. Allow popups for this website and try again.",
+            true
+          );
+          return;
+        }
+
+        try {
+          setStatus("Preparing the print sheet...");
+
+          const layout = currentLayout;
+          const blob = await exportCanvas(
+            el.sheetCanvas,
+            "png",
+            layout.dpi
+          );
+
+          const imageUrl = URL.createObjectURL(blob);
+
+          const pageWidth = layout.paper.width;
+          const pageHeight = layout.paper.height;
+
+          printWindow.document.open();
+
+          printWindow.document.write(
+            '<!DOCTYPE html><html lang="en"><head>' +
+            '<meta charset="UTF-8">' +
+            '<meta name="viewport" content="width=device-width, initial-scale=1">' +
+            '<title>Passport Photo Print Sheet</title>' +
+            '<style>' +
+            '@page{size:' + pageWidth + 'mm ' + pageHeight + 'mm;margin:0}' +
+            'html,body{margin:0;padding:0;background:#fff}' +
+            'body{width:' + pageWidth + 'mm;height:' + pageHeight + 'mm}' +
+            'img{display:block;width:' + pageWidth + 'mm;height:' +
+              pageHeight + 'mm;object-fit:fill}' +
+            '@media screen{body{width:auto;height:auto;padding:12px}' +
+            'img{width:auto;height:auto;max-width:100%;max-height:90vh;' +
+              'margin:auto;border:1px solid #ddd}}' +
+            '</style></head><body>' +
+            '<img id="pp-print-image" src="' + imageUrl +
+              '" alt="Passport photo print sheet">' +
+            '</body></html>'
+          );
+
+          printWindow.document.close();
+
+          const printImage = printWindow.document.getElementById(
+            "pp-print-image"
+          );
+
+          const triggerPrint = () => {
+            setTimeout(() => {
+              try {
+                printWindow.focus();
+                printWindow.print();
+              } catch (_) {
+                // The user can use the new window's browser print command.
+              }
+            }, 300);
+          };
+
+          if (printImage.complete && printImage.naturalWidth > 0) {
+            triggerPrint();
+          } else {
+            printImage.onload = triggerPrint;
+            printImage.onerror = () => {
+              setStatus("The print preview image could not be loaded.", true);
+            };
+          }
+
+          setTimeout(() => URL.revokeObjectURL(imageUrl), 120000);
+
+          setStatus(
+            "Print preview opened. Choose the matching paper size and print at Actual Size or 100%, not Fit to Page."
+          );
+
+        } catch (error) {
+          try {
+            printWindow.close();
+          } catch (_) {}
+
+          setStatus(
+            error.message || "The print preview could not be created.",
+            true
+          );
+        }
+      }
+
+      /* Preset and crop controls */
+
+      el.photoSize.addEventListener("change", () => {
+        updatePhotoPresetControls();
+
+        updateCropPreview();
+
+        markDirty();
+      });
+
+      el.photoWidth.addEventListener("input", () => {
+        updateCropPreview();
+        markDirty();
+      });
+
+      el.photoHeight.addEventListener("input", () => {
+        updateCropPreview();
+        markDirty();
+      });
+
+      [
+        el.paperSize,
+        el.resolution,
+        el.margin,
+        el.gap,
+        el.copies,
+        el.autoFill,
+        el.cutLines,
+        el.background,
+        el.guides
+      ].forEach(control => {
+        control.addEventListener("change", () => {
+          updateCropPreview();
+          markDirty();
+        });
+
+        if (
+          control === el.margin ||
+          control === el.gap ||
+          control === el.copies
+        ) {
+          control.addEventListener("input", () => {
+            markDirty();
+          });
+        }
+      });
+
+      [
+        el.zoom,
+        el.horizontal,
+        el.vertical
+      ].forEach(control => {
+        control.addEventListener("input", () => {
+          updateRangeLabels();
+          updateCropPreview();
+          markDirty();
+        });
+      });
+
+      el.resetCrop.addEventListener("click", resetCrop);
+
+      /* Upload button */
+
+      el.file.addEventListener("change", () => {
+        const file = el.file.files && el.file.files[0];
+
+        loadPhoto(file);
+
+        el.file.value = "";
+      });
+
+      /* Drag and drop */
+
+      el.dropzone.addEventListener("dragover", event => {
+        event.preventDefault();
+        el.dropzone.classList.add("pp-dragover");
+      });
+
+      el.dropzone.addEventListener("dragleave", event => {
+        if (!el.dropzone.contains(event.relatedTarget)) {
+          el.dropzone.classList.remove("pp-dragover");
+        }
+      });
+
+      el.dropzone.addEventListener("drop", event => {
+        event.preventDefault();
+        el.dropzone.classList.remove("pp-dragover");
+
+        const file = event.dataTransfer &&
+          event.dataTransfer.files &&
+          event.dataTransfer.files[0];
+
+        if (file) loadPhoto(file);
+      });
+
+      /* Layout and export actions */
+
+      el.autoFill.addEventListener("change", () => {
+        el.copies.disabled = el.autoFill.checked;
+        markDirty();
+      });
+
+      el.generate.addEventListener("click", renderSheet);
+
+      el.single.addEventListener("click", downloadSinglePhoto);
+
+      el.downloadPng.addEventListener("click", () => {
+        downloadSheet("png");
+      });
+
+      el.downloadJpg.addEventListener("click", () => {
+        downloadSheet("jpg");
+      });
+
+      el.print.addEventListener("click", printSheet);
+
+      /* Initial page state */
+
+      el.year.textContent = String(new Date().getFullYear());
+
+      updatePhotoPresetControls();
+      updateRangeLabels();
+      refreshButtonStates();
+
+    })();
+  </script>
+
 </body>
 </html>
