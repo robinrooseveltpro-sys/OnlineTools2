@@ -3,479 +3,1818 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>SRT Subtitle Checker – Validate Timing, CPS & Line Length</title>
-  <meta name="description" content="Check SRT and WebVTT subtitle files for timestamp errors, overlapping captions, reading speed, long lines, and display duration. Download a detailed report or normalized SRT.">
   <meta name="robots" content="index,follow,max-image-preview:large">
-  <meta name="theme-color" content="#f6f8fc">
-  <link rel="canonical" href="https://onlinetoolsandconverters.cc/tools/srt-subtitle-checker.html">
-  <link rel="stylesheet" href="../style.css">
+
+  <title>SRT Subtitle Checker – Validate SRT Files Online Free</title>
+  <meta name="description" content="Check SRT subtitle files online for invalid timestamps, numbering problems, empty captions, overlaps, long lines, and reading-speed warnings. Free and browser-based.">
+
+  <link rel="canonical" href="https://onlinetoolsandconverters.cc/srt-subtitle-checker.html">
 
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Online Tools &amp; Converters">
-  <meta property="og:title" content="SRT Subtitle Quality Checker">
-  <meta property="og:description" content="Validate subtitle timing, line length, reading speed, and caption structure in your browser.">
-  <meta property="og:url" content="https://onlinetoolsandconverters.cc/tools/srt-subtitle-checker.html">
+  <meta property="og:title" content="SRT Subtitle Checker – Validate Subtitle Files Online">
+  <meta property="og:description" content="Validate SRT captions for formatting, timing, numbering, overlap, and readability warnings in your browser.">
+  <meta property="og:url" content="https://onlinetoolsandconverters.cc/srt-subtitle-checker.html">
+
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="SRT Subtitle Quality Checker">
-  <meta name="twitter:description" content="Check subtitles for common timing and readability problems.">
+  <meta name="twitter:title" content="SRT Subtitle Checker">
+  <meta name="twitter:description" content="Check subtitle structure and timing with this free browser-based SRT validator.">
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebApplication",
-        "name": "SRT Subtitle Quality Checker",
-        "url": "https://onlinetoolsandconverters.cc/tools/srt-subtitle-checker.html",
-        "applicationCategory": "MultimediaApplication",
-        "operatingSystem": "Any",
-        "isAccessibleForFree": true,
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "USD"
-        },
-        "description": "A browser-based subtitle validation utility for SRT and WebVTT files."
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://onlinetoolsandconverters.cc/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "SRT Subtitle Checker",
-            "item": "https://onlinetoolsandconverters.cc/tools/srt-subtitle-checker.html"
-          }
-        ]
-      }
-    ]
+    "@type": "WebApplication",
+    "name": "SRT Subtitle Checker",
+    "url": "https://onlinetoolsandconverters.cc/srt-subtitle-checker.html",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Any device with a modern web browser",
+    "description": "A browser-based SRT subtitle validator that checks cue numbering, timestamp formatting, timing order, overlapping captions, empty text, line length, and reading speed.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
   }
   </script>
 
-  <script src="../script.js" defer></script>
+  <style>
+    :root {
+      --srt-ink: #172033;
+      --srt-muted: #5d687b;
+      --srt-line: #dfe5ee;
+      --srt-soft: #f5f7fb;
+      --srt-brand: #3157d5;
+      --srt-brand-dark: #2344b1;
+      --srt-green: #16794b;
+      --srt-red: #b42318;
+      --srt-amber: #9a6200;
+      --srt-radius: 17px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      color: var(--srt-ink);
+    }
+
+    .srt-page {
+      max-width: 1120px;
+      width: calc(100% - 32px);
+      margin: 0 auto;
+      padding: 24px 0 64px;
+    }
+
+    .srt-breadcrumb {
+      font-size: .9rem;
+      color: var(--srt-muted);
+      margin: 2px 0 20px;
+    }
+
+    .srt-breadcrumb a,
+    .srt-page a {
+      color: var(--srt-brand);
+      text-underline-offset: 3px;
+    }
+
+    .srt-hero {
+      padding: clamp(22px, 4vw, 42px);
+      border: 1px solid var(--srt-line);
+      border-radius: 24px;
+      background: linear-gradient(135deg, #f7f9ff, #fff 70%);
+      margin-bottom: 22px;
+    }
+
+    .srt-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid #dbe4ff;
+      background: #edf2ff;
+      color: #2948b7;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 750;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      padding: 7px 11px;
+    }
+
+    .srt-hero h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.08;
+      letter-spacing: -.045em;
+      margin: 15px 0 13px;
+    }
+
+    .srt-hero p {
+      max-width: 760px;
+      color: var(--srt-muted);
+      font-size: 1.06rem;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .srt-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 20px;
+    }
+
+    .srt-pill {
+      border: 1px solid var(--srt-line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: .88rem;
+      color: #3e4a60;
+    }
+
+    .srt-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(290px, .92fr);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .srt-card {
+      background: #fff;
+      border: 1px solid var(--srt-line);
+      border-radius: var(--srt-radius);
+      padding: clamp(16px, 2.6vw, 24px);
+      box-shadow: 0 5px 24px rgba(28, 42, 75, .045);
+      min-width: 0;
+    }
+
+    .srt-card h2 {
+      font-size: 1.24rem;
+      line-height: 1.3;
+      margin: 0 0 8px;
+      letter-spacing: -.02em;
+    }
+
+    .srt-muted {
+      color: var(--srt-muted);
+      line-height: 1.65;
+    }
+
+    .srt-small {
+      font-size: .88rem;
+    }
+
+    .srt-label {
+      display: block;
+      font-weight: 700;
+      font-size: .93rem;
+      margin: 17px 0 8px;
+    }
+
+    .srt-editor {
+      width: 100%;
+      min-height: 360px;
+      resize: vertical;
+      border: 1px solid #cbd4e2;
+      border-radius: 12px;
+      background: #fbfcff;
+      padding: 14px;
+      color: #152039;
+      font: .91rem/1.6 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      tab-size: 2;
+    }
+
+    .srt-editor:focus,
+    .srt-input:focus {
+      outline: 3px solid rgba(49, 87, 213, .15);
+      border-color: var(--srt-brand);
+    }
+
+    .srt-drop {
+      border: 1.5px dashed #b9c5dc;
+      border-radius: 13px;
+      padding: 15px;
+      text-align: center;
+      background: #fafbff;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+    }
+
+    .srt-drop:hover,
+    .srt-drop.is-over {
+      border-color: var(--srt-brand);
+      background: #f0f4ff;
+    }
+
+    .srt-drop strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .srt-drop span {
+      font-size: .88rem;
+      color: var(--srt-muted);
+    }
+
+    .srt-file {
+      display: none;
+    }
+
+    .srt-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .srt-btn {
+      appearance: none;
+      border: 1px solid #cbd4e2;
+      background: #fff;
+      color: #243047;
+      border-radius: 10px;
+      padding: 10px 14px;
+      font: inherit;
+      font-weight: 700;
+      font-size: .91rem;
+      cursor: pointer;
+      transition: transform .12s, background .12s, border-color .12s;
+    }
+
+    .srt-btn:hover {
+      border-color: #98a8c9;
+      background: #f7f9ff;
+    }
+
+    .srt-btn:active {
+      transform: translateY(1px);
+    }
+
+    .srt-btn:focus-visible {
+      outline: 3px solid rgba(49, 87, 213, .25);
+      outline-offset: 2px;
+    }
+
+    .srt-btn-primary {
+      background: var(--srt-brand);
+      color: white;
+      border-color: var(--srt-brand);
+    }
+
+    .srt-btn-primary:hover {
+      background: var(--srt-brand-dark);
+      border-color: var(--srt-brand-dark);
+      color: #fff;
+    }
+
+    .srt-btn:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .srt-options {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .srt-option {
+      border: 1px solid var(--srt-line);
+      border-radius: 11px;
+      padding: 10px 12px;
+      background: #fbfcff;
+    }
+
+    .srt-option label {
+      display: block;
+      font-size: .84rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .srt-option select {
+      width: 100%;
+      border: 1px solid #cad3e1;
+      border-radius: 8px;
+      background: #fff;
+      padding: 8px;
+      font: inherit;
+      color: var(--srt-ink);
+    }
+
+    .srt-result-top {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .srt-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: .82rem;
+      font-weight: 800;
+      background: #edf0f5;
+      color: #475467;
+    }
+
+    .srt-status.good {
+      background: #e7f7ef;
+      color: #12643e;
+    }
+
+    .srt-status.bad {
+      background: #fff0ee;
+      color: #a3261b;
+    }
+
+    .srt-status.warn {
+      background: #fff5db;
+      color: #805100;
+    }
+
+    .srt-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .srt-stat {
+      border: 1px solid var(--srt-line);
+      border-radius: 12px;
+      padding: 13px;
+      background: #fbfcff;
+      min-width: 0;
+    }
+
+    .srt-stat span {
+      display: block;
+      color: var(--srt-muted);
+      font-size: .8rem;
+      line-height: 1.4;
+    }
+
+    .srt-stat strong {
+      display: block;
+      font-size: 1.45rem;
+      line-height: 1.25;
+      margin-top: 5px;
+      overflow-wrap: anywhere;
+    }
+
+    .srt-findings {
+      display: grid;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .srt-finding {
+      border: 1px solid var(--srt-line);
+      border-left: 4px solid #98a2b3;
+      border-radius: 10px;
+      padding: 11px 12px;
+      min-width: 0;
+    }
+
+    .srt-finding.error {
+      border-left-color: var(--srt-red);
+    }
+
+    .srt-finding.warning {
+      border-left-color: #c28a16;
+    }
+
+    .srt-finding.info {
+      border-left-color: var(--srt-brand);
+    }
+
+    .srt-finding-head {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .srt-severity {
+      font-size: .72rem;
+      letter-spacing: .035em;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .srt-severity.error {
+      color: var(--srt-red);
+    }
+
+    .srt-severity.warning {
+      color: var(--srt-amber);
+    }
+
+    .srt-severity.info {
+      color: var(--srt-brand);
+    }
+
+    .srt-finding p {
+      margin: 0;
+      color: #344054;
+      font-size: .9rem;
+      line-height: 1.55;
+      overflow-wrap: anywhere;
+    }
+
+    .srt-finding code {
+      font-size: .83em;
+      overflow-wrap: anywhere;
+    }
+
+    .srt-empty {
+      border: 1px dashed #cbd4e2;
+      border-radius: 12px;
+      padding: 22px 14px;
+      text-align: center;
+      color: var(--srt-muted);
+      line-height: 1.6;
+      background: #fbfcff;
+    }
+
+    .srt-tool-note {
+      font-size: .85rem;
+      color: var(--srt-muted);
+      line-height: 1.6;
+      margin-top: 13px;
+    }
+
+    .srt-section {
+      margin-top: 27px;
+    }
+
+    .srt-section > h2 {
+      font-size: 1.55rem;
+      letter-spacing: -.025em;
+      margin: 0 0 12px;
+    }
+
+    .srt-section > p,
+    .srt-section li {
+      color: #485469;
+      line-height: 1.78;
+    }
+
+    .srt-section h3 {
+      font-size: 1.08rem;
+      margin: 20px 0 7px;
+    }
+
+    .srt-section ul,
+    .srt-section ol {
+      padding-left: 23px;
+    }
+
+    .srt-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--srt-line);
+      border-radius: 12px;
+      margin: 15px 0;
+    }
+
+    .srt-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 460px;
+      font-size: .93rem;
+    }
+
+    .srt-table th,
+    .srt-table td {
+      text-align: left;
+      padding: 11px 13px;
+      border-bottom: 1px solid var(--srt-line);
+      vertical-align: top;
+    }
+
+    .srt-table th {
+      background: #f5f7fb;
+      color: #273349;
+    }
+
+    .srt-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .srt-faq details {
+      border: 1px solid var(--srt-line);
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin: 10px 0;
+      background: #fff;
+    }
+
+    .srt-faq summary {
+      cursor: pointer;
+      font-weight: 750;
+      line-height: 1.45;
+    }
+
+    .srt-faq details p {
+      margin: 11px 0 0;
+      color: #4b566a;
+      line-height: 1.7;
+    }
+
+    .srt-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+      font-size: .92rem;
+    }
+
+    @media (max-width: 820px) {
+      .srt-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .srt-editor {
+        min-height: 300px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .srt-page {
+        width: calc(100% - 20px);
+        padding-top: 14px;
+      }
+
+      .srt-hero {
+        border-radius: 18px;
+      }
+
+      .srt-options {
+        grid-template-columns: 1fr;
+      }
+
+      .srt-stat strong {
+        font-size: 1.25rem;
+      }
+
+      .srt-actions .srt-btn {
+        flex: 1 1 auto;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="../index.html" aria-label="Online Tools and Converters home">
-      <span class="brand-mark" aria-hidden="true">✦</span>
-      <span class="brand-text">Online Tools <span>&amp; Converters</span></span>
-    </a>
+  <main class="srt-page">
 
-    <button class="nav-toggle" type="button"
-      aria-label="Open navigation menu"
-      aria-expanded="false" aria-controls="srt-navigation">
-      <span class="nav-toggle-bars"></span>
-    </button>
-
-    <nav class="primary-nav" id="srt-navigation" aria-label="Main navigation">
-      <ul>
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../index.html#tools">All tools</a></li>
-        <li><a href="../about.html">About</a></li>
-        <li><a href="../contact.html">Contact</a></li>
-      </ul>
+    <nav class="srt-breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-hidden="true">›</span>
+      <a href="/#tools">Tools</a>
+      <span aria-hidden="true">›</span>
+      SRT Subtitle Checker
     </nav>
-  </div>
-</header>
 
-<main class="container srt-page" data-tool="srt-subtitle-checker">
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <ol>
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../index.html#tools">Tools</a></li>
-      <li aria-current="page">SRT Subtitle Checker</li>
-    </ol>
-  </nav>
+    <header class="srt-hero">
+      <span class="srt-eyebrow">Free browser tool</span>
 
-  <section class="srt-hero">
-    <p class="eyebrow">Free subtitle quality tool</p>
-    <h1>SRT Subtitle Quality Checker</h1>
-    <p class="srt-lead">
-      Find subtitle timing errors, overlapping captions, high reading speed,
-      and lines that may be difficult to read. Check SRT and WebVTT files
-      directly in your browser.
-    </p>
+      <h1>SRT Subtitle Checker</h1>
 
-    <div class="srt-trust">
-      <span>✓ No account required</span>
-      <span>✓ Local browser processing</span>
-      <span>✓ Downloadable reports</span>
-    </div>
-  </section>
+      <p>
+        Validate an SRT subtitle file before you publish or deliver it.
+        Check cue numbering, timestamp formatting, reversed timing,
+        overlapping captions, empty subtitle text, long lines, and
+        estimated reading speed — right in your browser.
+      </p>
 
-  <section class="srt-workspace" aria-labelledby="checker-heading">
-    <div class="srt-editor panel">
-      <div class="srt-panel-heading">
-        <div>
-          <h2 id="checker-heading">Check your subtitles</h2>
-          <p class="muted small">Paste subtitle text or choose an SRT/VTT file.</p>
-        </div>
-        <span class="srt-file-badge">SRT · VTT</span>
+      <div class="srt-pills">
+        <span class="srt-pill">No sign-up</span>
+        <span class="srt-pill">Local browser processing</span>
+        <span class="srt-pill">Upload or paste</span>
+        <span class="srt-pill">Downloadable report</span>
       </div>
+    </header>
 
-      <label class="srt-dropzone" id="srt-dropzone" for="srt-file">
-        <span class="srt-upload-icon" aria-hidden="true">⇧</span>
-        <strong>Choose a subtitle file</strong>
-        <span>or drag and drop it here</span>
-        <small>Supports .srt, .vtt and .webvtt · Maximum 5 MB</small>
-        <input type="file" id="srt-file"
-          accept=".srt,.vtt,.webvtt,.txt,text/plain,text/vtt">
-      </label>
+    <section class="srt-layout" aria-label="SRT subtitle validator">
 
-      <p class="srt-file-status" id="srt-file-status"
-        role="status" aria-live="polite"></p>
+      <div class="srt-card">
+        <h2>1. Add your subtitle text</h2>
 
-      <div class="field">
-        <label for="srt-input">Subtitle text</label>
-        <textarea id="srt-input" rows="14" spellcheck="false"
+        <p class="srt-muted srt-small">
+          Paste the contents of an <code>.srt</code> file or choose one
+          from your device. Your subtitle text is processed locally
+          by this page.
+        </p>
+
+        <label class="srt-label" for="srt-input">
+          SRT subtitle content
+        </label>
+
+        <textarea
+          id="srt-input"
+          class="srt-editor"
+          spellcheck="false"
+          autocapitalize="off"
           autocomplete="off"
-          placeholder="1&#10;00:00:01,000 --> 00:00:03,000&#10;Your first subtitle goes here.&#10;&#10;2&#10;00:00:03,500 --> 00:00:05,000&#10;Your second subtitle goes here."></textarea>
-        <p class="hint">Your text stays in this browser. Checking is performed only when you press the button.</p>
+          placeholder="1&#10;00:00:01,000 --> 00:00:03,000&#10;Welcome to the video.&#10;&#10;2&#10;00:00:03,500 --> 00:00:05,000&#10;Let's get started."
+        ></textarea>
+
+        <label class="srt-label" for="srt-file">
+          Or upload an SRT file
+        </label>
+
+        <label
+          class="srt-drop"
+          id="srt-drop"
+          for="srt-file"
+          tabindex="0"
+          role="button"
+          aria-label="Choose or drop an SRT subtitle file"
+        >
+          <strong>Choose a file or drop it here</strong>
+          <span>Supports .srt and .txt text files · maximum 5 MB</span>
+
+          <input
+            class="srt-file"
+            id="srt-file"
+            type="file"
+            accept=".srt,.txt,text/plain,application/x-subrip"
+          >
+        </label>
+
+        <div class="srt-options" aria-label="Readability check settings">
+
+          <div class="srt-option">
+            <label for="srt-line-limit">Line length warning</label>
+            <select id="srt-line-limit">
+              <option value="32">32 characters</option>
+              <option value="37">37 characters</option>
+              <option value="42" selected>42 characters</option>
+              <option value="50">50 characters</option>
+              <option value="0">Don't check</option>
+            </select>
+          </div>
+
+          <div class="srt-option">
+            <label for="srt-cps-limit">Reading speed warning</label>
+            <select id="srt-cps-limit">
+              <option value="15">Over 15 chars/sec</option>
+              <option value="17">Over 17 chars/sec</option>
+              <option value="20" selected>Over 20 chars/sec</option>
+              <option value="25">Over 25 chars/sec</option>
+              <option value="0">Don't check</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="srt-actions">
+          <button type="button" class="srt-btn srt-btn-primary" id="srt-validate">
+            Check subtitles
+          </button>
+
+          <button type="button" class="srt-btn" id="srt-sample">
+            Load sample
+          </button>
+
+          <button type="button" class="srt-btn" id="srt-bad-sample">
+            Sample with errors
+          </button>
+
+          <button type="button" class="srt-btn" id="srt-clear">
+            Clear
+          </button>
+        </div>
+
+        <p class="srt-tool-note" id="srt-file-note" aria-live="polite">
+          Tip: keep the subtitle sequence number, timecode line,
+          and caption text on separate lines.
+        </p>
       </div>
 
-      <div class="srt-editor-actions">
-        <button type="button" class="btn btn-secondary btn-sm" id="srt-sample">Load example</button>
-        <button type="button" class="btn btn-secondary btn-sm" id="srt-clear">Clear</button>
-      </div>
+      <div class="srt-card" aria-live="polite" aria-atomic="false">
 
-      <div class="srt-rule-box">
-        <div class="srt-panel-heading">
+        <div class="srt-result-top">
           <div>
-            <h3>Readability settings</h3>
-            <p class="muted small">Choose practical review limits for your project.</p>
+            <h2>2. Validation report</h2>
+            <p class="srt-muted srt-small" style="margin:0">
+              Issues are listed with the cue number and approximate
+              source line where available.
+            </p>
+          </div>
+
+          <span class="srt-status" id="srt-status">
+            Not checked yet
+          </span>
+        </div>
+
+        <div id="srt-results">
+          <div class="srt-empty">
+            Add your subtitle text and select
+            <strong>Check subtitles</strong> to see the report.
           </div>
         </div>
 
-        <div class="field">
-          <label for="srt-preset">Rule preset</label>
-          <select id="srt-preset">
-            <option value="general">General subtitles</option>
-            <option value="conservative">Conservative reading limits</option>
-            <option value="shortform">Short-form video</option>
-            <option value="custom">Custom settings</option>
-          </select>
+        <div class="srt-actions">
+          <button type="button" class="srt-btn" id="srt-copy-report" disabled>
+            Copy report
+          </button>
+
+          <button type="button" class="srt-btn" id="srt-download-report" disabled>
+            Download report
+          </button>
         </div>
 
-        <div class="srt-settings-grid">
-          <div class="field">
-            <label for="srt-max-cps">Maximum characters per second (CPS)</label>
-            <input id="srt-max-cps" type="number" min="1" max="100" step="1" value="20">
-          </div>
-
-          <div class="field">
-            <label for="srt-max-cpl">Maximum characters per line</label>
-            <input id="srt-max-cpl" type="number" min="1" max="200" step="1" value="42">
-          </div>
-
-          <div class="field">
-            <label for="srt-max-lines">Maximum lines per cue</label>
-            <input id="srt-max-lines" type="number" min="1" max="10" step="1" value="2">
-          </div>
-
-          <div class="field">
-            <label for="srt-min-duration">Minimum display time (seconds)</label>
-            <input id="srt-min-duration" type="number" min="0" max="60" step="0.1" value="0.8">
-          </div>
-
-          <div class="field">
-            <label for="srt-max-duration">Maximum display time (seconds)</label>
-            <input id="srt-max-duration" type="number" min="0.1" max="600" step="0.5" value="7">
-          </div>
-
-          <div class="field">
-            <label for="srt-min-gap">Minimum gap (seconds)</label>
-            <input id="srt-min-gap" type="number" min="0" max="10" step="0.01" value="0">
-          </div>
-        </div>
-
-        <p class="srt-help">
-          These settings are review heuristics, not universal platform
-          requirements. Overlaps and unusual durations can sometimes be intentional.
+        <p class="srt-tool-note">
+          Warnings are guidelines, not universal delivery rules.
+          Caption specifications differ by broadcaster, platform,
+          language, and project.
         </p>
       </div>
 
-      <div class="srt-primary-actions">
-        <button class="btn btn-primary" type="button" id="srt-check">
-          Check subtitles
-        </button>
-        <button class="btn btn-secondary" type="button" id="srt-copy-issues" disabled>
-          Copy issues
-        </button>
-        <button class="btn btn-secondary" type="button" id="srt-copy-prompt" disabled>
-          Copy AI fix prompt
-        </button>
-      </div>
+    </section>
 
-      <div class="srt-status" id="srt-status" role="status" aria-live="polite"></div>
-    </div>
+    <section class="srt-section">
+      <h2>How to use this SRT subtitle checker</h2>
 
-    <aside class="srt-side">
-      <div class="panel srt-summary">
-        <p class="eyebrow">Quality report</p>
-        <h2>Subtitle analysis</h2>
-        <p class="muted small">Your report appears after checking the subtitle text.</p>
+      <ol>
+        <li>
+          <strong>Upload or paste your SRT:</strong>
+          choose an existing subtitle file or paste its plain-text
+          contents into the editor.
+        </li>
+        <li>
+          <strong>Run the check:</strong>
+          the validator reads each cue and checks common structure
+          and timing issues.
+        </li>
+        <li>
+          <strong>Review the report:</strong>
+          fix errors in your subtitle editor and review warnings
+          against your delivery requirements.
+        </li>
+        <li>
+          <strong>Check again:</strong>
+          after editing the original file, run the checker again
+          before sending or publishing it.
+        </li>
+      </ol>
 
-        <div class="srt-stat-grid">
-          <div class="srt-stat">
-            <strong id="srt-stat-cues">—</strong>
-            <span>Valid cues</span>
-          </div>
-          <div class="srt-stat">
-            <strong id="srt-stat-errors">—</strong>
-            <span>Errors</span>
-          </div>
-          <div class="srt-stat">
-            <strong id="srt-stat-warnings">—</strong>
-            <span>Warnings</span>
-          </div>
-          <div class="srt-stat">
-            <strong id="srt-stat-cps">—</strong>
-            <span>Highest CPS</span>
-          </div>
-          <div class="srt-stat">
-            <strong id="srt-stat-cpl">—</strong>
-            <span>Longest line</span>
-          </div>
-          <div class="srt-stat">
-            <strong id="srt-stat-clean">—</strong>
-            <span>Unflagged cues</span>
-          </div>
-        </div>
-
-        <div class="srt-total-time">
-          <span>Total subtitle time</span>
-          <strong id="srt-total-time">—</strong>
-        </div>
-
-        <div class="srt-report-actions">
-          <button class="btn btn-secondary" type="button"
-            id="srt-download-csv" disabled>Download CSV report</button>
-          <button class="btn btn-primary" type="button"
-            id="srt-download-srt" disabled>Download numbered SRT</button>
-        </div>
-
-        <p class="srt-help">
-          The SRT export normalizes cue numbering and timecode formatting.
-          It does not rewrite subtitle text or repair timing automatically.
-          WebVTT-specific settings are not preserved in SRT output.
-        </p>
-      </div>
-
-      <div class="panel srt-privacy">
-        <span class="srt-privacy-icon" aria-hidden="true">🔒</span>
-        <div>
-          <h3>Designed for local processing</h3>
-          <p class="muted small">
-            The tool reads selected files in your browser. It has no subtitle
-            upload endpoint and does not send your caption content to an AI service.
-          </p>
-        </div>
-      </div>
-    </aside>
-  </section>
-
-  <section class="srt-results-section" aria-labelledby="srt-issues-heading">
-    <div class="srt-section-heading">
-      <div>
-        <p class="eyebrow">Detailed findings</p>
-        <h2 id="srt-issues-heading">Issues found</h2>
-        <p class="muted">Each finding identifies the affected cue and its timecode.</p>
-      </div>
-    </div>
-
-    <div class="srt-issue-list" id="srt-issues" aria-live="polite">
-      <div class="srt-empty">
-        <span aria-hidden="true">⌕</span>
-        <h3>Ready to check</h3>
-        <p>Paste or select a subtitle file, then press “Check subtitles”.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="srt-results-section" aria-labelledby="srt-preview-heading">
-    <div class="srt-section-heading">
-      <div>
-        <p class="eyebrow">Cue-by-cue view</p>
-        <h2 id="srt-preview-heading">Subtitle preview and timing</h2>
-        <p class="muted">Review each cue's duration, reading speed, line length, and status.</p>
-      </div>
-    </div>
-
-    <div class="srt-table-wrap">
-      <table class="srt-cue-table">
-        <thead>
-          <tr>
-            <th>Cue</th>
-            <th>Timecode</th>
-            <th>Duration</th>
-            <th>CPS</th>
-            <th>Longest line</th>
-            <th>Review</th>
-            <th>Subtitle text</th>
-          </tr>
-        </thead>
-        <tbody id="srt-cue-rows">
-          <tr>
-            <td colspan="7" class="srt-table-empty">No subtitles checked yet.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
-
-  <article class="srt-content">
-    <section>
-      <h2>What does an SRT subtitle checker do?</h2>
       <p>
-        An SRT subtitle checker reviews the structure and readability of
-        SubRip subtitle files. It can flag malformed timecodes, cues with
-        invalid durations, caption overlaps, unusually fast reading speed,
-        overlong lines, excessive line counts, and numbering problems.
-      </p>
-      <p>
-        These checks are useful for video editors, YouTube creators,
-        subtitlers, translators, localization teams, and anyone preparing
-        caption files for review or delivery. A file can open correctly in a
-        player while still containing readability problems.
+        This tool reports potential problems; it does not silently
+        rewrite your subtitles. That lets you choose whether a reported
+        overlap or unusually short caption is intentional for your video.
       </p>
     </section>
 
-    <section>
-      <h2>What is CPS in subtitles?</h2>
-      <p>
-        CPS means characters per second. It estimates how quickly a viewer
-        must read the visible caption text during its display time.
-      </p>
-      <div class="srt-formula">
-        Characters per second = Visible subtitle characters ÷ Display duration in seconds
+    <section class="srt-section">
+      <h2>What does the SRT validator check?</h2>
+
+      <div class="srt-table-wrap">
+        <table class="srt-table">
+          <thead>
+            <tr>
+              <th>Check</th>
+              <th>What it looks for</th>
+              <th>Typical result</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>Subtitle numbering</td>
+              <td>Numeric cue indexes and the expected sequence</td>
+              <td>Error or warning for missing, invalid, or out-of-order indexes</td>
+            </tr>
+            <tr>
+              <td>Timestamp syntax</td>
+              <td>Hours, minutes, seconds, comma, milliseconds, and the timing arrow</td>
+              <td>Error if a timecode cannot be parsed</td>
+            </tr>
+            <tr>
+              <td>Time order</td>
+              <td>Start time before end time, plus cues presented out of chronological order</td>
+              <td>Error for invalid cue duration; warning for ordering concerns</td>
+            </tr>
+            <tr>
+              <td>Caption overlap</td>
+              <td>A cue starting before the previous timed cue has ended</td>
+              <td>Warning to review overlapping on-screen captions</td>
+            </tr>
+            <tr>
+              <td>Caption content</td>
+              <td>Empty captions, unusually many lines, and blank or padded text</td>
+              <td>Error for empty text; warnings for likely formatting issues</td>
+            </tr>
+            <tr>
+              <td>Readability hints</td>
+              <td>Line length, caption duration, and approximate characters per second</td>
+              <td>Warnings based on the thresholds you select</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+
       <p>
-        For example, a caption with 40 visible characters shown for two
-        seconds has a reading speed of approximately 20 CPS. Actual reading
-        comfort depends on language, audience, vocabulary, and context, so
-        adjust the threshold for your particular project.
+        The checker uses common SRT conventions. A clean report means
+        that no issue was detected by these checks; it does not prove
+        that the subtitle wording matches the audio or that every
+        platform will accept the file.
       </p>
     </section>
 
-    <section>
-      <h2>Why subtitle timing and line length matter</h2>
+    <section class="srt-section">
+      <h2>Understand the SRT subtitle format</h2>
+
       <p>
-        A caption that disappears too quickly can be difficult to read.
-        Overlapping captions may cause two cues to appear simultaneously,
-        although some projects intentionally use overlapping speaker cues.
-        Very long lines can also make subtitles harder to follow on small screens.
+        SRT means SubRip Text. It is a plain-text subtitle format often
+        used with movies, recorded lessons, social videos, and other
+        video projects. A typical cue contains a number, a start and
+        end time, the caption text, and a blank line before the next cue.
       </p>
+
+      <pre style="white-space:pre-wrap;overflow-wrap:anywhere;padding:16px;border:1px solid var(--srt-line);border-radius:12px;background:#f7f9fc;font:.91rem/1.7 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace"><code>1
+00:00:01,000 --> 00:00:03,200
+Welcome to the tutorial.
+
+2
+00:00:03,500 --> 00:00:06,000
+Let's begin.</code></pre>
+
       <p>
-        Use the checker to locate likely problems. Always compare important
-        findings with the final video and the style guide for your project.
-        This tool checks text structure and timing; it cannot prove that
-        captions match the spoken dialogue or are synchronized correctly to audio.
+        In the usual SRT timestamp, the comma separates seconds from
+        milliseconds, such as <code>00:00:03,200</code>. The line between
+        the two timecodes uses the arrow <code>--&gt;</code>. A period
+        instead of the comma may be valid in other subtitle formats,
+        but this checker treats standard SRT input strictly so likely
+        format mismatches are visible.
+      </p>
+
+      <h3>Errors versus warnings</h3>
+
+      <p>
+        An <strong>error</strong> points to a structural problem, for
+        example a timestamp that cannot be parsed, an end time that is
+        not after the start time, an invalid cue index, or missing
+        caption text. A <strong>warning</strong> points to something you
+        should inspect, such as an overlap, a long line, an unusually
+        fast reading speed, or a cue that stays on screen for an
+        atypical duration.
+      </p>
+
+      <p>
+        Warnings are not automatically proof that a subtitle is wrong.
+        Some content intentionally uses simultaneous captions, and
+        readability limits vary across languages and delivery guides.
+        Use the target service's specification where one is provided.
       </p>
     </section>
 
-    <section>
+    <section class="srt-section">
+      <h2>Common SRT problems and how to fix them</h2>
+
+      <h3>1. Incorrect timestamp punctuation</h3>
+      <p>
+        Standard SRT timestamps use three millisecond digits separated
+        from seconds by a comma. Review lines that use a period, omit
+        milliseconds, or have an incomplete time such as
+        <code>0:2:3,4</code>.
+      </p>
+
+      <h3>2. End time occurs before start time</h3>
+      <p>
+        Each caption should have a positive duration. Compare both
+        timestamps and correct the one that does not reflect the
+        intended display period.
+      </p>
+
+      <h3>3. Cue numbers skip or repeat</h3>
+      <p>
+        Many SRT files use a simple numeric sequence starting at 1.
+        Repeated, missing, or non-numeric cue indexes can be confusing
+        to editors and automated workflows. Renumber only after checking
+        that no caption block is missing.
+      </p>
+
+      <h3>4. Captions overlap</h3>
+      <p>
+        When one cue begins before the preceding cue ends, the captions
+        may appear together. This can be intentional, but for ordinary
+        dialogue it is often worth adjusting the in/out points in your
+        subtitle editor.
+      </p>
+
+      <h3>5. Lines are too long or reading speed is high</h3>
+      <p>
+        Long lines can be difficult to read on a small screen, and
+        dense text displayed briefly may be hard to follow. Split text
+        at natural language boundaries and, where possible, allow
+        enough time to read it. Character-per-second calculations are
+        rough signals rather than a complete measure of readability.
+      </p>
+
+      <h3>6. A clean syntax report but incorrect dialogue</h3>
+      <p>
+        A validator cannot determine whether a name is spelled correctly,
+        a translation is accurate, or captions match the speaker. Play
+        the video with the final subtitle file and review timing,
+        spelling, line breaks, and context before delivery.
+      </p>
+    </section>
+
+    <section class="srt-section srt-faq">
       <h2>Frequently asked questions</h2>
 
       <details>
-        <summary>Does this subtitle checker upload my file?</summary>
+        <summary>Is this SRT subtitle checker free?</summary>
         <p>
-          No. File reading and subtitle analysis take place locally in your
-          browser. The page does not upload your subtitle text to a server.
+          Yes. You can use the checker in your browser without creating
+          an account or paying to run a validation.
         </p>
       </details>
 
       <details>
-        <summary>Can I check WebVTT files as well as SRT?</summary>
+        <summary>Does this checker upload or store my subtitle file?</summary>
         <p>
-          Yes. The checker accepts SRT and WebVTT text and file formats.
-          The downloadable normalized output is SRT, so WebVTT-specific cue
-          settings are not retained.
+          The checking code reads the text in your browser and does not
+          send the subtitle contents to a validation server. If you
+          select a file, the browser reads it locally. Avoid pasting
+          sensitive material into any online tool unless you are
+          comfortable with its privacy conditions.
         </p>
       </details>
 
       <details>
-        <summary>Does a clean report guarantee platform approval?</summary>
+        <summary>Can I check an SRT file without uploading it?</summary>
         <p>
-          No. A clean report means the file passed the enabled checks. Platforms,
-          clients, languages, and projects may have different technical and
-          editorial requirements.
+          Yes. Open the file in a text editor, copy its content, and
+          paste it into the SRT subtitle content box.
         </p>
       </details>
 
       <details>
-        <summary>Does the tool automatically rewrite captions?</summary>
+        <summary>Why does it warn about overlapping subtitles?</summary>
         <p>
-          No. It reports potential issues and offers a downloadable report.
-          Its numbered SRT export normalizes cue numbering and time formatting,
-          but does not rewrite caption text or automatically change cue timing.
+          The next caption starts before a previous caption has ended.
+          That may cause both captions to appear together. It can be
+          intentional in some projects, so the checker treats overlaps
+          as a warning rather than automatically changing your timing.
         </p>
       </details>
 
       <details>
-        <summary>Why does the checker flag a subtitle overlap?</summary>
+        <summary>Does a warning mean the SRT file is invalid?</summary>
         <p>
-          It flags a cue that starts before the previous cue has finished.
-          This may be an error, but overlapping speaker captions can be
-          intentional, so review the video before changing the timing.
+          No. Warnings highlight things worth reviewing, such as line
+          length or reading speed. Errors flag stronger structural
+          concerns, but requirements still vary by target platform
+          and project.
         </p>
       </details>
 
       <details>
-        <summary>What does the AI fix prompt do?</summary>
+        <summary>Can it check whether the subtitles match the audio?</summary>
         <p>
-          It copies a prompt that explains the reported issues. It does not
-          send your subtitle file to an AI service. You decide whether to paste
-          the prompt and your subtitle content into another tool.
+          No. It examines structure, timing values, and approximate
+          readability indicators. It does not listen to your video,
+          compare a transcript with speech, check translation accuracy,
+          or detect every spelling mistake.
+        </p>
+      </details>
+
+      <details>
+        <summary>Can I use the report to fix my file automatically?</summary>
+        <p>
+          The report describes issues but does not rewrite the source
+          file. Make edits in your subtitle editor, then run the checker
+          again so you can keep control over the wording and timing.
+        </p>
+      </details>
+
+      <details>
+        <summary>Does this guarantee acceptance by YouTube, a streaming service, or a broadcaster?</summary>
+        <p>
+          No. A file can pass these general checks and still fail a
+          service-specific delivery requirement. Consult the current
+          technical guide for the destination and preview the final
+          subtitles with the video.
         </p>
       </details>
     </section>
-  </article>
 
-  <section class="related section">
-    <h2>Explore more tools</h2>
-    <div class="related-grid">
-      <a class="related-card" href="../index.html#tools">
-        <strong>All online tools →</strong>
-        <span>Browse calculators, converters, and other utilities.</span>
-      </a>
-      <a class="related-card" href="video-file-size-calculator.html">
-        <strong>Video File Size Calculator →</strong>
-        <span>Estimate file size from video bitrate and duration.</span>
-      </a>
-      <a class="related-card" href="../index.html#tools">
-        <strong>Data Converters →</strong>
-        <span>Discover useful data and developer tools.</span>
-      </a>
-    </div>
-  </section>
-</main>
+    <section class="srt-section">
+      <h2>Related references</h2>
 
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <a class="footer-brand" href="../index.html">Online Tools &amp; Converters</a>
+      <p>
+        For additional background, read the
+        <a href="https://www.loc.gov/preservation/digital/formats/fdd/fdd000569.shtml" target="_blank" rel="noopener noreferrer">Library of Congress overview of SubRip (SRT)</a>
+        and the
+        <a href="https://videocentral.amazon.com/support/partner-support/srt-file-content-information-and-troubleshooting?language=en_US" target="_blank" rel="noopener noreferrer">Prime Video SRT formatting and troubleshooting notes</a>.
+        Use the technical specification supplied by your intended
+        publisher whenever its rules are stricter than these general checks.
+      </p>
 
-    <nav class="footer-links" aria-label="Footer navigation">
-      <a href="../index.html">Home</a>
-      <a href="../about.html">About</a>
-      <a href="../contact.html">Contact</a>
-      <a href="../privacy-policy.html">Privacy Policy</a>
-      <a href="../terms-of-use.html">Terms of Use</a>
-    </nav>
+      <div class="srt-links">
+        <a href="/">Home</a>
+        <a href="/#tools">Explore all tools</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </div>
+    </section>
 
-    <p class="copyright">
-      © <span id="current-year">2026</span> Online Tools &amp; Converters.
-      All rights reserved.
-    </p>
-  </div>
-</footer>
+  </main>
+
+  <script>
+  (() => {
+    'use strict';
+
+    const $ = (id) => document.getElementById(id);
+
+    const input = $('srt-input');
+    const fileInput = $('srt-file');
+    const drop = $('srt-drop');
+    const status = $('srt-status');
+    const results = $('srt-results');
+    const fileNote = $('srt-file-note');
+    const copyButton = $('srt-copy-report');
+    const downloadButton = $('srt-download-report');
+
+    const MAX_BYTES = 5 * 1024 * 1024;
+
+    let latestReportText = '';
+
+    const goodSample = `1
+00:00:01,000 --> 00:00:03,200
+Welcome to the tutorial.
+
+2
+00:00:03,500 --> 00:00:06,000
+Let's begin.
+
+3
+00:00:06,500 --> 00:00:09,000
+This sample has correctly ordered subtitle cues.`;
+
+    const badSample = `1
+00:00:01.000 --> 00:00:03,000
+This timestamp uses a period.
+
+3
+00:00:02,500 --> 00:00:04,000
+This caption overlaps the one before it and the cue number skips.
+
+4
+00:00:05,000 --> 00:00:04,900
+
+5
+00:00:05,100 --> 00:00:05,300
+This is much too much text for a very short caption display time.`;
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, ch => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[ch]));
+    }
+
+    function byteLength(text) {
+      return new TextEncoder().encode(text).length;
+    }
+
+    function formatTime(ms) {
+      if (!Number.isFinite(ms) || ms < 0) return '—';
+
+      const whole = Math.floor(ms);
+      const hours = Math.floor(whole / 3600000);
+      const minutes = Math.floor((whole % 3600000) / 60000);
+      const seconds = Math.floor((whole % 60000) / 1000);
+      const millis = whole % 1000;
+
+      return String(hours).padStart(2, '0') + ':' +
+        String(minutes).padStart(2, '0') + ':' +
+        String(seconds).padStart(2, '0') + ',' +
+        String(millis).padStart(3, '0');
+    }
+
+    function parseTimestamp(value) {
+      const match = value.match(/^(\d{2,}):([0-5]\d):([0-5]\d),(\d{3})$/);
+
+      if (!match) return null;
+
+      const hours = Number(match[1]);
+      const minutes = Number(match[2]);
+      const seconds = Number(match[3]);
+      const millis = Number(match[4]);
+
+      const total =
+        (((hours * 60) + minutes) * 60 + seconds) * 1000 + millis;
+
+      return Number.isSafeInteger(total) ? total : null;
+    }
+
+    function addFinding(list, severity, title, message, cue, line) {
+      list.push({
+        severity,
+        title,
+        message,
+        cue: cue ?? null,
+        line: line ?? null
+      });
+    }
+
+    function splitBlocks(text) {
+      const lines = text
+        .replace(/^\uFEFF/, '')
+        .replace(/\r\n?/g, '\n')
+        .split('\n');
+
+      const blocks = [];
+      let current = [];
+      let startLine = 1;
+
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].trim() === '') {
+          if (current.length) {
+            blocks.push({ lines: current, startLine });
+            current = [];
+          }
+
+          startLine = i + 2;
+        } else {
+          if (!current.length) startLine = i + 1;
+
+          current.push({
+            text: lines[i],
+            line: i + 1
+          });
+        }
+      }
+
+      if (current.length) {
+        blocks.push({ lines: current, startLine });
+      }
+
+      return blocks;
+    }
+
+    function validateSRT(rawText) {
+      const text = rawText
+        .replace(/^\uFEFF/, '')
+        .replace(/\r\n?/g, '\n');
+
+      const findings = [];
+      const blocks = splitBlocks(text);
+
+      const lineLimit = Number($('srt-line-limit').value);
+      const cpsLimit = Number($('srt-cps-limit').value);
+
+      if (!text.trim()) {
+        addFinding(
+          findings,
+          'error',
+          'No subtitle text',
+          'Paste SRT content or choose a subtitle file before checking.'
+        );
+
+        return {
+          findings,
+          stats: {
+            cues: 0,
+            parsedCues: 0,
+            errors: 1,
+            warnings: 0,
+            bytes: byteLength(rawText),
+            maxLine: 0,
+            duration: 0
+          }
+        };
+      }
+
+      if (!blocks.length) {
+        addFinding(
+          findings,
+          'error',
+          'No subtitle cues found',
+          'The file contains no readable SRT cue blocks.'
+        );
+      }
+
+      if (byteLength(rawText) > MAX_BYTES) {
+        addFinding(
+          findings,
+          'warning',
+          'Large input',
+          'This text is above the 5 MB browser-tool limit recommended for this page.'
+        );
+      }
+
+      const cues = [];
+      let expectedIndex = 1;
+      let previousTimedCue = null;
+      let previousStart = -1;
+      let maxLine = 0;
+      let totalCharacters = 0;
+      let totalSeconds = 0;
+
+      blocks.forEach((block, blockIndex) => {
+        const lines = block.lines;
+        const indexText = (lines[0]?.text || '').trim();
+        const lineNo = lines[0]?.line || block.startLine;
+
+        let cueIndex = Number.NaN;
+
+        if (!/^\d+$/.test(indexText)) {
+          addFinding(
+            findings,
+            'error',
+            'Invalid cue number',
+            `Expected a numeric subtitle index near line ${lineNo}; found “${indexText || '(blank)'}”.`,
+            blockIndex + 1,
+            lineNo
+          );
+        } else {
+          cueIndex = Number(indexText);
+
+          if (cueIndex !== expectedIndex) {
+            addFinding(
+              findings,
+              'warning',
+              'Cue numbering is not sequential',
+              `Expected cue ${expectedIndex}, but this block is numbered ${cueIndex}.`,
+              cueIndex,
+              lineNo
+            );
+          }
+        }
+
+        expectedIndex = Number.isFinite(cueIndex)
+          ? cueIndex + 1
+          : expectedIndex + 1;
+
+        const timing = lines[1];
+
+        if (!timing) {
+          addFinding(
+            findings,
+            'error',
+            'Missing timestamp line',
+            `No timing line was found after the cue number near line ${lineNo}.`,
+            Number.isFinite(cueIndex) ? cueIndex : blockIndex + 1,
+            lineNo
+          );
+
+          return;
+        }
+
+        const timingMatch = timing.text.trim().match(
+          /^(\d{2,}:[0-5]\d:[0-5]\d,\d{3})\s+-->\s+(\d{2,}:[0-5]\d:[0-5]\d,\d{3})$/
+        );
+
+        if (!timingMatch) {
+          addFinding(
+            findings,
+            'error',
+            'Invalid timestamp format',
+            `Line ${timing.line} should look like 00:00:01,000 --> 00:00:03,000. Standard SRT uses a comma before milliseconds.`,
+            Number.isFinite(cueIndex) ? cueIndex : blockIndex + 1,
+            timing.line
+          );
+
+          const rawCaption = lines.slice(2).map(x => x.text);
+
+          if (!rawCaption.some(x => x.trim())) {
+            addFinding(
+              findings,
+              'error',
+              'Empty subtitle text',
+              `No caption text was found in this block near line ${lineNo}.`,
+              Number.isFinite(cueIndex) ? cueIndex : blockIndex + 1,
+              lineNo
+            );
+          }
+
+          return;
+        }
+
+        const start = parseTimestamp(timingMatch[1]);
+        const end = parseTimestamp(timingMatch[2]);
+
+        if (start === null || end === null) {
+          addFinding(
+            findings,
+            'error',
+            'Timecode is out of range',
+            `One of the timecodes on line ${timing.line} could not be represented safely.`,
+            Number.isFinite(cueIndex) ? cueIndex : blockIndex + 1,
+            timing.line
+          );
+
+          return;
+        }
+
+        const captionLines = lines.slice(2).map(x => x.text);
+        const captionText = captionLines.join('\n').trim();
+        const shownCue = Number.isFinite(cueIndex) ? cueIndex : blockIndex + 1;
+
+        if (!captionText) {
+          addFinding(
+            findings,
+            'error',
+            'Empty subtitle text',
+            `This cue has no caption text after its timing line (near line ${timing.line}).`,
+            shownCue,
+            timing.line + 1
+          );
+        }
+
+        if (end <= start) {
+          addFinding(
+            findings,
+            'error',
+            'End time must follow start time',
+            `This cue starts at ${formatTime(start)} and ends at ${formatTime(end)}. Its duration must be greater than zero.`,
+            shownCue,
+            timing.line
+          );
+        }
+
+        if (captionLines.length > 2) {
+          addFinding(
+            findings,
+            'warning',
+            'More than two caption lines',
+            `This cue has ${captionLines.length} text lines. Review the destination's caption layout requirements.`,
+            shownCue,
+            lines[2]?.line ?? timing.line + 1
+          );
+        }
+
+        captionLines.forEach((line, index) => {
+          const length = Array.from(line).length;
+          const sourceLine = lines[index + 2]?.line ?? timing.line + 1;
+
+          maxLine = Math.max(maxLine, length);
+
+          if (lineLimit > 0 && length > lineLimit) {
+            addFinding(
+              findings,
+              'warning',
+              'Long subtitle line',
+              `This line contains ${length} characters, above your selected ${lineLimit}-character guideline.`,
+              shownCue,
+              sourceLine
+            );
+          }
+
+          if (line.length !== line.trimEnd().length) {
+            addFinding(
+              findings,
+              'warning',
+              'Trailing spaces',
+              'A subtitle line has spaces at the end. They are usually unnecessary and can make edits harder.',
+              shownCue,
+              sourceLine
+            );
+          }
+        });
+
+        if (start < previousStart) {
+          addFinding(
+            findings,
+            'warning',
+            'Cue timing is out of order',
+            `This cue starts at ${formatTime(start)}, earlier than a preceding cue. Confirm the caption sequence is intentional.`,
+            shownCue,
+            timing.line
+          );
+        }
+
+        if (
+          previousTimedCue &&
+          start < previousTimedCue.end &&
+          end > start &&
+          previousTimedCue.end > previousTimedCue.start
+        ) {
+          const overlap = Math.min(previousTimedCue.end, end) - start;
+
+          if (overlap > 0) {
+            addFinding(
+              findings,
+              'warning',
+              'Overlapping subtitles',
+              `This cue overlaps cue ${previousTimedCue.index} by ${Math.round(overlap)} ms. Review whether both captions should be visible at once.`,
+              shownCue,
+              timing.line
+            );
+          }
+        }
+
+        if (end > start) {
+          const duration = end - start;
+
+          if (duration < 500) {
+            addFinding(
+              findings,
+              'warning',
+              'Very short cue duration',
+              `This caption is displayed for ${duration} ms. Check that there is enough time to read it.`,
+              shownCue,
+              timing.line
+            );
+          }
+
+          if (duration > 7000) {
+            addFinding(
+              findings,
+              'warning',
+              'Long cue duration',
+              `This caption remains on screen for ${(duration / 1000).toFixed(1)} seconds. Confirm this is intentional.`,
+              shownCue,
+              timing.line
+            );
+          }
+
+          const charCount = Array.from(
+            captionText.replace(/\s+/g, ' ').trim()
+          ).length;
+
+          const cps = charCount / (duration / 1000);
+
+          if (captionText && cpsLimit > 0 && cps > cpsLimit) {
+            addFinding(
+              findings,
+              'warning',
+              'High estimated reading speed',
+              `About ${cps.toFixed(1)} characters per second, above your selected ${cpsLimit} chars/sec guideline.`,
+              shownCue,
+              timing.line
+            );
+          }
+
+          if (captionText) {
+            totalCharacters += charCount;
+            totalSeconds += duration / 1000;
+          }
+        }
+
+        const cue = {
+          index: shownCue,
+          start,
+          end,
+          text: captionText,
+          line: lineNo
+        };
+
+        cues.push(cue);
+
+        if (
+          end > start &&
+          (!previousTimedCue || start >= previousTimedCue.start)
+        ) {
+          previousTimedCue = cue;
+        } else if (
+          end > start &&
+          previousTimedCue &&
+          start < previousTimedCue.start
+        ) {
+          if (end > previousTimedCue.end) {
+            previousTimedCue = cue;
+          }
+        }
+
+        previousStart = start;
+      });
+
+      const errors = findings.filter(f => f.severity === 'error').length;
+      const warnings = findings.filter(f => f.severity === 'warning').length;
+
+      const earliest = cues.length
+        ? Math.min(...cues.map(c => c.start))
+        : 0;
+
+      const latest = cues.length
+        ? Math.max(...cues.map(c => c.end))
+        : 0;
+
+      const stats = {
+        cues: blocks.length,
+        parsedCues: cues.length,
+        errors,
+        warnings,
+        bytes: byteLength(rawText),
+        maxLine,
+        duration: Math.max(0, latest - earliest)
+      };
+
+      return { findings, cues, stats };
+    }
+
+    function makeReportText(report) {
+      const s = report.stats;
+
+      const output = [
+        'SRT SUBTITLE CHECKER REPORT',
+        'Generated locally in your browser',
+        `Cue blocks found: ${s.cues}`,
+        `Cues parsed: ${s.parsedCues}`,
+        `Errors: ${s.errors}`,
+        `Warnings: ${s.warnings}`,
+        `Input size: ${(s.bytes / 1024).toFixed(1)} KB`,
+        `Maximum line length: ${s.maxLine} characters`,
+        `Approximate total timing span: ${(s.duration / 1000).toFixed(2)} seconds`,
+        '',
+        'FINDINGS'
+      ];
+
+      if (!report.findings.length) {
+        output.push('No issues were detected by the selected checks.');
+      }
+
+      report.findings.forEach((f, i) => {
+        const loc = [
+          f.cue !== null ? `cue ${f.cue}` : '',
+          f.line !== null ? `line ${f.line}` : ''
+        ].filter(Boolean).join(', ');
+
+        output.push(
+          `${i + 1}. [${f.severity.toUpperCase()}] ${f.title}` +
+          `${loc ? ` (${loc})` : ''}: ${f.message}`
+        );
+      });
+
+      output.push(
+        '',
+        'Note: This is a structural and readability check, not a guarantee of platform acceptance, translation accuracy, or synchronization with the actual audio.'
+      );
+
+      return output.join('\n');
+    }
+
+    function renderReport(report) {
+      const { findings, stats } = report;
+
+      status.className = 'srt-status';
+
+      if (stats.errors) {
+        status.classList.add('bad');
+        status.textContent =
+          `${stats.errors} error${stats.errors === 1 ? '' : 's'}`;
+      } else if (stats.warnings) {
+        status.classList.add('warn');
+        status.textContent =
+          `${stats.warnings} warning${stats.warnings === 1 ? '' : 's'}`;
+      } else {
+        status.classList.add('good');
+        status.textContent = 'No issues found';
+      }
+
+      const cards = `
+        <div class="srt-stats">
+          <div class="srt-stat">
+            <span>Cue blocks found</span>
+            <strong>${stats.cues}</strong>
+          </div>
+          <div class="srt-stat">
+            <span>Errors</span>
+            <strong>${stats.errors}</strong>
+          </div>
+          <div class="srt-stat">
+            <span>Warnings</span>
+            <strong>${stats.warnings}</strong>
+          </div>
+          <div class="srt-stat">
+            <span>Input size</span>
+            <strong>${(stats.bytes / 1024).toFixed(1)} KB</strong>
+          </div>
+          <div class="srt-stat">
+            <span>Longest text line</span>
+            <strong>${stats.maxLine} chars</strong>
+          </div>
+          <div class="srt-stat">
+            <span>Overall time span</span>
+            <strong>${(stats.duration / 1000).toFixed(1)} s</strong>
+          </div>
+        </div>`;
+
+      let body = '';
+
+      if (!findings.length) {
+        body = `
+          <div class="srt-empty">
+            <strong>No issues detected.</strong><br>
+            The SRT passed the selected structural and readability
+            checks. Review it with the actual video before delivery.
+          </div>`;
+      } else {
+        body = '<div class="srt-findings">' +
+          findings.map(f => {
+            const loc = [
+              f.cue !== null ? `Cue ${escapeHTML(f.cue)}` : '',
+              f.line !== null ? `Line ${escapeHTML(f.line)}` : ''
+            ].filter(Boolean).join(' · ');
+
+            return `
+              <article class="srt-finding ${escapeHTML(f.severity)}">
+                <div class="srt-finding-head">
+                  <span class="srt-severity ${escapeHTML(f.severity)}">
+                    ${escapeHTML(f.severity)}
+                  </span>
+                  <strong>${escapeHTML(f.title)}</strong>
+                  ${loc
+                    ? `<span class="srt-muted srt-small">${loc}</span>`
+                    : ''}
+                </div>
+                <p>${escapeHTML(f.message)}</p>
+              </article>`;
+          }).join('') +
+          '</div>';
+      }
+
+      results.innerHTML = cards + body;
+
+      latestReportText = makeReportText(report);
+
+      copyButton.disabled = false;
+      downloadButton.disabled = false;
+    }
+
+    function runValidation() {
+      const report = validateSRT(input.value);
+
+      renderReport(report);
+
+      fileNote.textContent =
+        `Checked ${report.stats.cues} cue block(s) · ` +
+        `${(report.stats.bytes / 1024).toFixed(1)} KB of text. ` +
+        'Review all findings before delivery.';
+    }
+
+    function clearAll() {
+      input.value = '';
+      fileInput.value = '';
+
+      status.className = 'srt-status';
+      status.textContent = 'Not checked yet';
+
+      results.innerHTML = `
+        <div class="srt-empty">
+          Add your subtitle text and select
+          <strong>Check subtitles</strong> to see the report.
+        </div>`;
+
+      copyButton.disabled = true;
+      downloadButton.disabled = true;
+      latestReportText = '';
+
+      fileNote.textContent =
+        'Tip: keep the subtitle sequence number, timecode line, and caption text on separate lines.';
+    }
+
+    async function loadFile(file) {
+      if (!file) return;
+
+      if (file.size > MAX_BYTES) {
+        fileNote.textContent =
+          'File is larger than 5 MB. Choose a smaller SRT or TXT file.';
+        return;
+      }
+
+      const ext = file.name.includes('.')
+        ? file.name.split('.').pop().toLowerCase()
+        : '';
+
+      if (!['srt', 'txt'].includes(ext) && file.type !== 'text/plain') {
+        fileNote.textContent =
+          'This tool reads .srt and plain-text .txt files. Choose a text subtitle file.';
+        return;
+      }
+
+      try {
+        input.value = (await file.text()).replace(/^\uFEFF/, '');
+
+        fileNote.textContent =
+          `Loaded ${file.name} · ${(file.size / 1024).toFixed(1)} KB. ` +
+          'Select “Check subtitles” to validate it.';
+
+        status.className = 'srt-status';
+        status.textContent = 'Ready to check';
+      } catch (err) {
+        fileNote.textContent =
+          'The file could not be read. Try opening it in a text editor and pasting the content instead.';
+      }
+    }
+
+    $('srt-validate').addEventListener('click', runValidation);
+
+    $('srt-sample').addEventListener('click', () => {
+      input.value = goodSample;
+      fileNote.textContent =
+        'Loaded a clean example. Select “Check subtitles” to try the validator.';
+    });
+
+    $('srt-bad-sample').addEventListener('click', () => {
+      input.value = badSample;
+      fileNote.textContent =
+        'Loaded an example with intentionally introduced issues. Select “Check subtitles” to see the findings.';
+    });
+
+    $('srt-clear').addEventListener('click', clearAll);
+
+    fileInput.addEventListener('change', (event) => {
+      loadFile(event.target.files?.[0]);
+    });
+
+    drop.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        fileInput.click();
+      }
+    });
+
+    ['dragenter', 'dragover'].forEach(type => {
+      drop.addEventListener(type, event => {
+        event.preventDefault();
+        drop.classList.add('is-over');
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(type => {
+      drop.addEventListener(type, event => {
+        event.preventDefault();
+        drop.classList.remove('is-over');
+      });
+    });
+
+    drop.addEventListener('drop', event => {
+      loadFile(event.dataTransfer?.files?.[0]);
+    });
+
+    copyButton.addEventListener('click', async () => {
+      if (!latestReportText) return;
+
+      try {
+        await navigator.clipboard.writeText(latestReportText);
+
+        copyButton.textContent = 'Copied';
+
+        setTimeout(() => {
+          copyButton.textContent = 'Copy report';
+        }, 1500);
+      } catch (err) {
+        const helper = document.createElement('textarea');
+
+        helper.value = latestReportText;
+        helper.style.position = 'fixed';
+        helper.style.opacity = '0';
+
+        document.body.appendChild(helper);
+        helper.select();
+
+        const ok = document.execCommand('copy');
+        helper.remove();
+
+        copyButton.textContent = ok ? 'Copied' : 'Copy unavailable';
+
+        setTimeout(() => {
+          copyButton.textContent = 'Copy report';
+        }, 1500);
+      }
+    });
+
+    downloadButton.addEventListener('click', () => {
+      if (!latestReportText) return;
+
+      const blob = new Blob(
+        [latestReportText],
+        { type: 'text/plain;charset=utf-8' }
+      );
+
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement('a');
+
+      anchor.href = url;
+      anchor.download = 'srt-validation-report.txt';
+
+      document.body.appendChild(anchor);
+      anchor.click();
+      anchor.remove();
+
+      URL.revokeObjectURL(url);
+    });
+
+  })();
+  </script>
 </body>
 </html>
