@@ -4,791 +4,2000 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Free Word Counter Online - Text Analyzer | ConvertToToolsOnline</title>
+  <title>Word Counter Online - Free Word &amp; Character Counter | Online Tools &amp; Converters</title>
 
-  <meta name="description" content="Count words, characters, sentences, paragraphs and lines instantly. Analyze keyword frequency, reading time and text length with our free online word counter.">
+  <meta name="description"
+    content="Use our free word counter online to count words, characters, sentences, paragraphs and lines. Analyze keyword frequency and estimate reading and speaking time instantly.">
 
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index,follow,max-image-preview:large">
   <meta name="theme-color" content="#2563eb">
 
-  <link rel="canonical" href="https://converttotoolsonline.com/word-counter.html">
+  <link rel="canonical"
+    href="https://onlinetoolsandconverters.cc/word-counter.html">
 
+  <!-- Shared root website assets -->
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
+
+  <!-- Social sharing metadata -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Free Online Word Counter and Text Analyzer">
-  <meta property="og:description" content="Analyze your text instantly with word counts, character counts, keyword frequency and reading time.">
-  <meta property="og:url" content="https://converttotoolsonline.com/word-counter.html">
+  <meta property="og:site_name" content="Online Tools &amp; Converters">
+  <meta property="og:title"
+    content="Word Counter Online - Free Word &amp; Character Counter">
+  <meta property="og:description"
+    content="Count words, characters, sentences, paragraphs and lines instantly. Analyze keywords and estimate reading time with our free online word counter.">
+  <meta property="og:url"
+    content="https://onlinetoolsandconverters.cc/word-counter.html">
 
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title"
+    content="Word Counter Online - Free Text Analyzer">
+  <meta name="twitter:description"
+    content="Count words and characters, analyze text, and estimate reading and speaking time using this free online tool.">
+
+  <!-- Structured data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "Free Word Counter",
-    "url": "https://converttotoolsonline.com/word-counter.html",
-    "description": "Count words, characters, sentences, paragraphs and analyze keyword frequency.",
+    "name": "Free Online Word Counter",
+    "url": "https://onlinetoolsandconverters.cc/word-counter.html",
+    "description": "A free browser-based word counter for measuring words, characters, sentences, paragraphs and lines, analyzing keyword frequency, and estimating reading and speaking time.",
     "applicationCategory": "UtilitiesApplication",
     "operatingSystem": "Any",
+    "browserRequirements": "Requires a modern browser with JavaScript enabled.",
+    "isAccessibleForFree": true,
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Online Tools & Converters",
+      "url": "https://onlinetoolsandconverters.cc/"
     }
   }
   </script>
 
   <style>
-    :root {
-      --primary: #2563eb;
-      --primary-dark: #1d4ed8;
-      --text: #172033;
-      --muted: #64748b;
-      --border: #e2e8f0;
-      --background: #f5f7fb;
-      --surface: #ffffff;
-      --success: #15803d;
-      --danger: #dc2626;
-      --radius: 16px;
-    }
+    /* ========================================
+       WORD COUNTER
+       All page-specific styles are included
+       in this HTML file for easy installation.
+    ======================================== */
 
-    * {
+    .ot-wc,
+    .ot-wc * {
       box-sizing: border-box;
     }
 
-    body {
-      margin: 0;
+    .ot-wc {
+      --ot-primary: #2563eb;
+      --ot-primary-hover: #1d4ed8;
+      --ot-text: #172033;
+      --ot-muted: #64748b;
+      --ot-border: #e2e8f0;
+      --ot-bg: #f8fafc;
+      --ot-white: #ffffff;
+
+      background: var(--ot-bg);
+      color: var(--ot-text);
       font-family: system-ui, -apple-system, BlinkMacSystemFont,
         "Segoe UI", sans-serif;
-      color: var(--text);
-      background: var(--background);
-      line-height: 1.6;
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-wrap: anywhere;
     }
 
-    button,
-    textarea,
-    input,
-    select {
+    .ot-wc button,
+    .ot-wc input,
+    .ot-wc textarea {
       font: inherit;
     }
 
-    button {
+    .ot-wc button {
       cursor: pointer;
     }
 
-    a {
-      color: var(--primary);
+    .ot-wc a {
+      color: var(--ot-primary);
+    }
+
+    .ot-wc button:focus-visible,
+    .ot-wc input:focus-visible,
+    .ot-wc textarea:focus-visible,
+    .ot-wc a:focus-visible,
+    .ot-wc summary:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, .35);
+      outline-offset: 3px;
+    }
+
+    .ot-wc-container {
+      width: min(1080px, calc(100% - 32px));
+      margin-inline: auto;
+    }
+
+    .ot-wc-skip {
+      position: absolute;
+      top: -100px;
+      left: 12px;
+      z-index: 100;
+      padding: 10px 14px;
+      background: #fff;
+      color: #172033;
+      border-radius: 8px;
+    }
+
+    .ot-wc-skip:focus {
+      top: 12px;
+    }
+
+    /* Navigation */
+
+    .ot-wc-header {
+      background: #fff;
+      border-bottom: 1px solid var(--ot-border);
+    }
+
+    .ot-wc-nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-block: 10px;
+    }
+
+    .ot-wc-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ot-text) !important;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: -.35px;
+    }
+
+    .ot-wc-logo {
+      height: 38px;
+      width: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: var(--ot-primary);
+      color: #fff;
+      font-weight: 850;
+    }
+
+    .ot-wc-navlinks {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .ot-wc-navlinks a {
+      text-decoration: none;
+      color: #475569;
+      font-size: 14px;
+      font-weight: 550;
+    }
+
+    .ot-wc-navlinks a:hover {
+      color: var(--ot-primary);
+    }
+
+    /* Introduction */
+
+    .ot-wc-intro {
+      text-align: center;
+      padding: 36px 0 24px;
+    }
+
+    .ot-wc-eyebrow {
+      margin: 0 0 8px;
+      text-transform: uppercase;
+      letter-spacing: 1.25px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--ot-primary);
+    }
+
+    .ot-wc-intro h1 {
+      max-width: 850px;
+      margin: 0 auto 14px;
+      font-size: clamp(30px, 5vw, 44px);
+      line-height: 1.17;
+      letter-spacing: -1.5px;
+      font-weight: 800;
+    }
+
+    .ot-wc-intro > p:not(.ot-wc-eyebrow) {
+      max-width: 760px;
+      margin: 0 auto;
+      color: var(--ot-muted);
+      font-size: 16px;
+    }
+
+    .ot-wc-breadcrumb {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 17px;
+      color: var(--ot-muted);
+      font-size: 13px;
+    }
+
+    .ot-wc-breadcrumb a {
       text-decoration: none;
     }
 
-    a:hover {
-      text-decoration: underline;
+    /* Main counter card */
+
+    .ot-wc-card {
+      overflow: hidden;
+      background: var(--ot-white);
+      border: 1px solid var(--ot-border);
+      border-radius: 16px;
+      box-shadow: 0 8px 28px rgba(15, 23, 42, .05);
     }
 
-    .site-header {
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .header-inner {
-      max-width: 1100px;
-      margin: auto;
-      padding: 16px 20px;
+    .ot-wc-card-heading {
+      padding: 19px 22px;
+      border-bottom: 1px solid var(--ot-border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 15px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
-    .brand {
-      font-size: 21px;
-      font-weight: 850;
-      color: var(--text);
-      letter-spacing: -0.7px;
+    .ot-wc-card-heading h2 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.4;
     }
 
-    .brand span {
-      color: var(--primary);
-    }
-
-    .nav-link {
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    main {
-      max-width: 1100px;
-      margin: auto;
-      padding: 36px 18px 60px;
-    }
-
-    .hero {
-      text-align: center;
-      margin-bottom: 28px;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 5px 12px;
-      border-radius: 100px;
-      background: #dbeafe;
-      color: #1d4ed8;
+    .ot-wc-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 10px;
+      border: 1px solid #dcfce7;
+      border-radius: 30px;
+      background: #f0fdf4;
+      color: #166534;
       font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.6px;
-      margin-bottom: 12px;
+      font-weight: 650;
     }
 
-    .hero h1 {
-      font-size: clamp(29px, 5vw, 44px);
-      line-height: 1.2;
-      letter-spacing: -1.2px;
-      margin: 0 0 12px;
+    .ot-wc-live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
     }
 
-    .hero p {
-      max-width: 680px;
-      margin: auto;
-      color: var(--muted);
-    }
+    /* Statistics */
 
-    .workspace {
+    .ot-wc-stats {
       display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(260px, 0.75fr);
-      gap: 20px;
-      align-items: start;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 11px;
+      padding: 17px;
+      border-bottom: 1px solid var(--ot-border);
+      background: #fbfdff;
     }
 
-    .card {
+    .ot-wc-stat {
+      padding: 13px;
       min-width: 0;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px;
-      box-shadow: 0 8px 28px rgba(15, 23, 42, 0.04);
-    }
-
-    .card h2 {
-      font-size: 19px;
-      margin: 0 0 5px;
-    }
-
-    .subtext {
-      margin: 0 0 18px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .text-area {
-      display: block;
-      width: 100%;
-      min-height: 330px;
-      resize: vertical;
-      padding: 16px;
-      border: 1px solid #d7dfeb;
-      border-radius: 12px;
-      outline: none;
-      color: var(--text);
+      border: 1px solid var(--ot-border);
+      border-radius: 11px;
       background: #fff;
-      line-height: 1.8;
-      font-size: 15px;
+    }
+
+    .ot-wc-stat-label {
+      display: block;
+      color: var(--ot-muted);
+      font-size: 12px;
+      line-height: 1.5;
+      font-weight: 650;
+      margin-bottom: 6px;
+    }
+
+    .ot-wc-stat-value {
+      display: block;
+      font-size: clamp(21px, 3vw, 28px);
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -.6px;
+      font-variant-numeric: tabular-nums;
       overflow-wrap: anywhere;
     }
 
-    .text-area:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    .ot-wc-stat-primary .ot-wc-stat-value {
+      color: var(--ot-primary);
     }
 
-    .text-area::placeholder {
+    /* Editor */
+
+    .ot-wc-editor-area {
+      padding: 20px;
+    }
+
+    .ot-wc-editor-label {
+      display: block;
+      margin-bottom: 9px;
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .ot-wc-textarea {
+      display: block;
+      width: 100%;
+      min-height: 320px;
+      padding: 17px;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      color: var(--ot-text);
+      background: #fff;
+      font-size: 15px;
+      line-height: 1.8;
+      resize: vertical;
+    }
+
+    .ot-wc-textarea::placeholder {
       color: #94a3b8;
+      opacity: 1;
     }
 
-    .editor-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-      color: var(--muted);
+    .ot-wc-textarea:focus {
+      outline: none;
+      border-color: var(--ot-primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, .11);
+    }
+
+    .ot-wc-help {
+      margin: 8px 0 0;
       font-size: 12px;
+      color: var(--ot-muted);
     }
 
-    .button-row {
+    .ot-wc-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 9px;
-      margin-top: 18px;
+      margin-top: 15px;
     }
 
-    .button {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      gap: 7px;
-      min-height: 42px;
+    .ot-wc-btn {
       padding: 10px 14px;
-      border: 0;
+      border: 1px solid var(--ot-border);
       border-radius: 9px;
-      background: var(--primary);
-      color: #fff;
-      font-weight: 750;
-      font-size: 13px;
-      transition: background 0.2s, transform 0.2s;
-    }
-
-    .button:hover {
-      background: var(--primary-dark);
-      transform: translateY(-1px);
-    }
-
-    .button.secondary {
-      background: #eaf0ff;
-      color: #1d4ed8;
-    }
-
-    .button.secondary:hover {
-      background: #dbeafe;
-    }
-
-    .button.neutral {
-      background: #f1f5f9;
+      background: #fff;
       color: #334155;
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.45;
     }
 
-    .button.neutral:hover {
-      background: #e2e8f0;
+    .ot-wc-btn:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
     }
 
-    .button.danger {
-      background: #fee2e2;
+    .ot-wc-btn-primary {
+      color: #fff;
+      background: var(--ot-primary);
+      border-color: var(--ot-primary);
+    }
+
+    .ot-wc-btn-primary:hover {
+      color: #fff;
+      background: var(--ot-primary-hover);
+      border-color: var(--ot-primary-hover);
+    }
+
+    .ot-wc-btn-danger:hover {
       color: #b91c1c;
+      background: #fef2f2;
+      border-color: #fecaca;
     }
 
-    .button.danger:hover {
-      background: #fecaca;
+    .ot-wc-status {
+      min-height: 23px;
+      margin: 9px 0 0;
+      color: #15803d;
+      font-size: 13px;
     }
 
-    .button:focus-visible,
-    input:focus-visible,
-    select:focus-visible {
-      outline: 3px solid rgba(37, 99, 235, 0.3);
-      outline-offset: 2px;
+    .ot-wc-file-input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
-    .stats-grid {
+    .ot-wc-upload {
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    /* Time estimates */
+
+    .ot-wc-estimates {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 12px;
+      padding: 17px 20px;
+      border-top: 1px solid var(--ot-border);
     }
 
-    .stat {
-      padding: 15px;
-      border: 1px solid var(--border);
+    .ot-wc-estimate {
+      padding: 13px;
+      border: 1px solid var(--ot-border);
+      border-radius: 10px;
       background: #f8fafc;
-      border-radius: 12px;
-      min-width: 0;
     }
 
-    .stat-label {
+    .ot-wc-estimate-label {
       display: block;
+      color: var(--ot-muted);
       font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 5px;
+      margin-bottom: 4px;
     }
 
-    .stat-value {
-      display: block;
-      font-size: clamp(21px, 3vw, 28px);
-      font-weight: 850;
-      line-height: 1.25;
-      overflow-wrap: anywhere;
+    .ot-wc-estimate-value {
+      font-size: 19px;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums;
     }
 
-    .stat-note {
-      display: block;
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: 5px;
+    /* Goal */
+
+    .ot-wc-goal {
+      padding: 18px 20px;
+      border-top: 1px solid var(--ot-border);
     }
 
-    .side-section {
-      margin-top: 25px;
-    }
-
-    .side-section h3 {
-      font-size: 15px;
-      margin: 0 0 12px;
-    }
-
-    .time-box {
-      display: grid;
-      gap: 10px;
-    }
-
-    .time-item {
+    .ot-wc-goal-head {
       display: flex;
+      align-items: center;
       justify-content: space-between;
       gap: 12px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border);
-      font-size: 13px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
     }
 
-    .time-item:last-child {
-      border-bottom: 0;
-      padding-bottom: 0;
-    }
-
-    .time-item span {
-      color: var(--muted);
-    }
-
-    .time-item strong {
-      text-align: right;
-    }
-
-    .keyword-controls {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 8px;
-    }
-
-    .keyword-controls input {
-      min-width: 0;
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      outline: none;
-    }
-
-    .keyword-controls input:focus {
-      border-color: var(--primary);
-    }
-
-    .keyword-table-wrap {
-      margin-top: 13px;
-      overflow-x: auto;
-    }
-
-    .keyword-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 12px;
-      text-align: left;
-    }
-
-    .keyword-table th,
-    .keyword-table td {
-      padding: 9px 6px;
-      border-bottom: 1px solid var(--border);
-      overflow-wrap: anywhere;
-    }
-
-    .keyword-table th {
-      color: var(--muted);
-      font-weight: 750;
-    }
-
-    .keyword-table td:last-child,
-    .keyword-table th:last-child {
-      text-align: right;
-      white-space: nowrap;
-    }
-
-    .keyword-empty {
-      font-size: 13px;
-      color: var(--muted);
-      padding: 12px 0;
-    }
-
-    .status {
-      min-height: 20px;
-      margin-top: 12px;
-      font-size: 12px;
-      color: var(--muted);
-      overflow-wrap: anywhere;
-    }
-
-    .status.error {
-      color: var(--danger);
-    }
-
-    .privacy-note {
-      margin-top: 18px;
-      padding: 12px;
-      background: #f0fdf4;
-      color: #166534;
-      border-radius: 10px;
-      font-size: 12px;
-    }
-
-    .content-section {
-      margin-top: 40px;
-    }
-
-    .content-section h2 {
-      font-size: 24px;
-      margin: 0 0 12px;
-    }
-
-    .content-section p,
-    .content-section li {
-      color: #475569;
-    }
-
-    .steps {
-      padding-left: 22px;
-    }
-
-    .faq-item {
-      padding: 15px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .faq-item h3 {
-      font-size: 16px;
-      margin: 0 0 6px;
-    }
-
-    .faq-item p {
+    .ot-wc-goal-head h3 {
+      font-size: 14px;
       margin: 0;
     }
 
-    .related {
+    .ot-wc-goal-field {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
     }
 
-    .related a {
-      padding: 10px 13px;
+    .ot-wc-goal-input {
+      width: 100px;
+      min-height: 37px;
+      padding: 7px 9px;
+      border: 1px solid var(--ot-border);
+      border-radius: 8px;
       background: #fff;
-      border: 1px solid var(--border);
+      color: var(--ot-text);
+    }
+
+    .ot-wc-progress {
+      width: 100%;
+      height: 8px;
+      background: #e2e8f0;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .ot-wc-progress-bar {
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      background: var(--ot-primary);
+      transition: width .15s ease;
+    }
+
+    .ot-wc-goal-status {
+      display: block;
+      margin-top: 8px;
+      color: var(--ot-muted);
+      font-size: 12px;
+    }
+
+    /* Keyword analyzer */
+
+    .ot-wc-keywords {
+      padding: 21px;
+      border-top: 1px solid var(--ot-border);
+    }
+
+    .ot-wc-section-title {
+      margin: 0 0 7px;
+      font-size: 18px;
+      line-height: 1.4;
+    }
+
+    .ot-wc-section-description {
+      margin: 0 0 15px;
+      color: var(--ot-muted);
+      font-size: 13px;
+    }
+
+    .ot-wc-keyword-form {
+      display: flex;
+      gap: 9px;
+      margin-bottom: 15px;
+    }
+
+    .ot-wc-keyword-input {
+      flex: 1;
+      min-width: 0;
+      padding: 10px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      background: #fff;
+      color: var(--ot-text);
+      font-size: 14px;
+    }
+
+    .ot-wc-keyword-result {
+      margin-bottom: 18px;
+      padding: 13px;
+      border: 1px solid var(--ot-border);
+      border-radius: 10px;
+      background: #f8fafc;
+      font-size: 13px;
+    }
+
+    .ot-wc-keyword-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .ot-wc-keyword-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-width: 0;
+      gap: 12px;
+      padding: 10px 12px;
+      border: 1px solid var(--ot-border);
       border-radius: 9px;
       font-size: 13px;
-      font-weight: 700;
     }
 
-    footer {
-      padding: 25px 15px;
-      text-align: center;
-      background: #fff;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
+    .ot-wc-keyword-word {
+      min-width: 0;
+      font-weight: 650;
+      overflow-wrap: anywhere;
+    }
+
+    .ot-wc-keyword-count {
+      color: var(--ot-muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .ot-wc-empty {
+      grid-column: 1 / -1;
+      color: var(--ot-muted);
       font-size: 13px;
     }
 
-    footer p {
-      margin: 5px 0;
+    /* SEO article */
+
+    .ot-wc-content {
+      padding: 36px 0 58px;
     }
 
-    @media (max-width: 800px) {
-      main {
-        padding: 28px 13px 45px;
-      }
-
-      .workspace {
-        grid-template-columns: 1fr;
-      }
-
-      .text-area {
-        min-height: 260px;
-      }
+    .ot-wc-content-intro h2 {
+      margin: 0 0 12px;
+      font-size: clamp(23px, 4vw, 30px);
+      line-height: 1.35;
+      letter-spacing: -.6px;
     }
 
-    @media (max-width: 430px) {
-      .header-inner {
+    .ot-wc-content-intro p {
+      max-width: 860px;
+      color: #475569;
+      margin: 0 0 14px;
+    }
+
+    .ot-wc-guide {
+      margin-top: 23px;
+      padding: 6px 22px;
+      background: #fff;
+      border: 1px solid var(--ot-border);
+      border-radius: 14px;
+    }
+
+    .ot-wc-guide details {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--ot-border);
+    }
+
+    .ot-wc-guide details:last-child {
+      border-bottom: 0;
+    }
+
+    .ot-wc-guide summary {
+      cursor: pointer;
+      padding-right: 8px;
+      color: var(--ot-text);
+      font-size: 15px;
+      line-height: 1.6;
+      font-weight: 750;
+    }
+
+    .ot-wc-guide summary::marker {
+      color: var(--ot-primary);
+    }
+
+    .ot-wc-guide details[open] summary {
+      margin-bottom: 13px;
+    }
+
+    .ot-wc-guide h3 {
+      margin: 20px 0 8px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .ot-wc-guide p,
+    .ot-wc-guide li {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.85;
+    }
+
+    .ot-wc-guide p {
+      margin: 0 0 14px;
+    }
+
+    .ot-wc-guide p:last-child {
+      margin-bottom: 0;
+    }
+
+    .ot-wc-guide ol,
+    .ot-wc-guide ul {
+      padding-left: 24px;
+      margin: 12px 0 17px;
+    }
+
+    .ot-wc-guide li {
+      margin-bottom: 7px;
+    }
+
+    .ot-wc-note {
+      margin-top: 18px;
+      color: var(--ot-muted);
+      font-size: 12px;
+    }
+
+    /* Related links */
+
+    .ot-wc-related {
+      margin-top: 32px;
+    }
+
+    .ot-wc-related h2 {
+      font-size: 22px;
+      margin: 0 0 12px;
+    }
+
+    .ot-wc-related-card {
+      display: block;
+      width: fit-content;
+      padding: 13px 16px;
+      border: 1px solid var(--ot-border);
+      border-radius: 10px;
+      background: #fff;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .ot-wc-related-card strong {
+      display: block;
+      color: var(--ot-text);
+    }
+
+    .ot-wc-related-card span {
+      display: block;
+      color: var(--ot-muted);
+      font-size: 13px;
+    }
+
+    /* Footer */
+
+    .ot-wc-footer {
+      background: #fff;
+      border-top: 1px solid var(--ot-border);
+      padding: 23px 0;
+    }
+
+    .ot-wc-footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .ot-wc-footer p {
+      margin: 0;
+      color: var(--ot-muted);
+      font-size: 12px;
+    }
+
+    .ot-wc-footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .ot-wc-footer-links a {
+      color: #475569;
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .ot-wc-sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 760px) {
+      .ot-wc-container {
+        width: calc(100% - 24px);
+      }
+
+      .ot-wc-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 11px;
+      }
+
+      .ot-wc-navlinks {
+        gap: 13px;
+      }
+
+      .ot-wc-intro {
+        padding-top: 28px;
+      }
+
+      .ot-wc-intro h1 {
+        letter-spacing: -.9px;
+      }
+
+      .ot-wc-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 12px;
+        gap: 8px;
+      }
+
+      .ot-wc-stat {
+        padding: 11px;
+      }
+
+      .ot-wc-editor-area {
         padding: 13px;
       }
 
-      .brand {
-        font-size: 17px;
+      .ot-wc-textarea {
+        min-height: 265px;
+        padding: 13px;
       }
 
-      .card {
+      .ot-wc-estimates {
+        grid-template-columns: 1fr;
+        padding: 13px;
+      }
+
+      .ot-wc-estimate {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .ot-wc-estimate-label {
+        margin-bottom: 0;
+      }
+
+      .ot-wc-goal,
+      .ot-wc-keywords {
+        padding: 14px;
+      }
+
+      .ot-wc-keyword-list {
+        grid-template-columns: 1fr;
+      }
+
+      .ot-wc-guide {
+        padding-inline: 15px;
+      }
+
+      .ot-wc-footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .ot-wc-navlinks {
+        gap: 10px;
+      }
+
+      .ot-wc-navlinks a {
+        font-size: 12px;
+      }
+
+      .ot-wc-brand {
+        font-size: 14px;
+      }
+
+      .ot-wc-logo {
+        width: 34px;
+        height: 34px;
+      }
+
+      .ot-wc-card-heading {
         padding: 15px;
       }
 
-      .button-row .button {
-        flex: 1 1 calc(50% - 9px);
+      .ot-wc-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .keyword-controls {
-        grid-template-columns: 1fr;
+      .ot-wc-btn,
+      .ot-wc-upload {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .ot-wc-keyword-form {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ot-wc *,
+      .ot-wc *::before,
+      .ot-wc *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        scroll-behavior: auto !important;
       }
     }
   </style>
 </head>
 
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="index.html">
-        Convert<span>ToTools</span>Online
-      </a>
-      <a class="nav-link" href="index.html">All Tools</a>
-    </div>
-  </header>
 
-  <main>
-    <section class="hero">
-      <span class="badge">FREE ONLINE TEXT TOOL</span>
-      <h1>Word Counter & Text Analyzer</h1>
-      <p>
-        Count words, characters, sentences and paragraphs instantly.
-        Analyze keywords and estimate reading time with one simple tool.
-      </p>
-    </section>
+  <a class="ot-wc-skip" href="#word-counter-tool">
+    Skip to word counter
+  </a>
 
-    <section class="workspace">
-      <div class="card">
-        <h2>Your Text</h2>
-        <p class="subtext">
-          Type, paste or edit your text below. Results update automatically.
+  <div class="ot-wc">
+
+    <!-- SECOND WEBSITE: ONLINE TOOLS & CONVERTERS -->
+
+    <header class="ot-wc-header">
+      <div class="ot-wc-container ot-wc-nav">
+
+        <a class="ot-wc-brand" href="/"
+          aria-label="Online Tools and Converters home">
+          <span class="ot-wc-logo" aria-hidden="true">OT</span>
+          <span>Online Tools &amp; Converters</span>
+        </a>
+
+        <nav class="ot-wc-navlinks" aria-label="Main navigation">
+          <a href="/">Home</a>
+          <a href="/#tools">All tools</a>
+          <a href="/#categories">Categories</a>
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
+        </nav>
+
+      </div>
+    </header>
+
+    <main>
+
+      <!-- INTRODUCTION -->
+
+      <section class="ot-wc-container ot-wc-intro">
+
+        <p class="ot-wc-eyebrow">Free online text tool</p>
+
+        <h1>Word Counter Online</h1>
+
+        <p>
+          Count words, characters with and without spaces, sentences,
+          paragraphs, and lines instantly. Analyze keyword frequency
+          and estimate reading and speaking time with this free online
+          word counter. Just type or paste your text to get started.
         </p>
 
-        <label for="textInput" class="hidden">Enter your text</label>
+        <nav class="ot-wc-breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="/#tools">Online tools</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">Word Counter</span>
+        </nav>
 
-        <textarea
-          id="textInput"
-          class="text-area"
-          placeholder="Start typing or paste your text here..."
-          spellcheck="true"
-        ></textarea>
+      </section>
 
-        <div class="editor-footer">
-          <span id="editorInfo">Ready to analyze your text</span>
-          <span>Live analysis</span>
-        </div>
+      <!-- WORD COUNTER APPLICATION -->
 
-        <div class="button-row">
-          <button class="button secondary" id="copyButton" type="button">
-            Copy Text
-          </button>
+      <section class="ot-wc-container"
+        id="word-counter-tool"
+        aria-labelledby="ot-wc-tool-heading">
 
-          <button class="button secondary" id="downloadButton" type="button">
-            Download TXT
-          </button>
+        <div class="ot-wc-card">
 
-          <button class="button neutral" id="uppercaseButton" type="button">
-            UPPERCASE
-          </button>
+          <div class="ot-wc-card-heading">
 
-          <button class="button neutral" id="lowercaseButton" type="button">
-            lowercase
-          </button>
+            <h2 id="ot-wc-tool-heading">Your text analyzer</h2>
 
-          <button class="button neutral" id="titleCaseButton" type="button">
-            Title Case
-          </button>
+            <span class="ot-wc-live">
+              <span class="ot-wc-live-dot" aria-hidden="true"></span>
+              Live counting
+            </span>
 
-          <button class="button neutral" id="cleanButton" type="button">
-            Clean Spaces
-          </button>
-
-          <button class="button danger" id="clearButton" type="button">
-            Clear Text
-          </button>
-        </div>
-
-        <div class="status" id="status" role="status" aria-live="polite"></div>
-
-        <div class="privacy-note">
-          🔒 <strong>Privacy friendly:</strong> text analysis happens
-          locally in your browser. Your text is not uploaded to our server.
-        </div>
-      </div>
-
-      <aside class="card">
-        <h2>Text Statistics</h2>
-        <p class="subtext">Your results at a glance.</p>
-
-        <div class="stats-grid">
-          <div class="stat">
-            <span class="stat-label">Words</span>
-            <strong class="stat-value" id="wordCount">0</strong>
-            <span class="stat-note">Total words</span>
           </div>
 
-          <div class="stat">
-            <span class="stat-label">Characters</span>
-            <strong class="stat-value" id="charCount">0</strong>
-            <span class="stat-note">Including spaces</span>
-          </div>
+          <!-- STATISTICS -->
 
-          <div class="stat">
-            <span class="stat-label">No Spaces</span>
-            <strong class="stat-value" id="noSpaceCount">0</strong>
-            <span class="stat-note">Characters without whitespace</span>
-          </div>
+          <div class="ot-wc-stats" aria-label="Text statistics">
 
-          <div class="stat">
-            <span class="stat-label">Sentences</span>
-            <strong class="stat-value" id="sentenceCount">0</strong>
-            <span class="stat-note">Estimated sentence count</span>
-          </div>
-
-          <div class="stat">
-            <span class="stat-label">Paragraphs</span>
-            <strong class="stat-value" id="paragraphCount">0</strong>
-            <span class="stat-note">Non-empty paragraphs</span>
-          </div>
-
-          <div class="stat">
-            <span class="stat-label">Lines</span>
-            <strong class="stat-value" id="lineCount">0</strong>
-            <span class="stat-note">Non-empty lines</span>
-          </div>
-        </div>
-
-        <div class="side-section">
-          <h3>Reading & Speaking Time</h3>
-
-          <div class="time-box">
-            <div class="time-item">
-              <span>Reading time</span>
-              <strong id="readingTime">0 sec</strong>
+            <div class="ot-wc-stat ot-wc-stat-primary">
+              <span class="ot-wc-stat-label">Words</span>
+              <output class="ot-wc-stat-value" id="otwc-words">0</output>
             </div>
 
-            <div class="time-item">
-              <span>Speaking time</span>
-              <strong id="speakingTime">0 sec</strong>
+            <div class="ot-wc-stat">
+              <span class="ot-wc-stat-label">Characters</span>
+              <output class="ot-wc-stat-value" id="otwc-characters">0</output>
             </div>
+
+            <div class="ot-wc-stat">
+              <span class="ot-wc-stat-label">Characters without spaces</span>
+              <output class="ot-wc-stat-value" id="otwc-no-spaces">0</output>
+            </div>
+
+            <div class="ot-wc-stat">
+              <span class="ot-wc-stat-label">Sentences</span>
+              <output class="ot-wc-stat-value" id="otwc-sentences">0</output>
+            </div>
+
+            <div class="ot-wc-stat">
+              <span class="ot-wc-stat-label">Paragraphs</span>
+              <output class="ot-wc-stat-value" id="otwc-paragraphs">0</output>
+            </div>
+
+            <div class="ot-wc-stat">
+              <span class="ot-wc-stat-label">Lines</span>
+              <output class="ot-wc-stat-value" id="otwc-lines">0</output>
+            </div>
+
+            <div class="ot-wc-stat">
+              <span class="ot-wc-stat-label">Unique words</span>
+              <output class="ot-wc-stat-value" id="otwc-unique">0</output>
+            </div>
+
+            <div class="ot-wc-stat">
+              <span class="ot-wc-stat-label">Average word length</span>
+              <output class="ot-wc-stat-value" id="otwc-average-length">0</output>
+            </div>
+
           </div>
 
-          <p class="hint">
-            Estimates use 200 words per minute for reading and
-            130 words per minute for speaking.
-          </p>
-        </div>
+          <!-- EDITOR -->
 
-        <div class="side-section">
-          <h3>Keyword Analyzer</h3>
-          <p class="subtext">
-            Find how often a word appears in your text.
-          </p>
+          <div class="ot-wc-editor-area">
 
-          <div class="keyword-controls">
-            <input
-              type="text"
-              id="keywordInput"
-              placeholder="Enter a keyword"
-              aria-label="Keyword to analyze"
-              maxlength="100"
+            <label class="ot-wc-editor-label" for="otwc-text">
+              Enter or paste your text
+            </label>
+
+            <textarea
+              id="otwc-text"
+              class="ot-wc-textarea"
+              placeholder="Start typing or paste your text here. Your statistics will update automatically..."
+              spellcheck="true"
+              aria-describedby="otwc-editor-help"
+            ></textarea>
+
+            <p class="ot-wc-help" id="otwc-editor-help">
+              The counter analyzes your text in this browser.
+              No account is required.
+            </p>
+
+            <div class="ot-wc-actions">
+
+              <button class="ot-wc-btn ot-wc-btn-primary"
+                type="button" id="otwc-copy">
+                Copy text
+              </button>
+
+              <button class="ot-wc-btn"
+                type="button" id="otwc-copy-stats">
+                Copy statistics
+              </button>
+
+              <button class="ot-wc-btn"
+                type="button" id="otwc-download">
+                Download TXT
+              </button>
+
+              <label class="ot-wc-btn ot-wc-upload"
+                for="otwc-upload">
+                Open text file
+              </label>
+
+              <input
+                class="ot-wc-file-input"
+                type="file"
+                id="otwc-upload"
+                accept=".txt,.md,.csv,.log,text/plain,text/markdown,text/csv"
+              >
+
+              <button class="ot-wc-btn ot-wc-btn-danger"
+                type="button" id="otwc-clear">
+                Clear text
+              </button>
+
+            </div>
+
+            <p class="ot-wc-status"
+              id="otwc-status"
+              role="status"
+              aria-live="polite"></p>
+
+          </div>
+
+          <!-- TIME ESTIMATES -->
+
+          <div class="ot-wc-estimates">
+
+            <div class="ot-wc-estimate">
+              <span class="ot-wc-estimate-label">Reading time</span>
+              <output class="ot-wc-estimate-value" id="otwc-reading-time">—</output>
+            </div>
+
+            <div class="ot-wc-estimate">
+              <span class="ot-wc-estimate-label">Speaking time</span>
+              <output class="ot-wc-estimate-value" id="otwc-speaking-time">—</output>
+            </div>
+
+            <div class="ot-wc-estimate">
+              <span class="ot-wc-estimate-label">Average words per sentence</span>
+              <output class="ot-wc-estimate-value" id="otwc-average-sentence">0</output>
+            </div>
+
+          </div>
+
+          <!-- WORD GOAL -->
+
+          <section class="ot-wc-goal" aria-labelledby="otwc-goal-heading">
+
+            <div class="ot-wc-goal-head">
+
+              <h3 id="otwc-goal-heading">Writing goal</h3>
+
+              <label class="ot-wc-goal-field" for="otwc-goal-input">
+                Target words
+                <input
+                  class="ot-wc-goal-input"
+                  id="otwc-goal-input"
+                  type="number"
+                  min="1"
+                  max="1000000"
+                  step="1"
+                  value="500"
+                  inputmode="numeric"
+                >
+              </label>
+
+            </div>
+
+            <div
+              class="ot-wc-progress"
+              id="otwc-progress"
+              role="progressbar"
+              aria-label="Progress toward word goal"
+              aria-valuemin="0"
+              aria-valuemax="500"
+              aria-valuenow="0"
             >
+              <div class="ot-wc-progress-bar" id="otwc-progress-bar"></div>
+            </div>
 
-            <button class="button" id="analyzeButton" type="button">
-              Analyze
-            </button>
-          </div>
+            <span class="ot-wc-goal-status" id="otwc-goal-status">
+              0 of 500 words
+            </span>
 
-          <div id="keywordResult" class="keyword-empty">
-            Enter a keyword to analyze its frequency.
-          </div>
+          </section>
 
-          <div class="keyword-table-wrap">
-            <table class="keyword-table">
-              <thead>
-                <tr>
-                  <th>Top Words</th>
-                  <th>Count</th>
-                  <th>Frequency</th>
-                </tr>
-              </thead>
-              <tbody id="topKeywords"></tbody>
-            </table>
-          </div>
+          <!-- KEYWORD ANALYSIS -->
+
+          <section class="ot-wc-keywords" aria-labelledby="otwc-keywords-heading">
+
+            <h3 class="ot-wc-section-title" id="otwc-keywords-heading">
+              Keyword frequency analyzer
+            </h3>
+
+            <p class="ot-wc-section-description">
+              Check how often a word or phrase appears in your text.
+              The most frequent meaningful words are also listed below.
+            </p>
+
+            <form class="ot-wc-keyword-form" id="otwc-keyword-form">
+
+              <label class="ot-wc-sr-only" for="otwc-keyword-input">
+                Enter a keyword or phrase
+              </label>
+
+              <input
+                class="ot-wc-keyword-input"
+                id="otwc-keyword-input"
+                type="search"
+                placeholder="Enter a word or phrase..."
+                autocomplete="off"
+              >
+
+              <button class="ot-wc-btn ot-wc-btn-primary" type="submit">
+                Analyze
+              </button>
+
+            </form>
+
+            <div class="ot-wc-keyword-result"
+              id="otwc-keyword-result"
+              aria-live="polite">
+              Enter text and a keyword to see the frequency.
+            </div>
+
+            <h4 style="margin:0 0 10px;font-size:14px;">
+              Most frequent words
+            </h4>
+
+            <ol class="ot-wc-keyword-list" id="otwc-keyword-list">
+              <li class="ot-wc-empty">
+                Frequently occurring words will appear here.
+              </li>
+            </ol>
+
+          </section>
+
         </div>
-      </aside>
-    </section>
 
-    <section class="content-section">
-      <h2>How to Use the Word Counter</h2>
-      <ol class="steps">
-        <li>Type or paste your content into the text editor.</li>
-        <li>View your word count, character count and other statistics instantly.</li>
-        <li>Check estimated reading time and speaking time.</li>
-        <li>Enter a keyword to check its frequency.</li>
-        <li>Copy your text or download it as a text file.</li>
-      </ol>
-    </section>
+      </section>
 
-    <section class="content-section">
-      <h2>Who Can Use This Tool?</h2>
-      <p>
-        Students can check assignment lengths, writers can track article
-        word counts, bloggers can analyze content, and social media
-        creators can review text before publishing.
-      </p>
-      <p>
-        The keyword analyzer helps identify frequently used words.
-        It is a simple text analysis tool, not a complete SEO ranking
-        checker or a substitute for reviewing content quality.
-      </p>
-    </section>
+      <!-- LONG-FORM, USER-ACCESSIBLE SEO CONTENT -->
 
-    <section class="content-section">
-      <h2>Frequently Asked Questions</h2>
+      <article class="ot-wc-container ot-wc-content">
 
-      <div class="faq-item">
-        <h3>How does the word counter work?</h3>
-        <p>
-          It analyzes the text entered in the editor and updates
-          the word, character, sentence, paragraph and line counts.
+        <header class="ot-wc-content-intro">
+
+          <h2>Free Word Counter Online: Count Words and Analyze Text</h2>
+
+          <p>
+            A word counter online makes it easy to understand the length
+            and structure of writing before submitting, publishing, or
+            sharing it. Whether you are preparing an essay, a blog post,
+            a business report, an application, a product description, or
+            a short message, knowing your text statistics helps you
+            check requirements and make informed edits.
+          </p>
+
+          <p>
+            This free online word counter measures words, characters,
+            sentences, paragraphs, and lines as you type or paste text.
+            It also estimates reading and speaking time and lets you
+            inspect keyword frequency. Copy your text, copy its
+            statistics, or download a plain-text file when you are done.
+          </p>
+
+          <p>
+            The counter is designed to make an everyday writing task
+            simple. Enter your text and review the numbers immediately.
+            The extra guidance below explains how to interpret the
+            statistics, check word limits, improve readability, and
+            use text analysis responsibly.
+          </p>
+
+        </header>
+
+        <div class="ot-wc-guide">
+
+          <details>
+            <summary>1. What is an online word counter?</summary>
+
+            <p>
+              An online word counter is a browser-based tool that
+              calculates the number of words in a passage of text.
+              Depending on its features, it may also measure
+              characters, spaces, sentences, paragraphs, lines,
+              and other writing statistics. Instead of counting
+              every word manually, you enter text into an editor
+              and let the software analyze it.
+            </p>
+
+            <p>
+              Word counting is useful whenever a task has a minimum
+              or maximum length. Students can check essays, reports,
+              assignments, and applications. Bloggers and writers can
+              monitor article length while drafting. Professionals
+              can review reports, proposals, emails, summaries, and
+              presentations before sharing them.
+            </p>
+
+            <p>
+              Website owners can also check the length of page
+              descriptions, tool instructions, help articles, and
+              other content. Word count does not determine quality
+              on its own, but it gives you a useful measurement
+              for planning and editing.
+            </p>
+
+            <p>
+              This free word counter provides an immediate result
+              without asking you to register for a counting account.
+              Type directly into the text editor, paste material
+              from another application, or open a supported text
+              file. The tool is intended for general text analysis
+              rather than replacing a specialist document editor.
+            </p>
+          </details>
+
+          <details>
+            <summary>2. How does this word counter count words?</summary>
+
+            <p>
+              A word counter applies text segmentation rules to
+              identify word-like units. This implementation uses
+              the browser's international word segmentation
+              facilities when available, with a regular-expression
+              fallback in other browsers. Common apostrophe forms
+              inside words are preserved when the counting method
+              supports them.
+            </p>
+
+            <p>
+              For example, the sentence “Online tools save time.”
+              contains four words. The full stop is punctuation,
+              not a separate word. A character count produces a
+              different number because letters, spaces, and
+              punctuation contribute to the length.
+            </p>
+
+            <p>
+              Counting rules can differ between applications.
+              Hyphenated compounds, contractions, abbreviations,
+              decimal numbers, symbols, and writing systems that
+              do not use spaces can be segmented differently.
+              The result is therefore a count according to
+              this tool's method, rather than a universal
+              definition used by every application.
+            </p>
+
+            <p>
+              For everyday writing, automatic counting is usually
+              more convenient than manual calculation. For a
+              strict submission, compare the result with the
+              rules of the school, publisher, website, employer,
+              or application system receiving your text.
+            </p>
+          </details>
+
+          <details>
+            <summary>3. What is the difference between word count and character count?</summary>
+
+            <p>
+              Word count measures units interpreted as words.
+              Character count measures individual text characters.
+              A short sentence may have a small number of words
+              and a much larger number of characters because
+              each letter, space, and punctuation mark contributes
+              to the character total.
+            </p>
+
+            <p>
+              Character count with spaces includes whitespace.
+              Character count without spaces excludes whitespace
+              before measuring the text. These figures are
+              useful for different requirements. An essay may
+              have a word limit, while a caption, form field,
+              or message may have a character limit.
+            </p>
+
+            <p>
+              Consider the phrase “Write better text.” It contains
+              three words, but the character count is larger
+              because it includes the letters and punctuation,
+              as well as the spaces separating the words.
+              Removing the spaces changes the character count
+              without changing the written message.
+            </p>
+
+            <p>
+              Some systems count Unicode characters differently,
+              especially combined characters and emojis. If you
+              are writing for a service with a strict limit,
+              use that service's count as the final authority.
+              This tool provides a useful general measurement
+              rather than a guarantee that every platform will
+              display an identical number.
+            </p>
+          </details>
+
+          <details>
+            <summary>4. Why are sentence, paragraph, and line counts useful?</summary>
+
+            <p>
+              Word count describes how much text you have written,
+              but it does not explain how the text is organised.
+              Two documents can have the same number of words
+              while using very different structures. One might
+              contain concise sentences and clear paragraphs,
+              while another might contain dense blocks that
+              are more difficult to read.
+            </p>
+
+            <p>
+              Sentence count helps you review the division of
+              ideas. Paragraph count shows the number of
+              non-empty text blocks, and line count reflects
+              explicit line breaks in the editor. It does not
+              count every visual line created when text wraps
+              across a phone or computer screen.
+            </p>
+
+            <p>
+              These statistics can be useful during proofreading.
+              A paragraph containing unrelated ideas may need
+              to be divided. A sentence with several separate
+              points might become clearer when rewritten.
+              Line counts can help with plain-text notes,
+              lists, scripts, and other content where line
+              breaks have a specific purpose.
+            </p>
+
+            <p>
+              Treat the numbers as editing indicators rather
+              than strict rules. A long paragraph is not always
+              wrong, and a short sentence is not necessarily
+              clearer. Automated sentence counting can also
+              be affected by abbreviations, decimal points,
+              quotation marks, and unusual punctuation.
+            </p>
+          </details>
+
+          <details>
+            <summary>5. How is reading time estimated?</summary>
+
+            <p>
+              Reading time estimates how long it might take
+              a person to read a passage silently. The estimate
+              is based on the number of words and an assumed
+              reading speed. This tool uses a reference pace
+              of approximately 200 words per minute.
+            </p>
+
+            <p>
+              Actual reading speed varies with vocabulary,
+              familiarity with the topic, sentence complexity,
+              interruptions, and individual reading habits.
+              A simple message may take less time to understand
+              than a technical article with the same number
+              of words.
+            </p>
+
+            <p>
+              Reading time can help website visitors understand
+              the approximate length of a guide and help writers
+              plan the scope of an article. It is a planning
+              estimate, not a measurement of an actual reader
+              or a promise that every person will finish in
+              the displayed time.
+            </p>
+
+            <p>
+              When exact timing matters, test the material
+              with real readers or time yourself reading it.
+              For general articles and drafts, the estimate
+              provides a quick reference without requiring
+              a separate timing application.
+            </p>
+          </details>
+
+          <details>
+            <summary>6. How is speaking time estimated?</summary>
+
+            <p>
+              Speaking time estimates how long it could take
+              to deliver the entered text aloud. This page
+              uses a reference rate of approximately 130 words
+              per minute. This is helpful when preparing
+              presentations, speech drafts, scripts, lessons,
+              or spoken explanations.
+            </p>
+
+            <p>
+              Actual delivery time varies with pauses,
+              pronunciation, emphasis, audience interaction,
+              and speaking style. A presentation may also
+              include slides, demonstrations, and transitions
+              that add time beyond the spoken words themselves.
+            </p>
+
+            <p>
+              Use this estimate to plan a draft and then
+              rehearse the final version aloud if you have
+              a strict time limit. A timed rehearsal generally
+              reflects your own speaking pace more accurately
+              than a fixed words-per-minute assumption.
+            </p>
+          </details>
+
+          <details>
+            <summary>7. How to use this free online word counter</summary>
+
+            <p>
+              You can use the counter with a short paragraph,
+              a complete article, a report, or many other
+              types of text. Start by typing into the editor
+              or pasting text copied from another application.
+              The displayed statistics update automatically.
+            </p>
+
+            <ol>
+              <li>
+                Enter or paste the text you want to analyze.
+              </li>
+              <li>
+                Review words, characters, sentences,
+                paragraphs, lines, and unique words.
+              </li>
+              <li>
+                Check reading time, speaking time, and
+                average word length if those figures are useful.
+              </li>
+              <li>
+                Enter a word or phrase in the keyword analyzer
+                to examine its frequency.
+              </li>
+              <li>
+                Set a word-count goal if you are working
+                toward a particular writing target.
+              </li>
+              <li>
+                Copy the text, copy the statistics, or
+                download a plain-text file.
+              </li>
+            </ol>
+
+            <p>
+              You can also open supported local text files.
+              The file is read by your browser and its contents
+              are placed in the editor. Large files may take
+              longer to process depending on the device and
+              browser being used.
+            </p>
+
+            <p>
+              Before submitting important work, check the
+              counting rules that apply to it. Some
+              requirements include titles and references,
+              while others exclude particular sections.
+              This counter measures the text you provide;
+              it does not automatically know the rules
+              of your specific assignment.
+            </p>
+          </details>
+
+          <details>
+            <summary>8. Who can benefit from a word counter?</summary>
+
+            <p>
+              Students can use a word counter to check essays,
+              assignments, applications, reports, summaries,
+              and research drafts against length requirements.
+              It helps writers see whether they have met a
+              target or exceeded a limit while editing.
+            </p>
+
+            <p>
+              Bloggers, writers, journalists, and editors can
+              track article length and examine how text changes
+              between drafts. Copywriters can measure product
+              descriptions and promotional text. Businesses
+              can check the length of proposals, summaries,
+              emails, and reports.
+            </p>
+
+            <p>
+              Job applicants can review personal statements
+              and application responses. Teachers may use
+              counts when reviewing written work. Presenters
+              can estimate the amount of material needed for
+              a speech, while content creators can measure
+              the length of scripts and captions.
+            </p>
+
+            <p>
+              Website publishers may use word and character
+              counts when preparing page introductions,
+              instructions, and help articles. Researchers
+              and other professionals can also use text
+              statistics as part of their drafting workflow.
+              The appropriate statistic depends on the
+              requirements of the final destination.
+            </p>
+          </details>
+
+          <details>
+            <summary>9. How to check word limits for essays and reports</summary>
+
+            <p>
+              Before editing a document, read the instructions
+              that define its word limit. A requirement of
+              1,000 words may be a target, a strict maximum,
+              or a minimum. Some rules explain whether headings,
+              citations, footnotes, tables, or references are
+              included in the final count.
+            </p>
+
+            <p>
+              Paste the relevant material into the counter
+              and compare the displayed total with the target.
+              If the draft is too long, review repeated points,
+              unnecessary introductions, and sentences that
+              could be clearer. Preserve essential evidence
+              and explanations rather than cutting text
+              simply to reduce the number.
+            </p>
+
+            <p>
+              If the draft is too short, consider whether
+              an important argument requires more explanation,
+              whether an example would clarify the subject,
+              or whether a required section is incomplete.
+              Avoid adding unrelated material just to reach
+              a particular word count.
+            </p>
+
+            <p>
+              Run the counter again after revising the text.
+              Check the final total against the recipient's
+              counting rules, particularly when a submission
+              is evaluated against a strict limit.
+            </p>
+          </details>
+
+          <details>
+            <summary>10. How to use text statistics to improve readability</summary>
+
+            <p>
+              Text statistics help you notice possible editing
+              opportunities, but they do not automatically
+              measure writing quality. A long text may contain
+              a thorough explanation or unnecessary repetition.
+              A short text may be concise or may omit information
+              readers need to understand the topic.
+            </p>
+
+            <p>
+              Sentence counts and average words per sentence
+              can guide a review. If a sentence contains several
+              separate ideas, consider dividing it. If every
+              sentence is extremely short, check whether the
+              writing sounds abrupt or repetitive. A varied
+              sentence structure may better serve the reader.
+            </p>
+
+            <p>
+              Paragraphs can help group related points.
+              Break up a dense paragraph when the discussion
+              moves to a different idea, but keep closely
+              connected information together. Headings are
+              particularly useful in longer articles because
+              readers can scan the page and find relevant
+              sections without reading every sentence.
+            </p>
+
+            <p>
+              Reading the text aloud can expose awkward
+              wording, missing transitions, and unclear
+              sentences. Combine the statistics with careful
+              proofreading instead of allowing a single
+              number to determine every edit.
+            </p>
+          </details>
+
+          <details>
+            <summary>11. How can a word counter support website SEO?</summary>
+
+            <p>
+              Website owners can use a word counter to review
+              page introductions, descriptions, help articles,
+              instructions, blog posts, and other text before
+              publishing it. The tool can reveal unnecessary
+              repetition and help editors keep content close
+              to the intended length.
+            </p>
+
+            <p>
+              However, there is no universal ideal word count
+              that guarantees higher search rankings. A
+              straightforward utility page may need a short
+              introduction and clear instructions, whereas
+              an educational guide may require examples,
+              explanations, and troubleshooting advice.
+              The appropriate length depends on what visitors
+              need to accomplish.
+            </p>
+
+            <p>
+              Good on-page SEO begins with understanding the
+              searcher's purpose. Write a descriptive title,
+              use a clear main heading, explain the tool near
+              the beginning, organise supporting material
+              with meaningful subheadings, and link to relevant
+              pages. Ensure the tool works properly and that
+              the page is easy to use on mobile devices.
+            </p>
+
+            <p>
+              Use relevant phrases naturally when they help
+              readers understand the topic. Do not repeat
+              keywords merely to increase their frequency.
+              Keyword density is a way to inspect language,
+              not a reliable target that guarantees search
+              visibility. A word counter supports content
+              editing but cannot replace keyword research,
+              technical SEO checks, or performance monitoring.
+            </p>
+          </details>
+
+          <details>
+            <summary>12. How does the keyword frequency analyzer work?</summary>
+
+            <p>
+              The keyword analyzer examines the text entered
+              into the editor and counts occurrences of a
+              selected word or phrase. It can also display
+              frequently occurring meaningful words, helping
+              you see which terms are repeated throughout
+              the supplied text.
+            </p>
+
+            <p>
+              This can be useful during proofreading. A
+              product description, article, or report may
+              repeat the same adjective or phrase several
+              times. Repetition can be appropriate, but it
+              may also point to an opportunity to improve
+              clarity or sentence variety.
+            </p>
+
+            <p>
+              Keyword frequency does not show how often
+              people search for a term on Google or Bing.
+              It also does not independently measure
+              rankings, competitor backlinks, or the overall
+              quality of a webpage. Those are different
+              research tasks requiring other tools and data.
+            </p>
+
+            <p>
+              Use the frequency results to understand and
+              improve your writing. Do not force every
+              keyword into the text or aim for an arbitrary
+              density percentage. Natural language and
+              useful information should take priority over
+              repetitive wording.
+            </p>
+          </details>
+
+          <details>
+            <summary>13. What does unique word count mean?</summary>
+
+            <p>
+              Unique word count measures the number of
+              distinct word forms found in the text after
+              normalising their case. For example, “Text,”
+              “text,” and “TEXT” are treated as the same
+              word by this counter, so changing capitalisation
+              alone does not create an additional unique term.
+            </p>
+
+            <p>
+              Unique words can help writers inspect vocabulary
+              variety and understand whether a passage uses
+              a small or broad range of terms. A repeated
+              technical term may be necessary for clarity,
+              while excessive repetition of ordinary
+              descriptive words might make a draft less natural.
+            </p>
+
+            <p>
+              This statistic does not measure creativity,
+              originality, or writing quality. Different
+              word forms, specialist vocabulary, names,
+              and the requirements of the subject all affect
+              the result. Use the figure as a descriptive
+              measure rather than a score.
+            </p>
+          </details>
+
+          <details>
+            <summary>14. Does this word counter upload or store your text?</summary>
+
+            <p>
+              The counting functions in this implementation
+              run in your browser. Calculating words,
+              characters, sentences, paragraphs, lines,
+              and keyword frequencies does not require
+              transmitting the entered text to a server.
+              Opening a supported local text file also
+              reads its contents in the browser.
+            </p>
+
+            <p>
+              This design is convenient for routine text
+              analysis because the tool does not need a
+              remote text-processing service to display
+              its results. Nevertheless, avoid entering
+              passwords, access tokens, confidential client
+              material, or other sensitive information
+              into online tools unless you are authorised
+              to do so and understand the relevant
+              data-handling practices.
+            </p>
+
+            <p>
+              Website hosting, analytics, browser extensions,
+              and other scripts can have separate behaviour.
+              The statement above describes the counting
+              functionality in this file and should not be
+              treated as a guarantee about every component
+              of your browser or the website's broader
+              privacy practices.
+            </p>
+          </details>
+
+          <details>
+            <summary>15. What are the limitations of a word counter?</summary>
+
+            <p>
+              A word counter calculates totals according
+              to its own rules. It cannot guarantee that
+              its result matches every word processor,
+              application form, or publishing platform.
+              Differences can arise around contractions,
+              hyphenated phrases, symbols, punctuation,
+              non-Latin writing systems, and combined
+              Unicode characters.
+            </p>
+
+            <p>
+              Sentence counts are estimates in many tools.
+              Abbreviations, decimals, quotation marks,
+              and unusual punctuation can affect automated
+              sentence detection. Paragraph counts depend
+              on line breaks, while line counts generally
+              follow explicit newline characters rather
+              than visual wrapping.
+            </p>
+
+            <p>
+              Reading time and speaking time are estimates
+              based on assumed rates, not observations of
+              an actual reader or speaker. Keyword frequency
+              describes the text that you enter and is not
+              a prediction of search engine rankings.
+            </p>
+
+            <p>
+              These limitations do not prevent the tool
+              from helping with ordinary writing tasks.
+              They simply mean that a specialised application
+              or the destination's own counting system may
+              be necessary when precise conformity matters.
+            </p>
+          </details>
+
+          <details>
+            <summary>16. Frequently asked questions about word counting</summary>
+
+            <h3>Is this word counter free?</h3>
+            <p>
+              Yes. You can use the counter to analyze text
+              without paying for a word-counting subscription
+              or creating a counting account.
+            </p>
+
+            <h3>Can I count words without installing software?</h3>
+            <p>
+              Yes. Open this page in a compatible browser,
+              enter your text, and review the statistics.
+              You do not need to install a desktop application
+              for ordinary word counting.
+            </p>
+
+            <h3>Does punctuation count as a word?</h3>
+            <p>
+              Punctuation by itself is not ordinarily a word.
+              It may nevertheless affect how counting software
+              identifies words, sentences, and abbreviations.
+            </p>
+
+            <h3>Do spaces count as characters?</h3>
+            <p>
+              The characters-with-spaces statistic includes
+              whitespace. The without-spaces statistic
+              excludes whitespace before calculating the total.
+            </p>
+
+            <h3>How accurate is reading time?</h3>
+            <p>
+              Reading time is an estimate based on an assumed
+              rate of 200 words per minute. Individual reading
+              speeds and text complexity can change the result.
+            </p>
+
+            <h3>How is speaking time calculated?</h3>
+            <p>
+              The tool estimates speaking time using 130
+              words per minute. Actual presentations may
+              take longer or shorter depending on pauses,
+              emphasis, and delivery.
+            </p>
+
+            <h3>Can I use the counter for academic writing?</h3>
+            <p>
+              Yes. It can help with essays, assignments,
+              reports, and applications. Follow the counting
+              and inclusion rules specified for your work.
+            </p>
+
+            <h3>Does keyword frequency improve SEO automatically?</h3>
+            <p>
+              No. Frequency analysis can help you spot
+              repeated wording, but it does not guarantee
+              search rankings. Write useful, accurate
+              content and use relevant terms naturally.
+            </p>
+
+            <h3>Can I download my text?</h3>
+            <p>
+              Yes. Use the Download TXT button to save
+              the text currently in the editor as a
+              plain-text file.
+            </p>
+
+            <h3>Can I open a local text file?</h3>
+            <p>
+              Yes. Use Open text file to load a supported
+              plain-text, Markdown, CSV, or log file into
+              the editor. The counter recalculates the
+              statistics after the contents are loaded.
+            </p>
+
+            <h3>Why does another word counter show a different result?</h3>
+            <p>
+              Counting systems may use different rules
+              for punctuation, contractions, Unicode
+              characters, and word boundaries. Use the
+              recipient's counting system for strict limits.
+            </p>
+
+            <h3>Is there a perfect word count for SEO?</h3>
+            <p>
+              No single word count guarantees better
+              rankings. Write enough to satisfy your
+              visitors' needs, explain the topic accurately,
+              and remove unnecessary repetition.
+            </p>
+
+            <h3>Can I count words on my phone?</h3>
+            <p>
+              Yes. The interface is responsive and is
+              designed to work in modern mobile browsers.
+              You can enter text, review statistics,
+              and use the available controls on a phone.
+            </p>
+
+          </details>
+
+        </div>
+
+        <p class="ot-wc-note">
+          Note: Results are calculated using this tool's counting
+          methods. Different applications may produce slightly
+          different totals. Follow your destination's requirements
+          when an exact count is essential.
         </p>
-      </div>
 
-      <div class="faq-item">
-        <h3>Does punctuation count as a word?</h3>
+        <section class="ot-wc-related" aria-labelledby="otwc-related-heading">
+
+          <h2 id="otwc-related-heading">Explore more online tools</h2>
+
+          <a class="ot-wc-related-card" href="/#tools">
+            <strong>Browse all tools and converters</strong>
+            <span>
+              Explore useful tools for text, data, images,
+              calculations, and everyday digital tasks.
+            </span>
+          </a>
+
+        </section>
+
+      </article>
+
+    </main>
+
+    <footer class="ot-wc-footer">
+
+      <div class="ot-wc-container ot-wc-footer-inner">
+
         <p>
-          Punctuation by itself is not counted as a word. Words separated
-          by whitespace are counted, including many words containing
-          apostrophes or hyphens.
+          © <span id="otwc-year">2026</span>
+          Online Tools &amp; Converters.
         </p>
+
+        <nav class="ot-wc-footer-links" aria-label="Footer navigation">
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/privacy-policy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms</a>
+        </nav>
+
       </div>
 
-      <div class="faq-item">
-        <h3>How is reading time calculated?</h3>
-        <p>
-          Reading time is estimated at 200 words per minute.
-          Actual reading speed varies by person and content difficulty.
-        </p>
-      </div>
+    </footer>
 
-      <div class="faq-item">
-        <h3>Is my text stored on your server?</h3>
-        <p>
-          No. The counting and analysis features run locally in your
-          browser. The page does not send your text to a server.
-        </p>
-      </div>
+  </div>
 
-      <div class="faq-item">
-        <h3>Can I download my text?</h3>
-        <p>
-          Yes. Use the Download TXT button to save the text in a
-          plain-text file.
-        </p>
-      </div>
-    </section>
-
-    <section class="content-section">
-      <h2>Explore More Free Tools</h2>
-
-      <div class="related">
-        <a href="image-compressor.html">Image Compressor</a>
-        <a href="image-resizer.html">Image Resizer</a>
-        <a href="jpg-to-pdf.html">JPG to PDF</a>
-        <a href="qr-code-generator.html">QR Code Generator</a>
-        <a href="index.html">All Tools</a>
-      </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>© <span id="year"></span> ConvertToToolsOnline</p>
-    <p>Simple, useful and free online tools.</p>
-  </footer>
+  <!-- WORD COUNTER FUNCTIONALITY -->
 
   <script>
     (() => {
@@ -796,214 +2005,392 @@
 
       const $ = (id) => document.getElementById(id);
 
-      const textInput = $("textInput");
-      const status = $("status");
+      const el = {
+        text: $("otwc-text"),
+        words: $("otwc-words"),
+        characters: $("otwc-characters"),
+        noSpaces: $("otwc-no-spaces"),
+        sentences: $("otwc-sentences"),
+        paragraphs: $("otwc-paragraphs"),
+        lines: $("otwc-lines"),
+        unique: $("otwc-unique"),
+        averageLength: $("otwc-average-length"),
+        averageSentence: $("otwc-average-sentence"),
+        readingTime: $("otwc-reading-time"),
+        speakingTime: $("otwc-speaking-time"),
 
-      $("year").textContent = new Date().getFullYear();
+        goalInput: $("otwc-goal-input"),
+        progress: $("otwc-progress"),
+        progressBar: $("otwc-progress-bar"),
+        goalStatus: $("otwc-goal-status"),
 
-      function getWords(text) {
-        const trimmed = text.trim();
+        keywordForm: $("otwc-keyword-form"),
+        keywordInput: $("otwc-keyword-input"),
+        keywordResult: $("otwc-keyword-result"),
+        keywordList: $("otwc-keyword-list"),
 
-        if (!trimmed) return [];
+        copy: $("otwc-copy"),
+        copyStats: $("otwc-copy-stats"),
+        download: $("otwc-download"),
+        upload: $("otwc-upload"),
+        clear: $("otwc-clear"),
+        status: $("otwc-status"),
+        year: $("otwc-year")
+      };
 
-        // Unicode-aware word matching, with a fallback for older browsers.
+      if (!el.text || !el.words) return;
+
+      let wordSegmenter = null;
+      let graphemeSegmenter = null;
+      let sentenceSegmenter = null;
+      let currentStats = null;
+      let statusTimer = null;
+
+      if (typeof Intl !== "undefined" && Intl.Segmenter) {
         try {
-          return trimmed.match(/[\p{L}\p{N}]+(?:['’_-][\p{L}\p{N}]+)*/gu) || [];
-        } catch {
-          return trimmed.match(/[A-Za-z0-9]+(?:['_-][A-Za-z0-9]+)*/g) || [];
+          wordSegmenter = new Intl.Segmenter(undefined, {
+            granularity: "word"
+          });
+
+          graphemeSegmenter = new Intl.Segmenter(undefined, {
+            granularity: "grapheme"
+          });
+
+          sentenceSegmenter = new Intl.Segmenter(undefined, {
+            granularity: "sentence"
+          });
+        } catch (_) {
+          wordSegmenter = null;
+          graphemeSegmenter = null;
+          sentenceSegmenter = null;
         }
       }
 
-      function formatDuration(minutes) {
-        if (!Number.isFinite(minutes) || minutes <= 0) {
-          return "0 sec";
+      const stopWords = new Set([
+        "a", "an", "and", "are", "as", "at", "be", "been",
+        "being", "but", "by", "can", "could", "did", "do",
+        "does", "for", "from", "had", "has", "have", "he",
+        "her", "here", "him", "his", "how", "i", "if", "in",
+        "into", "is", "it", "its", "just", "may", "me",
+        "might", "more", "most", "my", "no", "not", "of",
+        "on", "or", "our", "out", "own", "same", "she",
+        "should", "so", "some", "such", "than", "that",
+        "the", "their", "them", "then", "there", "these",
+        "they", "this", "those", "through", "to", "too",
+        "under", "up", "us", "very", "was", "we", "were",
+        "what", "when", "where", "which", "while", "who",
+        "why", "will", "with", "would", "you", "your"
+      ]);
+
+      function setText(node, value) {
+        if (node) node.textContent = value;
+      }
+
+      function number(value) {
+        return Number(value).toLocaleString();
+      }
+
+      function countWords(text) {
+        if (!text) return [];
+
+        if (wordSegmenter) {
+          return Array.from(wordSegmenter.segment(text))
+            .filter(part => part.isWordLike)
+            .map(part => part.segment);
         }
 
-        const totalSeconds = Math.ceil(minutes * 60);
+        try {
+          return text.match(
+            /[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu
+          ) || [];
+        } catch (_) {
+          return text.match(
+            /[A-Za-z0-9]+(?:['’][A-Za-z0-9]+)*/g
+          ) || [];
+        }
+      }
 
-        if (totalSeconds < 60) {
-          return totalSeconds + (totalSeconds === 1 ? " sec" : " sec");
+      function countCharacters(text) {
+        if (!text) return 0;
+
+        if (graphemeSegmenter) {
+          return Array.from(graphemeSegmenter.segment(text)).length;
         }
 
-        const mins = Math.floor(totalSeconds / 60);
-        const secs = totalSeconds % 60;
-
-        if (mins < 60) {
-          return secs ? mins + " min " + secs + " sec" : mins + " min";
-        }
-
-        const hours = Math.floor(mins / 60);
-        const remainingMinutes = mins % 60;
-
-        return hours + " hr" +
-          (remainingMinutes ? " " + remainingMinutes + " min" : "");
+        return Array.from(text).length;
       }
 
       function countSentences(text) {
-        const trimmed = text.trim();
+        const value = text.trim();
+        if (!value) return 0;
 
-        if (!trimmed) return 0;
+        if (sentenceSegmenter) {
+          return Array.from(sentenceSegmenter.segment(value))
+            .filter(part => /\S/u.test(part.segment))
+            .length;
+        }
 
-        // Count sentence-ending punctuation groups, including punctuation
-        // followed by closing quotation marks or brackets.
-        const matches = trimmed.match(/[.!?。！？]+(?:["'”’)\]]*)?(?=\s|$)/gu);
+        const matches = value.match(
+          /[^.!?…]+(?:[.!?…]+["'’”)\]]*)?/gu
+        ) || [];
 
-        if (matches) return matches.length;
-
-        // Count non-empty text as one sentence when no ending punctuation exists.
-        return /[\p{L}\p{N}]/u.test(trimmed) ? 1 : 0;
+        return matches.filter(sentence => {
+          return /[\p{L}\p{N}]/u.test(sentence);
+        }).length;
       }
 
-      function getParagraphs(text) {
-        return text.split(/\n\s*\n+/u).filter((part) => part.trim()).length;
+      function countParagraphs(text) {
+        const value = text.trim();
+        if (!value) return 0;
+
+        return value
+          .split(/\r\n[ \t]*\r\n+|\n[ \t]*\n+|\r[ \t]*\r+/)
+          .filter(part => part.trim().length > 0)
+          .length;
       }
 
-      function getNonEmptyLines(text) {
-        return text.split(/\r\n|\r|\n/u).filter((line) => line.trim()).length;
+      function countLines(text) {
+        return text.length ? text.split(/\r\n|\r|\n/).length : 0;
       }
 
-      function updateStatistics() {
-        const text = textInput.value;
-        const trimmed = text.trim();
-        const words = getWords(text);
+      function getStats(text) {
+        const words = countWords(text);
+        const frequencies = new Map();
 
-        $("wordCount").textContent = words.length.toLocaleString();
-        $("charCount").textContent = text.length.toLocaleString();
-        $("noSpaceCount").textContent =
-          text.replace(/\s/gu, "").length.toLocaleString();
+        for (const word of words) {
+          const key = word.toLocaleLowerCase();
+          frequencies.set(key, (frequencies.get(key) || 0) + 1);
+        }
 
-        $("sentenceCount").textContent =
-          countSentences(text).toLocaleString();
+        const totalWordLength = words.reduce(
+          (total, word) => total + countCharacters(word),
+          0
+        );
 
-        $("paragraphCount").textContent =
-          getParagraphs(text).toLocaleString();
+        const sentences = countSentences(text);
 
-        $("lineCount").textContent =
-          (trimmed ? getNonEmptyLines(text) : 0).toLocaleString();
-
-        $("readingTime").textContent =
-          formatDuration(words.length / 200);
-
-        $("speakingTime").textContent =
-          formatDuration(words.length / 130);
-
-        $("editorInfo").textContent = trimmed
-          ? words.length.toLocaleString() + " words · " +
-            text.length.toLocaleString() + " characters"
-          : "Ready to analyze your text";
-
-        renderTopKeywords(words);
-        analyzeKeyword(false);
+        return {
+          words,
+          wordCount: words.length,
+          characters: countCharacters(text),
+          charactersWithoutSpaces: countCharacters(text.replace(/\s/gu, "")),
+          sentences,
+          paragraphs: countParagraphs(text),
+          lines: countLines(text),
+          unique: frequencies.size,
+          averageLength: words.length ? totalWordLength / words.length : 0,
+          averageSentence: sentences ? words.length / sentences : 0,
+          frequencies
+        };
       }
 
-      function renderTopKeywords(words) {
-        const tbody = $("topKeywords");
-        tbody.replaceChildren();
+      function timeEstimate(wordCount, rate) {
+        if (!wordCount) return "—";
 
-        const counts = new Map();
+        const minutes = wordCount / rate;
 
-        words.forEach((word) => {
-          const normalized = word.toLocaleLowerCase();
-          counts.set(normalized, (counts.get(normalized) || 0) + 1);
-        });
+        if (minutes < 1) return "Less than 1 min";
 
-        const top = [...counts.entries()]
+        return "~" + Math.ceil(minutes) + " min";
+      }
+
+      function updateGoal(wordCount) {
+        const value = Number(el.goalInput.value);
+        const goal = Number.isFinite(value)
+          ? Math.min(1000000, Math.max(1, Math.floor(value)))
+          : 500;
+
+        const percent = Math.min(100, (wordCount / goal) * 100);
+
+        el.progressBar.style.width = percent + "%";
+        el.progress.setAttribute("aria-valuemax", String(goal));
+        el.progress.setAttribute(
+          "aria-valuenow",
+          String(Math.min(wordCount, goal))
+        );
+
+        el.progressBar.style.background =
+          wordCount >= goal ? "#16a34a" : "";
+
+        setText(
+          el.goalStatus,
+          number(wordCount) + " of " + number(goal) +
+            " words (" + Math.round(percent) + "%)"
+        );
+      }
+
+      function renderFrequentWords(stats) {
+        const entries = Array.from(stats.frequencies.entries())
+          .filter(([word, count]) => {
+            return word.length > 1 &&
+              count > 0 &&
+              !stopWords.has(word) &&
+              /[\p{L}\p{N}]/u.test(word);
+          })
           .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-          .slice(0, 8);
+          .slice(0, 10);
 
-        if (!top.length) {
-          const row = document.createElement("tr");
-          const cell = document.createElement("td");
+        el.keywordList.replaceChildren();
 
-          cell.colSpan = 3;
-          cell.textContent = "Enter text to see keyword statistics.";
-          cell.style.color = "var(--muted)";
-
-          row.append(cell);
-          tbody.append(row);
+        if (!entries.length) {
+          const item = document.createElement("li");
+          item.className = "ot-wc-empty";
+          item.textContent =
+            "Enter more text to display frequently occurring words.";
+          el.keywordList.appendChild(item);
           return;
         }
 
-        top.forEach(([word, count]) => {
-          const row = document.createElement("tr");
-          const wordCell = document.createElement("td");
-          const countCell = document.createElement("td");
-          const frequencyCell = document.createElement("td");
+        for (const [word, count] of entries) {
+          const item = document.createElement("li");
+          item.className = "ot-wc-keyword-item";
 
-          wordCell.textContent = word;
-          countCell.textContent = count.toLocaleString();
+          const name = document.createElement("span");
+          name.className = "ot-wc-keyword-word";
+          name.textContent = word;
 
-          const percentage = words.length
-            ? (count / words.length) * 100
+          const total = document.createElement("span");
+          total.className = "ot-wc-keyword-count";
+
+          const frequency = stats.wordCount
+            ? count / stats.wordCount * 100
             : 0;
 
-          frequencyCell.textContent = percentage.toFixed(1) + "%";
+          total.textContent = number(count) +
+            " · " + frequency.toFixed(1) + "%";
 
-          row.append(wordCell, countCell, frequencyCell);
-          tbody.append(row);
-        });
+          item.append(name, total);
+          el.keywordList.appendChild(item);
+        }
       }
 
-      function analyzeKeyword(showStatus = true) {
-        const keyword = $("keywordInput").value.trim();
-        const text = textInput.value;
-        const result = $("keywordResult");
+      function escapeRegExp(value) {
+        return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      }
+
+      function analyzeKeyword(query) {
+        const keyword = query.trim();
 
         if (!keyword) {
-          result.className = "keyword-empty";
-          result.textContent = "Enter a keyword to analyze its frequency.";
-
-          if (showStatus) {
-            setStatus("Enter a keyword first.");
-          }
-
+          setText(
+            el.keywordResult,
+            currentStats && currentStats.wordCount
+              ? "Enter a word or phrase to check its frequency."
+              : "Enter text and a keyword to begin."
+          );
           return;
         }
 
-        const escaped = keyword.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-        let expression;
+        const text = el.text.value;
+        const stats = currentStats || getStats(text);
 
-        try {
-          expression = new RegExp(
-            "(?<![\\p{L}\\p{N}_])" + escaped + "(?![\\p{L}\\p{N}_])",
-            "giu"
-          );
-        } catch {
-          expression = new RegExp(
-            "(^|[^A-Za-z0-9_])" + escaped + "(?=$|[^A-Za-z0-9_])",
-            "gi"
-          );
+        let occurrences = 0;
+
+        const queryWords = countWords(keyword);
+
+        if (queryWords.length === 1) {
+          occurrences =
+            stats.frequencies.get(keyword.toLocaleLowerCase()) || 0;
+        } else {
+          const phrasePattern = keyword
+            .split(/\s+/u)
+            .map(escapeRegExp)
+            .join("\\s+");
+
+          try {
+            const pattern = new RegExp(
+              "(^|[^\\p{L}\\p{N}])(" +
+              phrasePattern +
+              ")(?=$|[^\\p{L}\\p{N}])",
+              "giu"
+            );
+
+            occurrences = (text.match(pattern) || []).length;
+          } catch (_) {
+            const pattern = new RegExp(
+              "(^|\\W)(" + phrasePattern + ")(?=$|\\W)",
+              "gi"
+            );
+
+            occurrences = (text.match(pattern) || []).length;
+          }
         }
 
-        const matches = text.match(expression) || [];
-        const wordCount = getWords(text).length;
-        const frequency = wordCount
-          ? (matches.length / wordCount) * 100
+        const frequency = stats.wordCount
+          ? occurrences / stats.wordCount * 100
           : 0;
 
-        result.className = "keyword-empty";
-        result.textContent = '"' + keyword + '" appears ' +
-          matches.length + " time(s), approximately " +
-          frequency.toFixed(2) + "% of all words.";
+        el.keywordResult.replaceChildren();
 
-        if (showStatus) {
-          setStatus("Keyword analysis completed.");
+        const label = document.createElement("strong");
+        label.textContent = keyword + ": ";
+
+        const result = document.createElement("span");
+        result.textContent =
+          number(occurrences) +
+          (occurrences === 1 ? " occurrence" : " occurrences") +
+          " in " + number(stats.wordCount) + " words.";
+
+        const br = document.createElement("br");
+
+        const percentage = document.createElement("span");
+        percentage.textContent =
+          "Approximate frequency: " + frequency.toFixed(2) + "%.";
+
+        el.keywordResult.append(label, result, br, percentage);
+      }
+
+      function updateCounter() {
+        const stats = getStats(el.text.value);
+        currentStats = stats;
+
+        setText(el.words, number(stats.wordCount));
+        setText(el.characters, number(stats.characters));
+        setText(el.noSpaces, number(stats.charactersWithoutSpaces));
+        setText(el.sentences, number(stats.sentences));
+        setText(el.paragraphs, number(stats.paragraphs));
+        setText(el.lines, number(stats.lines));
+        setText(el.unique, number(stats.unique));
+        setText(el.averageLength, stats.averageLength.toFixed(1));
+        setText(el.averageSentence, stats.averageSentence.toFixed(1));
+
+        setText(
+          el.readingTime,
+          timeEstimate(stats.wordCount, 200)
+        );
+
+        setText(
+          el.speakingTime,
+          timeEstimate(stats.wordCount, 130)
+        );
+
+        updateGoal(stats.wordCount);
+        renderFrequentWords(stats);
+
+        if (el.keywordInput.value.trim()) {
+          analyzeKeyword(el.keywordInput.value);
+        } else {
+          setText(
+            el.keywordResult,
+            stats.wordCount
+              ? "Enter a word or phrase above to inspect its frequency."
+              : "Enter text and a keyword to begin."
+          );
         }
       }
 
-      function setStatus(message, error = false) {
-        status.textContent = message;
-        status.classList.toggle("error", error);
+      function showStatus(message, isError = false) {
+        setText(el.status, message);
+        el.status.style.color = isError ? "#b91c1c" : "#15803d";
+
+        if (statusTimer) clearTimeout(statusTimer);
+
+        statusTimer = setTimeout(() => {
+          setText(el.status, "");
+        }, 4000);
       }
 
-      async function copyText() {
-        const text = textInput.value;
-
-        if (!text) {
-          setStatus("There is no text to copy.", true);
-          return;
-        }
-
+      async function copyText(text, message) {
         try {
           if (navigator.clipboard && window.isSecureContext) {
             await navigator.clipboard.writeText(text);
@@ -1011,128 +2398,177 @@
             const temporary = document.createElement("textarea");
 
             temporary.value = text;
+            temporary.setAttribute("readonly", "");
             temporary.style.position = "fixed";
-            temporary.style.opacity = "0";
+            temporary.style.left = "-9999px";
+            temporary.style.top = "0";
 
-            document.body.append(temporary);
+            document.body.appendChild(temporary);
             temporary.select();
 
             const success = document.execCommand("copy");
             temporary.remove();
 
-            if (!success) {
-              throw new Error("Copy failed.");
-            }
+            if (!success) throw new Error("Clipboard unavailable");
           }
 
-          setStatus("Text copied to your clipboard.");
-        } catch {
-          setStatus(
-            "Copy failed. Please select the text and copy it manually.",
+          showStatus(message);
+        } catch (_) {
+          showStatus(
+            "Copying was blocked. Select the text and copy it manually.",
             true
           );
         }
       }
 
-      function downloadText() {
-        const text = textInput.value;
+      function statisticsReport() {
+        const stats = currentStats || getStats(el.text.value);
 
-        if (!text) {
-          setStatus("There is no text to download.", true);
+        return [
+          "Word Counter Statistics",
+          "-----------------------",
+          "Words: " + stats.wordCount,
+          "Characters: " + stats.characters,
+          "Characters without spaces: " + stats.charactersWithoutSpaces,
+          "Sentences: " + stats.sentences,
+          "Paragraphs: " + stats.paragraphs,
+          "Lines: " + stats.lines,
+          "Unique words: " + stats.unique,
+          "Average word length: " + stats.averageLength.toFixed(1),
+          "Average words per sentence: " + stats.averageSentence.toFixed(1),
+          "Reading time: " + timeEstimate(stats.wordCount, 200),
+          "Speaking time: " + timeEstimate(stats.wordCount, 130)
+        ].join("\n");
+      }
+
+      function downloadText() {
+        const text = el.text.value;
+
+        if (!text.trim()) {
+          showStatus("Enter some text before downloading.", true);
           return;
         }
 
-        const blob = new Blob([text], {
-          type: "text/plain;charset=utf-8"
-        });
+        try {
+          const blob = new Blob([text], {
+            type: "text/plain;charset=utf-8"
+          });
 
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement("a");
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
 
-        link.href = url;
-        link.download = "text-analysis.txt";
+          link.href = url;
+          link.download = "word-counter-text.txt";
 
-        document.body.append(link);
-        link.click();
-        link.remove();
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
 
-        setTimeout(() => URL.revokeObjectURL(url), 1000);
-
-        setStatus("Your TXT file download has started.");
+          setTimeout(() => URL.revokeObjectURL(url), 1000);
+          showStatus("Your text file has been prepared.");
+        } catch (_) {
+          showStatus("The text file could not be created.", true);
+        }
       }
 
-      function cleanSpaces() {
-        textInput.value = textInput.value
-          .split(/\r\n|\r|\n/u)
-          .map((line) => line.replace(/[^\S\r\n]+/gu, " ").trim())
-          .join("\n")
-          .replace(/\n{3,}/gu, "\n\n");
+      async function loadTextFile(file) {
+        if (!file) return;
 
-        updateStatistics();
-        setStatus("Extra spaces cleaned.");
+        const extensionAllowed = /\.(txt|md|csv|log)$/i.test(file.name);
+        const typeAllowed = [
+          "",
+          "text/plain",
+          "text/markdown",
+          "text/csv"
+        ].includes(file.type);
+
+        if (!typeAllowed && !extensionAllowed) {
+          showStatus(
+            "Choose a supported TXT, Markdown, CSV, or LOG file.",
+            true
+          );
+          el.upload.value = "";
+          return;
+        }
+
+        try {
+          el.text.value = await file.text();
+          updateCounter();
+          showStatus("Text loaded: " + file.name);
+        } catch (_) {
+          showStatus("The selected file could not be read.", true);
+        } finally {
+          el.upload.value = "";
+        }
       }
 
-      function toTitleCase(text) {
-        return text.toLocaleLowerCase().replace(
-          /(^|[\s([{“"'—–-])(\p{L})/gu,
-          (match, prefix, letter) =>
-            prefix + letter.toLocaleUpperCase()
-        );
-      }
+      /* Event handlers */
 
-      function clearText() {
-        textInput.value = "";
-        $("keywordInput").value = "";
+      el.text.addEventListener("input", updateCounter);
 
-        updateStatistics();
-        setStatus("Text cleared.");
-        textInput.focus();
-      }
-
-      textInput.addEventListener("input", updateStatistics);
-
-      $("copyButton").addEventListener("click", copyText);
-      $("downloadButton").addEventListener("click", downloadText);
-
-      $("uppercaseButton").addEventListener("click", () => {
-        textInput.value = textInput.value.toLocaleUpperCase();
-        updateStatistics();
-        setStatus("Text converted to uppercase.");
+      el.goalInput.addEventListener("input", () => {
+        updateGoal(currentStats ? currentStats.wordCount : 0);
       });
 
-      $("lowercaseButton").addEventListener("click", () => {
-        textInput.value = textInput.value.toLocaleLowerCase();
-        updateStatistics();
-        setStatus("Text converted to lowercase.");
+      el.keywordForm.addEventListener("submit", event => {
+        event.preventDefault();
+        analyzeKeyword(el.keywordInput.value);
       });
 
-      $("titleCaseButton").addEventListener("click", () => {
-        textInput.value = toTitleCase(textInput.value);
-        updateStatistics();
-        setStatus("Text converted to title case.");
-      });
-
-      $("cleanButton").addEventListener("click", cleanSpaces);
-      $("clearButton").addEventListener("click", clearText);
-
-      $("analyzeButton").addEventListener("click", () => {
-        analyzeKeyword(true);
-      });
-
-      $("keywordInput").addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-          analyzeKeyword(true);
+      el.keywordInput.addEventListener("input", () => {
+        if (el.keywordInput.value.trim()) {
+          analyzeKeyword(el.keywordInput.value);
+        } else {
+          setText(
+            el.keywordResult,
+            currentStats && currentStats.wordCount
+              ? "Enter a word or phrase to check its frequency."
+              : "Enter text and a keyword to begin."
+          );
         }
       });
 
-      $("keywordInput").addEventListener("input", () => {
-        if (!$("keywordInput").value.trim()) {
-          analyzeKeyword(false);
+      el.copy.addEventListener("click", () => {
+        if (!el.text.value) {
+          showStatus("There is no text to copy.", true);
+          return;
         }
+
+        copyText(el.text.value, "Text copied.");
       });
 
-      updateStatistics();
+      el.copyStats.addEventListener("click", () => {
+        copyText(statisticsReport(), "Text statistics copied.");
+      });
+
+      el.download.addEventListener("click", downloadText);
+
+      el.upload.addEventListener("change", () => {
+        loadTextFile(el.upload.files && el.upload.files[0]);
+      });
+
+      el.clear.addEventListener("click", () => {
+        if (!el.text.value && !el.keywordInput.value) {
+          showStatus("The editor is already empty.");
+          return;
+        }
+
+        el.text.value = "";
+        el.keywordInput.value = "";
+
+        updateCounter();
+        el.text.focus();
+
+        showStatus("Text cleared.");
+      });
+
+      setText(el.year, String(new Date().getFullYear()));
+
+      /* Initialize empty-state counts. */
+      updateCounter();
+
     })();
   </script>
+
 </body>
-</html
+</html>
