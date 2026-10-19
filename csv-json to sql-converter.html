@@ -4,1317 +4,3171 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>CSV/JSON to SQL INSERT Generator – MySQL, PostgreSQL, SQLite</title>
-  <meta name="description" content="Convert CSV, TSV, JSON arrays, and JSON Lines into SQL INSERT statements for MySQL, PostgreSQL, and SQLite. Preview rows, map columns, choose batch size, and download SQL locally.">
+  <title>CSV to SQL Converter &amp; JSON to SQL Tool | Online Tools</title>
+
+  <meta name="description"
+    content="Convert CSV or JSON to SQL CREATE TABLE and INSERT statements. Choose MySQL, PostgreSQL, SQLite or SQL Server, infer column types, and download SQL in your browser.">
+
   <meta name="robots" content="index,follow,max-image-preview:large">
-  <meta name="theme-color" content="#f6f8fc">
-  <link rel="canonical" href="https://onlinetoolsandconverters.cc/tools/csv-json-to-sql-insert-generator.html">
+  <meta name="theme-color" content="#2563eb">
+
+  <link rel="canonical"
+    href="https://onlinetoolsandconverters.cc/csv-json-to-sql-converter.html">
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="/script.js" defer></script>
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Online Tools &amp; Converters">
-  <meta property="og:title" content="CSV/JSON to SQL INSERT Generator">
-  <meta property="og:description" content="Generate SQL INSERT statements from CSV and JSON data in your browser.">
-  <meta property="og:url" content="https://onlinetoolsandconverters.cc/tools/csv-json-to-sql-insert-generator.html">
+  <meta property="og:title"
+    content="CSV &amp; JSON to SQL Converter Online - Free SQL Generator">
+  <meta property="og:description"
+    content="Turn CSV files and JSON data into SQL CREATE TABLE and INSERT statements. Select your database, review inferred column types, and download the generated SQL.">
+  <meta property="og:url"
+    content="https://onlinetoolsandconverters.cc/csv-json-to-sql-converter.html">
+
   <meta name="twitter:card" content="summary">
+  <meta name="twitter:title"
+    content="CSV &amp; JSON to SQL Converter Online">
+  <meta name="twitter:description"
+    content="Convert CSV and JSON data into SQL statements for popular databases with this free online converter.">
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "CSV/JSON to SQL INSERT Generator",
-    "url": "https://onlinetoolsandconverters.cc/tools/csv-json-to-sql-insert-generator.html",
+    "name": "CSV and JSON to SQL Converter",
+    "url": "https://onlinetoolsandconverters.cc/csv-json-to-sql-converter.html",
+    "description": "A free browser-based tool for converting CSV and JSON records into SQL CREATE TABLE and INSERT statements for MySQL, PostgreSQL, SQLite, and SQL Server.",
     "applicationCategory": "DeveloperApplication",
     "operatingSystem": "Any",
+    "browserRequirements": "Requires a modern browser with JavaScript enabled.",
     "isAccessibleForFree": true,
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
     },
-    "description": "Convert CSV, TSV, JSON arrays and JSON Lines into SQL INSERT statements for MySQL, PostgreSQL and SQLite."
+    "publisher": {
+      "@type": "Organization",
+      "name": "Online Tools & Converters",
+      "url": "https://onlinetoolsandconverters.cc/"
+    }
   }
   </script>
 
-  <link rel="stylesheet" href="../style.css">
-  <script src="../script.js" defer></script>
+  <style>
+    /* =========================================
+       CSV / JSON TO SQL CONVERTER
+       Page-specific styling, in one HTML file.
+    ========================================= */
+
+    .csql,
+    .csql * {
+      box-sizing: border-box;
+    }
+
+    .csql {
+      --csql-primary: #2563eb;
+      --csql-primary-hover: #1d4ed8;
+      --csql-text: #172033;
+      --csql-muted: #64748b;
+      --csql-border: #e2e8f0;
+      --csql-bg: #f8fafc;
+      --csql-white: #ffffff;
+      --csql-radius: 14px;
+
+      background: var(--csql-bg);
+      color: var(--csql-text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-wrap: anywhere;
+    }
+
+    .csql button,
+    .csql input,
+    .csql select,
+    .csql textarea {
+      font: inherit;
+    }
+
+    .csql button {
+      cursor: pointer;
+    }
+
+    .csql a {
+      color: var(--csql-primary);
+    }
+
+    .csql button:focus-visible,
+    .csql input:focus-visible,
+    .csql select:focus-visible,
+    .csql textarea:focus-visible,
+    .csql a:focus-visible,
+    .csql summary:focus-visible {
+      outline: 3px solid rgba(37, 99, 235, .3);
+      outline-offset: 3px;
+    }
+
+    .csql-container {
+      width: min(1120px, calc(100% - 32px));
+      margin-inline: auto;
+    }
+
+    .csql-skip {
+      position: absolute;
+      top: -100px;
+      left: 12px;
+      z-index: 100;
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: #172033;
+      background: #fff;
+    }
+
+    .csql-skip:focus {
+      top: 12px;
+    }
+
+    /* Navigation */
+
+    .csql-header {
+      background: #fff;
+      border-bottom: 1px solid var(--csql-border);
+    }
+
+    .csql-nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-block: 10px;
+    }
+
+    .csql-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--csql-text) !important;
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -.3px;
+    }
+
+    .csql-logo {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      background: var(--csql-primary);
+      color: #fff;
+      border-radius: 11px;
+      font-weight: 850;
+    }
+
+    .csql-navlinks {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .csql-navlinks a {
+      color: #475569;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 550;
+    }
+
+    .csql-navlinks a:hover {
+      color: var(--csql-primary);
+    }
+
+    /* Page introduction */
+
+    .csql-intro {
+      text-align: center;
+      padding: 36px 0 25px;
+    }
+
+    .csql-eyebrow {
+      margin: 0 0 8px;
+      color: var(--csql-primary);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+    }
+
+    .csql-intro h1 {
+      max-width: 900px;
+      margin: 0 auto 13px;
+      font-size: clamp(29px, 5vw, 43px);
+      font-weight: 800;
+      line-height: 1.17;
+      letter-spacing: -1.4px;
+    }
+
+    .csql-intro-description {
+      max-width: 790px;
+      margin: 0 auto;
+      color: var(--csql-muted);
+      font-size: 16px;
+    }
+
+    .csql-breadcrumb {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 17px;
+      color: var(--csql-muted);
+      font-size: 13px;
+    }
+
+    .csql-breadcrumb a {
+      text-decoration: none;
+    }
+
+    /* Main application */
+
+    .csql-app {
+      background: #fff;
+      border: 1px solid var(--csql-border);
+      border-radius: var(--csql-radius);
+      box-shadow: 0 8px 28px rgba(15, 23, 42, .045);
+      overflow: hidden;
+    }
+
+    .csql-app-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--csql-border);
+    }
+
+    .csql-app-heading h2 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.4;
+    }
+
+    .csql-local-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 10px;
+      border: 1px solid #dcfce7;
+      border-radius: 50px;
+      background: #f0fdf4;
+      color: #166534;
+      font-size: 12px;
+      font-weight: 650;
+    }
+
+    .csql-local-dot {
+      height: 7px;
+      width: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+
+    /* Configuration */
+
+    .csql-settings {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+      padding: 20px;
+      background: #fbfdff;
+      border-bottom: 1px solid var(--csql-border);
+    }
+
+    .csql-field {
+      min-width: 0;
+    }
+
+    .csql-field label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .csql-input,
+    .csql-select {
+      width: 100%;
+      min-height: 42px;
+      padding: 9px 11px;
+      border: 1px solid #cbd5e1;
+      border-radius: 9px;
+      background: #fff;
+      color: var(--csql-text);
+      font-size: 14px;
+    }
+
+    .csql-field-help {
+      margin: 6px 0 0;
+      font-size: 11px;
+      line-height: 1.6;
+      color: var(--csql-muted);
+    }
+
+    .csql-check-options {
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px 22px;
+      padding: 15px 20px;
+      border-bottom: 1px solid var(--csql-border);
+      background: #fff;
+    }
+
+    .csql-checkbox {
+      display: inline-flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #334155;
+      cursor: pointer;
+    }
+
+    .csql-checkbox input {
+      width: 16px;
+      height: 16px;
+      margin-top: 3px;
+      flex: 0 0 auto;
+      accent-color: var(--csql-primary);
+    }
+
+    /* Input/output workspaces */
+
+    .csql-workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 0;
+    }
+
+    .csql-panel {
+      min-width: 0;
+      padding: 19px;
+    }
+
+    .csql-panel + .csql-panel {
+      border-left: 1px solid var(--csql-border);
+    }
+
+    .csql-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 11px;
+    }
+
+    .csql-panel-header h3 {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    .csql-panel-header span {
+      color: var(--csql-muted);
+      font-size: 12px;
+    }
+
+    .csql-editor {
+      display: block;
+      width: 100%;
+      min-height: 390px;
+      padding: 13px;
+      resize: vertical;
+      background: #fff;
+      color: #172033;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas,
+        "Liberation Mono", monospace;
+      font-size: 12px;
+      line-height: 1.7;
+      tab-size: 2;
+    }
+
+    .csql-editor:focus {
+      outline: none;
+      border-color: var(--csql-primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, .1);
+    }
+
+    .csql-editor::placeholder {
+      color: #94a3b8;
+      opacity: 1;
+    }
+
+    .csql-editor-help {
+      margin: 8px 0 0;
+      color: var(--csql-muted);
+      font-size: 12px;
+    }
+
+    .csql-action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 13px;
+    }
+
+    .csql-btn {
+      min-height: 39px;
+      padding: 9px 13px;
+      border: 1px solid var(--csql-border);
+      border-radius: 9px;
+      background: #fff;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .csql-btn:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+
+    .csql-btn-primary {
+      color: #fff;
+      background: var(--csql-primary);
+      border-color: var(--csql-primary);
+    }
+
+    .csql-btn-primary:hover {
+      background: var(--csql-primary-hover);
+      border-color: var(--csql-primary-hover);
+      color: #fff;
+    }
+
+    .csql-btn:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
+    .csql-file-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .csql-file-input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .csql-status {
+      min-height: 25px;
+      margin: 13px 20px 0;
+      padding-bottom: 6px;
+      font-size: 13px;
+      color: #166534;
+    }
+
+    .csql-status-error {
+      color: #b91c1c;
+    }
+
+    .csql-result-summary {
+      margin: 0 20px 18px;
+      padding: 12px 14px;
+      border: 1px solid var(--csql-border);
+      border-radius: 10px;
+      background: #f8fafc;
+      color: #475569;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    /* Article */
+
+    .csql-content {
+      padding: 36px 0 58px;
+    }
+
+    .csql-content-intro h2 {
+      margin: 0 0 12px;
+      font-size: clamp(23px, 4vw, 30px);
+      line-height: 1.35;
+      letter-spacing: -.6px;
+    }
+
+    .csql-content-intro p {
+      max-width: 870px;
+      margin: 0 0 14px;
+      color: #475569;
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .csql-guide {
+      margin-top: 24px;
+      padding: 6px 22px;
+      border: 1px solid var(--csql-border);
+      border-radius: 14px;
+      background: #fff;
+    }
+
+    .csql-guide details {
+      padding: 18px 0;
+      border-bottom: 1px solid var(--csql-border);
+    }
+
+    .csql-guide details:last-child {
+      border-bottom: 0;
+    }
+
+    .csql-guide summary {
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 750;
+      line-height: 1.6;
+      color: var(--csql-text);
+    }
+
+    .csql-guide summary::marker {
+      color: var(--csql-primary);
+    }
+
+    .csql-guide details[open] summary {
+      margin-bottom: 13px;
+    }
+
+    .csql-guide h3 {
+      margin: 22px 0 8px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .csql-guide p,
+    .csql-guide li {
+      color: #475569;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+
+    .csql-guide p {
+      margin: 0 0 14px;
+    }
+
+    .csql-guide p:last-child {
+      margin-bottom: 0;
+    }
+
+    .csql-guide ul,
+    .csql-guide ol {
+      padding-left: 23px;
+      margin: 12px 0 17px;
+    }
+
+    .csql-guide li {
+      margin-bottom: 7px;
+    }
+
+    .csql-guide code,
+    .csql-related code {
+      padding: 2px 5px;
+      background: #f1f5f9;
+      border-radius: 4px;
+      font-size: .92em;
+    }
+
+    .csql-related {
+      margin-top: 30px;
+    }
+
+    .csql-related h2 {
+      margin: 0 0 12px;
+      font-size: 21px;
+    }
+
+    .csql-related-card {
+      display: block;
+      padding: 15px;
+      border: 1px solid var(--csql-border);
+      border-radius: 10px;
+      background: #fff;
+      text-decoration: none;
+    }
+
+    .csql-related-card strong {
+      display: block;
+      color: var(--csql-text);
+      margin-bottom: 4px;
+    }
+
+    .csql-related-card span {
+      color: var(--csql-muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* Footer */
+
+    .csql-footer {
+      padding: 24px 0;
+      background: #fff;
+      border-top: 1px solid var(--csql-border);
+    }
+
+    .csql-footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .csql-footer p {
+      margin: 0;
+      color: var(--csql-muted);
+      font-size: 12px;
+    }
+
+    .csql-footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .csql-footer-links a {
+      color: #475569;
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .csql-sr-only {
+      position: absolute;
+      height: 1px;
+      width: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 800px) {
+      .csql-container {
+        width: calc(100% - 24px);
+      }
+
+      .csql-nav {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 11px;
+      }
+
+      .csql-navlinks {
+        gap: 13px;
+      }
+
+      .csql-settings {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 15px;
+        gap: 12px;
+      }
+
+      .csql-workspace {
+        grid-template-columns: 1fr;
+      }
+
+      .csql-panel + .csql-panel {
+        border-left: 0;
+        border-top: 1px solid var(--csql-border);
+      }
+
+      .csql-editor {
+        min-height: 270px;
+      }
+
+      .csql-footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .csql-navlinks {
+        gap: 10px;
+      }
+
+      .csql-navlinks a {
+        font-size: 12px;
+      }
+
+      .csql-brand {
+        font-size: 14px;
+      }
+
+      .csql-logo {
+        height: 34px;
+        width: 34px;
+      }
+
+      .csql-intro {
+        padding-top: 27px;
+      }
+
+      .csql-intro h1 {
+        letter-spacing: -.8px;
+      }
+
+      .csql-settings {
+        grid-template-columns: 1fr;
+      }
+
+      .csql-check-options {
+        flex-direction: column;
+        padding: 14px;
+        gap: 12px;
+      }
+
+      .csql-panel {
+        padding: 13px;
+      }
+
+      .csql-editor {
+        font-size: 11px;
+        min-height: 250px;
+      }
+
+      .csql-action-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .csql-btn,
+      .csql-file-label {
+        justify-content: center;
+        text-align: center;
+      }
+
+      .csql-guide {
+        padding-inline: 15px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .csql *,
+      .csql *::before,
+      .csql *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="../index.html" aria-label="Website home">
-      <span class="brand-mark" aria-hidden="true">✦</span>
-      <span class="brand-text">Online Tools <span>&amp; Converters</span></span>
-    </a>
+  <a class="csql-skip" href="#csql-tool">Skip to converter</a>
 
-    <button class="nav-toggle" type="button"
-      aria-label="Open navigation menu"
-      aria-expanded="false" aria-controls="sql-navigation">
-      <span class="nav-toggle-bars"></span>
-    </button>
+  <div class="csql">
 
-    <nav class="primary-nav" id="sql-navigation" aria-label="Main navigation">
-      <ul>
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../index.html#tools">All tools</a></li>
-        <li><a href="../about.html">About</a></li>
-        <li><a href="../contact.html">Contact</a></li>
-      </ul>
-    </nav>
+    <header class="csql-header">
+      <div class="csql-container csql-nav">
+
+        <a class="csql-brand" href="/"
+          aria-label="Online Tools and Converters home">
+          <span class="csql-logo" aria-hidden="true">OT</span>
+          <span>Online Tools &amp; Converters</span>
+        </a>
+
+        <nav class="csql-navlinks" aria-label="Main navigation">
+          <a href="/">Home</a>
+          <a href="/#tools">All tools</a>
+          <a href="/#categories">Categories</a>
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
+        </nav>
+
+      </div>
+    </header>
+
+    <main>
+
+      <section class="csql-container csql-intro">
+
+        <p class="csql-eyebrow">Free developer and data tool</p>
+
+        <h1>CSV &amp; JSON to SQL Converter</h1>
+
+        <p class="csql-intro-description">
+          Convert CSV files and JSON data into SQL CREATE TABLE
+          and INSERT statements. Choose MySQL, PostgreSQL, SQLite,
+          or SQL Server, review automatically detected data types,
+          and copy or download your generated SQL.
+        </p>
+
+        <nav class="csql-breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Home</a>
+          <span aria-hidden="true">/</span>
+          <a href="/#categories">Developer &amp; Web</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">CSV / JSON to SQL</span>
+        </nav>
+
+      </section>
+
+      <!-- CONVERTER -->
+
+      <section class="csql-container" id="csql-tool"
+        aria-labelledby="csql-tool-heading">
+
+        <div class="csql-app">
+
+          <div class="csql-app-heading">
+
+            <h2 id="csql-tool-heading">Convert your data to SQL</h2>
+
+            <span class="csql-local-badge">
+              <span class="csql-local-dot" aria-hidden="true"></span>
+              Runs in your browser
+            </span>
+
+          </div>
+
+          <!-- OPTIONS -->
+
+          <div class="csql-settings">
+
+            <div class="csql-field">
+              <label for="csql-format">Input format</label>
+
+              <select class="csql-select" id="csql-format">
+                <option value="csv">CSV / TSV</option>
+                <option value="json">JSON</option>
+              </select>
+
+              <p class="csql-field-help">
+                Choose the format of your source data.
+              </p>
+            </div>
+
+            <div class="csql-field">
+              <label for="csql-dialect">SQL database</label>
+
+              <select class="csql-select" id="csql-dialect">
+                <option value="mysql">MySQL</option>
+                <option value="postgres">PostgreSQL</option>
+                <option value="sqlite">SQLite</option>
+                <option value="sqlserver">SQL Server</option>
+              </select>
+
+              <p class="csql-field-help">
+                SQL identifiers, data types, and values are formatted
+                for the selected dialect.
+              </p>
+            </div>
+
+            <div class="csql-field">
+              <label for="csql-table">Table name</label>
+
+              <input
+                class="csql-input"
+                id="csql-table"
+                type="text"
+                value="imported_data"
+                maxlength="64"
+                autocomplete="off"
+                spellcheck="false"
+                placeholder="imported_data"
+              >
+
+              <p class="csql-field-help">
+                Use letters, numbers and underscores; start with a letter
+                or underscore.
+              </p>
+            </div>
+
+            <div class="csql-field" id="csql-delimiter-field">
+              <label for="csql-delimiter">CSV delimiter</label>
+
+              <select class="csql-select" id="csql-delimiter">
+                <option value="auto">Auto-detect</option>
+                <option value=",">Comma (,)</option>
+                <option value=";">Semicolon (;)</option>
+                <option value="tab">Tab</option>
+                <option value="|">Pipe (|)</option>
+              </select>
+
+              <p class="csql-field-help">
+                Supports quoted fields containing commas and line breaks.
+              </p>
+            </div>
+
+            <div class="csql-field">
+              <label for="csql-batch">Rows per INSERT statement</label>
+
+              <select class="csql-select" id="csql-batch">
+                <option value="1">1 row</option>
+                <option value="10">10 rows</option>
+                <option value="50">50 rows</option>
+                <option value="100" selected>100 rows</option>
+                <option value="500">500 rows</option>
+              </select>
+
+              <p class="csql-field-help">
+                Smaller batches can be easier to inspect and troubleshoot.
+              </p>
+            </div>
+
+            <div class="csql-field">
+              <label for="csql-empty">Empty CSV fields</label>
+
+              <select class="csql-select" id="csql-empty">
+                <option value="null" selected>Treat empty fields as NULL</option>
+                <option value="empty">Preserve empty strings</option>
+              </select>
+
+              <p class="csql-field-help">
+                This option applies to blank CSV fields.
+              </p>
+            </div>
+
+          </div>
+
+          <div class="csql-check-options">
+
+            <label class="csql-checkbox" id="csql-header-option">
+              <input type="checkbox" id="csql-has-header" checked>
+              <span>First CSV row contains column headers</span>
+            </label>
+
+            <label class="csql-checkbox">
+              <input type="checkbox" id="csql-infer-types" checked>
+              <span>Infer SQL column types automatically</span>
+            </label>
+
+            <label class="csql-checkbox">
+              <input type="checkbox" id="csql-create-table" checked>
+              <span>Include CREATE TABLE statement</span>
+            </label>
+
+          </div>
+
+          <!-- INPUT AND OUTPUT -->
+
+          <div class="csql-workspace">
+
+            <section class="csql-panel"
+              aria-labelledby="csql-input-heading">
+
+              <div class="csql-panel-header">
+                <h3 id="csql-input-heading">Source data</h3>
+                <span id="csql-input-count">0 characters</span>
+              </div>
+
+              <label class="csql-sr-only" for="csql-input">
+                Paste CSV or JSON data
+              </label>
+
+              <textarea
+                class="csql-editor"
+                id="csql-input"
+                spellcheck="false"
+                autocapitalize="off"
+                autocomplete="off"
+                placeholder="Paste your CSV or JSON data here..."
+                aria-describedby="csql-input-help"
+              ></textarea>
+
+              <p class="csql-editor-help" id="csql-input-help">
+                Paste data, load a sample, or select a local file.
+              </p>
+
+              <div class="csql-action-row">
+
+                <button class="csql-btn"
+                  type="button" id="csql-sample-csv">
+                  Sample CSV
+                </button>
+
+                <button class="csql-btn"
+                  type="button" id="csql-sample-json">
+                  Sample JSON
+                </button>
+
+                <label class="csql-btn csql-file-label"
+                  for="csql-file">
+                  Open file
+                </label>
+
+                <input
+                  class="csql-file-input"
+                  type="file"
+                  id="csql-file"
+                  accept=".csv,.tsv,.txt,.json,.jsonl,.ndjson,text/csv,application/json,text/plain"
+                >
+
+                <button class="csql-btn"
+                  type="button" id="csql-clear">
+                  Clear
+                </button>
+
+              </div>
+
+            </section>
+
+            <section class="csql-panel"
+              aria-labelledby="csql-output-heading">
+
+              <div class="csql-panel-header">
+                <h3 id="csql-output-heading">Generated SQL</h3>
+                <span id="csql-output-count">0 characters</span>
+              </div>
+
+              <label class="csql-sr-only" for="csql-output">
+                Generated SQL output
+              </label>
+
+              <textarea
+                class="csql-editor"
+                id="csql-output"
+                spellcheck="false"
+                readonly
+                placeholder="Your CREATE TABLE and INSERT statements will appear here..."
+                aria-describedby="csql-output-help"
+              ></textarea>
+
+              <p class="csql-editor-help" id="csql-output-help">
+                Review the generated statements before running them
+                against a database.
+              </p>
+
+              <div class="csql-action-row">
+
+                <button class="csql-btn csql-btn-primary"
+                  type="button" id="csql-convert">
+                  Convert to SQL
+                </button>
+
+                <button class="csql-btn"
+                  type="button" id="csql-copy">
+                  Copy SQL
+                </button>
+
+                <button class="csql-btn"
+                  type="button" id="csql-download">
+                  Download .sql
+                </button>
+
+              </div>
+
+            </section>
+
+          </div>
+
+          <p class="csql-status" id="csql-status"
+            role="status" aria-live="polite"></p>
+
+          <div class="csql-result-summary" id="csql-summary">
+            Paste a CSV table or a JSON object/array, select your
+            database, and click Convert to SQL.
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- HELPFUL, EXPANDABLE SEO ARTICLE -->
+
+      <article class="csql-container csql-content">
+
+        <header class="csql-content-intro">
+
+          <h2>Convert CSV and JSON Data to SQL Online</h2>
+
+          <p>
+            CSV and JSON are widely used formats for moving structured
+            data between applications, spreadsheets, APIs, and
+            data-processing workflows. Relational databases, however,
+            generally store imported information in tables with
+            defined columns and data types. Turning a CSV file or
+            JSON dataset into SQL statements can involve writing
+            table definitions, identifying columns, escaping values,
+            and preparing one or more INSERT statements.
+          </p>
+
+          <p>
+            This CSV to SQL and JSON to SQL converter helps automate
+            that preparation. Paste your data or open a supported
+            local file, choose your SQL database, review the table
+            name and conversion settings, and generate SQL statements
+            in your browser. When type inference is enabled, the
+            converter examines the values to suggest suitable SQL
+            types for common numbers, booleans, dates, and text.
+          </p>
+
+          <p>
+            You can create a table definition alongside the insert
+            statements, change the number of rows included in each
+            INSERT statement, copy the resulting SQL, or download
+            it as a file. The converter is intended to make ordinary
+            data-import preparation easier while leaving you in
+            control of reviewing and running the final SQL.
+          </p>
+
+        </header>
+
+        <div class="csql-guide">
+
+          <details>
+            <summary>1. What is a CSV to SQL converter?</summary>
+
+            <p>
+              A CSV to SQL converter transforms tabular text data
+              into SQL statements that can be used with a relational
+              database. CSV stands for comma-separated values.
+              A typical CSV file contains records separated by
+              newlines, with individual fields separated by
+              commas or another delimiter. The first row often
+              contains column names, while subsequent rows
+              contain the data.
+            </p>
+
+            <p>
+              A converter reads the rows, determines which columns
+              exist, interprets the values where possible, and
+              generates statements for the selected database.
+              These commonly include a CREATE TABLE statement
+              that defines a table and INSERT statements that
+              add records to it. If a table already exists,
+              you may choose to generate only the INSERT statements.
+            </p>
+
+            <p>
+              This is useful when exporting spreadsheet data,
+              preparing test fixtures, migrating a small dataset,
+              or converting a structured report into SQL.
+              Instead of writing every values list by hand,
+              you can generate an initial script and inspect
+              the result before executing it.
+            </p>
+
+            <p>
+              CSV is a text format, so it does not intrinsically
+              record the database type of each column. A converter
+              must either infer likely types from the values
+              or use a conservative text type. Review inferred
+              types carefully when leading zeros, identifiers,
+              currency values, or other precision-sensitive
+              data must be preserved exactly.
+            </p>
+          </details>
+
+          <details>
+            <summary>2. What is a JSON to SQL converter?</summary>
+
+            <p>
+              A JSON to SQL converter turns JSON records into SQL
+              table definitions and data-insertion statements.
+              JSON represents data through objects, arrays,
+              strings, numbers, booleans, and null values.
+              Relational databases use tables, columns, and rows,
+              so conversion involves mapping those structures
+              into a format supported by the selected database.
+            </p>
+
+            <p>
+              This tool accepts a single JSON object or an array
+              of JSON objects. The object keys are used to build
+              the table's columns, and the records provide
+              their corresponding values. When objects have
+              different keys, the converter collects the unique
+              keys and leaves absent values as SQL NULL.
+            </p>
+
+            <p>
+              Numbers and booleans can be mapped to appropriate
+              SQL types, while strings and complex nested values
+              require additional care. In this implementation,
+              nested objects and arrays are serialized as JSON
+              text rather than expanded into separate relational
+              tables. That preserves their content in a simple
+              column, but it does not automatically design
+              relationships between multiple tables.
+            </p>
+
+            <p>
+              JSON type information can make some conversions
+              more predictable than CSV conversion because JSON
+              distinguishes numbers, booleans, strings, and null.
+              Even so, a string containing a date or numeric-looking
+              text remains a string unless a suitable conversion
+              rule can safely identify the value.
+            </p>
+          </details>
+
+          <details>
+            <summary>3. How to convert CSV to SQL step by step</summary>
+
+            <p>
+              Start by selecting CSV / TSV as the input format.
+              Paste your table into the source editor or choose
+              a local CSV file. If the first row contains headings,
+              leave the column-header option enabled. Otherwise,
+              the tool creates generic names such as column_1
+              and column_2.
+            </p>
+
+            <ol>
+              <li>Choose CSV / TSV as the source format.</li>
+              <li>Paste the data or open a local file.</li>
+              <li>Choose the delimiter if auto-detection is unsuitable.</li>
+              <li>Set the target database dialect.</li>
+              <li>Enter a valid table name.</li>
+              <li>Review the type-inference and empty-field options.</li>
+              <li>Choose whether the output should include CREATE TABLE.</li>
+              <li>Click Convert to SQL and inspect the generated statements.</li>
+              <li>Copy the result or download the SQL file.</li>
+            </ol>
+
+            <p>
+              A useful way to begin is with a small representative
+              sample. Check whether column headings have been
+              interpreted correctly, whether numbers remain numeric,
+              and whether text containing punctuation is preserved.
+              If the sample looks correct, convert the larger
+              dataset and review the resulting script before using it.
+            </p>
+
+            <p>
+              The generated script prepares SQL; it does not
+              connect to your database or execute commands.
+              Importing the data is a separate step that should
+              follow your database's normal backup, testing,
+              and access-control practices.
+            </p>
+          </details>
+
+          <details>
+            <summary>4. How to convert JSON to SQL step by step</summary>
+
+            <p>
+              Select JSON as the input format and paste an object
+              or an array of objects into the source editor.
+              You can also choose a local JSON file. The data
+              must be valid JSON, meaning that strings and object
+              keys use double quotes, values are separated by
+              commas, and the document follows the expected
+              object or array structure.
+            </p>
+
+            <ol>
+              <li>Choose JSON in the input-format selector.</li>
+              <li>Paste a JSON object or an array of objects.</li>
+              <li>Select your target SQL database.</li>
+              <li>Enter the desired table name.</li>
+              <li>Choose whether to generate a CREATE TABLE statement.</li>
+              <li>Set a suitable batch size for INSERT statements.</li>
+              <li>Click Convert to SQL and review the result.</li>
+              <li>Copy the SQL or download it for further inspection.</li>
+            </ol>
+
+            <p>
+              For example, a JSON array containing objects with
+              an id, name, and active property can be mapped to
+              a table with three corresponding columns. The
+              converter examines the values for each property
+              and selects likely column types when inference
+              is enabled.
+            </p>
+
+            <p>
+              This converter does not fetch external API URLs,
+              execute database queries, or infer a complete
+              relational schema from deeply nested relationships.
+              Convert and review the supplied records locally,
+              then adapt the output to match your application's
+              actual database structure.
+            </p>
+          </details>
+
+          <details>
+            <summary>5. Which SQL databases are supported?</summary>
+
+            <p>
+              SQL dialects differ in their identifier quoting,
+              type names, boolean representation, and some aspects
+              of SQL syntax. Selecting the correct database matters
+              because a statement that works in one database may
+              need adjustment before it can run in another.
+            </p>
+
+            <h3>MySQL</h3>
+            <p>
+              MySQL commonly uses backticks around identifiers
+              and supports types such as INT, BIGINT, DECIMAL,
+              DATE, DATETIME, and TEXT. The converter generates
+              MySQL-oriented names and value literals. Review
+              the output against your server's SQL mode,
+              storage engine, constraints, and actual column sizes.
+            </p>
+
+            <h3>PostgreSQL</h3>
+            <p>
+              PostgreSQL uses double-quoted identifiers and
+              supports types such as INTEGER, BIGINT, NUMERIC,
+              BOOLEAN, DATE, TIMESTAMP, and TEXT. PostgreSQL
+              type choices and application requirements may
+              call for more precise numeric types, timezone
+              handling, or explicit constraints.
+            </p>
+
+            <h3>SQLite</h3>
+            <p>
+              SQLite uses double-quoted identifiers and commonly
+              stores integers, real numbers, and text using its
+              dynamic type system. The generated statements
+              use familiar SQLite-compatible type names, but
+              your application may prefer additional validation
+              or explicit constraints for important fields.
+            </p>
+
+            <h3>Microsoft SQL Server</h3>
+            <p>
+              SQL Server uses bracket-quoted identifiers and
+              supports types such as INT, BIGINT, FLOAT, BIT,
+              DATE, DATETIME2, and NVARCHAR. This converter
+              uses SQL Server-style boolean values and string
+              literals. Check the output against the actual
+              SQL Server version and destination schema.
+            </p>
+
+            <p>
+              Database-specific behaviour can depend on versions,
+              configuration, collation, constraints, and existing
+              table definitions. Treat the selected dialect as
+              a formatting and type-generation choice, not a
+              guarantee that every generated script will suit
+              every database configuration without review.
+            </p>
+          </details>
+
+          <details>
+            <summary>6. How automatic SQL data type inference works</summary>
+
+            <p>
+              Automatic type inference examines the non-empty
+              values in a column and looks for consistent patterns.
+              Whole numbers may be assigned an integer type,
+              decimal values may receive a decimal or floating
+              point type, true and false values may become
+              booleans, and recognisable ISO-style dates may
+              become DATE or TIMESTAMP types. Text that does
+              not fit a consistent pattern is generally kept
+              as text.
+            </p>
+
+            <p>
+              The conversion examines the entire column rather
+              than using only its first value. This helps avoid
+              choosing an integer type for a column that later
+              contains ordinary text. However, inferred data
+              types are still suggestions. A phone number,
+              postal code, or product identifier can contain
+              only digits while still representing text rather
+              than a quantity.
+            </p>
+
+            <p>
+              Leading zeros are especially important. Values
+              such as 00125 may represent a code that must
+              remain exactly as supplied. The converter
+              deliberately avoids treating digit strings with
+              significant leading zeros as ordinary integers.
+              If the source format provides explicit JSON
+              strings, the converter preserves their string
+              character unless a date pattern is recognised.
+            </p>
+
+            <p>
+              Numeric precision also deserves attention.
+              Very large integers or high-precision decimal
+              quantities can exceed the safe range of browser
+              number handling or the selected SQL type.
+              Keep identifiers that require exact digit
+              preservation as strings, and verify currency,
+              scientific, and precision-sensitive values before
+              using generated statements in production.
+            </p>
+
+            <p>
+              If automatic inference is disabled, the generated
+              CREATE TABLE statement uses a text-oriented
+              type for every column. That is a more conservative
+              starting point when type information is uncertain,
+              although the destination application's own schema
+              may require explicit type definitions afterward.
+            </p>
+          </details>
+
+          <details>
+            <summary>7. What are CREATE TABLE and INSERT statements?</summary>
+
+            <p>
+              A CREATE TABLE statement defines a table's name,
+              column names, and column types. It establishes
+              a structure into which data can be inserted.
+              The exact definition may also include keys,
+              constraints, indexes, default values, and
+              relationships, depending on the requirements
+              of the application.
+            </p>
+
+            <p>
+              An INSERT statement adds one or more records
+              to a table. Its column list identifies where
+              each value belongs, and its VALUES clause
+              provides the corresponding data. When many
+              rows are inserted, grouping multiple rows into
+              a single INSERT can reduce repetitive SQL text
+              and simplify importing a dataset.
+            </p>
+
+            <p>
+              This converter can generate both CREATE TABLE
+              and INSERT statements. If the destination table
+              already exists and its schema is compatible,
+              you can turn off CREATE TABLE to generate only
+              the insert statements.
+            </p>
+
+            <p>
+              The converter does not detect whether a table
+              already exists in your database. Before running
+              a script that creates a table, confirm the target
+              schema and name. If the table exists, a new
+              CREATE TABLE statement may fail or require
+              changes to match your database's current structure.
+            </p>
+          </details>
+
+          <details>
+            <summary>8. How SQL identifiers and column names are handled</summary>
+
+            <p>
+              SQL identifiers are names used for database
+              objects such as tables and columns. CSV headings
+              and JSON object keys are not always suitable
+              as direct SQL identifiers. They may contain
+              spaces, punctuation, accented characters, or
+              other symbols that require special handling.
+            </p>
+
+            <p>
+              This converter builds column names by replacing
+              unsupported characters with underscores, handling
+              names that begin with digits, supplying fallback
+              names for empty headings, and adding suffixes
+              when sanitisation creates duplicate names.
+              For example, a heading such as First Name can
+              become First_Name.
+            </p>
+
+            <p>
+              The target table name is validated separately.
+              The converter expects a simple identifier made
+              of letters, digits, and underscores, starting
+              with a letter or underscore. It then quotes
+              identifiers according to the selected SQL dialect.
+              Schema-qualified names and arbitrary SQL fragments
+              are deliberately not accepted in that field.
+            </p>
+
+            <p>
+              Automatic name cleanup can change the original
+              headings. Review the column mapping before
+              importing important data, especially when
+              applications or reports expect exact column names.
+              A generated identifier may be valid SQL but
+              still differ from the name your application
+              expects to use.
+            </p>
+          </details>
+
+          <details>
+            <summary>9. How CSV delimiters, headers, and quoted fields work</summary>
+
+            <p>
+              A delimiter separates adjacent CSV fields. Commas
+              are common, but semicolons, tabs, and pipe
+              characters are also used in exported datasets.
+              The converter can try to detect a delimiter
+              automatically, or you can choose it explicitly
+              if the source file uses a less common format.
+            </p>
+
+            <p>
+              CSV fields may contain quoted commas, double
+              quotes, or line breaks. A reliable parser must
+              understand quotes instead of treating every
+              comma or newline as a field or record boundary.
+              This implementation recognises quoted fields
+              and doubled double quotes in standard-style CSV
+              input.
+            </p>
+
+            <p>
+              The first row often contains column headings.
+              When the header option is enabled, that row
+              defines column names and the following records
+              become the data. When it is disabled, every
+              row is treated as data and generic column names
+              are generated.
+            </p>
+
+            <p>
+              If columns appear misaligned, check the delimiter
+              first, then inspect how quotation marks are used.
+              Spreadsheet exports may also contain a byte-order
+              mark or formatting that changes how the first
+              heading appears. Review the first few rows after
+              conversion rather than assuming auto-detection
+              will understand every possible file variant.
+            </p>
+          </details>
+
+          <details>
+            <summary>10. How null values and empty CSV fields are handled</summary>
+
+            <p>
+              A missing value and an empty string are not
+              always the same thing in a database. SQL NULL
+              generally represents the absence of a value,
+              while an empty string is a present text value
+              containing no characters. That distinction can
+              matter when querying data, filtering results,
+              validating records, or applying constraints.
+            </p>
+
+            <p>
+              For CSV input, the converter provides an option
+              that treats empty fields as NULL. When this
+              option is disabled, empty fields are preserved
+              as empty strings. Choose the behaviour that
+              matches your source data and destination schema.
+            </p>
+
+            <p>
+              For JSON input, a field whose value is explicitly
+              null becomes SQL NULL. If a property is missing
+              from one object in an array, the corresponding
+              generated column receives NULL for that row.
+              An empty JSON string remains an empty string.
+              These cases should not be conflated during
+              data migration.
+            </p>
+
+            <p>
+              Real datasets may need more specialised rules.
+              A missing field might require a database default,
+              while a blank date may need to be transformed
+              before insertion. Review how empty and absent
+              fields should behave in the actual application
+              instead of relying on a universal conversion rule.
+            </p>
+          </details>
+
+          <details>
+            <summary>11. How SQL string escaping helps preserve text</summary>
+
+            <p>
+              Text values sometimes contain quotation marks,
+              backslashes, punctuation, or line breaks. SQL
+              uses delimiters around string literals, so
+              those characters must be represented correctly
+              to avoid breaking the generated statement.
+              A converter must also distinguish data values
+              from SQL syntax.
+            </p>
+
+            <p>
+              This converter escapes single quotation marks
+              in text literals and applies additional
+              backslash handling for MySQL. It quotes
+              table and column names separately using the
+              selected database's identifier style.
+              Ordinary numeric values are emitted as numeric
+              literals when the inferred type supports that
+              interpretation; text is quoted as text.
+            </p>
+
+            <p>
+              Escaping does not mean that every generated
+              script is automatically suitable for every
+              production environment. SQL modes, special
+              characters, database encodings, type limits,
+              constraints, and application-specific rules
+              may affect the final result. Review statements
+              before execution, especially when the input
+              contains user-supplied or untrusted data.
+            </p>
+
+            <p>
+              For long-lived production software, prepared
+              statements and parameterised database APIs
+              are usually preferable to constructing SQL
+              dynamically from external values. This tool
+              is useful for preparing and reviewing import
+              scripts, but it does not replace the safeguards
+              required in an application's database layer.
+            </p>
+          </details>
+
+          <details>
+            <summary>12. Can you convert data locally without uploading files?</summary>
+
+            <p>
+              Yes. The conversion engine in this page reads
+              the source text and processes it in the browser.
+              It constructs the output from the entered data
+              without sending that data to a conversion API.
+              The local-file input reads selected files
+              through the browser's file interface.
+            </p>
+
+            <p>
+              Browser-based processing can be convenient
+              for development data, sample datasets, and
+              other material that you would prefer not to
+              transmit to a remote conversion service.
+              It also avoids the need to configure a
+              dedicated conversion server for ordinary
+              supported inputs.
+            </p>
+
+            <p>
+              Local processing does not automatically make
+              every dataset safe to handle in every context.
+              Your browser, device, installed extensions,
+              hosting configuration, analytics scripts, or
+              surrounding website code may have separate
+              behaviour. The claim here applies to the
+              conversion code included in this page.
+            </p>
+
+            <p>
+              Do not use browser tools as a substitute for
+              an approved environment when handling regulated,
+              highly confidential, or otherwise restricted
+              information. Follow your organisation's data
+              handling requirements and check any additional
+              scripts running on the website.
+            </p>
+          </details>
+
+          <details>
+            <summary>13. How to handle larger datasets and batch inserts</summary>
+
+            <p>
+              A large CSV or JSON dataset can produce a long
+              SQL script. Splitting the rows into batches
+              creates multiple INSERT statements instead
+              of putting every record into one enormous
+              statement. That can make an output easier
+              to inspect, copy, troubleshoot, and run in
+              manageable groups.
+            </p>
+
+            <p>
+              This converter lets you choose batches of
+              1, 10, 50, 100, or 500 rows per INSERT statement.
+              The best setting depends on the database,
+              network path, client software, statement-size
+              limits, and the amount of data in each record.
+              Larger batches reduce the number of statements
+              but produce larger individual commands.
+            </p>
+
+            <p>
+              The browser-based implementation limits an
+              individual conversion to 10,000 data rows
+              and 200 columns. This is a practical guard
+              against generating excessively large output
+              that could make a browser unresponsive.
+              Processing time also depends on record length,
+              nested values, and the device being used.
+            </p>
+
+            <p>
+              For very large imports, a database's native
+              bulk-loading or staging-table facilities
+              may be more appropriate than generating
+              thousands of SQL value literals. Keep
+              a backup, test on a small subset, and use
+              the import method recommended for your
+              database environment.
+            </p>
+          </details>
+
+          <details>
+            <summary>14. Common CSV and JSON to SQL conversion errors</summary>
+
+            <p>
+              Invalid JSON is a common source of conversion
+              errors. JSON requires double-quoted strings
+              and object keys, commas between elements,
+              and matching brackets and braces. A trailing
+              comma or an unescaped quote can make a document
+              invalid. Read the error message and check
+              the input near the reported position.
+            </p>
+
+            <p>
+              CSV problems often involve the wrong delimiter,
+              missing quotation marks, inconsistent headers,
+              or data that contains unexpected line breaks.
+              If the columns look shifted, try explicitly
+              choosing the delimiter and verify the first
+              row. Text copied from spreadsheets may also
+              contain tabs or separators other than commas.
+            </p>
+
+            <p>
+              SQL problems can arise when a table already
+              exists, a generated type does not match the
+              destination schema, a column name is changed
+              during sanitisation, or a value violates
+              a database constraint. An INSERT statement
+              can be syntactically correct and still fail
+              because a target column requires a different
+              type, a value is too long, or a key is duplicated.
+            </p>
+
+            <p>
+              For troubleshooting, start with a small sample.
+              Convert a few records, inspect the generated
+              schema and statements, and test them in a
+              development database. Fix the underlying
+              format or schema mismatch before running
+              the full import. Never assume that generating
+              SQL means the target database has already
+              accepted or validated the data.
+            </p>
+          </details>
+
+          <details>
+            <summary>15. Common use cases for converting CSV and JSON to SQL</summary>
+
+            <p>
+              Spreadsheet imports are a common use case.
+              A team might export a CSV file from a spreadsheet
+              application and need to insert those records
+              into a relational database. Generating SQL
+              can help prepare a repeatable script for
+              a small data transfer or development task.
+            </p>
+
+            <p>
+              Developers may receive JSON arrays from APIs
+              or exported application records. Turning
+              those records into SQL statements can help
+              create sample tables, seed test environments,
+              inspect fields, and prepare data for migration.
+              JSON type information can also help identify
+              which columns naturally contain numbers,
+              booleans, strings, or null values.
+            </p>
+
+            <p>
+              Database administrators and analysts may
+              use generated statements for staging data,
+              reproducing a small dataset, preparing
+              demonstrations, and sharing reproducible
+              test cases. Teachers and students can use
+              the output to understand how tabular records
+              map to SQL columns and VALUES clauses.
+            </p>
+
+            <p>
+              The generated output remains a starting point.
+              Production data migrations may require
+              primary keys, foreign keys, uniqueness
+              constraints, transactions, indexes,
+              transformations, and validation queries.
+              This converter focuses on creating a basic
+              table definition and inserting records;
+              it does not automatically design or verify
+              an entire database schema.
+            </p>
+          </details>
+
+          <details>
+            <summary>16. Important limitations and data validation</summary>
+
+            <p>
+              Automated conversion is most useful when
+              the source format is consistent and the
+              target schema is reasonably straightforward.
+              Inferred types cannot determine every
+              application's business rules. An integer
+              might represent an identifier, and a date
+              string might be a label rather than a date.
+              Always confirm the intended meaning of important
+              fields before inserting the data.
+            </p>
+
+            <p>
+              Nested JSON is stored as JSON text in this
+              converter, not expanded into separate related
+              tables. SQL dialects and versions can differ
+              in their support for data types and syntax.
+              Large datasets, very long text fields,
+              precision-sensitive numbers, unusual encoding,
+              and strict database constraints may require
+              specialised tools or additional steps.
+            </p>
+
+            <p>
+              Column names are sanitised and may differ
+              from their original headings. The converter
+              validates the table name as a simple
+              identifier and quotes identifiers and values
+              for the selected dialect. Nevertheless,
+              review all output and confirm it matches
+              your database's naming rules and existing schema.
+            </p>
+
+            <p>
+              Before executing a generated script, review
+              the target database, table name, data types,
+              empty-value handling, and sample records.
+              Make a backup when changing important data.
+              Run the initial script in a development or
+              staging environment whenever possible, then
+              verify row counts and representative values.
+            </p>
+          </details>
+
+          <details>
+            <summary>17. Frequently asked questions about CSV and JSON to SQL conversion</summary>
+
+            <h3>Is this CSV to SQL converter free?</h3>
+            <p>
+              Yes. This page provides browser-based conversion
+              without a paid conversion subscription or account.
+            </p>
+
+            <h3>Can I convert JSON to SQL as well as CSV?</h3>
+            <p>
+              Yes. Choose JSON for a single object or an array
+              of objects. Choose CSV / TSV for delimited
+              tabular data.
+            </p>
+
+            <h3>Which SQL databases are supported?</h3>
+            <p>
+              The current tool generates SQL for MySQL,
+              PostgreSQL, SQLite, and SQL Server. Check the
+              generated statements against the version and
+              configuration of your target database.
+            </p>
+
+            <h3>Can it create the table automatically?</h3>
+            <p>
+              The converter can generate a CREATE TABLE
+              statement based on the detected columns
+              and inferred types. You still need to run
+              that statement in your own database.
+            </p>
+
+            <h3>Can I generate only INSERT statements?</h3>
+            <p>
+              Yes. Disable the CREATE TABLE option when
+              you already have a compatible destination
+              table and only need data-insertion statements.
+            </p>
+
+            <h3>Does it detect CSV data types?</h3>
+            <p>
+              When type inference is enabled, it examines
+              column values and suggests common integer,
+              decimal, boolean, date, timestamp, or text types.
+              Review the results before importing important data.
+            </p>
+
+            <h3>Can I download the generated SQL?</h3>
+            <p>
+              Yes. Use Download .sql to save the generated
+              statements to a SQL file that you can inspect
+              or open in your database client.
+            </p>
+
+            <h3>Are my CSV and JSON files uploaded?</h3>
+            <p>
+              The conversion engine in this page processes
+              the provided content in your browser rather
+              than sending it to a conversion API. Other
+              website components may have separate data
+              handling, so this is not a blanket guarantee
+              about the entire website.
+            </p>
+
+            <h3>Why are my columns named differently?</h3>
+            <p>
+              The converter replaces unsupported characters
+              with underscores, handles names starting
+              with numbers, and makes duplicate generated
+              names unique. Inspect the output if your
+              application depends on exact column names.
+            </p>
+
+            <h3>Can I convert a very large dataset?</h3>
+            <p>
+              This implementation accepts up to 10,000
+              data rows and 200 columns per conversion.
+              Native bulk-loading tools are usually more
+              appropriate for very large production imports.
+            </p>
+
+            <h3>Does converting data execute it in my database?</h3>
+            <p>
+              No. The tool generates a SQL script for you
+              to review and download. It does not connect
+              to your database or execute SQL statements.
+            </p>
+
+            <h3>Can I run the generated SQL immediately?</h3>
+            <p>
+              Only after checking that the script matches
+              your database dialect, schema, types, and
+              constraints. Test with a small sample first,
+              particularly when importing important data.
+            </p>
+
+            <h3>What should I do if conversion fails?</h3>
+            <p>
+              Check the source format, CSV delimiter,
+              JSON syntax, table name, and conversion
+              settings. Start with a small sample and
+              resolve formatting issues before attempting
+              a larger dataset.
+            </p>
+
+          </details>
+
+        </div>
+
+        <section class="csql-related" aria-labelledby="csql-related-heading">
+
+          <h2 id="csql-related-heading">Explore more online tools</h2>
+
+          <a class="csql-related-card" href="/#tools">
+            <strong>Browse all tools and converters</strong>
+            <span>
+              Discover useful tools for text, data, images,
+              calculations, development, and everyday tasks.
+            </span>
+          </a>
+
+        </section>
+
+      </article>
+
+    </main>
+
+    <footer class="csql-footer">
+      <div class="csql-container csql-footer-inner">
+
+        <p>
+          © <span id="csql-year">2026</span>
+          Online Tools &amp; Converters.
+        </p>
+
+        <nav class="csql-footer-links" aria-label="Footer navigation">
+          <a href="/about.html">About</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/privacy-policy.html">Privacy Policy</a>
+          <a href="/terms.html">Terms</a>
+        </nav>
+
+      </div>
+    </footer>
+
   </div>
-</header>
 
-<main class="container content-area" data-tool="csv-json-to-sql-insert-generator">
-  <nav class="breadcrumb" aria-label="Breadcrumb">
-    <ol>
-      <li><a href="../index.html">Home</a></li>
-      <li><a href="../index.html#tools">Tools</a></li>
-      <li aria-current="page">CSV/JSON to SQL INSERT Generator</li>
-    </ol>
-  </nav>
+  <!-- CONVERSION ENGINE -->
 
-  <section class="page-head">
-    <p class="eyebrow">Free developer utility</p>
-    <h1>CSV/JSON to SQL INSERT Generator</h1>
-    <p class="lead">
-      Turn spreadsheet exports, JSON arrays, or JSON Lines into
-      SQL INSERT statements. Choose your database dialect, configure
-      columns and batches, preview your data, and download the SQL file.
-      Everything runs in your browser.
-    </p>
-  </section>
+  <script>
+    (() => {
+      "use strict";
 
-  <section class="tool-layout">
-    <div class="panel">
-      <h2>1. Import your data</h2>
-      <p>Paste data below or load a local file. CSV parsing supports quoted fields, commas inside quotes, and embedded line breaks.</p>
+      const $ = (id) => document.getElementById(id);
 
-      <div class="field">
-        <label for="sql-file">Import a file (optional)</label>
-        <input type="file" id="sql-file"
-          accept=".csv,.tsv,.txt,.json,.jsonl,.ndjson,text/csv,application/json,text/plain">
-        <p class="hint">Maximum 5 MB. Files are read locally, not uploaded.</p>
-      </div>
+      const el = {
+        format: $("csql-format"),
+        dialect: $("csql-dialect"),
+        table: $("csql-table"),
+        delimiter: $("csql-delimiter"),
+        delimiterField: $("csql-delimiter-field"),
+        batch: $("csql-batch"),
+        empty: $("csql-empty"),
+        hasHeader: $("csql-has-header"),
+        headerOption: $("csql-header-option"),
+        inferTypes: $("csql-infer-types"),
+        createTable: $("csql-create-table"),
 
-      <div class="field">
-        <label for="sql-input-format">Input format</label>
-        <select id="sql-input-format">
-          <option value="auto">Auto-detect</option>
-          <option value="csv">CSV / TSV / delimited text</option>
-          <option value="json">JSON / JSON Lines</option>
-        </select>
-      </div>
+        input: $("csql-input"),
+        output: $("csql-output"),
+        inputCount: $("csql-input-count"),
+        outputCount: $("csql-output-count"),
+        status: $("csql-status"),
+        summary: $("csql-summary"),
 
-      <div class="field">
-        <label for="sql-input">CSV, TSV or JSON data</label>
-        <textarea id="sql-input" rows="13" spellcheck="false"
-          autocomplete="off" placeholder="name,email,age&#10;Ada Lovelace,ada@example.com,36&#10;Alan Turing,alan@example.com,41"></textarea>
-      </div>
+        convert: $("csql-convert"),
+        copy: $("csql-copy"),
+        download: $("csql-download"),
+        clear: $("csql-clear"),
+        file: $("csql-file"),
+        sampleCsv: $("csql-sample-csv"),
+        sampleJson: $("csql-sample-json"),
+        year: $("csql-year")
+      };
 
-      <div class="btn-row">
-        <button class="btn btn-secondary btn-sm" id="sql-sample-csv" type="button">CSV example</button>
-        <button class="btn btn-secondary btn-sm" id="sql-sample-json" type="button">JSON example</button>
-        <button class="btn btn-secondary btn-sm" id="sql-clear" type="button">Clear data</button>
-      </div>
+      const MAX_ROWS = 10000;
+      const MAX_COLUMNS = 200;
 
-      <div class="section">
-        <h2>2. Configure CSV parsing</h2>
+      let lastConversion = null;
 
-        <div class="field">
-          <label for="sql-delimiter">Field delimiter</label>
-          <select id="sql-delimiter">
-            <option value="auto">Auto-detect</option>
-            <option value="comma">Comma (,)</option>
-            <option value="tab">Tab</option>
-            <option value="semicolon">Semicolon (;)</option>
-            <option value="pipe">Pipe (|)</option>
-          </select>
-        </div>
+      function setText(node, text) {
+        if (node) node.textContent = String(text);
+      }
 
-        <label class="checkbox-row">
-          <input type="checkbox" id="sql-headers" checked>
-          First CSV row contains column names
-        </label>
+      function setStatus(message, isError = false) {
+        setText(el.status, message);
+        el.status.classList.toggle("csql-status-error", isError);
+      }
 
-        <label class="checkbox-row">
-          <input type="checkbox" id="sql-trim" checked>
-          Trim whitespace around cells
-        </label>
+      function updateCharacterCounts() {
+        setText(
+          el.inputCount,
+          el.input.value.length.toLocaleString() + " characters"
+        );
 
-        <label class="checkbox-row">
-          <input type="checkbox" id="sql-infer">
-          Infer numeric and boolean types from CSV text
-        </label>
+        setText(
+          el.outputCount,
+          el.output.value.length.toLocaleString() + " characters"
+        );
+      }
 
-        <div class="field">
-          <label for="sql-empty">How should empty CSV cells be handled?</label>
-          <select id="sql-empty">
-            <option value="null">NULL</option>
-            <option value="string">Empty string ('')</option>
-          </select>
-          <p class="hint">Missing cells in uneven rows become NULL. Literal text "NULL" remains text unless provided as a JSON null.</p>
-        </div>
-      </div>
+      function updateFormatControls() {
+        const isCsv = el.format.value === "csv";
 
-      <div class="section">
-        <h2>3. SQL output settings</h2>
+        el.delimiterField.hidden = !isCsv;
+        el.headerOption.hidden = !isCsv;
+      }
 
-        <div class="field">
-          <label for="sql-dialect">Database dialect</label>
-          <select id="sql-dialect">
-            <option value="mysql">MySQL / MariaDB</option>
-            <option value="postgresql">PostgreSQL</option>
-            <option value="sqlite">SQLite</option>
-          </select>
-        </div>
+      function quoteIdentifier(identifier, dialect) {
+        if (dialect === "mysql") {
+          return "`" + identifier.replace(/`/g, "``") + "`";
+        }
 
-        <div class="field">
-          <label for="sql-table">Target table name</label>
-          <input id="sql-table" type="text" value="imported_data"
-            maxlength="500" autocomplete="off" spellcheck="false">
-          <p class="hint">Schema-qualified names such as public.customers are supported.</p>
-        </div>
+        if (dialect === "sqlserver") {
+          return "[" + identifier.replace(/]/g, "]]") + "]";
+        }
 
-        <label class="checkbox-row">
-          <input type="checkbox" id="sql-quote-identifiers" checked>
-          Quote table and column identifiers
-        </label>
+        return '"' + identifier.replace(/"/g, '""') + '"';
+      }
 
-        <div class="field">
-          <label for="sql-batch">Rows per INSERT statement</label>
-          <select id="sql-batch">
-            <option value="1">1 — one statement per row</option>
-            <option value="10">10 rows</option>
-            <option value="50">50 rows</option>
-            <option value="100" selected>100 rows</option>
-            <option value="250">250 rows</option>
-            <option value="500">500 rows</option>
-          </select>
-        </div>
+      function validTableName(value) {
+        return /^[A-Za-z_][A-Za-z0-9_]{0,63}$/.test(value);
+      }
 
-        <div class="field">
-          <label for="sql-mapping">Optional column-name mapping</label>
-          <textarea id="sql-mapping" rows="4" spellcheck="false"
-            placeholder="customer_name&#10;email_address&#10;age"></textarea>
-          <p class="hint">One target name per line, in column order. Leave a line blank to keep that column's original name. Leave this box empty to use the imported names.</p>
-        </div>
-      </div>
+      function sanitizeColumnName(value, index, usedNames) {
+        let name = String(value ?? "")
+          .replace(/^\uFEFF/, "")
+          .trim()
+          .normalize("NFKD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .replace(/[^A-Za-z0-9_]/g, "_")
+          .replace(/_+/g, "_")
+          .replace(/^_+|_+$/g, "");
 
-      <button class="btn btn-primary" id="sql-generate" type="submit" form="sql-generator-form">
-        Generate SQL INSERT statements
-      </button>
+        if (!name) {
+          name = "column_" + (index + 1);
+        }
 
-      <div class="status" id="sql-status" role="status" aria-live="polite"></div>
-    </div>
+        if (/^[0-9]/.test(name)) {
+          name = "column_" + name;
+        }
 
-    <aside>
-      <div class="panel">
-        <h2>Generated SQL</h2>
-        <p class="hint">Review your SQL before running it against a real database.</p>
+        const base = name;
+        let suffix = 2;
 
-        <div class="stats">
-          <div class="stat">
-            <strong id="sql-row-count">—</strong>
-            <span>Data rows</span>
-          </div>
-          <div class="stat">
-            <strong id="sql-col-count">—</strong>
-            <span>Columns</span>
-          </div>
-          <div class="stat">
-            <strong id="sql-statement-count">—</strong>
-            <span>Statements</span>
-          </div>
-        </div>
+        while (usedNames.has(name.toLowerCase())) {
+          name = base + "_" + suffix;
+          suffix += 1;
+        }
 
-        <div class="field" style="margin-top:18px">
-          <label for="sql-output">SQL output</label>
-          <textarea id="sql-output" rows="17" readonly spellcheck="false"
-            placeholder="Generated INSERT statements will appear here."></textarea>
-        </div>
+        usedNames.add(name.toLowerCase());
 
-        <div class="btn-row">
-          <button class="btn btn-primary" id="sql-copy" type="button" disabled>Copy SQL</button>
-          <button class="btn btn-secondary" id="sql-download" type="button" disabled>Download .sql</button>
-        </div>
+        return name;
+      }
 
-        <p class="hint" id="sql-output-status" role="status" aria-live="polite"></p>
+      function buildColumns(originalNames) {
+        const usedNames = new Set();
 
-        <div class="callout" style="margin-top:16px">
-          <strong>Database safety:</strong> generated SQL is plain text; this tool
-          does not execute it. Review identifiers, data types, constraints and
-          dialect-specific escaping before running it. Use parameterized queries
-          for application code.
-        </div>
-      </div>
-    </aside>
-  </section>
+        return originalNames.map((original, index) => ({
+          original: String(original ?? ""),
+          name: sanitizeColumnName(original, index, usedNames)
+        }));
+      }
 
-  <section class="section">
-    <h2>Data preview</h2>
-    <p class="muted">Preview the parsed rows and headers before generating your SQL.</p>
-    <div id="sql-preview-info" class="result-line">No data parsed yet.</div>
-    <div id="sql-preview" style="overflow-x:auto; margin-top:14px"></div>
-  </section>
+      function countDelimiter(line, delimiter) {
+        let quoted = false;
+        let count = 0;
 
-  <article class="content prose">
-    <h2>Convert CSV or JSON into SQL INSERT statements</h2>
-    <p>
-      Importing rows into a database often starts with a spreadsheet export,
-      an API response, or a JSON data file. This generator creates INSERT
-      statements from those sources, allowing you to choose a destination
-      table, configure SQL identifier quoting, and group multiple rows into
-      each statement.
-    </p>
+        for (let i = 0; i < line.length; i++) {
+          const char = line[i];
 
-    <h2>Supported input formats</h2>
-    <p>
-      CSV and TSV data can include quoted fields containing commas, quotation
-      marks, or line breaks. JSON input can be a single object, an array of
-      objects, an array of arrays, or newline-delimited JSON records. For
-      JSON objects, keys are used to construct the column list.
-    </p>
+          if (char === '"') {
+            if (quoted && line[i + 1] === '"') {
+              i++;
+            } else {
+              quoted = !quoted;
+            }
+          } else if (!quoted && char === delimiter) {
+            count++;
+          }
+        }
 
-    <h2>Why batch rows into INSERT statements?</h2>
-    <p>
-      A multi-row INSERT groups several rows into one SQL statement. This can
-      reduce the number of statements needed for an import. The appropriate
-      batch size depends on database limits, statement length, row width,
-      server settings, and the way the import will be executed.
-    </p>
+        return count;
+      }
 
-    <h2>Review generated SQL before executing</h2>
-    <p>
-      Generated SQL does not infer your destination table's complete schema.
-      You remain responsible for matching the target column data types,
-      indexes, constraints, permissions, and database dialect. CSV fields
-      are text by default to avoid accidentally changing identifiers such
-      as postal codes or values with leading zeroes.
-    </p>
+      function detectDelimiter(text) {
+        const firstLine = text
+          .replace(/^\uFEFF/, "")
+          .split(/\r\n|\n|\r/, 1)[0] || "";
 
-    <h2>Frequently asked questions</h2>
-    <details>
-      <summary>Does this tool upload my data?</summary>
-      <p>No. Data parsing and SQL generation take place in the browser. The page does not send your imported data to a server.</p>
-    </details>
-    <details>
-      <summary>Can I generate statements for PostgreSQL and SQLite?</summary>
-      <p>Yes. Select MySQL/MariaDB, PostgreSQL or SQLite. Always review generated SQL against the exact version and configuration you use.</p>
-    </details>
-    <details>
-      <summary>Are CSV numbers automatically converted to numbers?</summary>
-      <p>No. CSV fields are treated as text by default. You can enable type inference, but review inferred values carefully, especially identifiers with leading zeros.</p>
-    </details>
-    <details>
-      <summary>Does the generator create a database table?</summary>
-      <p>No. It produces INSERT statements only. Create the table and its schema separately, or adapt the generated statements to your existing table.</p>
-    </details>
-  </article>
+        const candidates = [",", ";", "\t", "|"];
 
-  <section class="related section">
-    <h2>Explore more developer tools</h2>
-    <ul>
-      <li><a href="../index.html#tools">All online tools →</a></li>
-      <li><a href="json-formatter.html">JSON Formatter →</a></li>
-      <li><a href="video-file-size-calculator.html">Video File Size Calculator →</a></li>
-    </ul>
-  </section>
-</main>
+        let best = ",";
+        let bestCount = -1;
 
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <a class="footer-brand" href="../index.html">Online Tools &amp; Converters</a>
-    <nav class="footer-links" aria-label="Footer navigation">
-      <a href="../index.html">Home</a>
-      <a href="../about.html">About</a>
-      <a href="../contact.html">Contact</a>
-      <a href="../privacy-policy.html">Privacy Policy</a>
-      <a href="../terms-of-use.html">Terms of Use</a>
-    </nav>
-    <p class="copyright">© <span id="current-year">2026</span> Online Tools &amp; Converters. All rights reserved.</p>
-  </div>
-</footer>
+        for (const delimiter of candidates) {
+          const count = countDelimiter(firstLine, delimiter);
 
-<script>
-(() => {
-  "use strict";
+          if (count > bestCount) {
+            bestCount = count;
+            best = delimiter;
+          }
+        }
 
-  const $ = (id) => document.getElementById(id);
-  const MAX_BYTES = 5 * 1024 * 1024;
-  const MAX_ROWS = 5000;
-  const MAX_COLUMNS = 100;
-  const MAX_OUTPUT_CHARS = 15 * 1024 * 1024;
+        return best;
+      }
 
-  let generatedSql = "";
-  let generatedTableName = "imported_data";
-  let lastParsed = null;
+      function parseDelimited(text, delimiter) {
+        const rows = [];
+        let row = [];
+        let field = "";
+        let quoted = false;
 
-  const csvSample = [
-    "name,email,age,active",
-    '"Ada Lovelace",ada@example.com,36,true',
-    '"Alan Turing",alan@example.com,41,true',
-    '"Grace Hopper",grace@example.com,85,false',
-    '"Wilson, Bob",bob@example.com,28,true'
-  ].join("\n");
+        for (let i = 0; i < text.length; i++) {
+          const char = text[i];
 
-  const jsonSample = JSON.stringify([
-    {
-      name: "Ada Lovelace",
-      email: "ada@example.com",
-      age: 36,
-      active: true
-    },
-    {
-      name: "Alan Turing",
-      email: "alan@example.com",
-      age: 41,
-      active: true
-    },
-    {
-      name: "Grace Hopper",
-      email: "grace@example.com",
-      age: 85,
-      active: false
-    }
-  ], null, 2);
+          if (char === '"') {
+            if (quoted && text[i + 1] === '"') {
+              field += '"';
+              i++;
+            } else if (quoted) {
+              quoted = false;
+            } else if (field.length === 0) {
+              quoted = true;
+            } else {
+              field += char;
+            }
 
-  function setStatus(message, type = "") {
-    const box = $("sql-status");
-    box.textContent = message;
-    box.className = "status show";
-    if (type) box.classList.add(type);
-  }
+          } else if (!quoted && char === delimiter) {
+            row.push(field);
+            field = "";
 
-  function clearStatus() {
-    $("sql-status").textContent = "";
-    $("sql-status").className = "status";
-  }
+          } else if (!quoted && (char === "\n" || char === "\r")) {
+            row.push(field);
+            rows.push(row);
 
-  function invalidateOutput() {
-    generatedSql = "";
-    lastParsed = null;
+            field = "";
+            row = [];
 
-    $("sql-output").value = "";
-    $("sql-copy").disabled = true;
-    $("sql-download").disabled = true;
-    $("sql-output-status").textContent = "";
+            if (char === "\r" && text[i + 1] === "\n") {
+              i++;
+            }
 
-    $("sql-row-count").textContent = "—";
-    $("sql-col-count").textContent = "—";
-    $("sql-statement-count").textContent = "—";
-  }
-
-  function fmt(value) {
-    return new Intl.NumberFormat("en-US").format(value);
-  }
-
-  function parseCsv(text, delimiter) {
-    const rows = [];
-    let row = [];
-    let field = "";
-    let quoted = false;
-
-    for (let i = 0; i < text.length; i++) {
-      const ch = text[i];
-
-      if (quoted) {
-        if (ch === '"') {
-          if (text[i + 1] === '"') {
-            field += '"';
-            i++;
           } else {
-            quoted = false;
+            field += char;
+          }
+        }
+
+        if (quoted) {
+          throw new Error(
+            "The CSV contains an unclosed quoted field. Check its quotation marks."
+          );
+        }
+
+        if (field.length > 0 || row.length > 0) {
+          row.push(field);
+          rows.push(row);
+        }
+
+        return rows.filter((currentRow) =>
+          currentRow.some((cell) => String(cell).trim() !== "")
+        );
+      }
+
+      function parseCsvInput(text) {
+        const delimiter = el.delimiter.value === "auto"
+          ? detectDelimiter(text)
+          : el.delimiter.value === "tab"
+            ? "\t"
+            : el.delimiter.value;
+
+        const rows = parseDelimited(
+          text.replace(/^\uFEFF/, ""),
+          delimiter
+        );
+
+        if (!rows.length) {
+          throw new Error("Enter some CSV data before converting.");
+        }
+
+        const maxWidth = rows.reduce(
+          (max, row) => Math.max(max, row.length),
+          0
+        );
+
+        if (maxWidth > MAX_COLUMNS) {
+          throw new Error(
+            "The input exceeds the limit of " +
+              MAX_COLUMNS + " columns."
+          );
+        }
+
+        const hasHeaders = el.hasHeader.checked;
+
+        let originalNames;
+        let dataRows;
+
+        if (hasHeaders) {
+          originalNames = rows[0].slice();
+
+          dataRows = rows.slice(1);
+
+          while (originalNames.length < maxWidth) {
+            originalNames.push(
+              "extra_column_" + (originalNames.length + 1)
+            );
           }
         } else {
-          field += ch;
+          originalNames = Array.from(
+            { length: maxWidth },
+            (_, index) => "column_" + (index + 1)
+          );
+
+          dataRows = rows;
         }
-        continue;
-      }
 
-      if (ch === '"' && field === "") {
-        quoted = true;
-      } else if (ch === delimiter) {
-        row.push(field);
-        field = "";
-      } else if (ch === "\n" || ch === "\r") {
-        row.push(field);
-        rows.push(row);
-        row = [];
-        field = "";
-
-        if (ch === "\r" && text[i + 1] === "\n") i++;
-      } else {
-        field += ch;
-      }
-    }
-
-    if (quoted) {
-      throw new Error("CSV contains an unclosed quoted field.");
-    }
-
-    if (field !== "" || row.length > 0) {
-      row.push(field);
-      rows.push(row);
-    }
-
-    return rows
-      .map((cells) => cells.map((cell) => String(cell)))
-      .filter((cells) => cells.some((cell) => cell.trim() !== ""));
-  }
-
-  function detectDelimiter(text) {
-    const candidates = [",", "\t", ";", "|"];
-    let best = { delimiter: ",", score: -1 };
-
-    for (const delimiter of candidates) {
-      try {
-        const rows = parseCsv(text.slice(0, 100000), delimiter)
-          .slice(0, 40);
-
-        if (rows.length < 1) continue;
-
-        const counts = new Map();
-
-        rows.forEach((row) => {
-          counts.set(row.length, (counts.get(row.length) || 0) + 1);
-        });
-
-        let modalCols = 1;
-        let modalCount = 0;
-
-        counts.forEach((count, cols) => {
-          if (count > modalCount || (count === modalCount && cols > modalCols)) {
-            modalCols = cols;
-            modalCount = count;
-          }
-        });
-
-        const consistency = modalCount / rows.length;
-        const score = modalCols > 1
-          ? modalCols * 10 + consistency * 5
-          : 0;
-
-        if (score > best.score) {
-          best = { delimiter, score };
+        if (dataRows.length > MAX_ROWS) {
+          throw new Error(
+            "This converter supports up to " +
+              MAX_ROWS.toLocaleString() +
+              " data rows per conversion."
+          );
         }
-      } catch (_) {
-        // A delimiter candidate with malformed quoting is ignored.
+
+        const columns = buildColumns(originalNames);
+
+        dataRows = dataRows.map((row) =>
+          Array.from(
+            { length: columns.length },
+            (_, index) => row[index] === undefined ? "" : row[index]
+          )
+        );
+
+        return {
+          columns,
+          rows: dataRows,
+          sourceFormat: "csv",
+          delimiter
+        };
       }
-    }
 
-    return best.score > 0 ? best.delimiter : ",";
-  }
+      function parseJsonInput(text) {
+        if (!text.trim()) {
+          throw new Error("Enter JSON data before converting.");
+        }
 
-  function delimiterFromSetting() {
-    const choice = $("sql-delimiter").value;
+        let parsed;
 
-    if (choice === "tab") return "\t";
-    if (choice === "semicolon") return ";";
-    if (choice === "pipe") return "|";
-    if (choice === "comma") return ",";
-    return null;
-  }
+        try {
+          parsed = JSON.parse(text);
+        } catch (error) {
+          throw new Error(
+            "Invalid JSON. Check double quotes, commas, brackets, and braces. " +
+            error.message
+          );
+        }
 
-  function isPlainObject(value) {
-    return value !== null &&
-      typeof value === "object" &&
-      !Array.isArray(value);
-  }
+        let records;
 
-  function jsonRowsToTable(value, useHeaders) {
-    if (isPlainObject(value)) {
-      const keys = Object.keys(value);
-      return {
-        headers: keys,
-        rows: [keys.map((key) => value[key])],
-        sourceType: "json"
-      };
-    }
+        if (Array.isArray(parsed)) {
+          records = parsed;
+        } else if (
+          parsed !== null &&
+          typeof parsed === "object"
+        ) {
+          records = [parsed];
+        } else {
+          throw new Error(
+            "JSON input must be an object or an array of objects."
+          );
+        }
 
-    if (!Array.isArray(value) || value.length === 0) {
-      throw new Error(
-        "JSON must be an object, an array of objects, an array of arrays, or JSON Lines records."
-      );
-    }
+        if (!records.length) {
+          throw new Error("The JSON array does not contain any records.");
+        }
 
-    if (value.every(isPlainObject)) {
-      const headers = [];
-      const seen = new Set();
+        if (records.length > MAX_ROWS) {
+          throw new Error(
+            "This converter supports up to " +
+              MAX_ROWS.toLocaleString() +
+              " data rows per conversion."
+          );
+        }
 
-      value.forEach((item) => {
-        Object.keys(item).forEach((key) => {
-          if (!seen.has(key)) {
-            seen.add(key);
-            headers.push(key);
+        for (let i = 0; i < records.length; i++) {
+          const record = records[i];
+
+          if (
+            record === null ||
+            typeof record !== "object" ||
+            Array.isArray(record)
+          ) {
+            throw new Error(
+              "JSON record " + (i + 1) +
+              " is not an object. Provide a single object or an array of objects."
+            );
           }
-        });
-      });
+        }
 
-      return {
-        headers,
-        rows: value.map((item) =>
-          headers.map((key) =>
-            Object.prototype.hasOwnProperty.call(item, key)
-              ? item[key]
+        const originalNames = [];
+        const discovered = new Set();
+
+        for (const record of records) {
+          for (const key of Object.keys(record)) {
+            if (!discovered.has(key)) {
+              discovered.add(key);
+              originalNames.push(key);
+            }
+          }
+        }
+
+        if (!originalNames.length) {
+          throw new Error(
+            "No object properties were found in the JSON input."
+          );
+        }
+
+        if (originalNames.length > MAX_COLUMNS) {
+          throw new Error(
+            "The input exceeds the limit of " +
+              MAX_COLUMNS + " columns."
+          );
+        }
+
+        const columns = buildColumns(originalNames);
+
+        const rows = records.map((record) =>
+          originalNames.map((key) =>
+            Object.prototype.hasOwnProperty.call(record, key)
+              ? record[key]
               : null
           )
-        ),
-        sourceType: "json"
-      };
-    }
-
-    if (value.every(Array.isArray)) {
-      const arrays = value.map((row) => row.slice());
-      const maxCols = Math.max(...arrays.map((row) => row.length));
-
-      if (maxCols > MAX_COLUMNS) {
-        throw new Error(`Maximum ${MAX_COLUMNS} columns are supported.`);
-      }
-
-      let headers;
-      let rows;
-
-      if (useHeaders) {
-        headers = (arrays.shift() || []).map((cell) =>
-          cell === null || cell === undefined ? "" : String(cell)
-        );
-        rows = arrays;
-      } else {
-        headers = Array.from(
-          { length: maxCols },
-          (_, index) => `column_${index + 1}`
-        );
-        rows = arrays;
-      }
-
-      return { headers, rows, sourceType: "json" };
-    }
-
-    if (value.every((item) =>
-      item === null ||
-      ["string", "number", "boolean"].includes(typeof item)
-    )) {
-      return {
-        headers: ["value"],
-        rows: value.map((item) => [item]),
-        sourceType: "json"
-      };
-    }
-
-    throw new Error(
-      "JSON array contains mixed structures. Use an array of objects or an array of arrays."
-    );
-  }
-
-  function parseJsonInput(text) {
-    try {
-      return jsonRowsToTable(
-        JSON.parse(text),
-        $("sql-headers").checked
-      );
-    } catch (fullError) {
-      const lines = text
-        .split(/\r?\n/)
-        .map((line) => line.trim())
-        .filter(Boolean);
-
-      if (lines.length > 1) {
-        try {
-          const values = lines.map((line) => JSON.parse(line));
-          return jsonRowsToTable(
-            values,
-            $("sql-headers").checked
-          );
-        } catch (_) {
-          // Throw the original whole-document parsing error below.
-        }
-      }
-
-      throw new Error(
-        "Could not parse JSON. Check brackets, commas, quotes, and line-delimited records. " +
-        (fullError instanceof Error ? fullError.message : "")
-      );
-    }
-  }
-
-  function parseInput() {
-    const text = $("sql-input").value.replace(/^\uFEFF/, "");
-    const requested = $("sql-input-format").value;
-
-    if (!text.trim()) {
-      throw new Error("Paste data or choose a file first.");
-    }
-
-    if (text.length > MAX_BYTES) {
-      throw new Error("Input exceeds the 5 MB text limit.");
-    }
-
-    if (requested === "json") {
-      return parseJsonInput(text);
-    }
-
-    if (
-      requested === "auto" &&
-      /^[\s]*[\[{]/.test(text)
-    ) {
-      return parseJsonInput(text);
-    }
-
-    const delimiter =
-      delimiterFromSetting() ||
-      detectDelimiter(text);
-
-    const rows = parseCsv(text, delimiter);
-
-    if (!rows.length) {
-      throw new Error("No CSV rows were found.");
-    }
-
-    let headers;
-    let dataRows;
-
-    if ($("sql-headers").checked) {
-      headers = rows[0].slice();
-      dataRows = rows.slice(1);
-    } else {
-      const columnCount = Math.max(...rows.map((row) => row.length));
-
-      headers = Array.from(
-        { length: columnCount },
-        (_, index) => `column_${index + 1}`
-      );
-
-      dataRows = rows;
-    }
-
-    const trim = $("sql-trim").checked;
-
-    if (trim) {
-      headers = headers.map((value) => String(value).trim());
-      dataRows = dataRows.map((row) =>
-        row.map((value) => String(value).trim())
-      );
-    }
-
-    return {
-      headers,
-      rows: dataRows,
-      sourceType: "csv",
-      delimiter
-    };
-  }
-
-  function uniqueColumnNames(names) {
-    const used = new Set();
-
-    return names.map((name, index) => {
-      const original = String(name ?? "").trim() || `column_${index + 1}`;
-      let candidate = original;
-      let suffix = 2;
-
-      while (used.has(candidate.toLocaleLowerCase())) {
-        candidate = `${original}_${suffix++}`;
-      }
-
-      used.add(candidate.toLocaleLowerCase());
-      return candidate;
-    });
-  }
-
-  function prepareTable(parsed) {
-    const mappingText = $("sql-mapping").value;
-
-    let mapping = [];
-
-    if (mappingText.trim()) {
-      mapping = mappingText.split(/\r?\n/).map((line) => line.trim());
-
-      while (mapping.length && mapping[mapping.length - 1] === "") {
-        mapping.pop();
-      }
-    }
-
-    let headers = parsed.headers.map((value) =>
-      String(value ?? "")
-    );
-
-    const rows = parsed.rows.slice();
-
-    const maxRowWidth = rows.length
-      ? Math.max(...rows.map((row) => row.length))
-      : 0;
-
-    if (maxRowWidth > MAX_COLUMNS || headers.length > MAX_COLUMNS) {
-      throw new Error(`Maximum ${MAX_COLUMNS} columns are supported.`);
-    }
-
-    const columnCount = Math.max(headers.length, maxRowWidth);
-
-    while (headers.length < columnCount) {
-      headers.push(`column_${headers.length + 1}`);
-    }
-
-    if (mapping.length > columnCount) {
-      throw new Error(
-        "Column mapping contains more lines than the detected number of columns."
-      );
-    }
-
-    mapping.forEach((targetName, index) => {
-      if (targetName) headers[index] = targetName;
-    });
-
-    headers = uniqueColumnNames(headers);
-
-    let normalizedRows = rows.map((row) => {
-      const output = row.slice();
-
-      while (output.length < columnCount) {
-        output.push(null);
-      }
-
-      return output.slice(0, columnCount);
-    });
-
-    if ($("sql-trim").checked && parsed.sourceType === "json") {
-      normalizedRows = normalizedRows.map((row) =>
-        row.map((value) => typeof value === "string" ? value.trim() : value)
-      );
-    }
-
-    normalizedRows = normalizedRows.filter((row) =>
-      row.some((value) => {
-        if (value === null || value === undefined) return false;
-        return String(value).trim() !== "";
-      })
-    );
-
-    if (!normalizedRows.length) {
-      throw new Error("No data rows remain after parsing. Check the header setting.");
-    }
-
-    if (normalizedRows.length > MAX_ROWS) {
-      throw new Error(
-        `This tool supports up to ${MAX_ROWS} rows per operation. Split the data into smaller batches.`
-      );
-    }
-
-    if (columnCount === 0) {
-      throw new Error("No columns were detected.");
-    }
-
-    return {
-      headers,
-      rows: normalizedRows,
-      sourceType: parsed.sourceType,
-      delimiter: parsed.delimiter || null
-    };
-  }
-
-  function quoteIdentifier(identifier) {
-    if (typeof identifier !== "string" || !identifier.length) {
-      throw new Error("An identifier is empty.");
-    }
-
-    if (
-      identifier.length > 128 ||
-      /[\u0000-\u001f\u007f]/.test(identifier)
-    ) {
-      throw new Error(
-        "Identifier is too long or contains a control character."
-      );
-    }
-
-    const dialect = $("sql-dialect").value;
-    const quoteEnabled = $("sql-quote-identifiers").checked;
-
-    if (!quoteEnabled) {
-      if (!/^[A-Za-z_][A-Za-z0-9_$]*$/.test(identifier)) {
-        throw new Error(
-          `Identifier "${identifier}" is invalid without identifier quoting.`
-        );
-      }
-
-      return identifier;
-    }
-
-    if (dialect === "mysql") {
-      return "`" + identifier.replace(/`/g, "``") + "`";
-    }
-
-    return '"' + identifier.replace(/"/g, '""') + '"';
-  }
-
-  function quoteTableName(rawName) {
-    const parts = rawName.split(".").map((part) => part.trim());
-
-    if (
-      !parts.length ||
-      parts.some((part) => !part)
-    ) {
-      throw new Error(
-        "Enter a valid table name. Each schema/table segment must be non-empty."
-      );
-    }
-
-    return parts.map(quoteIdentifier).join(".");
-  }
-
-  function inferCsvValue(value) {
-    if (typeof value !== "string") return value;
-
-    const text = $("sql-trim").checked
-      ? value.trim()
-      : value;
-
-    if (/^true$/i.test(text)) return true;
-    if (/^false$/i.test(text)) return false;
-
-    // Deliberately preserve leading-zero identifiers such as 001234.
-    const numericPattern =
-      /^-?(?:0|[1-9]\d*)(?:\.\d+)?(?:[eE][+-]?\d+)?$/;
-
-    if (
-      numericPattern.test(text) &&
-      !/^-?0\d/.test(text) &&
-      Number.isFinite(Number(text))
-    ) {
-      return Number(text);
-    }
-
-    return text;
-  }
-
-  function sqlLiteral(inputValue, sourceType) {
-    let value = inputValue;
-
-    if (value === null || value === undefined) {
-      return "NULL";
-    }
-
-    if (sourceType === "csv" && typeof value === "string") {
-      const text = $("sql-trim").checked
-        ? value.trim()
-        : value;
-
-      if (text === "") {
-        return $("sql-empty").value === "null"
-          ? "NULL"
-          : "''";
-      }
-
-      value = $("sql-infer").checked
-        ? inferCsvValue(text)
-        : text;
-    }
-
-    if (value === null || value === undefined) {
-      return "NULL";
-    }
-
-    if (typeof value === "boolean") {
-      return value ? "TRUE" : "FALSE";
-    }
-
-    if (typeof value === "number") {
-      if (!Number.isFinite(value)) {
-        throw new Error("A non-finite number was found in the input.");
-      }
-
-      return String(value);
-    }
-
-    if (typeof value === "object") {
-      value = JSON.stringify(value);
-    }
-
-    if (typeof value !== "string") {
-      throw new Error("An unsupported value type was found.");
-    }
-
-    if (value.includes("\u0000")) {
-      throw new Error(
-        "A string contains a NUL character, which is not supported in SQL text literals."
-      );
-    }
-
-    const dialect = $("sql-dialect").value;
-
-    // Double backslashes for the usual MySQL backslash-escape mode.
-    // MySQL server SQL modes can affect literal handling; review the
-    // target server configuration before executing generated SQL.
-    if (dialect === "mysql") {
-      value = value.replace(/\\/g, "\\\\");
-    }
-
-    return "'" + value.replace(/'/g, "''") + "'";
-  }
-
-  function buildSql(table) {
-    const dialect = $("sql-dialect").value;
-    const tableName = $("sql-table").value.trim();
-
-    if (!tableName) {
-      throw new Error("Enter a target table name.");
-    }
-
-    const quotedTable = quoteTableName(tableName);
-    const quotedColumns = table.headers.map(quoteIdentifier);
-
-    const batchSize = Number($("sql-batch").value);
-
-    if (
-      !Number.isInteger(batchSize) ||
-      batchSize < 1 ||
-      batchSize > 500
-    ) {
-      throw new Error("Choose a supported batch size.");
-    }
-
-    const statements = [];
-
-    for (let start = 0; start < table.rows.length; start += batchSize) {
-      const batch = table.rows.slice(start, start + batchSize);
-
-      const values = batch.map((row) => {
-        const literals = table.headers.map((_, columnIndex) =>
-          sqlLiteral(row[columnIndex], table.sourceType)
         );
 
-        return "  (" + literals.join(", ") + ")";
-      });
+        return {
+          columns,
+          rows,
+          sourceFormat: "json",
+          delimiter: null
+        };
+      }
 
-      statements.push(
-        `INSERT INTO ${quotedTable} (${quotedColumns.join(", ")})\n` +
-        "VALUES\n" +
-        values.join(",\n") +
-        ";"
-      );
-    }
-
-    const dialectName = {
-      mysql: "MySQL / MariaDB",
-      postgresql: "PostgreSQL",
-      sqlite: "SQLite"
-    }[dialect];
-
-    const output = [
-      "-- Generated by Online Tools & Converters",
-      `-- Dialect: ${dialectName}`,
-      `-- Rows: ${table.rows.length}; Columns: ${table.headers.length}`,
-      "-- Review the target schema and database settings before execution.",
-      "",
-      statements.join("\n\n"),
-      ""
-    ].join("\n");
-
-    if (output.length > MAX_OUTPUT_CHARS) {
-      throw new Error(
-        "Generated SQL exceeds the 15 MB output limit. Reduce the input size."
-      );
-    }
-
-    return {
-      sql: output,
-      statementCount: statements.length,
-      tableName
-    };
-  }
-
-  function renderPreview(table) {
-    const container = $("sql-preview");
-    container.replaceChildren();
-
-    $("sql-preview-info").textContent =
-      `${fmt(table.rows.length)} data row(s), ` +
-      `${fmt(table.headers.length)} column(s). ` +
-      (table.delimiter
-        ? `Detected delimiter: ${table.delimiter === "\t" ? "Tab" : table.delimiter}.`
-        : `Input format: ${table.sourceType.toUpperCase()}.`);
-
-    const wrap = document.createElement("div");
-    wrap.style.overflowX = "auto";
-
-    const htmlTable = document.createElement("table");
-    const thead = document.createElement("thead");
-    const headerRow = document.createElement("tr");
-
-    table.headers.slice(0, 15).forEach((header) => {
-      const th = document.createElement("th");
-      th.textContent = header;
-      headerRow.appendChild(th);
-    });
-
-    if (table.headers.length > 15) {
-      const th = document.createElement("th");
-      th.textContent = "…";
-      headerRow.appendChild(th);
-    }
-
-    thead.appendChild(headerRow);
-    htmlTable.appendChild(thead);
-
-    const tbody = document.createElement("tbody");
-
-    table.rows.slice(0, 8).forEach((row) => {
-      const tr = document.createElement("tr");
-
-      row.slice(0, 15).forEach((value) => {
-        const td = document.createElement("td");
-
+      function normalizeCell(value, sourceFormat, emptyAsNull) {
         if (value === null || value === undefined) {
-          td.textContent = "NULL";
-        } else if (typeof value === "object") {
-          td.textContent = JSON.stringify(value);
-        } else {
-          td.textContent = String(value);
+          return null;
         }
 
-        tr.appendChild(td);
-      });
+        if (
+          sourceFormat === "csv" &&
+          typeof value === "string" &&
+          value.trim() === "" &&
+          emptyAsNull
+        ) {
+          return null;
+        }
 
-      if (table.headers.length > 15) {
-        const td = document.createElement("td");
-        td.textContent = "…";
-        tr.appendChild(td);
+        if (Array.isArray(value) ||
+            (value && typeof value === "object")) {
+          return JSON.stringify(value);
+        }
+
+        return value;
       }
 
-      tbody.appendChild(tr);
-    });
+      function classifyCsvString(value) {
+        const trimmed = value.trim();
 
-    htmlTable.appendChild(tbody);
-    wrap.appendChild(htmlTable);
-    container.appendChild(wrap);
+        if (!trimmed) {
+          return "text";
+        }
 
-    if (table.rows.length > 8) {
-      const note = document.createElement("p");
-      note.className = "hint";
-      note.textContent =
-        `Showing the first 8 of ${fmt(table.rows.length)} rows.`;
-      container.appendChild(note);
-    }
-  }
+        if (/^(true|false)$/i.test(trimmed)) {
+          return "boolean";
+        }
 
-  function generate() {
-    clearStatus();
-    $("sql-output-status").textContent = "";
-    invalidateOutput();
+        if (/^\d{4}-\d{2}-\d{2}$/.test(trimmed)) {
+          return "date";
+        }
 
-    try {
-      const parsed = parseInput();
-      const table = prepareTable(parsed);
-      const result = buildSql(table);
+        if (
+          /^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}/.test(trimmed)
+        ) {
+          return "datetime";
+        }
 
-      generatedSql = result.sql;
-      generatedTableName = result.tableName;
-      lastParsed = table;
+        /*
+         * Preserve values such as 00125 as text because they
+         * may be identifiers, postal codes, or fixed-width codes.
+         */
 
-      $("sql-output").value = generatedSql;
-      $("sql-row-count").textContent = fmt(table.rows.length);
-      $("sql-col-count").textContent = fmt(table.headers.length);
-      $("sql-statement-count").textContent = fmt(result.statementCount);
+        if (/^[+-]?0\d+$/.test(trimmed)) {
+          return "text";
+        }
 
-      $("sql-copy").disabled = false;
-      $("sql-download").disabled = false;
+        if (/^[+-]?\d+$/.test(trimmed)) {
+          const n = Number(trimmed);
 
-      renderPreview(table);
+          if (!Number.isSafeInteger(n)) {
+            return "text";
+          }
 
-      setStatus(
-        `Generated ${fmt(table.rows.length)} row(s) across ` +
-        `${fmt(result.statementCount)} INSERT statement(s).`
-      );
-    } catch (error) {
-      setStatus(
-        error instanceof Error
-          ? error.message
-          : "Could not generate SQL.",
-        "error"
-      );
-    }
-  }
+          if (Math.abs(n) > 2147483647) {
+            return "bigint";
+          }
 
-  function downloadBlob(blob, filename) {
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
+          return "integer";
+        }
 
-    link.href = url;
-    link.download = filename;
-    link.hidden = true;
+        if (
+          /^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/.test(trimmed)
+        ) {
+          const n = Number(trimmed);
 
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
+          return Number.isFinite(n) ? "decimal" : "text";
+        }
 
-    window.setTimeout(() => URL.revokeObjectURL(url), 1500);
-  }
+        return "text";
+      }
 
-  async function copyText(text) {
-    if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(text);
-      return;
-    }
+      function typeForColumn(values, sourceFormat, dialect, inferTypes, emptyAsNull) {
+        if (!inferTypes) {
+          return "text";
+        }
 
-    const helper = document.createElement("textarea");
-    helper.value = text;
-    helper.setAttribute("readonly", "");
-    helper.style.position = "fixed";
-    helper.style.opacity = "0";
+        const normalized = values.map((value) =>
+          normalizeCell(value, sourceFormat, emptyAsNull)
+        );
 
-    document.body.appendChild(helper);
-    helper.select();
+        const present = normalized.filter((value) => value !== null);
 
-    const success = document.execCommand("copy");
-    helper.remove();
+        if (!present.length) {
+          return "text";
+        }
 
-    if (!success) {
-      throw new Error("The browser blocked clipboard access.");
-    }
-  }
+        /*
+         * Complex JSON structures are preserved as serialized
+         * JSON text rather than pretending they are scalar values.
+         */
 
-  /* Form and settings */
+        if (present.some((value) =>
+          typeof value === "string" &&
+          ((value.trim().startsWith("{") &&
+            value.trim().endsWith("}")) ||
+           (value.trim().startsWith("[") &&
+            value.trim().endsWith("]")))
+        ) && sourceFormat === "json") {
+          const originalComplex = values.some((value) =>
+            value !== null &&
+            typeof value === "object"
+          );
 
-  const form = document.createElement("form");
-  form.id = "sql-generator-form";
-  form.hidden = true;
-  document.body.appendChild(form);
+          if (originalComplex) {
+            return "text";
+          }
+        }
 
-  // Associate the visible generator with the form without wrapping the
-  // output panel or changing the shared header/footer layout.
-  $("sql-generate").form = form;
+        let types;
 
-  $("sql-generate").addEventListener("click", (event) => {
-    event.preventDefault();
-    generate();
-  });
+        if (sourceFormat === "json") {
+          types = present.map((value) => {
+            if (typeof value === "boolean") {
+              return "boolean";
+            }
 
-  $("sql-sample-csv").addEventListener("click", () => {
-    $("sql-input").value = csvSample;
-    $("sql-input-format").value = "csv";
-    $("sql-delimiter").value = "comma";
-    invalidateOutput();
-    clearStatus();
-    generate();
-  });
+            if (typeof value === "number") {
+              if (!Number.isFinite(value)) return "text";
 
-  $("sql-sample-json").addEventListener("click", () => {
-    $("sql-input").value = jsonSample;
-    $("sql-input-format").value = "json";
-    invalidateOutput();
-    clearStatus();
-    generate();
-  });
+              if (Number.isInteger(value)) {
+                if (!Number.isSafeInteger(value)) return "text";
 
-  $("sql-clear").addEventListener("click", () => {
-    $("sql-input").value = "";
-    $("sql-file").value = "";
-    $("sql-input-format").value = "auto";
-    $("sql-delimiter").value = "auto";
-    $("sql-mapping").value = "";
+                return Math.abs(value) > 2147483647
+                  ? "bigint"
+                  : "integer";
+              }
 
-    invalidateOutput();
-    clearStatus();
+              return "decimal";
+            }
 
-    $("sql-preview").replaceChildren();
-    $("sql-preview-info").textContent = "No data parsed yet.";
-  });
+            if (typeof value === "string") {
+              const kind = classifyCsvString(value);
 
-  $("sql-file").addEventListener("change", async () => {
-    const file = $("sql-file").files && $("sql-file").files[0];
-    if (!file) return;
+              /*
+               * Numeric-looking JSON strings stay strings:
+               * JSON preserves their explicit string type.
+               */
+              if (
+                kind === "integer" ||
+                kind === "bigint" ||
+                kind === "decimal" ||
+                kind === "boolean"
+              ) {
+                return "text";
+              }
 
-    invalidateOutput();
-    clearStatus();
+              return kind;
+            }
 
-    if (file.size > MAX_BYTES) {
-      setStatus("File exceeds the 5 MB limit.", "error");
-      $("sql-file").value = "";
-      return;
-    }
+            return "text";
+          });
 
-    const filename = file.name.toLowerCase();
+        } else {
+          types = present.map((value) =>
+            typeof value === "string"
+              ? classifyCsvString(value)
+              : "text"
+          );
+        }
 
-    if (/\.(json|jsonl|ndjson)$/.test(filename)) {
-      $("sql-input-format").value = "json";
-    } else if (/\.tsv$/.test(filename)) {
-      $("sql-input-format").value = "csv";
-      $("sql-delimiter").value = "tab";
-    } else if (/\.(csv|txt)$/.test(filename)) {
-      $("sql-input-format").value = "csv";
-    }
+        if (types.every((type) => type === "boolean")) {
+          return "boolean";
+        }
 
-    try {
-      $("sql-input").value = await file.text();
+        if (types.every((type) =>
+          ["integer", "bigint", "decimal"].includes(type)
+        )) {
+          if (types.includes("decimal")) {
+            return "decimal";
+          }
 
-      setStatus(
-        `${file.name} loaded locally. Review the settings and generate your SQL.`
-      );
-    } catch (_) {
-      setStatus(
-        "The file could not be read. Try a UTF-8 text file.",
-        "error"
-      );
-    }
-  });
+          if (types.includes("bigint")) {
+            return "bigint";
+          }
 
-  // Changing data or settings invalidates previously generated SQL.
-  [
-    "sql-input",
-    "sql-input-format",
-    "sql-delimiter",
-    "sql-headers",
-    "sql-trim",
-    "sql-infer",
-    "sql-empty",
-    "sql-dialect",
-    "sql-table",
-    "sql-quote-identifiers",
-    "sql-batch",
-    "sql-mapping"
-  ].forEach((id) => {
-    $(id).addEventListener("input", () => {
-      invalidateOutput();
-      clearStatus();
-    });
+          return "integer";
+        }
 
-    $(id).addEventListener("change", () => {
-      invalidateOutput();
-      clearStatus();
-    });
-  });
+        if (types.every((type) =>
+          ["date", "datetime"].includes(type)
+        )) {
+          return types.includes("datetime") ? "datetime" : "date";
+        }
 
-  $("sql-copy").addEventListener("click", async () => {
-    if (!generatedSql) return;
+        if (types.every((type) => type === "date")) {
+          return "date";
+        }
 
-    try {
-      await copyText(generatedSql);
-      $("sql-output-status").textContent = "SQL copied to clipboard.";
-    } catch (_) {
-      $("sql-output-status").textContent =
-        "Clipboard access was blocked. Select the output and copy it manually.";
-    }
-  });
+        if (types.every((type) => type === "datetime")) {
+          return "datetime";
+        }
 
-  $("sql-download").addEventListener("click", () => {
-    if (!generatedSql) return;
+        return "text";
+      }
 
-    const blob = new Blob(
-      [generatedSql],
-      { type: "text/plain;charset=utf-8" }
-    );
+      function sqlType(type, dialect) {
+        const types = {
+          mysql: {
+            integer: "INT",
+            bigint: "BIGINT",
+            decimal: "DOUBLE",
+            boolean: "BOOLEAN",
+            date: "DATE",
+            datetime: "DATETIME",
+            text: "TEXT"
+          },
 
-    const safeName = generatedTableName
-      .replace(/[^A-Za-z0-9_-]+/g, "_")
-      .replace(/^_+|_+$/g, "") || "imported_data";
+          postgres: {
+            integer: "INTEGER",
+            bigint: "BIGINT",
+            decimal: "NUMERIC",
+            boolean: "BOOLEAN",
+            date: "DATE",
+            datetime: "TIMESTAMP",
+            text: "TEXT"
+          },
 
-    downloadBlob(blob, `${safeName}.sql`);
-  });
+          sqlite: {
+            integer: "INTEGER",
+            bigint: "INTEGER",
+            decimal: "REAL",
+            boolean: "INTEGER",
+            date: "TEXT",
+            datetime: "TEXT",
+            text: "TEXT"
+          },
 
-  // Start with a useful sample and live generated result.
-  $("sql-input").value = csvSample;
-  $("sql-input-format").value = "csv";
-  $("sql-delimiter").value = "comma";
-  generate();
-})();
-</script>
+          sqlserver: {
+            integer: "INT",
+            bigint: "BIGINT",
+            decimal: "FLOAT",
+            boolean: "BIT",
+            date: "DATE",
+            datetime: "DATETIME2",
+            text: "NVARCHAR(MAX)"
+          }
+        };
+
+        return types[dialect][type] || types[dialect].text;
+      }
+
+      function isValidNumber(value) {
+        if (typeof value === "number") {
+          return Number.isFinite(value);
+        }
+
+        return /^[+-]?(?:\d+\.?\d*|\.\d+)(?:[eE][+-]?\d+)?$/
+          .test(String(value).trim());
+      }
+
+      function sqlString(value, dialect) {
+        let text = String(value);
+
+        if (text.includes("\u0000")) {
+          throw new Error(
+            "A text value contains a NUL character that cannot safely " +
+            "be emitted as a regular SQL string literal."
+          );
+        }
+
+        if (dialect === "mysql") {
+          text = text
+            .replace(/\\/g, "\\\\")
+            .replace(/'/g, "''");
+
+          return "'" + text + "'";
+        }
+
+        text = text.replace(/'/g, "''");
+
+        if (dialect === "sqlserver") {
+          return "N'" + text + "'";
+        }
+
+        return "'" + text + "'";
+      }
+
+      function sqlLiteral(value, type, sourceFormat, dialect, emptyAsNull) {
+        const normalized = normalizeCell(
+          value,
+          sourceFormat,
+          emptyAsNull
+        );
+
+        if (normalized === null) {
+          return "NULL";
+        }
+
+        if (type === "boolean") {
+          const bool = typeof normalized === "boolean"
+            ? normalized
+            : String(normalized).trim().toLowerCase() === "true";
+
+          if (dialect === "sqlserver" || dialect === "sqlite") {
+            return bool ? "1" : "0";
+          }
+
+          return bool ? "TRUE" : "FALSE";
+        }
+
+        if (
+          ["integer", "bigint", "decimal"].includes(type) &&
+          isValidNumber(normalized)
+        ) {
+          return String(normalized).trim();
+        }
+
+        return sqlString(normalized, dialect);
+      }
+
+      function buildSql(parsed) {
+        const dialect = el.dialect.value;
+        const tableName = el.table.value.trim();
+
+        if (!validTableName(tableName)) {
+          throw new Error(
+            "Enter a valid simple table name using letters, numbers, " +
+            "and underscores. The first character must be a letter or underscore."
+          );
+        }
+
+        if (!parsed.columns.length) {
+          throw new Error("No columns were found in the supplied data.");
+        }
+
+        if (parsed.columns.length > MAX_COLUMNS) {
+          throw new Error("The column limit has been exceeded.");
+        }
+
+        const quote = (name) => quoteIdentifier(name, dialect);
+        const emptyAsNull = el.empty.value === "null";
+
+        const columnTypes = parsed.columns.map((column, index) =>
+          typeForColumn(
+            parsed.rows.map((row) => row[index]),
+            parsed.sourceFormat,
+            dialect,
+            el.inferTypes.checked,
+            emptyAsNull
+          )
+        );
+
+        const lines = [];
+
+        lines.push("-- Generated by Online Tools & Converters.");
+        lines.push("-- Review table names, column types, and values before execution.");
+        lines.push("-- Source format: " + parsed.sourceFormat.toUpperCase());
+        lines.push("-- SQL dialect: " + dialect);
+        lines.push("");
+
+        if (el.createTable.checked) {
+          lines.push(
+            "CREATE TABLE " + quote(tableName) + " ("
+          );
+
+          const definitions = parsed.columns.map((column, index) =>
+            "  " + quote(column.name) + " " +
+            sqlType(columnTypes[index], dialect)
+          );
+
+          lines.push(definitions.join(",\n"));
+          lines.push(");");
+          lines.push("");
+        }
+
+        const batchSize = Math.max(
+          1,
+          Math.min(500, Number(el.batch.value) || 100)
+        );
+
+        if (!parsed.rows.length) {
+          lines.push("-- No data rows were found to insert.");
+          return {
+            sql: lines.join("\n"),
+            columns: parsed.columns,
+            rowCount: 0,
+            dialect,
+            sourceFormat: parsed.sourceFormat
+          };
+        }
+
+        const columnList = parsed.columns
+          .map((column) => quote(column.name))
+          .join(", ");
+
+        for (let start = 0; start < parsed.rows.length; start += batchSize) {
+          const batch = parsed.rows.slice(start, start + batchSize);
+
+          lines.push(
+            "INSERT INTO " + quote(tableName) +
+            " (" + columnList + ")"
+          );
+
+          lines.push("VALUES");
+
+          const valueRows = batch.map((row) => {
+            const values = parsed.columns.map((column, index) =>
+              sqlLiteral(
+                row[index],
+                columnTypes[index],
+                parsed.sourceFormat,
+                dialect,
+                emptyAsNull
+              )
+            );
+
+            return "  (" + values.join(", ") + ")";
+          });
+
+          /*
+           * SQL Server's table value constructor supports up to
+           * 1,000 rows in a single INSERT. This converter's batch
+           * choices are all below that limit.
+           */
+
+          lines.push(valueRows.join(",\n") + ";");
+          lines.push("");
+        }
+
+        lines.push("-- End of generated SQL.");
+
+        return {
+          sql: lines.join("\n"),
+          columns: parsed.columns,
+          rowCount: parsed.rows.length,
+          dialect,
+          sourceFormat: parsed.sourceFormat,
+          columnTypes
+        };
+      }
+
+      function updateSummary(result) {
+        const typeLabels = result.columns.map((column, index) => {
+          const type = result.columnTypes
+            ? sqlType(result.columnTypes[index], result.dialect)
+            : "TEXT";
+
+          return column.name + " (" + type + ")";
+        });
+
+        el.summary.replaceChildren();
+
+        const first = document.createElement("div");
+        first.textContent =
+          "Converted " + result.rowCount.toLocaleString() +
+          " row(s) and " + result.columns.length.toLocaleString() +
+          " column(s) into " +
+          result.dialect.toUpperCase() + " SQL.";
+
+        const second = document.createElement("div");
+        second.textContent = "Columns: " + typeLabels.join(", ");
+
+        el.summary.append(first, second);
+      }
+
+      function convert() {
+        el.output.value = "";
+        lastConversion = null;
+        updateCharacterCounts();
+
+        const text = el.input.value;
+
+        if (!text.trim()) {
+          setStatus("Paste CSV or JSON data before converting.", true);
+          setText(
+            el.summary,
+            "No source data has been converted yet."
+          );
+          return;
+        }
+
+        try {
+          const parsed = el.format.value === "json"
+            ? parseJsonInput(text)
+            : parseCsvInput(text);
+
+          const result = buildSql(parsed);
+
+          el.output.value = result.sql;
+          lastConversion = result;
+
+          updateCharacterCounts();
+          updateSummary(result);
+
+          setStatus(
+            "Conversion complete. Review the SQL before running it."
+          );
+
+        } catch (error) {
+          el.output.value = "";
+          updateCharacterCounts();
+
+          setStatus(
+            error && error.message
+              ? error.message
+              : "Conversion failed. Check your input and settings.",
+            true
+          );
+
+          setText(
+            el.summary,
+            "No SQL was generated. Correct the input or settings and try again."
+          );
+        }
+      }
+
+      async function copySql() {
+        const text = el.output.value;
+
+        if (!text) {
+          setStatus("Generate SQL before copying it.", true);
+          return;
+        }
+
+        try {
+          if (navigator.clipboard && window.isSecureContext) {
+            await navigator.clipboard.writeText(text);
+          } else {
+            const temporary = document.createElement("textarea");
+
+            temporary.value = text;
+            temporary.setAttribute("readonly", "");
+            temporary.style.position = "fixed";
+            temporary.style.left = "-9999px";
+
+            document.body.appendChild(temporary);
+            temporary.select();
+
+            const succeeded = document.execCommand("copy");
+            temporary.remove();
+
+            if (!succeeded) {
+              throw new Error("Clipboard command failed.");
+            }
+          }
+
+          setStatus("SQL copied to the clipboard.");
+
+        } catch (_) {
+          setStatus(
+            "The browser blocked clipboard access. Select the SQL and copy it manually.",
+            true
+          );
+        }
+      }
+
+      function downloadSql() {
+        const text = el.output.value;
+
+        if (!text) {
+          setStatus("Generate SQL before downloading it.", true);
+          return;
+        }
+
+        try {
+          const blob = new Blob([text], {
+            type: "text/plain;charset=utf-8"
+          });
+
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+
+          link.href = url;
+          link.download = "converted-data.sql";
+
+          document.body.appendChild(link);
+          link.click();
+          link.remove();
+
+          setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+          setStatus("SQL download prepared.");
+        } catch (_) {
+          setStatus("The SQL file could not be created.", true);
+        }
+      }
+
+      function loadSampleCsv() {
+        el.format.value = "csv";
+        updateFormatControls();
+
+        el.input.value = [
+          "id,name,email,active,score",
+          "1,Ada Lovelace,ada@example.com,true,98.5",
+          "2,Grace Hopper,grace@example.com,false,94.2",
+          "3,Linus Torvalds,linus@example.com,true,91.7"
+        ].join("\n");
+
+        el.table.value = "users";
+        updateCharacterCounts();
+
+        setStatus("Sample CSV loaded. Click Convert to SQL to test it.");
+      }
+
+      function loadSampleJson() {
+        el.format.value = "json";
+        updateFormatControls();
+
+        el.input.value = JSON.stringify([
+          {
+            id: 1,
+            name: "Ada Lovelace",
+            email: "ada@example.com",
+            active: true,
+            score: 98.5,
+            joined: "2024-01-15"
+          },
+          {
+            id: 2,
+            name: "Grace Hopper",
+            email: "grace@example.com",
+            active: false,
+            score: 94.2,
+            joined: "2024-02-20"
+          },
+          {
+            id: 3,
+            name: "Linus Torvalds",
+            email: "linus@example.com",
+            active: true,
+            score: 91.7,
+            joined: "2024-03-12"
+          }
+        ], null, 2);
+
+        el.table.value = "users";
+        updateCharacterCounts();
+
+        setStatus("Sample JSON loaded. Click Convert to SQL to test it.");
+      }
+
+      async function loadFile(file) {
+        if (!file) return;
+
+        const extension = file.name.split(".").pop().toLowerCase();
+
+        if (["json", "jsonl", "ndjson"].includes(extension)) {
+          el.format.value = "json";
+        } else if (["csv", "tsv", "txt"].includes(extension)) {
+          el.format.value = "csv";
+
+          if (extension === "tsv") {
+            el.delimiter.value = "tab";
+          }
+        } else {
+          setStatus(
+            "Choose a CSV, TSV, TXT, JSON, JSONL, or NDJSON file.",
+            true
+          );
+
+          el.file.value = "";
+          return;
+        }
+
+        updateFormatControls();
+
+        try {
+          const content = await file.text();
+
+          if (content.length > 20_000_000) {
+            throw new Error(
+              "This file is too large for the current converter. " +
+              "Try a smaller file or a database bulk-import tool."
+            );
+          }
+
+          el.input.value = content;
+          updateCharacterCounts();
+
+          setStatus(
+            "Loaded " + file.name + ". Click Convert to SQL to continue."
+          );
+
+        } catch (error) {
+          setStatus(
+            error.message || "The selected file could not be read.",
+            true
+          );
+
+        } finally {
+          el.file.value = "";
+        }
+      }
+
+      function clearAll() {
+        el.input.value = "";
+        el.output.value = "";
+
+        lastConversion = null;
+
+        updateCharacterCounts();
+
+        setText(
+          el.summary,
+          "Paste a CSV table or a JSON object/array, select your database, and click Convert to SQL."
+        );
+
+        setStatus("Input and output cleared.");
+      }
+
+      el.format.addEventListener("change", () => {
+        updateFormatControls();
+
+        setStatus(
+          el.format.value === "csv"
+            ? "CSV / TSV input selected."
+            : "JSON input selected."
+        );
+      });
+
+      el.input.addEventListener("input", updateCharacterCounts);
+
+      el.convert.addEventListener("click", convert);
+      el.copy.addEventListener("click", copySql);
+      el.download.addEventListener("click", downloadSql);
+      el.clear.addEventListener("click", clearAll);
+
+      el.sampleCsv.addEventListener("click", loadSampleCsv);
+      el.sampleJson.addEventListener("click", loadSampleJson);
+
+      el.file.addEventListener("change", () => {
+        loadFile(el.file.files && el.file.files[0]);
+      });
+
+      el.input.addEventListener("keydown", (event) => {
+        if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+          event.preventDefault();
+          convert();
+        }
+      });
+
+      el.output.addEventListener("focus", () => {
+        el.output.select();
+      });
+
+      el.year.textContent = String(new Date().getFullYear());
+
+      updateFormatControls();
+      updateCharacterCounts();
+
+    })();
+  </script>
+
 </body>
 </html>
